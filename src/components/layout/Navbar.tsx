@@ -1,9 +1,8 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, ScanLine } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-export function Navbar() {
+export const Navbar = () => {
   return (
     <nav className="sticky top-0 z-50 w-full glass-card border-x-0 border-t-0 rounded-none bg-background/70 backdrop-blur-xl border-b border-border/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

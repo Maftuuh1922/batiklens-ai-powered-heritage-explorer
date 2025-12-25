@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Menu, ScanLine } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 export const Navbar = () => {
   return (
     <nav className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-xl border-b border-border/40">
@@ -17,16 +17,16 @@ export const Navbar = () => {
           </div>
           {/* Desktop Navigation - Strict Right */}
           <div className="hidden md:flex items-center justify-end space-x-8 lg:space-x-10">
-            <Link 
-              to="/catalog" 
+            <Link
+              to="/catalog"
               className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors"
             >
               Heritage Catalog
             </Link>
             <Link to="/scan">
-              <Button 
-                size="sm" 
-                className="bg-foreground text-background hover:bg-foreground/90 flex items-center gap-2 px-6 rounded-full font-black uppercase text-[10px] tracking-[0.2em]"
+              <Button
+                size="sm"
+                className="bg-foreground text-background hover:bg-foreground/90 flex items-center gap-2 px-6 rounded-full font-black uppercase text-[10px] tracking-[0.2em] transition-transform active:scale-95"
               >
                 <ScanLine className="w-3.5 h-3.5" />
                 Scan Motif
@@ -43,17 +43,20 @@ export const Navbar = () => {
               </SheetTrigger>
               <SheetContent side="right" className="bg-background border-l border-border w-[280px] sm:w-[350px] p-0">
                 <div className="flex flex-col h-full py-12 px-6">
-                  <SheetTitle className="text-left font-serif text-2xl mb-8 pb-4 border-b border-border/40">
+                  <SheetTitle className="text-left font-serif text-2xl mb-2">
                     BatikLens.
                   </SheetTitle>
+                  <SheetDescription className="text-[10px] uppercase tracking-widest text-muted-foreground mb-8 pb-4 border-b border-border/40">
+                    Heritage Vision Explorer
+                  </SheetDescription>
                   <nav className="flex flex-col space-y-6">
-                    <Link to="/" className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors">
+                    <Link to="/" className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors py-2">
                       Home
                     </Link>
-                    <Link to="/catalog" className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors">
+                    <Link to="/catalog" className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors py-2">
                       Catalog
                     </Link>
-                    <Link to="/scan" className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors">
+                    <Link to="/scan" className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors py-2">
                       Scan Engine
                     </Link>
                   </nav>

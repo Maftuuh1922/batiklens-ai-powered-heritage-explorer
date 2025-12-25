@@ -32,7 +32,7 @@ export function ResultPage() {
             New Analysis
           </Link>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Analysis Media */}
           <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
@@ -58,7 +58,7 @@ export function ResultPage() {
             className="space-y-10 md:space-y-14"
           >
             <div className="space-y-4 md:space-y-6">
-              <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold tracking-tighter monochrome-gradient-text leading-[0.9] break-words">
+              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-bold tracking-tighter monochrome-gradient-text leading-[0.9] break-words">
                 {batik.name}
               </h1>
               <div className="flex items-center gap-2 text-muted-foreground">

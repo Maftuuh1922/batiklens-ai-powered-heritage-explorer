@@ -86,23 +86,23 @@ export function ScanPage() {
                   className="absolute inset-0"
                 >
                   <img src={preview} alt="Preview" className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-background/40 backdrop-grayscale" />
+                  <div className="absolute inset-0 bg-background/60 backdrop-blur-[2px]" />
                   <div className="absolute inset-0 pointer-events-none overflow-hidden">
                     <motion.div
                       animate={{ top: ['-5%', '105%'] }}
                       transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-                      className="absolute left-0 right-0 h-[2px] bg-white shadow-[0_0_20px_white] z-20"
+                      className="absolute left-0 right-0 h-[2px] bg-foreground shadow-[0_0_20px_hsl(var(--foreground))] z-20"
                     />
                     <motion.div
                       animate={{ top: ['-5%', '105%'] }}
                       transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-                      className="absolute left-0 right-0 h-[60px] bg-gradient-to-b from-transparent via-white/10 to-transparent z-10"
+                      className="absolute left-0 right-0 h-[60px] bg-gradient-to-b from-transparent via-foreground/10 to-transparent z-10"
                     />
                   </div>
-                  <div className="absolute inset-0 flex items-center justify-center flex-col bg-background/20 p-6">
-                    <RefreshCw className="w-10 h-10 text-white animate-spin mb-4" />
-                    <p className="text-white font-serif text-xl md:text-2xl font-bold tracking-[0.2em] uppercase">Processing</p>
-                    <p className="text-white/60 text-[8px] md:text-[10px] mt-2 font-black tracking-[0.4em] uppercase text-center">Analyzing geometric vectors</p>
+                  <div className="absolute inset-0 flex items-center justify-center flex-col p-6">
+                    <RefreshCw className="w-10 h-10 text-foreground animate-spin mb-4" />
+                    <p className="text-foreground font-serif text-xl md:text-2xl font-bold tracking-[0.2em] uppercase">Processing</p>
+                    <p className="text-foreground/60 text-[8px] md:text-[10px] mt-2 font-black tracking-[0.4em] uppercase text-center">Analyzing geometric vectors</p>
                   </div>
                 </motion.div>
               )}

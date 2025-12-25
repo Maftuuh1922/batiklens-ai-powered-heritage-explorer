@@ -11,29 +11,29 @@ export default {
   			mono: ['JetBrains Mono', 'monospace']
   		},
   		colors: {
-  			background: '#0F1F17',
-  			foreground: '#F5F5F5',
+  			background: 'hsl(var(--background))',
+  			foreground: 'hsl(var(--foreground))',
   			primary: {
-  				DEFAULT: '#2E7D32',
-  				foreground: '#FFFFFF'
+  				DEFAULT: 'hsl(var(--primary))',
+  				foreground: 'hsl(var(--primary-foreground))'
   			},
   			secondary: {
-  				DEFAULT: '#C8A951',
-  				foreground: '#0F1F17'
+  				DEFAULT: 'hsl(var(--secondary))',
+  				foreground: 'hsl(var(--secondary-foreground))'
   			},
   			accent: {
-  				DEFAULT: '#1B3B2B',
-  				foreground: '#C8A951'
+  				DEFAULT: 'hsl(var(--accent))',
+  				foreground: 'hsl(var(--accent-foreground))'
   			},
   			muted: {
-  				DEFAULT: '#1A2E24',
-  				foreground: '#A3B3AA'
+  				DEFAULT: 'hsl(var(--muted))',
+  				foreground: 'hsl(var(--muted-foreground))'
   			},
-  			border: '#2A3F34',
-  			ring: '#C8A951',
+  			border: 'hsl(var(--border))',
+  			ring: 'hsl(var(--foreground))',
   			card: {
-  				DEFAULT: 'rgba(26, 46, 36, 0.6)',
-  				foreground: '#F5F5F5'
+  				DEFAULT: 'hsl(var(--card))',
+  				foreground: 'hsl(var(--card-foreground))'
   			}
   		},
   		keyframes: {
@@ -48,12 +48,18 @@ export default {
   			'parallax': {
   				'0%': { backgroundPosition: '0% 0%' },
   				'100%': { backgroundPosition: '100% 100%' }
+  			},
+  			'slow-pan': {
+  				'0%': { transform: 'scale(1) translate(0, 0)' },
+  				'50%': { transform: 'scale(1.1) translate(-1%, -1%)' },
+  				'100%': { transform: 'scale(1) translate(0, 0)' }
   			}
   		},
   		animation: {
   			'scan-line': 'scan-line 2s linear infinite',
   			'float': 'float 4s ease-in-out infinite',
-  			'parallax': 'parallax 20s linear infinite'
+  			'parallax': 'parallax 30s linear infinite',
+  			'slow-pan': 'slow-pan 20s ease-in-out infinite'
   		}
   	}
   },

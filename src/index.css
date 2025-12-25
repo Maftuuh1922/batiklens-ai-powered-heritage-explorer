@@ -4,43 +4,70 @@
 @tailwind utilities;
 @layer base {
   :root {
-    --background: 155 35% 9%;
-    --foreground: 0 0% 96%;
-    --card: 155 28% 14%;
-    --card-foreground: 0 0% 96%;
-    --popover: 155 28% 14%;
-    --popover-foreground: 0 0% 96%;
-    --primary: 123 46% 34%;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 98%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 0 0% 0%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 44 52% 55%;
-    --secondary-foreground: 155 35% 9%;
-    --muted: 155 28% 14%;
-    --muted-foreground: 155 10% 67%;
-    --accent: 155 37% 17%;
-    --accent-foreground: 44 52% 55%;
+    --secondary: 0 0% 20%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 90%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 0%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 155 15% 21%;
-    --input: 155 15% 21%;
-    --ring: 44 52% 55%;
-    --radius: 0.75rem;
+    --border: 0 0% 83%;
+    --input: 0 0% 83%;
+    --ring: 0 0% 0%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 80%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 0 0% 10%;
+    --accent-foreground: 0 0% 100%;
+    --border: 0 0% 25%;
+    --input: 0 0% 25%;
+    --ring: 0 0% 100%;
   }
 }
 @layer components {
   .glass-card {
-    @apply bg-card/60 backdrop-blur-xl border border-white/10 shadow-2xl;
+    @apply bg-white/5 dark:bg-white/5 backdrop-blur-2xl border border-black/10 dark:border-white/10 shadow-xl;
   }
-  .gold-gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#C8A951] via-[#E6D296] to-[#C8A951];
+  .monochrome-gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-foreground via-foreground/90 to-foreground/60;
   }
   .nature-gradient {
-    background: radial-gradient(circle at top left, #1B3B2B 0%, #0F1F17 100%);
+    background: radial-gradient(circle at top right, hsl(var(--accent)) 0%, hsl(var(--background)) 100%);
+  }
+  .batik-overlay {
+    @apply absolute inset-0 opacity-10 dark:opacity-[0.15] pointer-events-none;
+    background-image: url('https://www.transparenttextures.com/patterns/batik-fractal.png');
+    background-repeat: repeat;
   }
 }
 body {
-  @apply bg-background text-foreground font-sans nature-gradient min-h-screen;
+  @apply bg-background text-foreground font-sans nature-gradient min-h-screen selection:bg-foreground selection:text-background;
   background-attachment: fixed;
 }
 h1, h2, h3, h4 {
-  @apply font-serif;
+  @apply font-serif tracking-tight;
+}
+.dark .batik-overlay {
+  filter: invert(1);
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { MapPin, Info, History, ArrowLeft, Share2 } from 'lucide-react';
+import { MapPin, Info, History, ArrowLeft, Share2, CornerDownRight } from 'lucide-react';
 import { batiks } from '@/lib/batik-data';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -11,73 +11,89 @@ export function ResultPage() {
   const batik = batiks.find(b => b.id === id);
   if (!batik) {
     return (
-      <div className="max-w-7xl mx-auto px-4 py-20 text-center">
-        <h2 className="text-2xl font-serif">Result not found</h2>
-        <Link to="/scan" className="text-secondary mt-4 inline-block">Try scanning again</Link>
+      <div className="max-w-7xl mx-auto px-4 py-32 text-center">
+        <h2 className="text-4xl font-serif font-bold mb-4">Dossier Missing</h2>
+        <Link to="/scan">
+          <Button variant="link" className="text-foreground font-bold underline underline-offset-4">Restart Scanner</Button>
+        </Link>
       </div>
     );
   }
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="py-12 md:py-16">
-        <div className="mb-12">
-          <Link to="/scan" className="text-muted-foreground hover:text-white flex items-center gap-2 text-sm transition-colors">
-            <ArrowLeft className="w-4 h-4" />
-            Back to Scanner
+      <div className="py-16 md:py-24">
+        <div className="mb-16">
+          <Link to="/scan" className="group text-muted-foreground hover:text-foreground flex items-center gap-3 text-xs font-bold uppercase tracking-widest transition-all">
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            New Analysis
           </Link>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="space-y-6"
-          >
-            <div className="relative aspect-square rounded-3xl overflow-hidden glass-card">
-              <img src={batik.imageUrl} alt={batik.name} className="w-full h-full object-cover" />
-              <div className="absolute top-6 left-6">
-                <Badge className="bg-secondary text-secondary-foreground text-xs uppercase tracking-widest px-4 py-1">98% Confidence</Badge>
-              </div>
-            </div>
-            <div className="flex gap-4">
-              <Button variant="outline" className="flex-1 rounded-xl border-white/10 glass-card">
-                <Share2 className="w-4 h-4 mr-2" /> Share Analysis
-              </Button>
-            </div>
-          </motion.div>
-          <motion.div 
-            initial={{ opacity: 0, x: 20 }}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="space-y-8"
           >
-            <div className="space-y-2">
-              <h1 className="text-5xl md:text-6xl font-serif font-bold gold-gradient-text">{batik.name}</h1>
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <MapPin className="w-4 h-4 text-secondary" />
-                <span className="text-sm font-medium">Origin: {batik.origin}</span>
+            <div className="relative aspect-square rounded-[2.5rem] overflow-hidden glass-card border-border shadow-2xl">
+              <img src={batik.imageUrl} alt={batik.name} className="w-full h-full object-cover grayscale-[0.2]" />
+              <div className="absolute top-8 left-8">
+                <Badge className="bg-foreground text-background font-black text-[10px] uppercase tracking-widest px-5 py-2 rounded-full border-none shadow-xl">
+                  Match Integrity: 98.4%
+                </Badge>
               </div>
             </div>
-            <div className="space-y-6">
-              <div className="glass-card p-8 rounded-2xl space-y-4">
-                <div className="flex items-center gap-2 text-secondary">
-                  <Info className="w-5 h-5" />
-                  <h3 className="font-serif text-xl">Meaning & Philosophy</h3>
-                </div>
-                <p className="text-muted-foreground leading-relaxed">{batik.meaning}</p>
-              </div>
-              <div className="glass-card p-8 rounded-2xl space-y-4">
-                <div className="flex items-center gap-2 text-secondary">
-                  <History className="w-5 h-5" />
-                  <h3 className="font-serif text-xl">Historical Context</h3>
-                </div>
-                <p className="text-muted-foreground leading-relaxed">{batik.history}</p>
+            <div className="flex gap-4">
+              <Button variant="outline" className="flex-1 rounded-2xl border-border hover:bg-foreground hover:text-background py-8 text-sm font-bold uppercase tracking-widest transition-all">
+                <Share2 className="w-4 h-4 mr-3" /> Export Dossier
+              </Button>
+            </div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="space-y-12"
+          >
+            <div className="space-y-4">
+              <h1 className="text-7xl md:text-8xl font-serif font-bold tracking-tighter monochrome-gradient-text leading-none">{batik.name}</h1>
+              <div className="flex items-center gap-3 text-muted-foreground">
+                <MapPin className="w-4 h-4" />
+                <span className="text-xs font-bold uppercase tracking-[0.2em]">Provenance: {batik.origin}</span>
               </div>
             </div>
-            <div className="pt-8 flex flex-col sm:flex-row gap-4">
-              <Link to="/catalog" className="flex-1">
-                <Button className="w-full bg-primary text-white hover:bg-primary/90 py-6 rounded-xl">View Similar Patterns</Button>
+            <div className="space-y-8">
+              <div className="group space-y-4">
+                <div className="flex items-center gap-3 text-foreground">
+                  <Info className="w-5 h-5 opacity-50" />
+                  <h3 className="font-bold uppercase text-xs tracking-[0.3em]">Interpretation</h3>
+                </div>
+                <div className="relative pl-8 border-l border-border/60">
+                  <p className="text-xl md:text-2xl font-serif italic text-foreground/90 leading-relaxed">
+                    "{batik.meaning}"
+                  </p>
+                </div>
+              </div>
+              <div className="group space-y-4">
+                <div className="flex items-center gap-3 text-foreground">
+                  <History className="w-5 h-5 opacity-50" />
+                  <h3 className="font-bold uppercase text-xs tracking-[0.3em]">Chronology</h3>
+                </div>
+                <div className="relative pl-8 border-l border-border/60">
+                  <p className="text-muted-foreground leading-relaxed text-lg">
+                    {batik.history}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="pt-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Link to="/catalog">
+                <Button className="w-full bg-foreground text-background hover:bg-foreground/80 py-8 rounded-2xl font-bold uppercase tracking-widest text-xs">
+                  Discover Related Patterns
+                </Button>
               </Link>
-              <Link to="/scan" className="flex-1">
-                <Button variant="outline" className="w-full border-secondary text-secondary hover:bg-secondary/10 py-6 rounded-xl">Scan Another</Button>
+              <Link to="/scan">
+                <Button variant="outline" className="w-full border-border hover:border-foreground py-8 rounded-2xl font-bold uppercase tracking-widest text-xs transition-colors">
+                  Process New Sample
+                </Button>
               </Link>
             </div>
           </motion.div>

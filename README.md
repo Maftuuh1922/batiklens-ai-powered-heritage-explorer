@@ -1,6 +1,6 @@
 # Cloudflare Workers AI Chat Agent
 
-[![Deploy to Cloudflare][cloudflarebutton]]
+[![Deploy to Cloudflare][![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/Maftuuh1922/batiklens-ai-powered-heritage-explorer)]
 
 A production-ready, full-stack chat application powered by Cloudflare Workers, featuring AI-powered conversations with multi-session management, streaming responses, and built-in tools like web search. Built with React, TypeScript, and the Cloudflare Agents SDK for seamless Durable Object integration.
 
@@ -102,7 +102,7 @@ A production-ready, full-stack chat application powered by Cloudflare Workers, f
    ```
    Or use the button below:
 
-[cloudflarebutton]
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/Maftuuh1922/batiklens-ai-powered-heritage-explorer)
 
 Your app will be live at `https://your-project.workers.dev`. Assets are automatically served as a SPA.
 

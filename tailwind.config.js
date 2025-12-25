@@ -51,7 +51,7 @@ export default {
   			},
   			'slow-pan': {
   				'0%': { transform: 'scale(1) translate(0, 0)' },
-  				'50%': { transform: 'scale(1.1) translate(-1%, -1%)' },
+  				'50%': { transform: 'scale(1.05) translate(-1%, -1%)' },
   				'100%': { transform: 'scale(1) translate(0, 0)' }
   			}
   		},
@@ -59,7 +59,7 @@ export default {
   			'scan-line': 'scan-line 2s linear infinite',
   			'float': 'float 4s ease-in-out infinite',
   			'parallax': 'parallax 30s linear infinite',
-  			'slow-pan': 'slow-pan 20s ease-in-out infinite'
+  			'slow-pan': 'slow-pan 25s ease-in-out infinite'
   		}
   	}
   },

@@ -50,15 +50,16 @@
     @apply bg-white/5 dark:bg-white/5 backdrop-blur-2xl border border-black/10 dark:border-white/10 shadow-xl;
   }
   .monochrome-gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-br from-foreground via-foreground/90 to-foreground/60;
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-foreground via-foreground/90 to-foreground/50;
   }
   .nature-gradient {
     background: radial-gradient(circle at top right, hsl(var(--accent)) 0%, hsl(var(--background)) 100%);
   }
   .batik-overlay {
-    @apply absolute inset-0 opacity-10 dark:opacity-[0.15] pointer-events-none;
-    background-image: url('https://www.transparenttextures.com/patterns/batik-fractal.png');
-    background-repeat: repeat;
+    @apply absolute inset-0 opacity-20 pointer-events-none grayscale;
+    background-image: url('https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?auto=format&fit=crop&q=80&w=2048');
+    background-size: cover;
+    background-position: center;
   }
 }
 body {
@@ -69,5 +70,5 @@ h1, h2, h3, h4 {
   @apply font-serif tracking-tight;
 }
 .dark .batik-overlay {
-  filter: invert(1);
+  filter: invert(1) opacity(0.15);
 }

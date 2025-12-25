@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;0,800;0,900;1,400&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,67 +14,66 @@
     --primary-foreground: 0 0% 100%;
     --secondary: 0 0% 20%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 0 0% 90%;
+    --muted: 0 0% 95%;
     --muted-foreground: 0 0% 40%;
-    --accent: 0 0% 96%;
+    --accent: 0 0% 98%;
     --accent-foreground: 0 0% 0%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 83%;
-    --input: 0 0% 83%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
     --ring: 0 0% 0%;
     --radius: 0.5rem;
   }
   .dark {
     --background: 0 0% 0%;
     --foreground: 0 0% 100%;
-    --card: 0 0% 4%;
+    --card: 0 0% 3%;
     --card-foreground: 0 0% 100%;
-    --popover: 0 0% 4%;
+    --popover: 0 0% 3%;
     --popover-foreground: 0 0% 100%;
     --primary: 0 0% 100%;
     --primary-foreground: 0 0% 0%;
     --secondary: 0 0% 80%;
     --secondary-foreground: 0 0% 0%;
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 65%;
-    --accent: 0 0% 10%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 0 0% 8%;
     --accent-foreground: 0 0% 100%;
-    --border: 0 0% 25%;
-    --input: 0 0% 25%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
     --ring: 0 0% 100%;
   }
 }
 @layer components {
   .glass-card {
-    @apply bg-white/5 dark:bg-white/5 backdrop-blur-2xl border border-foreground/10 shadow-xl;
+    @apply bg-background/50 backdrop-blur-xl border border-border/40 shadow-xl;
   }
   .monochrome-gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-br from-foreground via-foreground/90 to-foreground/50;
-    /* Ensure no duplication artifacts */
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-foreground via-foreground to-foreground/40;
     -webkit-background-clip: text;
+    background-clip: text;
   }
-  .nature-gradient {
-    background: radial-gradient(circle at top right, hsl(var(--accent)) 0%, hsl(var(--background)) 100%);
-  }
-  .batik-overlay {
-    @apply absolute inset-0 opacity-10 pointer-events-none grayscale;
-    background-image: url('https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?auto=format&fit=crop&q=80&w=2048');
-    background-size: cover;
-    background-position: center;
-  }
+}
+html {
+  scroll-behavior: smooth;
 }
 body {
-  @apply bg-background text-foreground font-sans nature-gradient min-h-screen selection:bg-foreground selection:text-background;
-  background-attachment: fixed;
+  @apply bg-background text-foreground font-sans subpixel-antialiased min-h-screen selection:bg-foreground selection:text-background overflow-x-hidden;
+}
+#root {
+  @apply overflow-x-hidden relative;
 }
 h1, h2, h3, h4 {
-  @apply font-serif tracking-tight;
+  @apply font-serif tracking-tight text-balance;
 }
-.dark .batik-overlay {
-  filter: invert(1) opacity(0.05);
+/* Fix mobile scroll bounce color shifts */
+body {
+  background-color: hsl(var(--background));
 }
-/* Ensure no ghosting or duplicated text on buttons */
-button {
-  @apply subpixel-antialiased;
+/* Hide scrollbars for specialized areas */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

@@ -1,41 +1,66 @@
 import { Link } from 'react-router-dom';
 import { Menu, ScanLine } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 export const Navbar = () => {
   return (
-    <nav className="sticky top-0 z-50 w-full glass-card border-x-0 border-t-0 rounded-none bg-background/70 backdrop-blur-xl border-b border-border/40">
+    <nav className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-xl border-b border-border/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          <Link to="/" className="flex items-center space-x-2 group">
-            <span className="text-2xl font-serif font-bold tracking-tighter text-foreground group-hover:opacity-80 transition-opacity">BatikLens.</span>
-          </Link>
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-10">
-            <Link to="/" className="text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">Archive</Link>
-            <Link to="/catalog" className="text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">Heritage Catalog</Link>
+        <div className="flex justify-between items-center h-16 md:h-20">
+          {/* Logo - Strict Left */}
+          <div className="flex-shrink-0">
+            <Link to="/" className="flex items-center group">
+              <span className="text-xl md:text-2xl font-serif font-bold tracking-tighter text-foreground group-hover:opacity-80 transition-opacity">
+                BatikLens.
+              </span>
+            </Link>
+          </div>
+          {/* Desktop Navigation - Strict Right */}
+          <div className="hidden md:flex items-center justify-end space-x-8 lg:space-x-10">
+            <Link 
+              to="/catalog" 
+              className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Heritage Catalog
+            </Link>
             <Link to="/scan">
-              <Button size="sm" className="bg-foreground text-background hover:bg-foreground/90 flex items-center gap-2 px-6 rounded-full font-bold uppercase text-[10px] tracking-widest">
-                <ScanLine className="w-3 h-3" />
+              <Button 
+                size="sm" 
+                className="bg-foreground text-background hover:bg-foreground/90 flex items-center gap-2 px-6 rounded-full font-black uppercase text-[10px] tracking-[0.2em]"
+              >
+                <ScanLine className="w-3.5 h-3.5" />
                 Scan Motif
               </Button>
             </Link>
           </div>
-          {/* Mobile Menu */}
+          {/* Mobile Navigation Trigger */}
           <div className="md:hidden flex items-center">
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="hover:bg-foreground/5">
+                <Button variant="ghost" size="icon" className="hover:bg-foreground/5 -mr-2">
                   <Menu className="w-6 h-6" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="bg-background border-border w-full sm:max-w-xs">
-                <div className="flex flex-col space-y-8 mt-16 px-4">
-                  <Link to="/" className="text-3xl font-serif font-bold border-b border-border pb-4">Home</Link>
-                  <Link to="/catalog" className="text-3xl font-serif font-bold border-b border-border pb-4">Catalog</Link>
-                  <Link to="/scan" className="text-3xl font-serif font-bold border-b border-border pb-4">Scan Batik</Link>
-                  <div className="pt-8">
-                    <p className="text-xs text-muted-foreground font-medium uppercase tracking-[0.2em]">Preserving the Infinite Thread</p>
+              <SheetContent side="right" className="bg-background border-l border-border w-[280px] sm:w-[350px] p-0">
+                <div className="flex flex-col h-full py-12 px-6">
+                  <SheetTitle className="text-left font-serif text-2xl mb-8 pb-4 border-b border-border/40">
+                    BatikLens.
+                  </SheetTitle>
+                  <nav className="flex flex-col space-y-6">
+                    <Link to="/" className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors">
+                      Home
+                    </Link>
+                    <Link to="/catalog" className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors">
+                      Catalog
+                    </Link>
+                    <Link to="/scan" className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors">
+                      Scan Engine
+                    </Link>
+                  </nav>
+                  <div className="mt-auto pt-8 border-t border-border/40">
+                    <p className="text-[10px] text-muted-foreground font-black uppercase tracking-[0.3em]">
+                      Preserving the Infinite Thread
+                    </p>
                   </div>
                 </div>
               </SheetContent>
@@ -45,4 +70,4 @@ export const Navbar = () => {
       </div>
     </nav>
   );
-}
+};

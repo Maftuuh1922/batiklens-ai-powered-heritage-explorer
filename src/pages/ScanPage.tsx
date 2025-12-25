@@ -33,17 +33,17 @@ export function ScanPage() {
   };
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[80vh] flex items-center justify-center">
-      <div className="py-20 w-full">
+      <div className="py-12 md:py-20 w-full">
         <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           className="max-w-3xl mx-auto text-center"
         >
-          <div className="mb-12 space-y-4">
-            <h1 className="text-5xl md:text-6xl font-serif font-bold tracking-tight">Motif Analysis</h1>
-            <p className="text-muted-foreground text-lg max-w-lg mx-auto">Optical characterization of Javanese textile patterns using the BatikLens Vision Engine.</p>
+          <div className="mb-8 md:mb-12 space-y-3 md:space-y-4 px-4">
+            <h1 className="text-4xl md:text-6xl font-serif font-bold tracking-tight leading-tight">Motif Analysis</h1>
+            <p className="text-sm md:text-lg text-muted-foreground max-w-lg mx-auto">Optical characterization of Javanese textile patterns using the Vision Engine.</p>
           </div>
-          <div className="relative aspect-square max-w-md mx-auto rounded-[2rem] overflow-hidden glass-card border-border/60 group shadow-2xl shadow-black/20 dark:shadow-white/5">
+          <div className="relative aspect-square w-full max-w-[min(90vw,448px)] mx-auto rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden glass-card border-border/60 group shadow-2xl">
             <AnimatePresence mode="wait">
               {state === 'idle' && (
                 <motion.div
@@ -51,14 +51,14 @@ export function ScanPage() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="absolute inset-0 flex flex-col items-center justify-center p-12 space-y-8"
+                  className="absolute inset-0 flex flex-col items-center justify-center p-6 md:p-12 space-y-6 md:space-y-8"
                 >
-                  <div className="w-24 h-24 rounded-3xl bg-foreground/5 flex items-center justify-center text-foreground border border-border shadow-inner group-hover:scale-105 transition-transform duration-500">
-                    <Upload className="w-10 h-10" />
+                  <div className="w-16 h-16 md:w-24 md:h-24 rounded-2xl md:rounded-3xl bg-foreground/5 flex items-center justify-center text-foreground border border-border shadow-inner">
+                    <Upload className="w-8 h-8 md:w-10 md:h-10" />
                   </div>
-                  <div className="space-y-2">
-                    <p className="text-xl font-bold font-serif">Input Sample</p>
-                    <p className="text-sm text-muted-foreground font-medium uppercase tracking-widest">JPG • PNG • RAW</p>
+                  <div className="space-y-1">
+                    <p className="text-lg md:text-xl font-bold font-serif">Input Sample</p>
+                    <p className="text-[10px] text-muted-foreground font-black uppercase tracking-widest">JPG • PNG • RAW</p>
                   </div>
                   <input
                     type="file"
@@ -67,12 +67,12 @@ export function ScanPage() {
                     accept="image/*"
                     onChange={handleFile}
                   />
-                  <div className="flex flex-col gap-3 w-full">
-                    <Button onClick={() => fileInputRef.current?.click()} className="bg-foreground text-background hover:bg-foreground/90 rounded-2xl py-7 text-lg font-bold">
+                  <div className="flex flex-col gap-3 w-full max-w-[280px]">
+                    <Button onClick={() => fileInputRef.current?.click()} className="bg-foreground text-background hover:bg-foreground/90 rounded-2xl py-6 md:py-7 text-base md:text-lg font-black uppercase tracking-widest">
                       Upload Plate
                     </Button>
-                    <Button variant="ghost" className="rounded-2xl border-border py-7 text-muted-foreground hover:text-foreground">
-                      <Camera className="w-5 h-5 mr-3" />
+                    <Button variant="ghost" className="rounded-2xl border-border py-6 md:py-7 text-muted-foreground hover:text-foreground text-xs font-bold uppercase tracking-widest">
+                      <Camera className="w-4 h-4 mr-2" />
                       Live Capture
                     </Button>
                   </div>
@@ -87,25 +87,22 @@ export function ScanPage() {
                 >
                   <img src={preview} alt="Preview" className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-background/40 backdrop-grayscale" />
-                  {/* High Glow Scan Line */}
                   <div className="absolute inset-0 pointer-events-none overflow-hidden">
                     <motion.div
-                      animate={{ top: ['-10%', '110%'] }}
-                      transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-                      className="absolute left-0 right-0 h-[2px] bg-white shadow-[0_0_30px_rgba(255,255,255,1)] z-20"
+                      animate={{ top: ['-5%', '105%'] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+                      className="absolute left-0 right-0 h-[2px] bg-white shadow-[0_0_20px_white] z-20"
                     />
                     <motion.div
-                      animate={{ top: ['-10%', '110%'] }}
-                      transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut', delay: 0.1 }}
-                      className="absolute left-0 right-0 h-[100px] bg-gradient-to-b from-transparent via-white/10 to-transparent z-10"
+                      animate={{ top: ['-5%', '105%'] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+                      className="absolute left-0 right-0 h-[60px] bg-gradient-to-b from-transparent via-white/10 to-transparent z-10"
                     />
                   </div>
-                  <div className="absolute inset-0 flex items-center justify-center flex-col bg-background/20">
-                    <div className="p-4 rounded-full border border-white/20 bg-black/40 backdrop-blur-md mb-6">
-                      <RefreshCw className="w-8 h-8 text-white animate-spin" />
-                    </div>
-                    <p className="text-white font-serif text-2xl font-bold tracking-[0.2em] uppercase">Processing...</p>
-                    <p className="text-white/60 text-[10px] mt-4 font-bold tracking-[0.4em] uppercase">Analyzing geometric vectors</p>
+                  <div className="absolute inset-0 flex items-center justify-center flex-col bg-background/20 p-6">
+                    <RefreshCw className="w-10 h-10 text-white animate-spin mb-4" />
+                    <p className="text-white font-serif text-xl md:text-2xl font-bold tracking-[0.2em] uppercase">Processing</p>
+                    <p className="text-white/60 text-[8px] md:text-[10px] mt-2 font-black tracking-[0.4em] uppercase text-center">Analyzing geometric vectors</p>
                   </div>
                 </motion.div>
               )}
@@ -116,26 +113,25 @@ export function ScanPage() {
                   animate={{ opacity: 1 }}
                   className="absolute inset-0"
                 >
-                  <img src={preview} alt="Preview" className="w-full h-full object-cover saturate-0 opacity-50 blur-sm" />
-                  <div className="absolute inset-0 bg-foreground/10 backdrop-blur-xl" />
-                  <div className="absolute inset-0 flex items-center justify-center flex-col">
-                    <div className="w-20 h-20 rounded-full border-2 border-foreground flex items-center justify-center mb-6">
-                      <Scan className="w-10 h-10 text-foreground" />
-                    </div>
-                    <p className="text-foreground font-serif text-3xl font-bold">Analysis Ready</p>
-                    <p className="text-muted-foreground text-sm font-bold tracking-widest uppercase mt-2">Opening dossier...</p>
+                  <img src={preview} alt="Preview" className="w-full h-full object-cover saturate-0 opacity-40 blur-sm" />
+                  <div className="absolute inset-0 flex items-center justify-center flex-col p-6">
+                    <Scan className="w-12 h-12 text-foreground mb-4" />
+                    <p className="text-foreground font-serif text-2xl md:text-3xl font-bold">Analysis Ready</p>
+                    <p className="text-muted-foreground text-[10px] font-black tracking-widest uppercase mt-2">Opening dossier...</p>
                   </div>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
-          <div className="mt-16 text-[10px] font-bold tracking-[0.3em] text-muted-foreground uppercase flex items-center justify-center gap-4">
+          <div className="mt-12 md:mt-16 text-[8px] md:text-[10px] font-black tracking-[0.3em] text-muted-foreground uppercase flex flex-wrap items-center justify-center gap-4 md:gap-6">
             <div className="flex items-center gap-2">
               <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              Vision Engine: Online
+              Vision: Online
             </div>
             <div className="w-1 h-1 rounded-full bg-border" />
             Latent: 42ms
+            <div className="w-1 h-1 rounded-full bg-border" />
+            V2.1-Edge
           </div>
         </motion.div>
       </div>

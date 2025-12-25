@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import { Menu, ScanLine } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from '@/components/ui/sheet';
+import { ThemeToggle } from '@/components/ThemeToggle';
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const closeMenu = () => setIsOpen(false);
   return (
-    <nav className="sticky top-0 z-50 w-full glass-nav">
+    <nav className="sticky top-0 z-50 w-full glass-nav transition-all duration-300">
       <div className="absolute inset-0 bg-gradient-to-r from-background/40 via-transparent to-background/40 pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex justify-between items-center h-16 md:h-20">
@@ -18,7 +19,7 @@ export const Navbar = () => {
               </span>
             </Link>
           </div>
-          <div className="hidden md:flex items-center justify-end space-x-8 lg:space-x-10">
+          <div className="hidden md:flex items-center justify-end space-x-6 lg:space-x-8">
             <Link
               to="/catalog"
               className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors"
@@ -34,8 +35,10 @@ export const Navbar = () => {
                 Scan Motif
               </Button>
             </Link>
+            <ThemeToggle className="static" />
           </div>
-          <div className="md:hidden flex items-center">
+          <div className="md:hidden flex items-center gap-2">
+            <ThemeToggle className="static" />
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="hover:bg-foreground/5 -mr-2">
@@ -44,9 +47,11 @@ export const Navbar = () => {
               </SheetTrigger>
               <SheetContent side="right" className="bg-background/95 backdrop-blur-3xl border-l border-foreground/5 w-[280px] sm:w-[350px] p-0">
                 <div className="flex flex-col h-full py-12 px-6">
-                  <SheetTitle className="text-left font-serif text-2xl mb-2">
-                    BatikLens.
-                  </SheetTitle>
+                  <div className="flex justify-between items-start mb-2">
+                    <SheetTitle className="text-left font-serif text-2xl">
+                      BatikLens.
+                    </SheetTitle>
+                  </div>
                   <SheetDescription className="text-[10px] uppercase tracking-widest text-muted-foreground mb-8 pb-4 border-b border-foreground/5">
                     Heritage Vision Explorer
                   </SheetDescription>

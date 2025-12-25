@@ -7,24 +7,22 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { RouteErrorBoundary } from '@/components/RouteErrorBoundary';
 import '@/index.css'
 import App from './App';
-import { LandingPage } from '@/pages/LandingPage';
+import { HomePage } from '@/pages/HomePage';
 import { ScanPage } from '@/pages/ScanPage';
 import { ResultPage } from '@/pages/ResultPage';
 import { CatalogPage } from '@/pages/CatalogPage';
 import { DetailPage } from '@/pages/DetailPage';
-
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     errorElement: <RouteErrorBoundary />,
     children: [
-      { path: "/", element: <LandingPage /> },
+      { path: "/", element: <HomePage /> },
       { path: "/scan", element: <ScanPage /> },
       { path: "/result", element: <ResultPage /> },
       { path: "/catalog", element: <CatalogPage /> },

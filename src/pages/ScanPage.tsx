@@ -9,8 +9,8 @@ export function ScanPage() {
   const [state, setState] = useState<ScanState>('idle');
   const [preview, setPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const scanTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const redirectTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const scanTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const redirectTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const navigate = useNavigate();
   useEffect(() => {
     return () => {
@@ -94,7 +94,7 @@ export function ScanPage() {
                   className="absolute inset-0"
                 >
                   <img src={preview} alt="Preview" className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-background/60 backdrop-blur-[6px]" />
+                  <div className="absolute inset-0 bg-background/80 backdrop-blur-[12px]" />
                   <div className="absolute inset-0 pointer-events-none overflow-hidden">
                     <motion.div
                       animate={{ top: ['-5%', '105%'] }}
@@ -122,7 +122,7 @@ export function ScanPage() {
                   className="absolute inset-0"
                 >
                   <img src={preview} alt="Preview" className="w-full h-full object-cover saturate-0 opacity-40 blur-sm" />
-                  <div className="absolute inset-0 flex items-center justify-center flex-col p-6 backdrop-blur-[10px]">
+                  <div className="absolute inset-0 flex items-center justify-center flex-col p-6 backdrop-blur-[20px]">
                     <Scan className="w-12 h-12 text-foreground mb-4" />
                     <p className="text-foreground font-serif text-2xl md:text-3xl font-bold">Analysis Ready</p>
                     <p className="text-muted-foreground text-[10px] font-black tracking-widest uppercase mt-2">Opening dossier...</p>

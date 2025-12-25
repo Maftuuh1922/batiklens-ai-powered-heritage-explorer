@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Sparkles, ArrowUp } from 'lucide-react';
 export function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -24,9 +25,9 @@ export function Footer() {
           <div className="space-y-6">
             <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-foreground/50">Navigation</h4>
             <ul className="space-y-4 text-sm font-bold uppercase tracking-widest">
-              <li><a href="/" className="text-muted-foreground hover:text-foreground transition-colors">Dossier</a></li>
-              <li><a href="/catalog" className="text-muted-foreground hover:text-foreground transition-colors">Archive</a></li>
-              <li><a href="/scan" className="text-muted-foreground hover:text-foreground transition-colors">Vision Engine</a></li>
+              <li><Link to="/" className="text-muted-foreground hover:text-foreground transition-colors">Dossier</Link></li>
+              <li><Link to="/catalog" className="text-muted-foreground hover:text-foreground transition-colors">Archive</Link></li>
+              <li><Link to="/scan" className="text-muted-foreground hover:text-foreground transition-colors">Vision Engine</Link></li>
             </ul>
           </div>
           <div className="space-y-6">

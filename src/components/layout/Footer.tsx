@@ -3,8 +3,9 @@ import { Sparkles, ArrowUp } from 'lucide-react';
 export function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
   return (
-    <footer className="bg-background border-t border-border mt-32 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <footer className="bg-background border-t border-foreground/5 mt-32 relative">
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-foreground/[0.02] pointer-events-none" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-16">
           <div className="col-span-1 md:col-span-2 space-y-8">
             <h3 className="text-4xl font-serif font-bold tracking-tighter text-foreground">BatikLens.</h3>
@@ -12,10 +13,10 @@ export function Footer() {
               A technological tribute to Indonesia's sacred textile patterns. Preserving history through the precision of vision intelligence.
             </p>
             <div className="flex items-center gap-6">
-               <div className="px-5 py-2 rounded-full border border-border text-[10px] font-bold uppercase tracking-widest bg-foreground/5">
+               <div className="px-5 py-2 rounded-full border border-foreground/10 text-[10px] font-bold uppercase tracking-widest bg-foreground/[0.03] backdrop-blur-xl">
                 Archival Grade AI
                </div>
-               <div className="px-5 py-2 rounded-full border border-border text-[10px] font-bold uppercase tracking-widest bg-foreground/5">
+               <div className="px-5 py-2 rounded-full border border-foreground/10 text-[10px] font-bold uppercase tracking-widest bg-foreground/[0.03] backdrop-blur-xl">
                 Edge Vision v2.1
                </div>
             </div>
@@ -39,13 +40,13 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-20 pt-10 border-t border-border/40 flex flex-col md:flex-row justify-between items-center gap-8">
+        <div className="mt-20 pt-10 border-t border-foreground/5 flex flex-col md:flex-row justify-between items-center gap-8">
           <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.4em]">
             &copy; {new Date().getFullYear()} BatikLens Protocol. All Rights Reserved.
           </p>
-          <button 
+          <button
             onClick={scrollToTop}
-            className="group flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
+            className="group flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.4em] text-muted-foreground hover:text-foreground transition-all duration-300"
           >
             Back to Apex
             <ArrowUp className="w-4 h-4 group-hover:-translate-y-1 transition-transform" />

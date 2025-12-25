@@ -24,8 +24,7 @@ export function LandingPage() {
   };
   return (
     <div className="flex flex-col w-full overflow-x-hidden">
-      {/* Immersive Hero Section */}
-      <section className="relative min-h-[85vh] md:min-h-[92vh] flex items-center justify-center border-b border-border overflow-hidden">
+      <section className="relative min-h-[85vh] md:min-h-[92vh] flex items-center justify-center border-b border-foreground/5 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <motion.div
             initial={{ scale: 1.1 }}
@@ -38,7 +37,8 @@ export function LandingPage() {
               backgroundPosition: 'center'
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/40 to-background" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-background/20" />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-12 md:py-24 text-center">
           <motion.div
@@ -47,7 +47,7 @@ export function LandingPage() {
             variants={containerVariants}
             className="flex flex-col items-center"
           >
-            <motion.div variants={itemVariants} className="mb-6 md:mb-8 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-background/50 backdrop-blur-md">
+            <motion.div variants={itemVariants} className="mb-6 md:mb-8 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-foreground/10 bg-background/40 backdrop-blur-[40px]">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-foreground opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-foreground"></span>
@@ -83,7 +83,6 @@ export function LandingPage() {
           </motion.div>
         </div>
       </section>
-      {/* Features Grid */}
       <section className="py-20 md:py-32 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
@@ -95,9 +94,9 @@ export function LandingPage() {
               <motion.div
                 key={i}
                 whileHover={{ y: -5 }}
-                className="space-y-4 md:space-y-6 glass-card p-8 md:p-10 rounded-3xl border-border/50 transition-colors hover:border-foreground/20"
+                className="space-y-4 md:space-y-6 glass-card p-8 md:p-10 rounded-3xl transition-all duration-500 hover:border-foreground/20 hover:bg-foreground/5"
               >
-                <div className="w-12 h-12 md:w-14 md:h-14 bg-foreground/5 rounded-2xl flex items-center justify-center text-foreground border border-border">
+                <div className="w-12 h-12 md:w-14 md:h-14 bg-foreground/5 rounded-2xl flex items-center justify-center text-foreground border border-foreground/10">
                   {React.cloneElement(feature.icon as React.ReactElement, { className: "w-6 h-6 md:w-7 md:h-7" })}
                 </div>
                 <h3 className="text-xl md:text-2xl font-serif font-bold">{feature.title}</h3>
@@ -109,7 +108,7 @@ export function LandingPage() {
           </div>
         </div>
       </section>
-      <section className="py-12 md:py-16 border-t border-border/40 bg-background/20 backdrop-blur-sm">
+      <section className="py-12 md:py-16 border-t border-foreground/5 bg-background/20 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-[0.3em] font-black opacity-60">
             Heritage integrity verified • Global access limits apply • 2024 Protocol

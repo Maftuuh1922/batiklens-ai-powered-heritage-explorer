@@ -4,10 +4,10 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 export const Navbar = () => {
   return (
-    <nav className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-xl border-b border-border/40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="sticky top-0 z-50 w-full glass-nav">
+      <div className="absolute inset-0 bg-gradient-to-r from-background/40 via-transparent to-background/40 pointer-events-none" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex justify-between items-center h-16 md:h-20">
-          {/* Logo - Strict Left */}
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center group">
               <span className="text-xl md:text-2xl font-serif font-bold tracking-tighter text-foreground group-hover:opacity-80 transition-opacity">
@@ -15,7 +15,6 @@ export const Navbar = () => {
               </span>
             </Link>
           </div>
-          {/* Desktop Navigation - Strict Right */}
           <div className="hidden md:flex items-center justify-end space-x-8 lg:space-x-10">
             <Link
               to="/catalog"
@@ -33,7 +32,6 @@ export const Navbar = () => {
               </Button>
             </Link>
           </div>
-          {/* Mobile Navigation Trigger */}
           <div className="md:hidden flex items-center">
             <Sheet>
               <SheetTrigger asChild>
@@ -41,12 +39,12 @@ export const Navbar = () => {
                   <Menu className="w-6 h-6" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="bg-background border-l border-border w-[280px] sm:w-[350px] p-0">
+              <SheetContent side="right" className="bg-background/95 backdrop-blur-3xl border-l border-foreground/5 w-[280px] sm:w-[350px] p-0">
                 <div className="flex flex-col h-full py-12 px-6">
                   <SheetTitle className="text-left font-serif text-2xl mb-2">
                     BatikLens.
                   </SheetTitle>
-                  <SheetDescription className="text-[10px] uppercase tracking-widest text-muted-foreground mb-8 pb-4 border-b border-border/40">
+                  <SheetDescription className="text-[10px] uppercase tracking-widest text-muted-foreground mb-8 pb-4 border-b border-foreground/5">
                     Heritage Vision Explorer
                   </SheetDescription>
                   <nav className="flex flex-col space-y-6">
@@ -60,7 +58,7 @@ export const Navbar = () => {
                       Scan Engine
                     </Link>
                   </nav>
-                  <div className="mt-auto pt-8 border-t border-border/40">
+                  <div className="mt-auto pt-8 border-t border-foreground/5">
                     <p className="text-[10px] text-muted-foreground font-black uppercase tracking-[0.3em]">
                       Preserving the Infinite Thread
                     </p>

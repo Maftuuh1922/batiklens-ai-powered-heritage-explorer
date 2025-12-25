@@ -40,7 +40,11 @@ export function ResultPage() {
             className="space-y-6 md:space-y-8"
           >
             <div className="relative aspect-square w-full rounded-[1.5rem] md:rounded-[2rem] overflow-hidden glass-card border-foreground/10 shadow-2xl">
-              <img src={batik.imageUrl} alt={batik.name} className="w-full h-full object-cover grayscale-[20%]" />
+              <img 
+                src={batik.imageUrl} 
+                alt={batik.name} 
+                className="w-full h-full object-cover grayscale-[20%]" 
+              />
               <div className="absolute top-4 left-4 md:top-8 md:left-8">
                 <Badge className="bg-foreground text-background font-black text-[9px] md:text-[10px] uppercase tracking-widest px-4 md:px-5 py-2 rounded-full border-none shadow-2xl">
                   Confidence: 98.4%
@@ -61,9 +65,9 @@ export function ResultPage() {
               <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-bold tracking-tighter monochrome-gradient-text leading-[0.9] break-words">
                 {batik.name}
               </h1>
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <MapPin className="w-4 h-4" />
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] border-b border-border/60 pb-1">Provenance: {batik.origin}</span>
+              <div className="flex items-center gap-3 bg-foreground text-background w-fit px-5 py-2 rounded-full shadow-xl">
+                <MapPin className="w-3.5 h-3.5" />
+                <span className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em] uppercase">Provenance: {batik.origin}</span>
               </div>
             </div>
             <div className="space-y-10 md:space-y-12">
@@ -72,7 +76,7 @@ export function ResultPage() {
                   <Info className="w-4 h-4" />
                   <h3 className="font-black uppercase text-[9px] tracking-[0.4em]">Interpretation</h3>
                 </div>
-                <div className="relative pl-6 md:pl-8 border-l border-foreground/10">
+                <div className="relative pl-6 md:pl-8 border-l-2 border-border/60">
                   <p className="text-xl md:text-3xl font-serif italic text-foreground leading-relaxed">
                     "{batik.meaning}"
                   </p>
@@ -83,14 +87,14 @@ export function ResultPage() {
                   <History className="w-4 h-4" />
                   <h3 className="font-black uppercase text-[9px] tracking-[0.4em]">Chronology</h3>
                 </div>
-                <div className="relative pl-6 md:pl-8 border-l border-foreground/10">
+                <div className="relative pl-6 md:pl-8">
                   <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
                     {batik.history}
                   </p>
                 </div>
               </div>
             </div>
-            <div className="pt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="pt-10 grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-border/40">
               <Link to="/catalog">
                 <Button className="w-full bg-foreground text-background hover:bg-foreground/80 py-6 md:py-7 rounded-2xl font-black uppercase tracking-widest text-[10px]">
                   Explore Archive

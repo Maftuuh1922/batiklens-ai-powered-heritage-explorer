@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Upload, Camera, Scan, RefreshCw } from 'lucide-react';
@@ -9,7 +9,15 @@ export function ScanPage() {
   const [state, setState] = useState<ScanState>('idle');
   const [preview, setPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const scanTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const redirectTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const navigate = useNavigate();
+  useEffect(() => {
+    return () => {
+      if (scanTimeoutRef.current) clearTimeout(scanTimeoutRef.current);
+      if (redirectTimeoutRef.current) clearTimeout(redirectTimeoutRef.current);
+    };
+  }, []);
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -23,10 +31,10 @@ export function ScanPage() {
   };
   const startScan = () => {
     setState('scanning');
-    setTimeout(() => {
+    scanTimeoutRef.current = setTimeout(() => {
       setState('complete');
       toast.success("Identity Confirmed", { description: "Pattern recognized in heritage database." });
-      setTimeout(() => {
+      redirectTimeoutRef.current = setTimeout(() => {
         navigate('/result?id=mega-mendung');
       }, 1500);
     }, 4000);
@@ -91,7 +99,7 @@ export function ScanPage() {
                     <motion.div
                       animate={{ top: ['-5%', '105%'] }}
                       transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-                      className="absolute left-0 right-0 h-[3px] bg-foreground shadow-[0_0_30px_hsl(var(--foreground))] z-20"
+                      className="absolute left-0 right-0 h-[3px] bg-foreground shadow-[0_0_40px_hsl(var(--foreground))] z-20"
                     />
                     <motion.div
                       animate={{ top: ['-5%', '105%'] }}

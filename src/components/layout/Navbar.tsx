@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, ScanLine } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 export const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const closeMenu = () => setIsOpen(false);
   return (
     <nav className="sticky top-0 z-50 w-full glass-nav">
       <div className="absolute inset-0 bg-gradient-to-r from-background/40 via-transparent to-background/40 pointer-events-none" />
@@ -33,7 +36,7 @@ export const Navbar = () => {
             </Link>
           </div>
           <div className="md:hidden flex items-center">
-            <Sheet>
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="hover:bg-foreground/5 -mr-2">
                   <Menu className="w-6 h-6" />
@@ -48,13 +51,13 @@ export const Navbar = () => {
                     Heritage Vision Explorer
                   </SheetDescription>
                   <nav className="flex flex-col space-y-6">
-                    <Link to="/" className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors py-2">
+                    <Link to="/" onClick={closeMenu} className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors py-2">
                       Home
                     </Link>
-                    <Link to="/catalog" className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors py-2">
+                    <Link to="/catalog" onClick={closeMenu} className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors py-2">
                       Catalog
                     </Link>
-                    <Link to="/scan" className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors py-2">
+                    <Link to="/scan" onClick={closeMenu} className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors py-2">
                       Scan Engine
                     </Link>
                   </nav>

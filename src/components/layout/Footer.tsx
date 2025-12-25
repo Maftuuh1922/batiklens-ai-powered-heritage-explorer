@@ -34,6 +34,11 @@ export function Footer() {
             <p className="text-sm italic text-muted-foreground leading-relaxed">
               "Weaving the past into the digital present, thread by thread."
             </p>
+            <div className="pt-4">
+              <p className="text-[9px] md:text-[10px] text-muted-foreground/60 leading-tight uppercase tracking-wider">
+                Note: Although this project has AI capabilities, there is a limit on the number of requests that can be made to the AI servers across all user apps in a given time period.
+              </p>
+            </div>
             <div className="flex items-center gap-3 text-[10px] font-bold text-foreground/40 uppercase tracking-[0.3em] pt-4">
               <Sparkles className="w-3 h-3" />
               Powered by Cloudflare

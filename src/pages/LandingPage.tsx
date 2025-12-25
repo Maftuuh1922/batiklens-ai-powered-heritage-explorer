@@ -1,25 +1,25 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { ArrowRight, ScanLine, BookOpen, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 export function LandingPage() {
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1, 
-      transition: { staggerChildren: 0.15 } 
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 }
     }
   };
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { y: 30, opacity: 0 },
-    visible: { 
-      y: 0, 
-      opacity: 1, 
-      transition: { 
-        duration: 0.6, 
-        ease: "easeOut" 
-      } 
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
     }
   };
   return (
@@ -28,7 +28,7 @@ export function LandingPage() {
       <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden border-b border-border">
         {/* High-Res Seamless Batik Background */}
         <div className="absolute inset-0 z-0">
-          <motion.div 
+          <motion.div
             initial={{ scale: 1.1 }}
             animate={{ scale: 1 }}
             transition={{ duration: 1.5, ease: "easeOut" }}

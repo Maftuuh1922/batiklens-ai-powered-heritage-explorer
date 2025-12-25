@@ -36,7 +36,7 @@ export function ResultPage() {
             className="space-y-8"
           >
             <div className="relative aspect-square rounded-[2.5rem] overflow-hidden glass-card border-border shadow-2xl">
-              <img src={batik.imageUrl} alt={batik.name} className="w-full h-full object-cover grayscale-[0.3]" />
+              <img src={batik.imageUrl} alt={batik.name} className="w-full h-full object-cover grayscale-[30%]" />
               <div className="absolute top-8 left-8">
                 <Badge className="bg-foreground text-background font-black text-[10px] uppercase tracking-widest px-5 py-2 rounded-full border-none shadow-2xl">
                   Match Integrity: 98.4%

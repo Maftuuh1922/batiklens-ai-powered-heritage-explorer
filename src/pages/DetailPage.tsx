@@ -35,7 +35,7 @@ export function DetailPage() {
             animate={{ opacity: 1, scale: 1 }}
             className="relative aspect-[4/5] rounded-[2.5rem] overflow-hidden glass-card shadow-2xl border-border"
           >
-            <img src={batik.imageUrl} alt={batik.name} className="w-full h-full object-cover grayscale-[0.2]" />
+            <img src={batik.imageUrl} alt={batik.name} className="w-full h-full object-cover grayscale-[20%]" />
           </motion.div>
           <motion.div
             initial={{ opacity: 0, x: 20 }}

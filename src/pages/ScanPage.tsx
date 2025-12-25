@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Upload, Camera, Loader2, Scan, RefreshCw, X } from 'lucide-react';
+import { Upload, Camera, Scan, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 type ScanState = 'idle' | 'scanning' | 'complete';
@@ -30,10 +30,6 @@ export function ScanPage() {
         navigate('/result?id=mega-mendung');
       }, 1500);
     }, 4000);
-  };
-  const reset = () => {
-    setState('idle');
-    setPreview(null);
   };
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[80vh] flex items-center justify-center">
@@ -90,7 +86,7 @@ export function ScanPage() {
                   className="absolute inset-0"
                 >
                   <img src={preview} alt="Preview" className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-background/40 backdrop-grayscale-[0.5]" />
+                  <div className="absolute inset-0 bg-background/40 backdrop-grayscale" />
                   {/* High Glow Scan Line */}
                   <div className="absolute inset-0 pointer-events-none overflow-hidden">
                     <motion.div

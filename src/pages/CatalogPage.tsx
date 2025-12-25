@@ -15,7 +15,7 @@ export function CatalogPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="py-20 md:py-32">
         <div className="flex flex-col items-center text-center space-y-8 mb-24">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             className="flex items-center gap-3 px-4 py-1 rounded-full border border-border bg-foreground/5"
@@ -23,7 +23,7 @@ export function CatalogPage() {
             <Grid2X2 className="w-3 h-3" />
             <span className="text-[10px] font-bold uppercase tracking-[0.3em]">Curated Heritage Archive</span>
           </motion.div>
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -31,7 +31,7 @@ export function CatalogPage() {
           >
             Heritage Index.
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -57,9 +57,9 @@ export function CatalogPage() {
           </div>
           <div className="relative w-full md:w-80 group">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground group-focus-within:text-foreground transition-colors" />
-            <Input 
-              className="bg-foreground/5 border-border pl-12 h-12 rounded-full font-medium placeholder:text-muted-foreground/50 focus:ring-foreground/20" 
-              placeholder="Query motif name..." 
+            <Input
+              className="bg-foreground/5 border-border pl-12 h-12 rounded-full font-medium placeholder:text-muted-foreground/50 focus:ring-foreground/20"
+              placeholder="Query motif name..."
             />
           </div>
         </div>
@@ -77,7 +77,7 @@ export function CatalogPage() {
                   <img
                     src={batik.imageUrl}
                     alt={batik.name}
-                    className="w-full h-full object-cover grayscale-[0.2] transition-transform duration-1000 group-hover:scale-110"
+                    className="w-full h-full object-cover grayscale-[20%] transition-transform duration-1000 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-end p-10">
                     <p className="text-xs font-bold uppercase tracking-[0.2em] mb-4 text-muted-foreground">Typology: {batik.category}</p>

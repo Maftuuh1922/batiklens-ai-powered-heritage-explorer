@@ -9,85 +9,68 @@ export function DetailPage() {
   const batik = batiks.find(b => b.id === id);
   if (!batik) {
     return (
-      <div className="max-w-7xl mx-auto px-4 py-24 text-center">
-        <h2 className="text-3xl font-serif font-bold mb-4">Motif Not Found</h2>
-        <Link to="/catalog">
-          <Button variant="link" className="text-foreground font-black underline underline-offset-4 text-[10px] uppercase tracking-widest">
-            Back to Archive
-          </Button>
-        </Link>
+      <div className="max-w-7xl mx-auto px-4 py-20 text-center">
+        <h2 className="text-2xl font-serif">Motif not found</h2>
+        <Link to="/catalog" className="text-secondary mt-4 inline-block">Back to Catalog</Link>
       </div>
     );
   }
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="py-8 md:py-20">
-        <div className="mb-8 md:mb-12 flex justify-between items-center">
-          <Link to="/catalog" className="text-muted-foreground hover:text-foreground flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] transition-colors group">
-            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            Archive Index
+      <div className="py-12 md:py-16">
+        <div className="mb-12 flex justify-between items-center">
+          <Link to="/catalog" className="text-muted-foreground hover:text-white flex items-center gap-2 text-sm transition-colors">
+            <ArrowLeft className="w-4 h-4" />
+            Back to Catalog
           </Link>
-          <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground border border-border/20 rounded-full h-10 w-10">
-            <Heart className="w-4 h-4" />
+          <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-red-500 transition-colors">
+            <Heart className="w-5 h-5" />
           </Button>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="relative aspect-square w-full rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden glass-card shadow-2xl border-foreground/15 premium-glow"
+            className="relative aspect-[4/5] rounded-3xl overflow-hidden glass-card shadow-nature shadow-secondary/5"
           >
-            <img 
-              src={batik.imageUrl} 
-              alt={batik.name} 
-              className="w-full h-full object-cover grayscale-[15%] transition-transform duration-1000" 
-            />
+            <img src={batik.imageUrl} alt={batik.name} className="w-full h-full object-cover" />
           </motion.div>
-          <motion.div
+          <motion.div 
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex flex-col"
+            className="flex flex-col h-full"
           >
-            <div className="mb-10 md:mb-14">
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold monochrome-gradient-text mb-6 leading-tight break-words">
-                {batik.name}
-              </h1>
-              <motion.div 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="flex items-center gap-3 bg-foreground text-background w-fit px-5 py-2 rounded-full shadow-xl"
-              >
-                <MapPin className="w-3.5 h-3.5" />
-                <span className="text-[9px] md:text-[10px] font-black tracking-[0.3em] uppercase">{batik.origin}</span>
-              </motion.div>
+            <div className="mb-8">
+              <h1 className="text-5xl md:text-6xl font-serif font-bold gold-gradient-text mb-4">{batik.name}</h1>
+              <div className="flex items-center gap-3 bg-secondary/10 w-fit px-4 py-2 rounded-full border border-secondary/20">
+                <MapPin className="w-4 h-4 text-secondary" />
+                <span className="text-sm font-semibold tracking-wide text-secondary uppercase">{batik.origin}</span>
+              </div>
             </div>
-            <div className="flex-grow space-y-10 md:space-y-12">
-              <section className="space-y-4 md:space-y-6">
-                <div className="flex items-center gap-3 text-foreground/50">
-                  <Info className="w-4 h-4" />
-                  <h3 className="font-black uppercase text-[9px] tracking-[0.4em]">Interpretation</h3>
+            <div className="flex-grow space-y-10">
+              <section className="space-y-4">
+                <div className="flex items-center gap-2 text-secondary/80">
+                  <Info className="w-5 h-5" />
+                  <h3 className="font-serif text-2xl font-bold">Philosophy</h3>
                 </div>
-                <div className="border-l-2 border-border/60 pl-6 md:pl-8">
-                  <p className="text-xl md:text-3xl font-serif italic text-foreground leading-relaxed">
-                    "{batik.meaning}"
-                  </p>
-                </div>
+                <p className="text-muted-foreground leading-relaxed text-lg italic">
+                  "{batik.meaning}"
+                </p>
               </section>
-              <section className="space-y-4 md:space-y-6">
-                <div className="flex items-center gap-3 text-foreground/50">
-                  <History className="w-4 h-4" />
-                  <h3 className="font-black uppercase text-[9px] tracking-[0.4em]">Chronology</h3>
+              <section className="space-y-4">
+                <div className="flex items-center gap-2 text-secondary/80">
+                  <History className="w-5 h-5" />
+                  <h3 className="font-serif text-2xl font-bold">The History</h3>
                 </div>
-                <p className="text-base md:text-lg text-muted-foreground leading-relaxed pl-6 md:pl-8">
+                <p className="text-muted-foreground leading-relaxed">
                   {batik.history}
                 </p>
               </section>
             </div>
-            <div className="mt-12 pt-8 border-t border-border/40">
+            <div className="mt-12 pt-8 border-t border-border">
               <Link to="/scan">
-                <Button className="w-full bg-foreground text-background hover:bg-foreground/90 py-7 md:py-8 text-[10px] font-black uppercase tracking-widest rounded-2xl shadow-xl transition-all active:scale-[0.98]">
-                  Analyze Custom Sample
+                <Button className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90 py-7 text-lg rounded-2xl">
+                  Analyze Your Own Batik
                 </Button>
               </Link>
             </div>

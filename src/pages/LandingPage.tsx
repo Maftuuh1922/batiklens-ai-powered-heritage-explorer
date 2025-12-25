@@ -1,117 +1,92 @@
 import React from 'react';
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ArrowRight, ScanLine, BookOpen, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 export function LandingPage() {
-  const containerVariants: Variants = {
+  const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15 }
-    }
+    visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
   };
-  const itemVariants: Variants = {
+  const itemVariants = {
     hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        ease: [0.16, 1, 0.3, 1]
-      }
-    }
+    visible: { y: 0, opacity: 1 }
   };
   return (
-    <div className="flex flex-col w-full overflow-x-hidden">
-      <section className="relative min-h-[85vh] md:min-h-[92vh] flex items-center justify-center border-b border-foreground/5 overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <motion.div
-            initial={{ scale: 1.1 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 2, ease: "easeOut" }}
-            className="absolute inset-0 grayscale opacity-15 md:opacity-20 animate-slow-pan"
-            style={{
-              backgroundImage: "url('https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?auto=format&fit=crop&q=80&w=2048')",
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-background/20" />
+    <div className="flex flex-col w-full">
+      {/* Hero Section */}
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
+          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/batik-fractal.png')] animate-parallax" />
         </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-12 md:py-24 text-center">
-          <motion.div
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20 lg:py-32">
+          <motion.div 
             initial="hidden"
             animate="visible"
             variants={containerVariants}
-            className="flex flex-col items-center"
+            className="max-w-3xl"
           >
-            <motion.div variants={itemVariants} className="mb-6 md:mb-8 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-foreground/10 bg-background/40 backdrop-blur-[40px]">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-foreground opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-foreground"></span>
-              </span>
-              <span className="text-[9px] md:text-[10px] uppercase tracking-widest font-black">Heritage AI v2.0 Live</span>
-            </motion.div>
-            <motion.h1
-              variants={itemVariants}
-              className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-serif font-bold leading-[1] md:leading-[0.9] mb-6 md:mb-8 monochrome-gradient-text"
-            >
-              The Soul of Batik <br className="hidden md:block" />Revealed.
+            <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold leading-tight mb-6">
+              The Soul of <span className="gold-gradient-text">Batik</span> Revealed by AI.
             </motion.h1>
-            <motion.p
-              variants={itemVariants}
-              className="text-base md:text-xl text-muted-foreground mb-10 md:mb-12 leading-relaxed max-w-2xl mx-auto px-4"
-            >
-              Bridge the gap between ancient Javanese philosophy and modern vision intelligence.
-              Instantly identify motifs with clinical precision.
+            <motion.p variants={itemVariants} className="text-lg md:text-xl text-muted-foreground mb-10 leading-relaxed">
+              Scan Indonesian batik motifs and instantly explore their hidden philosophy, history, and geographical origins with our heritage-trained vision model.
             </motion.p>
-            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center gap-4 md:gap-6 w-full max-w-md sm:max-w-none px-6">
-              <Link to="/scan" className="w-full sm:w-auto">
-                <Button size="lg" className="w-full sm:w-auto bg-foreground text-background hover:bg-foreground/90 px-8 py-7 md:py-8 text-lg md:text-xl rounded-full font-black shadow-2xl shadow-foreground/10">
+            <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
+              <Link to="/scan">
+                <Button size="lg" className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-8 py-7 text-lg rounded-full">
                   Start Scanning
-                  <ArrowRight className="ml-2 w-5 h-5 md:w-6 md:h-6" />
+                  <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
-              <Link to="/catalog" className="w-full sm:w-auto">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto border-foreground/20 text-foreground hover:bg-foreground/5 px-8 py-7 md:py-8 text-lg md:text-xl rounded-full font-medium transition-all">
-                  Browse Archive
+              <Link to="/catalog">
+                <Button variant="outline" size="lg" className="border-secondary text-secondary hover:bg-secondary/10 px-8 py-7 text-lg rounded-full">
+                  Browse Catalog
                 </Button>
               </Link>
             </motion.div>
           </motion.div>
         </div>
       </section>
-      <section className="py-20 md:py-32 bg-background">
+      {/* Features Grid */}
+      <section className="py-24 bg-accent/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {[
-              { icon: <ScanLine />, title: "Neural Classification", desc: "Trained on high-resolution museum archives to identify motifs with clinical precision." },
-              { icon: <BookOpen />, title: "Ethical Intelligence", desc: "Providing cultural context and philosophical depth, ensuring heritage stories are preserved." },
-              { icon: <ShieldCheck />, title: "Digital Stewardship", desc: "A non-profit initiative dedicated to protecting Indonesian intangible cultural heritage." }
-            ].map((feature, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ y: -5 }}
-                className="space-y-4 md:space-y-6 glass-card p-8 md:p-10 rounded-3xl transition-all duration-500 hover:border-foreground/20 hover:bg-foreground/5"
-              >
-                <div className="w-12 h-12 md:w-14 md:h-14 bg-foreground/5 rounded-2xl flex items-center justify-center text-foreground border border-foreground/10">
-                  {React.cloneElement(feature.icon as React.ReactElement, { className: "w-6 h-6 md:w-7 md:h-7" })}
-                </div>
-                <h3 className="text-xl md:text-2xl font-serif font-bold">{feature.title}</h3>
-                <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-                  {feature.desc}
-                </p>
-              </motion.div>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="space-y-4 glass-card p-8 rounded-2xl">
+              <div className="w-12 h-12 bg-secondary/20 rounded-lg flex items-center justify-center text-secondary">
+                <ScanLine className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-serif font-bold">Intelligent Vision</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Identify over 100+ Indonesian batik patterns with high-precision computer vision trained on authentic heritage datasets.
+              </p>
+            </div>
+            <div className="space-y-4 glass-card p-8 rounded-2xl">
+              <div className="w-12 h-12 bg-secondary/20 rounded-lg flex items-center justify-center text-secondary">
+                <BookOpen className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-serif font-bold">Deep Philosophy</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Go beyond the aesthetics. Understand the spiritual meaning and social status behind every curve and line.
+              </p>
+            </div>
+            <div className="space-y-4 glass-card p-8 rounded-2xl">
+              <div className="w-12 h-12 bg-secondary/20 rounded-lg flex items-center justify-center text-secondary">
+                <ShieldCheck className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-serif font-bold">Cultural Preservation</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                A digital archive designed to protect and promote Indonesian intangible cultural heritage for the next generation.
+              </p>
+            </div>
           </div>
         </div>
       </section>
-      <section className="py-12 md:py-16 border-t border-foreground/5 bg-background/20 backdrop-blur-sm">
+      {/* Note for Users */}
+      <section className="py-12 border-y border-border">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-[0.3em] font-black opacity-60">
-            Heritage integrity verified • Global access limits apply • 2024 Protocol
+          <p className="text-xs text-muted-foreground/60 uppercase tracking-widest">
+            Note: AI processing limits apply across the platform. Preserving heritage requires mindful computing.
           </p>
         </div>
       </section>

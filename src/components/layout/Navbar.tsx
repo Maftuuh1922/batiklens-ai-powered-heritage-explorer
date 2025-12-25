@@ -1,75 +1,42 @@
-import { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, ScanLine } from 'lucide-react';
+import { Menu, Search, ScanLine, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from '@/components/ui/sheet';
-import { ThemeToggle } from '@/components/ThemeToggle';
-export const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const closeMenu = () => setIsOpen(false);
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+export function Navbar() {
   return (
-    <nav className="sticky top-0 z-50 w-full glass-nav transition-all duration-300">
-      <div className="absolute inset-0 bg-gradient-to-r from-background/40 via-transparent to-background/40 pointer-events-none" />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex justify-between items-center h-16 md:h-20">
-          <div className="flex-shrink-0">
-            <Link to="/" className="flex items-center group">
-              <span className="text-xl md:text-2xl font-serif font-bold tracking-tighter text-foreground group-hover:opacity-80 transition-opacity">
-                BatikLens.
-              </span>
-            </Link>
-          </div>
-          <div className="hidden md:flex items-center justify-end space-x-6 lg:space-x-8">
-            <Link
-              to="/catalog"
-              className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Heritage Catalog
-            </Link>
+    <nav className="sticky top-0 z-50 w-full glass-card border-none bg-background/80">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-20">
+          <Link to="/" className="flex items-center space-x-2">
+            <span className="text-2xl font-serif font-bold gold-gradient-text">BatikLens</span>
+          </Link>
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center space-x-8">
+            <Link to="/" className="text-sm font-medium hover:text-secondary transition-colors">Home</Link>
+            <Link to="/catalog" className="text-sm font-medium hover:text-secondary transition-colors">Heritage Catalog</Link>
             <Link to="/scan">
-              <Button
-                size="sm"
-                className="bg-foreground text-background hover:bg-foreground/90 flex items-center gap-2 px-6 rounded-full font-black uppercase text-[10px] tracking-[0.2em] transition-transform active:scale-95"
-              >
-                <ScanLine className="w-3.5 h-3.5" />
+              <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90 flex items-center gap-2">
+                <ScanLine className="w-4 h-4" />
                 Scan Motif
               </Button>
             </Link>
-            <ThemeToggle className="static" />
           </div>
-          <div className="md:hidden flex items-center gap-2">
-            <ThemeToggle className="static" />
-            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+          {/* Mobile Menu */}
+          <div className="md:hidden flex items-center">
+            <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="hover:bg-foreground/5 -mr-2">
+                <Button variant="ghost" size="icon">
                   <Menu className="w-6 h-6" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="bg-background/95 backdrop-blur-3xl border-l border-foreground/5 w-[280px] sm:w-[350px] p-0">
-                <div className="flex flex-col h-full py-12 px-6">
-                  <div className="flex justify-between items-start mb-2">
-                    <SheetTitle className="text-left font-serif text-2xl">
-                      BatikLens.
-                    </SheetTitle>
-                  </div>
-                  <SheetDescription className="text-[10px] uppercase tracking-widest text-muted-foreground mb-8 pb-4 border-b border-foreground/5">
-                    Heritage Vision Explorer
-                  </SheetDescription>
-                  <nav className="flex flex-col space-y-6">
-                    <Link to="/" onClick={closeMenu} className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors py-2">
-                      Home
-                    </Link>
-                    <Link to="/catalog" onClick={closeMenu} className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors py-2">
-                      Catalog
-                    </Link>
-                    <Link to="/scan" onClick={closeMenu} className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors py-2">
-                      Scan Engine
-                    </Link>
-                  </nav>
-                  <div className="mt-auto pt-8 border-t border-foreground/5">
-                    <p className="text-[10px] text-muted-foreground font-black uppercase tracking-[0.3em]">
-                      Preserving the Infinite Thread
-                    </p>
+              <SheetContent side="right" className="bg-background border-border">
+                <div className="flex flex-col space-y-6 mt-12">
+                  <Link to="/" className="text-lg font-serif">Home</Link>
+                  <Link to="/catalog" className="text-lg font-serif">Heritage Catalog</Link>
+                  <Link to="/scan" className="text-lg font-serif">Scan Batik</Link>
+                  <div className="pt-6 border-t border-border">
+                    <p className="text-xs text-muted-foreground italic">Preserving Indonesia's Heritage through AI.</p>
                   </div>
                 </div>
               </SheetContent>
@@ -79,4 +46,4 @@ export const Navbar = () => {
       </div>
     </nav>
   );
-};
+}

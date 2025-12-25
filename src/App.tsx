@@ -1,18 +1,17 @@
-import { Outlet, ScrollRestoration } from 'react-router-dom';
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { Toaster } from '@/components/ui/sonner';
-const App = () => {
+export default function App() {
   return (
-    <div className="min-h-screen flex flex-col antialiased selection:bg-foreground selection:text-background">
+    <div className="min-h-screen flex flex-col selection:bg-secondary/30 selection:text-secondary">
       <Navbar />
       <main className="flex-grow">
         <Outlet />
       </main>
       <Footer />
-      <ScrollRestoration />
-      <Toaster richColors position="top-right" closeButton />
+      <Toaster richColors position="top-right" />
     </div>
   );
-};
-export default App;
+}

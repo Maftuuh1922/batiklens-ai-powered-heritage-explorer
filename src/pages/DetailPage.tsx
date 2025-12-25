@@ -23,8 +23,8 @@ export function DetailPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="py-8 md:py-20">
         <div className="mb-8 md:mb-12 flex justify-between items-center">
-          <Link to="/catalog" className="text-muted-foreground hover:text-foreground flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] transition-colors">
-            <ArrowLeft className="w-4 h-4" />
+          <Link to="/catalog" className="text-muted-foreground hover:text-foreground flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] transition-colors group">
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
             Archive Index
           </Link>
           <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground border border-border/20 rounded-full h-10 w-10">
@@ -35,9 +35,13 @@ export function DetailPage() {
           <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="relative aspect-[4/5] w-full rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden glass-card shadow-2xl border-border"
+            className="relative aspect-square w-full rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden glass-card shadow-2xl border-foreground/15 premium-glow"
           >
-            <img src={batik.imageUrl} alt={batik.name} className="w-full h-full object-cover grayscale-[15%]" />
+            <img 
+              src={batik.imageUrl} 
+              alt={batik.name} 
+              className="w-full h-full object-cover grayscale-[15%] transition-transform duration-1000" 
+            />
           </motion.div>
           <motion.div
             initial={{ opacity: 0, x: 20 }}
@@ -48,10 +52,15 @@ export function DetailPage() {
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold monochrome-gradient-text mb-6 leading-tight break-words">
                 {batik.name}
               </h1>
-              <div className="flex items-center gap-3 bg-foreground text-background w-fit px-5 py-2 rounded-full shadow-xl">
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="flex items-center gap-3 bg-foreground text-background w-fit px-5 py-2 rounded-full shadow-xl"
+              >
                 <MapPin className="w-3.5 h-3.5" />
                 <span className="text-[9px] md:text-[10px] font-black tracking-[0.3em] uppercase">{batik.origin}</span>
-              </div>
+              </motion.div>
             </div>
             <div className="flex-grow space-y-10 md:space-y-12">
               <section className="space-y-4 md:space-y-6">
@@ -77,7 +86,7 @@ export function DetailPage() {
             </div>
             <div className="mt-12 pt-8 border-t border-border/40">
               <Link to="/scan">
-                <Button className="w-full bg-foreground text-background hover:bg-foreground/90 py-7 md:py-8 text-[10px] font-black uppercase tracking-widest rounded-2xl shadow-xl">
+                <Button className="w-full bg-foreground text-background hover:bg-foreground/90 py-7 md:py-8 text-[10px] font-black uppercase tracking-widest rounded-2xl shadow-xl transition-all active:scale-[0.98]">
                   Analyze Custom Sample
                 </Button>
               </Link>

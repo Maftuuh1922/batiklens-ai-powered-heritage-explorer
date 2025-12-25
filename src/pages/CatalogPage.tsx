@@ -5,6 +5,7 @@ import { Search, ArrowUpRight, Grid2X2 } from 'lucide-react';
 import { batiks } from '@/lib/batik-data';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
 export const CatalogPage = () => {
   const [filter, setFilter] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
@@ -53,10 +54,12 @@ export const CatalogPage = () => {
                 key={cat}
                 onClick={() => setFilter(cat)}
                 variant={filter === cat ? 'default' : 'outline'}
-                className={filter === cat
-                  ? "bg-foreground text-background hover:bg-foreground/90 rounded-full px-4 md:px-5 h-8 md:h-9 text-[9px] md:text-[10px] font-black uppercase tracking-widest flex-shrink-0 backdrop-blur-[40px]"
-                  : "bg-transparent text-muted-foreground hover:text-foreground border-foreground/10 hover:border-foreground/30 rounded-full px-4 md:px-5 h-8 md:h-9 text-[9px] md:text-[10px] font-bold uppercase tracking-widest flex-shrink-0 backdrop-blur-[40px]"
-                }
+                className={cn(
+                  "rounded-full px-4 md:px-5 h-8 md:h-9 text-[9px] md:text-[10px] font-black uppercase tracking-widest flex-shrink-0 backdrop-blur-[40px] transition-all",
+                  filter === cat
+                    ? "bg-foreground text-background hover:bg-foreground/90"
+                    : "bg-transparent text-muted-foreground hover:text-foreground border-foreground/10 hover:border-foreground/30"
+                )}
               >
                 {cat}
               </Button>
@@ -73,35 +76,35 @@ export const CatalogPage = () => {
           </div>
         </div>
         {filteredBatiks.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
             {filteredBatiks.map((batik, idx) => (
               <motion.div
                 key={batik.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.05 }}
-                className="group"
+                className="group w-full max-w-[360px]"
               >
                 <Link to={`/batik/${batik.id}`}>
-                  <div className="relative aspect-[3/4] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden glass-card mb-4 md:mb-6 border-foreground/5 group-hover:shadow-2xl transition-all duration-500">
+                  <div className="relative aspect-square rounded-[1.5rem] md:rounded-[2rem] overflow-hidden glass-card mb-4 border-foreground/5 group-hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:group-hover:shadow-[0_0_30px_rgba(255,255,255,0.08)] transition-all duration-500">
                     <div className="absolute inset-0 bg-gradient-to-br from-foreground/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 pointer-events-none" />
                     <img
                       src={batik.imageUrl}
                       alt={batik.name}
-                      className="w-full h-full object-cover grayscale-[20%] transition-transform duration-1000 group-hover:scale-105"
+                      className="w-full h-full object-cover grayscale-[20%] transition-transform duration-1000 group-hover:scale-[1.02]"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 md:p-8 z-20">
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 md:p-8 z-20">
                       <p className="text-[10px] font-black uppercase tracking-[0.2em] mb-2 text-muted-foreground">Typology: {batik.category}</p>
-                      <p className="text-sm md:text-base font-serif italic text-foreground leading-relaxed">"{batik.meaning.slice(0, 70)}..."</p>
+                      <p className="text-sm md:text-base font-serif italic text-foreground leading-tight">"{batik.meaning.slice(0, 60)}..."</p>
                     </div>
                     <div className="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 bg-foreground text-background rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 -translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-xl z-30">
                       <ArrowUpRight className="w-5 h-5" />
                     </div>
                   </div>
-                  <div className="space-y-1 px-2">
-                    <h3 className="text-2xl md:text-3xl font-serif font-bold transition-opacity">{batik.name}</h3>
+                  <div className="space-y-0.5 px-2">
+                    <h3 className="text-xl md:text-2xl font-serif font-bold transition-opacity leading-none">{batik.name}</h3>
                     <div className="flex items-center gap-2">
-                      <div className="h-[1px] w-3 bg-muted-foreground/40" />
+                      <div className="h-[1px] w-3 bg-muted-foreground/30" />
                       <p className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-[0.3em] font-black">{batik.origin}</p>
                     </div>
                   </div>

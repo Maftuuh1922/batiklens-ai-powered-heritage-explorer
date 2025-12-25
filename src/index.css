@@ -45,7 +45,7 @@
 }
 @layer components {
   .glass-card {
-    @apply bg-background/50 backdrop-blur-[40px] border border-foreground/10 shadow-xl overflow-hidden relative;
+    @apply bg-background/50 backdrop-blur-[40px] border border-foreground/15 shadow-xl overflow-hidden relative;
     background-image: linear-gradient(to bottom, hsl(var(--foreground) / 0.03), transparent);
   }
   .monochrome-gradient-text {
@@ -57,9 +57,13 @@
     @apply backdrop-blur-[40px] bg-background/80 border-b border-foreground/5;
     background-image: linear-gradient(to bottom, hsl(var(--foreground) / 0.02), transparent);
   }
+  .premium-glow {
+    @apply transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_0_30px_rgba(255,255,255,0.06)] hover:backdrop-blur-[50px];
+  }
 }
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 body {
   @apply bg-background text-foreground font-sans subpixel-antialiased min-h-screen selection:bg-foreground selection:text-background overflow-x-hidden;

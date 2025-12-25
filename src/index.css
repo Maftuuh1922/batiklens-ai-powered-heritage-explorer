@@ -41,6 +41,6 @@ body {
   @apply bg-background text-foreground font-sans nature-gradient min-h-screen;
   background-attachment: fixed;
 }
-h1, h2, h3, h4, .font-serif {
+h1, h2, h3, h4 {
   @apply font-serif;
 }

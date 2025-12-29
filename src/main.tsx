@@ -16,6 +16,7 @@ import { ScanPage } from '@/pages/ScanPage';
 import { ResultPage } from '@/pages/ResultPage';
 import { CatalogPage } from '@/pages/CatalogPage';
 import { DetailPage } from '@/pages/DetailPage';
+import GalleryPage from '@/pages/GalleryPage';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
       { path: "/scan", element: <ScanPage /> },
       { path: "/result", element: <ResultPage /> },
       { path: "/catalog", element: <CatalogPage /> },
+      { path: "/gallery", element: <GalleryPage /> },
       { path: "/batik/:id", element: <DetailPage /> },
     ]
   },

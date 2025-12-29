@@ -18,26 +18,57 @@ export function ScanPage() {
       if (redirectTimeoutRef.current) clearTimeout(redirectTimeoutRef.current);
     };
   }, []);
-  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreview(reader.result as string);
-        startScan();
-      };
-      reader.readAsDataURL(file);
+      const objectUrl = URL.createObjectURL(file);
+      setPreview(objectUrl);
+      startScan(file, objectUrl);
     }
   };
-  const startScan = () => {
+  const startScan = async (file: File, previewUrl?: string) => {
     setState('scanning');
-    scanTimeoutRef.current = setTimeout(() => {
-      setState('complete');
-      toast.success("Identity Confirmed", { description: "Pattern recognized in heritage database." });
-      redirectTimeoutRef.current = setTimeout(() => {
-        navigate('/result?id=mega-mendung');
-      }, 1500);
-    }, 4000);
+    
+    try {
+      // Send to Python backend for actual classification
+      const formData = new FormData();
+      formData.append('image', file);
+      const API_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/predict`, {
+        method: 'POST',
+        body: formData
+      });
+      
+      if (!response.ok) {
+        throw new Error('Classification failed');
+      }
+      
+      const result = await response.json();
+      
+      setTimeout(() => {
+        setState('complete');
+        toast.success("Identity Confirmed", { 
+          description: `Pattern recognized: ${result.prediction} (${result.percentage})` 
+        });
+        
+        redirectTimeoutRef.current = setTimeout(() => {
+          // Store result and uploaded image for result page
+          const resultWithImage = {
+            ...result,
+            uploadedImageUrl: previewUrl || preview
+          };
+          localStorage.setItem('scanResult', JSON.stringify(resultWithImage));
+          navigate('/result?id=scan-result');
+        }, 1500);
+      }, 2000);
+      
+    } catch (error) {
+      console.error('Scan error:', error);
+      setState('idle');
+      toast.error("Scan Failed", { 
+        description: "Please try again with a different image." 
+      });
+    }
   };
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[80vh] flex items-center justify-center">

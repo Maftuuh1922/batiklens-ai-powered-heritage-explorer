@@ -8,8 +8,23 @@ import { Badge } from '@/components/ui/badge';
 export function ResultPage() {
   const [searchParams] = useSearchParams();
   const id = searchParams.get('id');
-  const batik = batiks.find(b => b.id === id);
-  if (!batik) {
+  
+  // Check if this is a scan result
+  const scanResult = id === 'scan-result' ? JSON.parse(localStorage.getItem('scanResult') || 'null') : null;
+  
+  // Find batik data - if scan result, try to match by prediction name
+  let batik = batiks.find(b => b.id === id);
+  
+  if (scanResult && !batik) {
+    // Try to find batik data that matches the scan result prediction
+    batik = batiks.find(b => 
+      b.id === scanResult.prediction || 
+      scanResult.prediction.includes(b.id) ||
+      b.id.includes(scanResult.prediction.replace('batik-', '').replace('_', '-'))
+    );
+  }
+  
+  if (!batik && !scanResult) {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="py-24 md:py-40 flex flex-col items-center justify-center text-center space-y-6">
@@ -29,6 +44,24 @@ export function ResultPage() {
       </div>
     );
   }
+
+  // Use scan result if available, otherwise use batik data
+  const displayData = scanResult && batik ? {
+    // Use batik data but with uploaded image and scan confidence
+    ...batik,
+    description: `Classified with ${scanResult.percentage} confidence`,
+    imageUrl: scanResult.uploadedImageUrl, // ALWAYS use uploaded image for scan results
+    scanResult: scanResult
+  } : scanResult ? {
+    // Fallback if no matching batik data found
+    name: scanResult.prediction,
+    description: `Classified with ${scanResult.percentage} confidence`,
+    imageUrl: scanResult.uploadedImageUrl || '/batik-day.png',
+    region: 'Detected Pattern',
+    history: `AI Classification Result: ${scanResult.prediction}`,
+    materials: scanResult.top_5_predictions?.slice(0, 3).map((p: any) => p.class) || [],
+    category: 'AI Detection'
+  } : batik;
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="py-8 md:py-16">
@@ -47,13 +80,17 @@ export function ResultPage() {
           >
             <div className="relative aspect-square w-full rounded-[1.5rem] md:rounded-[2rem] overflow-hidden glass-card border-foreground/10 shadow-2xl">
               <img
-                src={batik.imageUrl}
-                alt={batik.name}
+                src={displayData.imageUrl}
+                alt={displayData.name}
                 className="w-full h-full object-cover grayscale-[20%]"
+                onError={(e) => {
+                  const img = e.currentTarget as HTMLImageElement;
+                  img.src = '/batik-day.png';
+                }}
               />
               <div className="absolute top-4 left-4 md:top-8 md:left-8">
                 <Badge className="bg-foreground text-background font-black text-[9px] md:text-[10px] uppercase tracking-widest px-4 md:px-5 py-2 rounded-full border-none shadow-2xl">
-                  Confidence: 98.4%
+                  {scanResult ? `Confidence: ${scanResult.percentage}` : 'Confidence: 98.4%'}
                 </Badge>
               </div>
             </div>
@@ -69,11 +106,11 @@ export function ResultPage() {
           >
             <div className="space-y-4 md:space-y-6">
               <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-bold tracking-tighter monochrome-gradient-text leading-[0.9] break-words">
-                {batik.name}
+                {displayData.name}
               </h1>
               <div className="flex items-center gap-3 bg-foreground text-background w-fit px-5 py-2 rounded-full shadow-xl">
                 <MapPin className="w-3.5 h-3.5" />
-                <span className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em]">Provenance: {batik.origin}</span>
+                <span className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em]">Provenance: {displayData.origin || displayData.region}</span>
               </div>
             </div>
             <div className="space-y-10 md:space-y-12">
@@ -84,7 +121,7 @@ export function ResultPage() {
                 </div>
                 <div className="relative pl-6 md:pl-8 border-l-2 border-border/60">
                   <p className="text-xl md:text-3xl font-serif italic text-foreground leading-relaxed">
-                    "{batik.meaning}"
+                    "{displayData.meaning || displayData.description}"
                   </p>
                 </div>
               </div>
@@ -95,7 +132,7 @@ export function ResultPage() {
                 </div>
                 <div className="relative pl-6 md:pl-8">
                   <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                    {batik.history}
+                    {displayData.history}
                   </p>
                 </div>
               </div>

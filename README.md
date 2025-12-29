@@ -64,6 +64,27 @@ A production-ready, full-stack chat application powered by Cloudflare Workers, f
    ```
    Open [http://localhost:3000](http://localhost:3000) (or your configured PORT).
 
+### Connect Batik Classifier Backend
+
+This UI can call a local Python backend for image classification.
+
+1. Start the backend (Flask + TFLite):
+   ```bash
+   # Activate local env
+   source ../batik-classifier/api/batik-env/bin/activate
+   # Run the server
+   python ../batik-classifier/api/app_mobilenet.py
+   # Backend runs at: http://localhost:5000
+   ```
+
+2. Point the frontend to the backend by setting an env var:
+   ```bash
+   # Create .env.local in this folder
+   echo "VITE_BACKEND_URL=http://localhost:5000" > .env.local
+   ```
+
+3. Use the Scan page to upload an image; it will POST to `/predict` and display the result.
+
 ## 💻 Development
 
 - **Frontend**: `bun dev` (Vite dev server).

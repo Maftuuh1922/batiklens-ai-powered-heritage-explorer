@@ -30,9 +30,9 @@ export function HomePage() {
             initial={{ scale: 1.1 }}
             animate={{ scale: 1 }}
             transition={{ duration: 2, ease: "easeOut" }}
-            className="absolute inset-0 grayscale opacity-15 md:opacity-20 animate-slow-pan"
+            className="absolute inset-0 opacity-25 md:opacity-30 animate-slow-pan"
             style={{
-              backgroundImage: "url('https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?auto=format&fit=crop&q=80&w=2048')",
+              backgroundImage: "url('/batik-day.png')",
               backgroundSize: 'cover',
               backgroundPosition: 'center'
             }}

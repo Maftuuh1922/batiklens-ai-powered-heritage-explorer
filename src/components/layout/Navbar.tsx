@@ -26,12 +26,6 @@ export const Navbar = () => {
             >
               Heritage Catalog
             </Link>
-            <Link
-              to="/gallery"
-              className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Batik Gallery
-            </Link>
             <Link to="/scan">
               <Button
                 size="sm"
@@ -66,10 +60,7 @@ export const Navbar = () => {
                       Home
                     </Link>
                     <Link to="/catalog" onClick={closeMenu} className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors py-2">
-                      Catalog
-                    </Link>
-                    <Link to="/gallery" onClick={closeMenu} className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors py-2">
-                      Batik Gallery
+                      Heritage Catalog
                     </Link>
                     <Link to="/scan" onClick={closeMenu} className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors py-2">
                       Scan Engine

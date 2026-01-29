@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import batikData from '../lib/batik-drive-data.json';
+import { useBatikImages } from '../hooks/useBatikImages';
 
 interface BatikItem {
   nama: string;
@@ -11,22 +11,23 @@ interface BatikItem {
 const BatikGallery: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const { images, loading } = useBatikImages();
 
   // Get unique categories
   const categories = useMemo(() => {
-    const uniqueCategories = Array.from(new Set(batikData.map((item: BatikItem) => item.kategori)));
+    const uniqueCategories = Array.from(new Set(images.map((img) => img.category)));
     return ['all', ...uniqueCategories];
-  }, []);
+  }, [images]);
 
   // Filter images based on category and search
   const filteredImages = useMemo(() => {
-    return batikData.filter((item: BatikItem) => {
-      const matchesCategory = selectedCategory === 'all' || item.kategori === selectedCategory;
-      const matchesSearch = item.nama.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                           item.kategori.toLowerCase().includes(searchQuery.toLowerCase());
+    return images.filter((img) => {
+      const matchesCategory = selectedCategory === 'all' || img.category === selectedCategory;
+      const matchesSearch = img.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                           img.category.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesCategory && matchesSearch;
     });
-  }, [selectedCategory, searchQuery]);
+  }, [selectedCategory, searchQuery, images]);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -74,10 +75,20 @@ const BatikGallery: React.FC = () => {
         </div>
       </div>
 
+      {/* Loading state */}
+      {loading && (
+        <div className="text-center text-gray-500 mb-6">Memuat gambar batik lokal…</div>
+      )}
+
       {/* Image Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {filteredImages.map((item: BatikItem, index: number) => (
-          <BatikCard key={index} item={item} />
+        {filteredImages.map((item: any, index: number) => (
+          <BatikCard key={index} item={{
+            nama: item.name,
+            directLink: item.url,
+            thumbnailLink: item.thumbnailUrl,
+            kategori: item.category
+          }} />
         ))}
       </div>
 
@@ -93,6 +104,11 @@ const BatikGallery: React.FC = () => {
 const BatikCard: React.FC<{ item: BatikItem }> = ({ item }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
+
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    console.error('Failed to load image:', item.thumbnailLink, e);
+    setImageError(true);
+  };
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
@@ -111,7 +127,7 @@ const BatikCard: React.FC<{ item: BatikItem }> = ({ item }) => {
                 imageLoaded ? 'opacity-100' : 'opacity-0'
               }`}
               onLoad={() => setImageLoaded(true)}
-              onError={() => setImageError(true)}
+              onError={handleImageError}
               loading="lazy"
             />
           </>

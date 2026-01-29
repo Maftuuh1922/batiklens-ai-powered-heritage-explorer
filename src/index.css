@@ -48,6 +48,13 @@
     @apply bg-background/50 backdrop-blur-[40px] border border-foreground/15 shadow-xl overflow-hidden relative;
     background-image: linear-gradient(to bottom, hsl(var(--foreground) / 0.03), transparent);
   }
+  
+  /* Fix for video elements */
+  video {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
   .monochrome-gradient-text {
     @apply bg-clip-text text-transparent bg-gradient-to-br from-foreground via-foreground/90 to-foreground/30;
     -webkit-background-clip: text;

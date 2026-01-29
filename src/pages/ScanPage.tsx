@@ -1,72 +1,279 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Upload, Camera, Scan, RefreshCw } from 'lucide-react';
+import { Upload, Camera, Scan, RefreshCw, X, Check, RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
-type ScanState = 'idle' | 'scanning' | 'complete';
+
+type ScanState = 'idle' | 'camera' | 'preview' | 'scanning' | 'complete';
+
 export function ScanPage() {
   const [state, setState] = useState<ScanState>('idle');
   const [preview, setPreview] = useState<string | null>(null);
+  const [isCameraActive, setIsCameraActive] = useState(false);
+  const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const streamRef = useRef<MediaStream | null>(null);
   const scanTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const redirectTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const navigate = useNavigate();
+
   useEffect(() => {
     return () => {
       if (scanTimeoutRef.current) clearTimeout(scanTimeoutRef.current);
       if (redirectTimeoutRef.current) clearTimeout(redirectTimeoutRef.current);
+      stopCamera();
     };
   }, []);
+
+  const stopCamera = () => {
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach(track => track.stop());
+      streamRef.current = null;
+    }
+    setIsCameraActive(false);
+    setState('idle');
+  };
+
+  const startCamera = async () => {
+    try {
+      console.log('Requesting camera access...');
+
+      if (!navigator.mediaDevices?.getUserMedia) {
+        throw new Error('getUserMedia not supported');
+      }
+
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: 'environment',
+          width: { ideal: 1920, min: 1280 },
+          height: { ideal: 1080, min: 720 },
+        },
+        audio: false,
+      });
+
+      console.log('Camera stream obtained:', stream);
+
+      if (!videoRef.current) {
+        console.error('Video ref not available');
+        return;
+      }
+
+      // Set state first so video element becomes visible
+      streamRef.current = stream;
+      setIsCameraActive(true);
+      setState('camera');
+      setPreview(null);
+      setCapturedImage(null);
+
+      // Then assign stream to video
+      videoRef.current.srcObject = stream;
+
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            console.log('Video playing successfully');
+          })
+          .catch((err) => {
+            console.warn('Autoplay blocked, waiting for user gesture', err);
+          });
+      }
+
+      videoRef.current.onloadedmetadata = () => {
+        console.log('Video metadata loaded, dimensions:', videoRef.current?.videoWidth, 'x', videoRef.current?.videoHeight);
+        toast.success('Camera Ready', {
+          description: 'Posisikan batik di frame lalu tekan capture',
+        });
+      };
+    } catch (error: any) {
+      console.error('Camera error:', error);
+      let errorMsg = 'Camera access denied or not supported. Please try uploading an image.';
+
+      if (error.name === 'NotAllowedError') {
+        errorMsg = 'Camera permission denied. Please allow camera access and try again.';
+      } else if (error.name === 'NotFoundError') {
+        errorMsg = 'No camera found. Please use upload instead.';
+      }
+
+      toast.error('Camera Access Failed', {
+        description: errorMsg,
+      });
+    }
+  };
+
+  const capturePhoto = () => {
+    if (videoRef.current && canvasRef.current && isCameraActive) {
+      const canvas = canvasRef.current;
+      const video = videoRef.current;
+      
+      console.log('Capturing photo...', {
+        videoWidth: video.videoWidth,
+        videoHeight: video.videoHeight,
+        readyState: video.readyState
+      });
+      
+      // Check if video is ready
+      if (video.videoWidth === 0 || video.videoHeight === 0) {
+        toast.error("Camera not ready", {
+          description: "Please wait for camera to initialize"
+        });
+        return;
+      }
+      
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      
+      const ctx = canvas.getContext('2d', { willReadFrequently: true });
+      if (ctx) {
+        // Gunakan kualitas gambar tertinggi
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        
+        // Gunakan PNG untuk kualitas maksimal (lossless)
+        canvas.toBlob((blob) => {
+          if (blob) {
+            const objectUrl = URL.createObjectURL(blob);
+            setCapturedImage(objectUrl);
+            setPreview(objectUrl);
+            stopCamera();
+            toast.success("Photo captured!", {
+              description: "Starting analysis..."
+            });
+            
+            // Langsung analisis tanpa perlu tekan tombol lagi
+            const file = new File([blob], 'camera-capture.png', { type: 'image/png' });
+            startScan(file, objectUrl);
+          } else {
+            toast.error("Capture failed", {
+              description: "Could not capture image. Please try again."
+            });
+          }
+        }, 'image/png'); // PNG lossless untuk kualitas maksimal
+      }
+    } else {
+      toast.error("Camera not active", {
+        description: "Please start camera first"
+      });
+    }
+  };
+
+  const confirmCapture = () => {
+    if (capturedImage && preview) {
+      // Convert objectUrl back to File for API
+      fetch(capturedImage)
+        .then(res => res.blob())
+        .then(blob => {
+          const file = new File([blob], 'camera-capture.jpg', { type: 'image/jpeg' });
+          startScan(file, preview);
+        });
+    }
+  };
+
+  const retakePhoto = () => {
+    if (capturedImage) {
+      URL.revokeObjectURL(capturedImage);
+    }
+    setCapturedImage(null);
+    setPreview(null);
+    setState('idle');
+  };
+
   const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const objectUrl = URL.createObjectURL(file);
       setPreview(objectUrl);
-      startScan(file, objectUrl);
+      setState('preview');
     }
   };
+
+  const confirmUpload = () => {
+    if (preview) {
+      fetch(preview)
+        .then(res => res.blob())
+        .then(blob => {
+          const file = new File([blob], 'uploaded-image.jpg', { type: blob.type });
+          startScan(file, preview);
+        });
+    }
+  };
+
   const startScan = async (file: File, previewUrl?: string) => {
     setState('scanning');
     
     try {
-      // Send to Python backend for actual classification
+      console.log('Starting scan with file:', file.name);
+      
       const formData = new FormData();
-      formData.append('image', file);
+      formData.append('file', file);
+      
       const API_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+      console.log('Sending request to:', `${API_URL}/predict`);
+      
       const response = await fetch(`${API_URL}/predict`, {
         method: 'POST',
         body: formData
       });
       
+      console.log('Response status:', response.status);
+      
       if (!response.ok) {
-        throw new Error('Classification failed');
+        const errorText = await response.text();
+        console.error('API Error:', errorText);
+        throw new Error(`Classification failed: ${response.status} - ${errorText}`);
       }
       
       const result = await response.json();
+      console.log('Scan result:', result);
       
-      setTimeout(() => {
-        setState('complete');
-        toast.success("Identity Confirmed", { 
-          description: `Pattern recognized: ${result.prediction} (${result.percentage})` 
-        });
-        
-        redirectTimeoutRef.current = setTimeout(() => {
-          // Store result and uploaded image for result page
-          const resultWithImage = {
-            ...result,
-            uploadedImageUrl: previewUrl || preview
-          };
-          localStorage.setItem('scanResult', JSON.stringify(resultWithImage));
-          navigate('/result?id=scan-result');
-        }, 1500);
-      }, 2000);
+      // Cek jika ada error dari backend
+      if (result.error) {
+        throw new Error(result.error);
+      }
+      
+      // Pastikan ada prediction
+      if (!result.prediction) {
+        throw new Error('No prediction returned from backend');
+      }
+      
+      // Langsung ke state complete dan redirect
+      setState('complete');
+      toast.success("Identity Confirmed", { 
+        description: `Pattern recognized: ${result.prediction} (${result.percentage || ''})` 
+      });
+      
+      // Simpan hasil dan redirect ke halaman result
+      const resultWithImage = {
+        ...result,
+        success: true,
+        uploadedImageUrl: previewUrl || preview
+      };
+      localStorage.setItem('scanResult', JSON.stringify(resultWithImage));
+      
+      // Redirect setelah 1.5 detik
+      redirectTimeoutRef.current = setTimeout(() => {
+        navigate('/result?id=scan-result');
+      }, 1500);
       
     } catch (error) {
       console.error('Scan error:', error);
       setState('idle');
+      
+      let errorMessage = "Please try again with a different image.";
+      if (error instanceof Error) {
+        if (error.message.includes('Failed to fetch')) {
+          errorMessage = "Backend server is not running. Please start the backend.";
+        } else if (error.message.includes('Classification failed')) {
+          errorMessage = "Classification service error. Check backend logs.";
+        }
+      }
+      
       toast.error("Scan Failed", { 
-        description: "Please try again with a different image." 
+        description: errorMessage 
       });
     }
   };
@@ -83,8 +290,20 @@ export function ScanPage() {
             <p className="text-sm md:text-lg text-muted-foreground max-w-lg mx-auto">Optical characterization of Javanese textile patterns using the Vision Engine.</p>
           </div>
           <div className="relative aspect-square w-full max-w-[min(90vw,448px)] mx-auto rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden glass-card border-foreground/10 group shadow-2xl">
+            {/* Hidden canvas for photo capture */}
+            <canvas ref={canvasRef} className="hidden" />
+            
+            {/* Camera video stream - always in DOM, visibility controlled by CSS */}
+            <video
+              ref={videoRef}
+              autoPlay
+              playsInline
+              muted
+              className={`absolute inset-0 w-full h-full object-cover ${state === 'camera' && isCameraActive ? 'block' : 'hidden'}`}
+            />
+            
             <AnimatePresence mode="wait">
-              {state === 'idle' && (
+              {state === 'idle' && !isCameraActive && (
                 <motion.div
                   key="idle"
                   initial={{ opacity: 0 }}
@@ -110,13 +329,125 @@ export function ScanPage() {
                     <Button onClick={() => fileInputRef.current?.click()} className="bg-foreground text-background hover:bg-foreground/90 rounded-2xl py-6 md:py-7 text-base md:text-lg font-black uppercase tracking-widest">
                       Upload Plate
                     </Button>
-                    <Button variant="ghost" className="rounded-2xl border-foreground/10 py-6 md:py-7 text-muted-foreground hover:text-foreground text-xs font-bold uppercase tracking-widest">
+                    <Button 
+                      variant="ghost" 
+                      onClick={startCamera}
+                      className="rounded-2xl border-foreground/10 py-6 md:py-7 text-muted-foreground hover:text-foreground text-xs font-bold uppercase tracking-widest"
+                    >
                       <Camera className="w-4 h-4 mr-2" />
                       Live Capture
                     </Button>
                   </div>
                 </motion.div>
               )}
+              
+              {/* Camera active state */}
+              {state === 'camera' && isCameraActive && (
+                <motion.div
+                  key="camera"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="absolute inset-0 z-10"
+                >
+                  {/* Camera overlay with frame guide - full screen view */}
+                  <div className="absolute inset-0 z-20 flex flex-col">
+                    {/* Scanning frame - covers most of the screen */}
+                    <div className="absolute inset-4 pointer-events-none">
+                      {/* Corner guides - larger and more visible */}
+                      <div className="absolute top-0 left-0 w-12 h-12 border-l-4 border-t-4 border-white/90 rounded-tl-lg" />
+                      <div className="absolute top-0 right-0 w-12 h-12 border-r-4 border-t-4 border-white/90 rounded-tr-lg" />
+                      <div className="absolute bottom-0 left-0 w-12 h-12 border-l-4 border-b-4 border-white/90 rounded-bl-lg" />
+                      <div className="absolute bottom-0 right-0 w-12 h-12 border-r-4 border-b-4 border-white/90 rounded-br-lg" />
+                    </div>
+                    
+                    {/* Bottom controls */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 pointer-events-auto">
+                      <div className="flex gap-6 justify-center mb-4">
+                        <Button 
+                          onClick={capturePhoto}
+                          size="lg"
+                          className="bg-white text-black hover:bg-white/90 rounded-full w-20 h-20 p-0 shadow-lg z-30 border-4 border-white/50"
+                        >
+                          <Camera className="w-10 h-10" />
+                        </Button>
+                        <Button 
+                          onClick={stopCamera}
+                          variant="outline"
+                          size="lg"
+                          className="bg-black/50 text-white border-white/30 hover:bg-black/70 rounded-full w-16 h-16 p-0 z-30"
+                        >
+                          <X className="w-6 h-6" />
+                        </Button>
+                      </div>
+                      <p className="text-white text-sm font-medium text-center">
+                        Posisikan batik dalam frame
+                      </p>
+                      <p className="text-white/70 text-xs mt-1">
+                        Tekan tombol putih untuk foto
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+              
+              {/* Preview captured photo state */}
+              {state === 'preview' && preview && (
+                <motion.div
+                  key="preview"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  className="absolute inset-0"
+                >
+                  <img src={preview} alt="Captured" className="w-full h-full object-cover" />
+                  
+                  {/* Preview overlay with controls */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20">
+                    <div className="absolute top-4 left-4 right-4 flex justify-between items-center">
+                      <div className="bg-black/50 px-3 py-1 rounded-full backdrop-blur-sm">
+                        <p className="text-white text-xs font-medium">Preview</p>
+                      </div>
+                      <Button
+                        onClick={retakePhoto}
+                        variant="outline"
+                        size="sm"
+                        className="bg-black/50 text-white border-white/30 hover:bg-black/70 rounded-full"
+                      >
+                        <X className="w-4 h-4" />
+                      </Button>
+                    </div>
+                    
+                    <div className="absolute bottom-6 left-4 right-4 flex gap-4 justify-center">
+                      <Button 
+                        onClick={retakePhoto}
+                        variant="outline"
+                        className="bg-black/50 text-white border-white/30 hover:bg-black/70 rounded-2xl px-6 py-3 flex-1 max-w-[140px]"
+                      >
+                        <RotateCcw className="w-4 h-4 mr-2" />
+                        Retake
+                      </Button>
+                      <Button 
+                        onClick={capturedImage ? confirmCapture : confirmUpload}
+                        className="bg-white text-black hover:bg-white/90 rounded-2xl px-6 py-3 flex-1 max-w-[140px] font-semibold"
+                      >
+                        <Check className="w-4 h-4 mr-2" />
+                        Analyze
+                      </Button>
+                    </div>
+                    
+                    <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2">
+                      <p className="text-white/90 text-sm font-medium text-center mb-1">
+                        {capturedImage ? 'Photo captured successfully' : 'Image ready for analysis'}
+                      </p>
+                      <p className="text-white/60 text-xs text-center">
+                        Review your image before scanning
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+              
               {state === 'scanning' && preview && (
                 <motion.div
                   key="scanning"

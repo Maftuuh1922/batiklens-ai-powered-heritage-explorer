@@ -31,14 +31,12 @@ copy(fileIds.join('\\n'));
 };
 
 export const sampleFileIds = [
-  // Ganti dengan file IDs yang sebenarnya dari Google Drive Anda
-  // Contoh format:
-  // '1abc123def456',
-  // '2def456ghi789',
-  // '3ghi789jkl012',
+  // Menggunakan folder ID yang diberikan user
+  // Format: https://drive.google.com/drive/folders/19SaEgW7yPcsJTSAwsSBajBdsmHQrbItB
 ];
 
 export const googleDriveConfig = {
   folderId: '19SaEgW7yPcsJTSAwsSBajBdsmHQrbItB',
+  folderUrl: 'https://drive.google.com/drive/folders/19SaEgW7yPcsJTSAwsSBajBdsmHQrbItB',
   apiKey: process.env.VITE_GOOGLE_DRIVE_API_KEY || '', // Optional: for advanced features
 };

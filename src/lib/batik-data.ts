@@ -14,7 +14,7 @@ export const batiks: Batik[] = [
     origin: 'Aceh',
     meaning: 'Traditional Acehnese patterns reflecting Islamic culture and local wisdom.',
     history: 'Batik from the westernmost province of Indonesia, influenced by Islamic art and local Acehnese culture.',
-    imageUrl: '/batik-images/batik-aceh/1.jpg',
+    imageUrl: '/batik-images/batik-aceh/hf_git_1134_Aceh11.jpg',
     category: 'Regional'
   },
   {
@@ -32,7 +32,7 @@ export const batiks: Batik[] = [
     origin: 'Bali',
     meaning: 'Depicting the sacred Barong lion-like creature from Balinese mythology.',
     history: 'Sacred pattern representing Barong, a protective spirit in Balinese Hindu religion.',
-    imageUrl: '/batik-images/batik-bali_barong/1.jpg',
+    imageUrl: '/batik-images/batik-bali_barong/hf_git_2043_Bali_Barong44.jpg',
     category: 'Spiritual'
   },
   {
@@ -41,7 +41,7 @@ export const batiks: Batik[] = [
     origin: 'Bali',
     meaning: 'Peacock patterns symbolizing beauty, grace, and royalty.',
     history: 'Balinese batik featuring peacock (merak) motifs, representing beauty and divine grace.',
-    imageUrl: '/batik-images/batik-bali_merak/1.jpg',
+    imageUrl: '/batik-images/batik-bali_merak/hf_git_283_Bali_Merak27.jpg',
     category: 'Animal'
   },
   {
@@ -77,7 +77,7 @@ export const batiks: Batik[] = [
     origin: 'Central Java',
     meaning: 'Geometric star-like patterns representing cosmic order.',
     history: 'Classic Javanese geometric pattern with repetitive star or flower-like motifs.',
-    imageUrl: '/batik-images/batik-ceplok/1.jpg',
+    imageUrl: '/batik-images/batik-ceplok/10.jpg',
     category: 'Geometric'
   },
   {
@@ -95,7 +95,7 @@ export const batiks: Batik[] = [
     origin: 'Coastal Areas',
     meaning: 'Fish gill patterns representing maritime culture.',
     history: 'Coastal batik pattern inspired by fish gills, reflecting maritime traditions.',
-    imageUrl: '/batik-images/batik-corak_insang/1.jpg',
+    imageUrl: '/batik-images/batik-corak_insang/hf_git_1056_Corak_Insang6.jpg',
     category: 'Maritime'
   },
   {
@@ -122,7 +122,7 @@ export const batiks: Batik[] = [
     origin: 'Various',
     meaning: 'Combined weaving and dyeing technique creating unique patterns.',
     history: 'Traditional technique combining ikat weaving with batik dyeing methods.',
-    imageUrl: '/batik-images/batik-ikat_celup/1.jpg',
+    imageUrl: '/batik-images/batik-ikat_celup/hf_git_1274_Ikat_Celup43.jpg',
     category: 'Technique'
   },
   {
@@ -131,7 +131,7 @@ export const batiks: Batik[] = [
     origin: 'Jakarta',
     meaning: 'Jakarta traditional giant puppet patterns for protection.',
     history: 'Batik featuring Ondel-Ondel, Jakarta traditional giant puppets used in ceremonies.',
-    imageUrl: '/batik-images/batik-jakarta_ondel_ondel/1.jpg',
+    imageUrl: '/batik-images/batik-jakarta_ondel_ondel/hf_git_1576_Jakarta_Ondel_Ondel36.jpg',
     category: 'Cultural'
   },
   {
@@ -140,7 +140,7 @@ export const batiks: Batik[] = [
     origin: 'West Java',
     meaning: 'West Javanese cloud patterns bringing prosperity.',
     history: 'West Javanese version of Mega Mendung pattern with local adaptations.',
-    imageUrl: '/batik-images/batik-jawa_barat_megamendung/1.jpg',
+    imageUrl: '/batik-images/batik-jawa_barat_megamendung/hf_git_330_Jawa_Barat_Megamendung125.jpg',
     category: 'Nature'
   },
   {
@@ -149,7 +149,7 @@ export const batiks: Batik[] = [
     origin: 'East Java',
     meaning: 'Bamboo patterns symbolizing flexibility and strength.',
     history: 'East Javanese batik featuring bamboo (pring) motifs representing resilience.',
-    imageUrl: '/batik-images/batik-jawa_timur_pring/1.jpg',
+    imageUrl: '/batik-images/batik-jawa_timur_pring/hf_git_1873_Jawa_Timur_Pring14.jpg',
     category: 'Nature'
   },
   {
@@ -158,7 +158,7 @@ export const batiks: Batik[] = [
     origin: 'Kalimantan',
     meaning: 'Dayak tribal patterns with spiritual significance.',
     history: 'Traditional Dayak patterns from Kalimantan with tribal spiritual meanings.',
-    imageUrl: '/batik-images/batik-kalimantan_dayak/1.jpg',
+    imageUrl: '/batik-images/batik-kalimantan_dayak/hf_git_1000_Kalimantan_Dayak26.jpg',
     category: 'Tribal'
   },
   {
@@ -185,7 +185,7 @@ export const batiks: Batik[] = [
     origin: 'Lampung',
     meaning: 'Elephant patterns representing strength and wisdom.',
     history: 'Lampung batik featuring elephant motifs, symbol of strength in Sumatran culture.',
-    imageUrl: '/batik-images/batik-lampung_gajah/1.jpg',
+    imageUrl: '/batik-images/batik-lampung_gajah/hf_git_0_Lampung_Gajah26.jpg',
     category: 'Animal'
   },
   {
@@ -203,7 +203,7 @@ export const batiks: Batik[] = [
     origin: 'Madura',
     meaning: 'Eye-like patterns for protection from evil.',
     history: 'Madura batik with eye motifs believed to provide protection from negative forces.',
-    imageUrl: '/batik-images/batik-madura_mataketeran/1.jpg',
+    imageUrl: '/batik-images/batik-madura_mataketeran/hf_git_2396_Madura_Mataketeran42.jpg',
     category: 'Protective'
   },
   {
@@ -212,7 +212,7 @@ export const batiks: Batik[] = [
     origin: 'Maluku',
     meaning: 'Nutmeg patterns representing spice trade heritage.',
     history: 'Maluku batik featuring nutmeg (pala) motifs, reflecting the spice islands heritage.',
-    imageUrl: '/batik-images/batik-maluku_pala/1.jpg',
+    imageUrl: '/batik-images/batik-maluku_pala/hf_git_598_Maluku_Pala46.jpg',
     category: 'Heritage'
   },
   {
@@ -230,7 +230,7 @@ export const batiks: Batik[] = [
     origin: 'West Nusa Tenggara',
     meaning: 'Traditional rice barn patterns representing prosperity.',
     history: 'NTB batik featuring lumbung (rice barn) motifs symbolizing food security and prosperity.',
-    imageUrl: '/batik-images/batik-ntb_lumbung/1.jpg',
+    imageUrl: '/batik-images/batik-ntb_lumbung/hf_git_1913_NTB_Lumbung80.jpg',
     category: 'Traditional'
   },
   {
@@ -239,7 +239,7 @@ export const batiks: Batik[] = [
     origin: 'Papua',
     meaning: 'Asmat tribal patterns with spiritual significance.',
     history: 'Papua batik inspired by Asmat tribal art and spiritual beliefs.',
-    imageUrl: '/batik-images/batik-papua_asmat/1.jpg',
+    imageUrl: '/batik-images/batik-papua_asmat/hf_git_100_Papua_Asmat11.jpg',
     category: 'Tribal'
   },
   {
@@ -248,7 +248,7 @@ export const batiks: Batik[] = [
     origin: 'Papua',
     meaning: 'Bird of Paradise representing Papua identity.',
     history: 'Papua batik featuring the iconic Cendrawasih bird, symbol of Papua.',
-    imageUrl: '/batik-images/batik-papua_cendrawasih/1.jpg',
+    imageUrl: '/batik-images/batik-papua_cendrawasih/hf_git_2217_Papua_Cendrawasih38.jpg',
     category: 'Animal'
   },
   {
@@ -257,7 +257,7 @@ export const batiks: Batik[] = [
     origin: 'Papua',
     meaning: 'Traditional drum patterns representing Papuan music culture.',
     history: 'Papua batik featuring Tifa drum motifs, important in Papuan traditional music.',
-    imageUrl: '/batik-images/batik-papua_tifa/1.jpg',
+    imageUrl: '/batik-images/batik-papua_tifa/hf_git_1795_Papua_Tifa33.jpg',
     category: 'Musical'
   },
   {
@@ -329,7 +329,7 @@ export const batiks: Batik[] = [
     origin: 'Solo',
     meaning: 'Royal Solo version of Parang patterns.',
     history: 'Solo court version of the sacred Parang pattern with refined details.',
-    imageUrl: '/batik-images/batik-solo_parang/1.jpg',
+    imageUrl: '/batik-images/batik-solo_parang/hf_git_2087_Solo_Parang8.jpg',
     category: 'Royal'
   },
   {
@@ -338,7 +338,7 @@ export const batiks: Batik[] = [
     origin: 'South Sulawesi',
     meaning: 'Ancient script patterns preserving Bugis-Makassar writing.',
     history: 'South Sulawesi batik featuring Lontara script, traditional Bugis-Makassar writing.',
-    imageUrl: '/batik-images/batik-sulawesi_selatan_lontara/1.jpg',
+    imageUrl: '/batik-images/batik-sulawesi_selatan_lontara/hf_git_1715_Sulawesi_Selatan_Lontara1.jpg',
     category: 'Script'
   },
   {
@@ -347,7 +347,7 @@ export const batiks: Batik[] = [
     origin: 'West Sumatra',
     meaning: 'Traditional Minangkabau house patterns.',
     history: 'West Sumatran batik featuring traditional Minangkabau architecture motifs.',
-    imageUrl: '/batik-images/batik-sumatera_barat_rumah_minang/1.jpg',
+    imageUrl: '/batik-images/batik-sumatera_barat_rumah_minang/hf_git_1341_Sumatera_Barat_Rumah_Minang36.jpg',
     category: 'Architecture'
   },
   {
@@ -356,7 +356,7 @@ export const batiks: Batik[] = [
     origin: 'North Sumatra',
     meaning: 'Batak tribal patterns with spiritual protection.',
     history: 'North Sumatran batik with Batak cultural influence and protective symbols.',
-    imageUrl: '/batik-images/batik-sumatera_utara_boraspati/1.jpg',
+    imageUrl: '/batik-images/batik-sumatera_utara_boraspati/hf_git_746_Sumatera_Utara_Boraspati61.jpg',
     category: 'Tribal'
   },
   {
@@ -374,7 +374,7 @@ export const batiks: Batik[] = [
     origin: 'Yogyakarta',
     meaning: 'Yogyakarta royal version of Kawung patterns.',
     history: 'Yogyakarta court version of the ancient Kawung pattern with royal refinement.',
-    imageUrl: '/batik-images/batik-yogyakarta_kawung/1.jpg',
+    imageUrl: '/batik-images/batik-yogyakarta_kawung/hf_git_2474_Yogyakarta_Kawung87.jpg',
     category: 'Royal'
   },
   {
@@ -383,7 +383,7 @@ export const batiks: Batik[] = [
     origin: 'Yogyakarta',
     meaning: 'Yogyakarta royal version of Parang patterns.',
     history: 'Yogyakarta court version of the sacred Parang pattern with distinctive royal style.',
-    imageUrl: '/batik-images/batik-yogyakarta_parang/1.jpg',
+    imageUrl: '/batik-images/batik-yogyakarta_parang/hf_git_1421_Yogyakarta_Parang19.jpg',
     category: 'Royal'
   }
 ];

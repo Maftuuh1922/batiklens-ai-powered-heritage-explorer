@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { GoogleDriveService, imageUtils } from '../lib/googleDrive';
+import batikLocalData from '../lib/batik-local-data.json';
 
 export interface BatikImage {
   id: string;
@@ -19,56 +19,19 @@ export const useBatikImages = () => {
       try {
         setLoading(true);
 
-        // Google Drive folder ID dari link yang diberikan user
-        const folderId = '19SaEgW7yPcsJTSAwsSBajBdsmHQrbItB';
+        // Load from local JSON (batik-local-data.json)
+        console.log('Loading batik images from local data...');
+        
+        const localImages: BatikImage[] = (batikLocalData as any[]).map((item: any) => ({
+          id: item.id,
+          url: item.directLink,
+          thumbnailUrl: item.thumbnailLink,
+          name: item.nama,
+          category: item.kategori
+        }));
 
-        // Untuk demo, kita buat list gambar manual dari Google Drive
-        // Dalam kasus nyata, Anda bisa menggunakan Google Drive API
-        const batikCategories = [
-          'batik-aceh',
-          'batik-bali',
-          'batik-betawi',
-          'batik-celup',
-          'batik-ciamis',
-          'batik-jakarta',
-          'batik-kawung',
-          'batik-lasem',
-          'batik-madura',
-          'batik-megamendung',
-          'batik-parang',
-          'batik-pekalongan',
-          'batik-sogan',
-          'batik-solo',
-          'batik-sulawesi',
-          'batik-sumatera',
-          'batik-yogyakarta'
-        ];
-
-        // Sample images - ganti dengan file ID yang sebenarnya dari Google Drive Anda
-        const sampleImageIds = [
-          '1abc123def456', // Ganti dengan file ID asli
-          '2def456ghi789', // Ganti dengan file ID asli
-          '3ghi789jkl012', // Ganti dengan file ID asli
-          // Tambahkan lebih banyak file ID
-        ];
-
-        const batikImages: BatikImage[] = [];
-
-        // Generate sample data untuk setiap kategori
-        batikCategories.forEach((category, categoryIndex) => {
-          sampleImageIds.forEach((imageId, imageIndex) => {
-            const sharingLink = `https://drive.google.com/file/d/${imageId}/view?usp=sharing`;
-            batikImages.push({
-              id: `${category}-${imageIndex}`,
-              url: imageUtils.getViewableImageUrl(sharingLink),
-              thumbnailUrl: imageUtils.getThumbnailUrl(sharingLink),
-              name: `${category.replace('batik-', '').replace('-', ' ').toUpperCase()} ${imageIndex + 1}`,
-              category: category
-            });
-          });
-        });
-
-        setImages(batikImages);
+        console.log(`Loaded ${localImages.length} local batik images`);
+        setImages(localImages);
         setError(null);
       } catch (err) {
         setError('Failed to load batik images');

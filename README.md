@@ -104,6 +104,19 @@ This UI can call a local Python backend for image classification.
 | Sessions | `worker/userRoutes.ts`, `worker/app-controller.ts` |
 | Styling | `tailwind.config.js`, `src/index.css` |
 
+### Google Drive Images
+
+- Set your folder to "Anyone with the link" (view).
+- Create `.env.local` in this folder and add:
+
+```
+VITE_GOOGLE_DRIVE_API_KEY=your-google-api-key
+VITE_GOOGLE_DRIVE_FOLDER_ID=19SaEgW7yPcsJTSAwsSBajBdsmHQrbItB
+```
+
+- The gallery reads images from the public folder ID set in `.env.local` (`VITE_GOOGLE_DRIVE_FOLDER_ID`).
+- Without an API key, the app falls back to `src/lib/batik-drive-data.json`. Replace that JSON with your own file IDs if needed.
+
 ## ☁️ Deployment
 
 1. Build the app:

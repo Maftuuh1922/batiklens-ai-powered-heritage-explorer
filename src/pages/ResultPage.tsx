@@ -94,9 +94,6 @@ export function ResultPage() {
                 </Badge>
               </div>
             </div>
-            <Button variant="outline" className="w-full rounded-2xl border-foreground/10 hover:border-foreground/30 hover:bg-foreground/5 py-6 md:py-7 text-[10px] font-black uppercase tracking-widest">
-              <Share2 className="w-4 h-4 mr-3" /> Export Digital Dossier
-            </Button>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, x: 20 }}

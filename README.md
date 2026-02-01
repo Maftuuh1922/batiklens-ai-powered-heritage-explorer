@@ -1,26 +1,94 @@
-# Cloudflare Workers AI Chat Agent
+<!-- HEADER -->
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,9,5&height=200&section=header&text=🎨%20BatikLens&fontSize=60&fontColor=fff&animation=fadeIn&fontAlignY=35&desc=AI-Powered%20Indonesian%20Batik%20Heritage%20Explorer&descAlignY=55&descSize=18"/>
+</p>
 
-[![Deploy to Cloudflare][![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/Maftuuh1922/batiklens-ai-powered-heritage-explorer)]
+<p align="center">
+  <em>Discover, Learn, and Explore the Beauty of Indonesian Batik Patterns with Artificial Intelligence</em>
+</p>
 
-A production-ready, full-stack chat application powered by Cloudflare Workers, featuring AI-powered conversations with multi-session management, streaming responses, and built-in tools like web search. Built with React, TypeScript, and the Cloudflare Agents SDK for seamless Durable Object integration.
+<!-- BADGES -->
+<p align="center">
+  <img src="https://img.shields.io/badge/React-18.x-61DAFB?style=for-the-badge&logo=react&logoColor=white"/>
+  <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white"/>
+  <img src="https://img.shields.io/badge/TensorFlow-ML-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Cloudflare-Workers-F38020?style=for-the-badge&logo=cloudflare&logoColor=white"/>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square"/>
+  <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen?style=flat-square"/>
+  <img src="https://img.shields.io/github/stars/Maftuuh1922/batiklens-ai-powered-heritage-explorer?style=flat-square&color=yellow"/>
+  <img src="https://img.shields.io/github/forks/Maftuuh1922/batiklens-ai-powered-heritage-explorer?style=flat-square"/>
+</p>
+
+---
+
+## 📸 Preview
+
+<p align="center">
+  <img src="https://via.placeholder.com/800x400/1a1a2e/ffffff?text=BatikLens+Demo+Screenshot" alt="BatikLens Demo" width="100%"/>
+</p>
+
+> 💡 **Tip**: Replace placeholder with actual screenshots of your app
+
+---
 
 ## ✨ Features
 
-- **Multi-Session Chat**: Create, switch, delete, and manage unlimited chat sessions with automatic title generation.
-- **AI Streaming**: Real-time streaming responses using Cloudflare AI Gateway (OpenAI-compatible).
-- **Tool Integration**: Built-in tools for web search (SerpAPI), weather, and extensible MCP (Model Context Protocol) support.
-- **Modern UI**: Responsive design with shadcn/ui, Tailwind CSS, dark mode, and smooth animations.
-- **Session Persistence**: Durable Objects for stateful chat history and global session control.
-- **Type-Safe**: Full TypeScript support across frontend and Workers.
-- **Production-Ready**: Error handling, logging, CORS, health checks, and client error reporting.
+<table>
+  <tr>
+    <td align="center" width="33%">
+      <img src="https://img.icons8.com/fluency/96/camera.png" width="60"/>
+      <br/><b>📷 Scan & Identify</b>
+      <br/><sub>Upload or capture batik images for instant AI-powered pattern recognition</sub>
+    </td>
+    <td align="center" width="33%">
+      <img src="https://img.icons8.com/fluency/96/artificial-intelligence.png" width="60"/>
+      <br/><b>🤖 AI Chat Assistant</b>
+      <br/><sub>Interactive chatbot to learn about batik history, patterns, and cultural significance</sub>
+    </td>
+    <td align="center" width="33%">
+      <img src="https://img.icons8.com/fluency/96/gallery.png" width="60"/>
+      <br/><b>🖼️ Batik Gallery</b>
+      <br/><sub>Explore 40+ authentic Indonesian batik patterns from various regions</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="33%">
+      <img src="https://img.icons8.com/fluency/96/book.png" width="60"/>
+      <br/><b>📚 Rich Catalog</b>
+      <br/><sub>Detailed information about each batik pattern, origin, and meaning</sub>
+    </td>
+    <td align="center" width="33%">
+      <img src="https://img.icons8.com/fluency/96/cloud.png" width="60"/>
+      <br/><b>☁️ Cloud Powered</b>
+      <br/><sub>Deployed on Cloudflare Workers for blazing-fast global performance</sub>
+    </td>
+    <td align="center" width="33%">
+      <img src="https://img.icons8.com/fluency/96/smartphone-tablet.png" width="60"/>
+      <br/><b>📱 Responsive Design</b>
+      <br/><sub>Beautiful UI that works seamlessly on desktop, tablet, and mobile</sub>
+    </td>
+  </tr>
+</table>
 
-## 🛠 Tech Stack
+---
 
-- **Frontend**: React 18, TypeScript, Vite, Tailwind CSS, shadcn/ui, TanStack Query, React Router, Framer Motion, Lucide Icons.
-- **Backend**: Cloudflare Workers, Hono, Cloudflare Agents SDK, Durable Objects.
-- **AI/ML**: Cloudflare AI Gateway (@cloudflare/ai), OpenAI SDK (Gemini models supported).
-- **Tools**: SerpAPI (web search), MCP SDK (extensible tools).
-- **Build Tools**: Bun, Wrangler, Vitest.
+## 🛠️ Tech Stack
+
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=react,typescript,vite,tailwind,tensorflow,python,cloudflare&theme=dark"/>
+</p>
+
+| Category | Technologies |
+|----------|-------------|
+| **Frontend** | React 18, TypeScript, Vite, Tailwind CSS, shadcn/ui, Framer Motion |
+| **Backend** | Cloudflare Workers, Hono, Durable Objects |
+| **AI/ML** | TensorFlow.js, MobileNet, Cloudflare AI Gateway |
+| **Database** | Cloudflare D1, Durable Objects |
+| **Deployment** | Cloudflare Workers, Vercel |
+| **Tools** | Bun, Wrangler, ESLint, Prettier |
 
 ## 🚀 Quick Start
 
@@ -30,148 +98,202 @@ A production-ready, full-stack chat application powered by Cloudflare Workers, f
 - [Cloudflare Account](https://dash.cloudflare.com/) with Workers enabled
 - Cloudflare AI Gateway credentials (Account ID, Gateway ID, API Token)
 
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- [Bun](https://bun.sh/) or [Node.js](https://nodejs.org/) (v18+)
+- [Cloudflare Account](https://dash.cloudflare.com/) with Workers enabled
+- Python 3.9+ (for ML backend)
+
 ### Installation
 
-1. Clone the repository:
-   ```
-   git clone <your-repo-url>
-   cd batik-lens-w7w8_o5czvrpplbdqzsht
-   ```
+```bash
+# 1. Clone the repository
+git clone https://github.com/Maftuuh1922/batiklens-ai-powered-heritage-explorer.git
+cd batiklens-ai-powered-heritage-explorer
 
-2. Install dependencies:
-   ```
-   bun install
-   ```
+# 2. Install dependencies
+bun install
+# or
+npm install
 
-3. Configure environment variables in `wrangler.jsonc`:
-   ```json
-   "vars": {
-     "CF_AI_BASE_URL": "https://gateway.ai.cloudflare.com/v1/YOUR_ACCOUNT_ID/YOUR_GATEWAY_ID/openai",
-     "CF_AI_API_KEY": "your-cloudflare-api-token",
-     "SERPAPI_KEY": "your-serpapi-key",  // Optional: for web search
-     "OPENROUTER_API_KEY": "your-openrouter-key"  // Optional: additional models
-   }
-   ```
+# 3. Setup environment variables
+cp .env.example .env.local
+# Edit .env.local with your API keys
 
-4. Generate types:
-   ```
-   bun cf-typegen
-   ```
-
-5. Run locally:
-   ```
-   bun dev
-   ```
-   Open [http://localhost:3000](http://localhost:3000) (or your configured PORT).
-
-### Connect Batik Classifier Backend
-
-This UI can call a local Python backend for image classification.
-
-1. Start the backend (Flask + TFLite):
-   ```bash
-   # Activate local env
-   source ../batik-classifier/api/batik-env/bin/activate
-   # Run the server
-   python ../batik-classifier/api/app_mobilenet.py
-   # Backend runs at: http://localhost:5000
-   ```
-
-2. Point the frontend to the backend by setting an env var:
-   ```bash
-   # Create .env.local in this folder
-   echo "VITE_BACKEND_URL=http://localhost:5000" > .env.local
-   ```
-
-3. Use the Scan page to upload an image; it will POST to `/predict` and display the result.
-
-## 💻 Development
-
-- **Frontend**: `bun dev` (Vite dev server).
-- **Workers**: Routes are hot-reloaded. Edit `worker/userRoutes.ts` for custom APIs.
-- **Linting**: `bun lint`.
-- **Type Checking**: Handled by `tsconfig.json` references.
-- **Adding Tools**: Extend `worker/tools.ts` or configure MCP servers in `worker/mcp-client.ts`.
-- **Custom Agents**: Modify `worker/agent.ts` and implement new Durable Object classes.
-
-### Key Files to Customize
-
-| Purpose | File |
-|---------|------|
-| UI Components | `src/pages/HomePage.tsx`, `src/components/` |
-| Chat Logic | `src/lib/chat.ts`, `worker/chat.ts` |
-| Tools | `worker/tools.ts` |
-| Sessions | `worker/userRoutes.ts`, `worker/app-controller.ts` |
-| Styling | `tailwind.config.js`, `src/index.css` |
-
-### Google Drive Images
-
-- Set your folder to "Anyone with the link" (view).
-- Create `.env.local` in this folder and add:
-
-```
-VITE_GOOGLE_DRIVE_API_KEY=your-google-api-key
-VITE_GOOGLE_DRIVE_FOLDER_ID=19SaEgW7yPcsJTSAwsSBajBdsmHQrbItB
+# 4. Run development server
+bun dev
+# or
+npm run dev
 ```
 
-- The gallery reads images from the public folder ID set in `.env.local` (`VITE_GOOGLE_DRIVE_FOLDER_ID`).
-- Without an API key, the app falls back to `src/lib/batik-drive-data.json`. Replace that JSON with your own file IDs if needed.
+Open [http://localhost:3000](http://localhost:3000) to see the app 🎉
 
-## ☁️ Deployment
+### Environment Variables
 
-1. Build the app:
-   ```
-   bun build
-   ```
+Create a `.env.local` file in the root directory:
 
-2. Add secrets (if not in vars):
-   ```
-   wrangler secret put CF_AI_API_KEY
-   wrangler secret put SERPAPI_KEY  # Optional
-   ```
+```env
+# Cloudflare AI Gateway
+CF_AI_BASE_URL=https://gateway.ai.cloudflare.com/v1/YOUR_ACCOUNT_ID/YOUR_GATEWAY_ID/openai
+CF_AI_API_KEY=your-cloudflare-api-token
 
-3. Deploy:
-   ```
-   bun deploy
-   ```
-   Or use the button below:
+# Backend URL (for image classification)
+VITE_BACKEND_URL=http://localhost:5000
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/Maftuuh1922/batiklens-ai-powered-heritage-explorer)
+# Optional
+SERPAPI_KEY=your-serpapi-key
+OPENROUTER_API_KEY=your-openrouter-key
+```
 
-Your app will be live at `https://your-project.workers.dev`. Assets are automatically served as a SPA.
+---
 
-### Production Config
+## 🧠 AI Model Setup
 
-- Update `wrangler.jsonc` for custom domains, environments.
-- Enable Observability for metrics and logs.
-- Scale with Durable Objects (automatic).
+### Batik Classifier Backend
 
-## 📚 API Endpoints
+The image classification uses a MobileNet model trained on 40+ batik patterns.
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/chat/:sessionId/chat` | POST | Send message (supports streaming) |
-| `/api/chat/:sessionId/messages` | GET | Get chat history |
-| `/api/sessions` | GET/POST/DELETE | Manage sessions |
-| `/api/health` | GET | Health check |
+```bash
+# Navigate to classifier directory
+cd ../batik-classifier/api
 
-See `worker/userRoutes.ts` for details.
+# Create virtual environment
+python -m venv batik-env
+source batik-env/bin/activate  # Linux/Mac
+# or
+batik-env\Scripts\activate  # Windows
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the Flask server
+python app_mobilenet.py
+# Backend runs at: http://localhost:5000
+```
+
+### Supported Batik Patterns
+
+<details>
+<summary>📋 Click to see all 40+ supported patterns</summary>
+
+| Region | Pattern |
+|--------|---------|
+| Aceh | Batik Aceh |
+| Bali | Barong, Merak |
+| Betawi | Ondel-ondel |
+| Jawa Barat | Megamendung, Garutan |
+| Jawa Tengah | Parang, Kawung, Sogan, Lasem |
+| Jawa Timur | Pring, Madura Mataketeran |
+| Yogyakarta | Kawung, Parang, Sekar |
+| Kalimantan | Dayak |
+| Sulawesi | Lontara |
+| Sumatera | Boraspati, Rumah Minang, Lampung Gajah |
+| Papua | Asmat, Cendrawasih, Tifa |
+| Maluku | Pala |
+| NTB | Lumbung |
+| ...and more! | |
+
+</details>
+
+---
+
+## 📁 Project Structure
+
+```
+batiklens-ai-powered-heritage-explorer/
+├── 📂 public/
+│   └── 📂 batik-images/       # Batik pattern images
+├── 📂 src/
+│   ├── 📂 components/         # Reusable UI components
+│   ├── 📂 hooks/              # Custom React hooks
+│   ├── 📂 lib/                # Utilities & helpers
+│   ├── 📂 pages/
+│   │   ├── LandingPage.tsx    # Welcome screen
+│   │   ├── HomePage.tsx       # Main dashboard
+│   │   ├── ScanPage.tsx       # Image upload & scan
+│   │   ├── ResultPage.tsx     # Classification results
+│   │   ├── CatalogPage.tsx    # Batik catalog
+│   │   ├── GalleryPage.tsx    # Image gallery
+│   │   └── DetailPage.tsx     # Pattern details
+│   ├── App.tsx
+│   └── main.tsx
+├── 📂 worker/
+│   ├── agent.ts               # AI agent logic
+│   ├── chat.ts                # Chat functionality
+│   ├── tools.ts               # AI tools
+│   └── index.ts               # Worker entry
+├── package.json
+├── tailwind.config.js
+├── vite.config.ts
+└── wrangler.jsonc             # Cloudflare config
+```
+
+---
+
+## 🎯 Usage
+
+### 1. Scan Batik Pattern
+- Click "Scan" button on the homepage
+- Upload an image or use camera capture
+- AI will identify the batik pattern instantly
+
+### 2. Explore Catalog
+- Browse 40+ authentic batik patterns
+- Learn about history and cultural significance
+- View high-quality images
+
+### 3. Chat with AI
+- Ask questions about batik
+- Get recommendations
+- Learn about Indonesian heritage
+
+---
 
 ## 🤝 Contributing
 
-1. Fork and create a PR.
-2. Follow TypeScript and ESLint rules.
-3. Test changes with `bun dev`.
-4. Update README if adding features.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## ⚠️ License
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-This project is MIT licensed. See [LICENSE](LICENSE) for details.
+---
 
-## 🙌 Support
+## 📄 License
 
-- [Cloudflare Workers Docs](https://developers.cloudflare.com/workers/)
-- [Cloudflare AI Gateway](https://developers.cloudflare.com/ai-gateway/)
-- File issues here on GitHub.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Built with ❤️ for the Cloudflare developer community.
+---
+
+## 🙏 Acknowledgments
+
+- Indonesian Batik UNESCO World Heritage
+- TensorFlow.js Team
+- Cloudflare Workers Team
+- All contributors and supporters
+
+---
+
+## 📞 Contact
+
+**Muhammad Maftuh** - [@maftuuh](https://instagram.com/maftuuh)
+
+Project Link: [https://github.com/Maftuuh1922/batiklens-ai-powered-heritage-explorer](https://github.com/Maftuuh1922/batiklens-ai-powered-heritage-explorer)
+
+---
+
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,9,5&height=100&section=footer"/>
+</p>
+
+<p align="center">
+  Made with ❤️ in Indonesia 🇮🇩
+  <br/>
+  <sub>Preserving Cultural Heritage Through Technology</sub>
+</p>

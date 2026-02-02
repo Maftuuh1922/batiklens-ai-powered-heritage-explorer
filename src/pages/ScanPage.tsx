@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Upload, Camera, Scan, RefreshCw, X, Check, RotateCcw } from 'lucide-react';
+import { Upload, Camera, Scan, RefreshCw, X, Check, RotateCcw, ZoomIn, ZoomOut, Focus, Flashlight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 
@@ -12,6 +12,13 @@ export function ScanPage() {
   const [preview, setPreview] = useState<string | null>(null);
   const [isCameraActive, setIsCameraActive] = useState(false);
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
+  const [zoomLevel, setZoomLevel] = useState(1);
+  const [flashEnabled, setFlashEnabled] = useState(false);
+  const [cameraCapabilities, setCameraCapabilities] = useState<{
+    zoom?: { min: number; max: number; step: number };
+    torch?: boolean;
+    focusMode?: string[];
+  }>({});
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -68,6 +75,43 @@ export function ScanPage() {
       setPreview(null);
       setCapturedImage(null);
 
+      // Get camera capabilities for zoom, flash, and focus
+      const videoTrack = stream.getVideoTracks()[0];
+      const capabilities = videoTrack.getCapabilities?.();
+      
+      if (capabilities) {
+        const caps: any = {};
+        
+        // Check zoom capability
+        if ('zoom' in capabilities) {
+          caps.zoom = {
+            min: (capabilities as any).zoom.min,
+            max: (capabilities as any).zoom.max,
+            step: (capabilities as any).zoom.step || 0.1,
+          };
+          setZoomLevel((capabilities as any).zoom.min);
+        }
+        
+        // Check torch (flash) capability
+        if ('torch' in capabilities) {
+          caps.torch = true;
+        }
+        
+        // Check focus mode capability
+        if ('focusMode' in capabilities) {
+          caps.focusMode = (capabilities as any).focusMode;
+          // Enable continuous autofocus if available
+          if (caps.focusMode.includes('continuous')) {
+            await videoTrack.applyConstraints({
+              advanced: [{ focusMode: 'continuous' } as any]
+            });
+          }
+        }
+        
+        setCameraCapabilities(caps);
+        console.log('Camera capabilities:', caps);
+      }
+
       // Then assign stream to video
       videoRef.current.srcObject = stream;
 
@@ -101,6 +145,73 @@ export function ScanPage() {
       toast.error('Camera Access Failed', {
         description: errorMsg,
       });
+    }
+  };
+
+  const handleZoom = async (direction: 'in' | 'out') => {
+    if (!streamRef.current || !cameraCapabilities.zoom) return;
+    
+    const videoTrack = streamRef.current.getVideoTracks()[0];
+    const { min, max, step } = cameraCapabilities.zoom;
+    
+    let newZoom = zoomLevel;
+    if (direction === 'in') {
+      newZoom = Math.min(max, zoomLevel + step);
+    } else {
+      newZoom = Math.max(min, zoomLevel - step);
+    }
+    
+    try {
+      await videoTrack.applyConstraints({
+        advanced: [{ zoom: newZoom } as any]
+      });
+      setZoomLevel(newZoom);
+    } catch (err) {
+      console.error('Failed to apply zoom:', err);
+    }
+  };
+
+  const toggleFlash = async () => {
+    if (!streamRef.current || !cameraCapabilities.torch) return;
+    
+    const videoTrack = streamRef.current.getVideoTracks()[0];
+    const newFlashState = !flashEnabled;
+    
+    try {
+      await videoTrack.applyConstraints({
+        advanced: [{ torch: newFlashState } as any]
+      });
+      setFlashEnabled(newFlashState);
+      toast.success(newFlashState ? 'Flash On' : 'Flash Off');
+    } catch (err) {
+      console.error('Failed to toggle flash:', err);
+      toast.error('Flash not supported on this device');
+    }
+  };
+
+  const triggerAutofocus = async () => {
+    if (!streamRef.current) return;
+    
+    const videoTrack = streamRef.current.getVideoTracks()[0];
+    const capabilities = videoTrack.getCapabilities?.();
+    
+    if (capabilities && 'focusMode' in capabilities) {
+      try {
+        // Trigger single autofocus
+        await videoTrack.applyConstraints({
+          advanced: [{ focusMode: 'single-shot' } as any]
+        });
+        toast.success('Autofocus triggered');
+        
+        // Return to continuous after a moment
+        setTimeout(async () => {
+          await videoTrack.applyConstraints({
+            advanced: [{ focusMode: 'continuous' } as any]
+          });
+        }, 1000);
+      } catch (err) {
+        console.error('Failed to trigger autofocus:', err);
+      }
     }
   };
 
@@ -352,6 +463,63 @@ export function ScanPage() {
                 >
                   {/* Camera overlay with frame guide - full screen view */}
                   <div className="absolute inset-0 z-20 flex flex-col">
+                    {/* Top controls - Flash and Autofocus */}
+                    <div className="absolute top-4 left-4 right-4 flex justify-between items-start pointer-events-auto z-30">
+                      <div className="flex gap-2">
+                        {cameraCapabilities.torch && (
+                          <Button
+                            onClick={toggleFlash}
+                            size="sm"
+                            variant="outline"
+                            className={`rounded-full w-10 h-10 p-0 backdrop-blur-md border-white/30 ${
+                              flashEnabled 
+                                ? 'bg-white text-black hover:bg-white/90' 
+                                : 'bg-black/50 text-white hover:bg-black/70'
+                            }`}
+                          >
+                            <Flashlight className="w-5 h-5" />
+                          </Button>
+                        )}
+                        {cameraCapabilities.focusMode && (
+                          <Button
+                            onClick={triggerAutofocus}
+                            size="sm"
+                            variant="outline"
+                            className="bg-black/50 text-white border-white/30 hover:bg-black/70 rounded-full w-10 h-10 p-0 backdrop-blur-md"
+                          >
+                            <Focus className="w-5 h-5" />
+                          </Button>
+                        )}
+                      </div>
+                      
+                      {/* Zoom controls */}
+                      {cameraCapabilities.zoom && (
+                        <div className="flex gap-2 bg-black/50 backdrop-blur-md rounded-full px-2 py-1 border border-white/30">
+                          <Button
+                            onClick={() => handleZoom('out')}
+                            size="sm"
+                            variant="ghost"
+                            className="text-white hover:bg-white/20 rounded-full w-8 h-8 p-0"
+                            disabled={zoomLevel <= cameraCapabilities.zoom.min}
+                          >
+                            <ZoomOut className="w-4 h-4" />
+                          </Button>
+                          <span className="text-white text-xs font-medium self-center px-2">
+                            {zoomLevel.toFixed(1)}x
+                          </span>
+                          <Button
+                            onClick={() => handleZoom('in')}
+                            size="sm"
+                            variant="ghost"
+                            className="text-white hover:bg-white/20 rounded-full w-8 h-8 p-0"
+                            disabled={zoomLevel >= cameraCapabilities.zoom.max}
+                          >
+                            <ZoomIn className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      )}
+                    </div>
+                    
                     {/* Scanning frame - covers most of the screen */}
                     <div className="absolute inset-4 pointer-events-none">
                       {/* Corner guides - larger and more visible */}
@@ -384,7 +552,8 @@ export function ScanPage() {
                         Posisikan batik dalam frame
                       </p>
                       <p className="text-white/70 text-xs mt-1">
-                        Tekan tombol putih untuk foto
+                        {cameraCapabilities.zoom && 'Gunakan zoom untuk detail lebih baik'}
+                        {!cameraCapabilities.zoom && 'Tekan tombol putih untuk foto'}
                       </p>
                     </div>
                   </div>

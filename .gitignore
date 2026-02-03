@@ -7,7 +7,3 @@
 # Local Netlify folder
 .netlify
 node_modules/
-
-# Ignore large image datasets (too big for GitHub)
-public/batik-images/
-dist/client/batik-images/

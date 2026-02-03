@@ -302,6 +302,44 @@ export function ScanPage() {
     }
   };
 
+  // Helper function to resize image to target dimensions
+  const resizeImage = (file: File, width: number, height: number): Promise<File> => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      
+      img.onload = () => {
+        canvas.width = width;
+        canvas.height = height;
+        
+        if (ctx) {
+          // Use high quality interpolation
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = 'high';
+          ctx.drawImage(img, 0, 0, width, height);
+          
+          canvas.toBlob((blob) => {
+            if (blob) {
+              const resizedFile = new File([blob], file.name, { 
+                type: 'image/jpeg',
+                lastModified: Date.now()
+              });
+              resolve(resizedFile);
+            } else {
+              reject(new Error('Failed to resize image'));
+            }
+          }, 'image/jpeg', 0.95); // High quality JPEG
+        } else {
+          reject(new Error('Failed to get canvas context'));
+        }
+      };
+      
+      img.onerror = () => reject(new Error('Failed to load image'));
+      img.src = URL.createObjectURL(file);
+    });
+  };
+
   const confirmUpload = () => {
     if (preview) {
       fetch(preview)
@@ -313,14 +351,18 @@ export function ScanPage() {
     }
   };
 
+
   const startScan = async (file: File, previewUrl?: string) => {
     setState('scanning');
     
     try {
       console.log('Starting scan with file:', file.name);
       
+      // Preprocess image: resize to 224x224 for consistency with training
+      const resizedFile = await resizeImage(file, 224, 224);
+      
       const formData = new FormData();
-      formData.append('file', file);
+      formData.append('file', resizedFile);
       
       const API_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
       console.log('Sending request to:', `${API_URL}/predict`);

@@ -307,29 +307,36 @@ export function ScanPage() {
     return new Promise((resolve, reject) => {
       const img = new Image();
       const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
+      const ctx = canvas.getContext('2d', { willReadFrequently: false });
       
       img.onload = () => {
         canvas.width = width;
         canvas.height = height;
         
         if (ctx) {
-          // Use high quality interpolation
+          // Ensure consistent color space and rendering
           ctx.imageSmoothingEnabled = true;
           ctx.imageSmoothingQuality = 'high';
+          
+          // Fill with white background first (in case of transparency)
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fillRect(0, 0, width, height);
+          
+          // Draw image centered and scaled to fit
           ctx.drawImage(img, 0, 0, width, height);
           
+          // Use PNG for lossless compression (consistent across devices)
           canvas.toBlob((blob) => {
             if (blob) {
-              const resizedFile = new File([blob], file.name, { 
-                type: 'image/jpeg',
+              const resizedFile = new File([blob], file.name.replace(/\.[^.]+$/, '.png'), { 
+                type: 'image/png',
                 lastModified: Date.now()
               });
               resolve(resizedFile);
             } else {
               reject(new Error('Failed to resize image'));
             }
-          }, 'image/jpeg', 0.95); // High quality JPEG
+          }, 'image/png'); // PNG lossless - no quality loss
         } else {
           reject(new Error('Failed to get canvas context'));
         }

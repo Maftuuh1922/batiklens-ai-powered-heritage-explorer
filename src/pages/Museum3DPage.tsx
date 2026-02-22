@@ -1,9 +1,8 @@
 
 import React, { useState, Suspense, useMemo, useCallback, useEffect, useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
 import {
     KeyboardControls,
-    AdaptiveDpr,
     ContactShadows,
 } from '@react-three/drei';
 import * as THREE from 'three';
@@ -20,7 +19,7 @@ import { Player } from '@/components/museum/Player';
 import { MiniMap } from '@/components/museum/MiniMap';
 import { DetailDialog } from '@/components/museum/DetailDialog';
 import { LoadingScreen } from '@/components/museum/LoadingScreen';
-import { MobileJoystick } from '@/components/museum/MobileJoystick';
+import { MobileControls } from '@/components/museum/MobileControls';
 
 // Decorative Component: Light Dust Particles (Twinkling)
 const DustParticles = () => {
@@ -45,7 +44,6 @@ const DustParticles = () => {
             if (pos[i * 3 + 1] > 7.8) pos[i * 3 + 1] = 0.5;
         }
         mesh.current.geometry.attributes.position.needsUpdate = true;
-        // Twinkle effect
         if (mesh.current.material instanceof THREE.PointsMaterial) {
             mesh.current.material.opacity = 0.2 + Math.sin(time * 2) * 0.1;
         }
@@ -57,6 +55,8 @@ const DustParticles = () => {
         </points>
     );
 };
+
+import { useFrame } from '@react-three/fiber';
 
 // Centerpiece: Glowing Heritage Crest
 const HeritageCrest = () => {
@@ -93,16 +93,35 @@ export const Museum3DPage = () => {
 
     // Mobile & Control States
     const [isMobile, setIsMobile] = useState(false);
-    const [joystickData, setJoystickData] = useState({ x: 0, y: 0 });
     const [isFullscreen, setIsFullscreen] = useState(false);
+
+    // FIX 1 & 4: Mobile Handlers and Navbar Hiding
+    const mobileHandlers = useRef({
+        onMove: (x: number, y: number) => { },
+        onLook: (dx: number, dy: number) => { },
+        onSprint: (s: boolean) => { },
+    });
 
     useEffect(() => {
         const checkMobile = () => {
-            setIsMobile(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 1024);
+            setIsMobile(/Android|iPhone|iPad/i.test(navigator.userAgent) || window.innerWidth < 1024);
         };
         checkMobile();
         window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
+
+        // Hide Navbar/Header
+        const navbar = document.querySelector('nav') as HTMLElement;
+        const header = document.querySelector('header') as HTMLElement;
+        if (navbar) navbar.style.display = 'none';
+        if (header) header.style.display = 'none';
+        document.documentElement.style.overflow = 'hidden';
+
+        return () => {
+            window.removeEventListener('resize', checkMobile);
+            if (navbar) navbar.style.display = '';
+            if (header) header.style.display = '';
+            document.documentElement.style.overflow = '';
+        };
     }, []);
 
     const toggleFullscreen = () => {
@@ -170,18 +189,16 @@ export const Museum3DPage = () => {
     if (!loaded) return <LoadingScreen onComplete={() => setLoaded(true)} />;
 
     return (
-        <div className="h-screen w-full bg-[#ede8df] relative overflow-hidden font-sans">
+        <div className="h-screen w-full bg-[#ede8df] relative overflow-hidden font-sans" style={{ touchAction: 'none' }}>
             <Toaster position="top-right" expand={false} richColors theme="dark" />
 
             {/* Mobile Controls Overlay */}
-            {started && isMobile && !selectedBatik && (
-                <div className="fixed bottom-10 left-10 z-[100] scale-125 md:scale-150">
-                    <MobileJoystick
-                        onMove={(data) => setJoystickData(data)}
-                        onEnd={() => setJoystickData({ x: 0, y: 0 })}
-                    />
-                </div>
-            )}
+            <MobileControls
+                visible={started && !selectedBatik && isMobile}
+                onMove={(x, y) => mobileHandlers.current.onMove(x, y)}
+                onLook={(dx, dy) => mobileHandlers.current.onLook(dx, dy)}
+                onSprint={(s) => mobileHandlers.current.onSprint(s)}
+            />
 
             {/* Target Crosshair */}
             {started && !selectedBatik && (
@@ -200,7 +217,7 @@ export const Museum3DPage = () => {
                     <div>
                         <h1 className="text-white font-serif font-black text-3xl leading-none tracking-tighter italic">GALLERY OF HERITAGE</h1>
                         <div className="flex items-center gap-3 mt-3">
-                            <p className="text-gold/60 text-[10px] uppercase tracking-[0.4em] font-black">Archive Experience • ver 6.9</p>
+                            <p className="text-gold/60 text-[10px] uppercase tracking-[0.4em] font-black">Archive Experience • ver 7.5</p>
                             <div className="w-1 h-1 rounded-full bg-white/20" />
                             <p className="text-white/40 text-[10px] uppercase tracking-widest font-bold">{visited.size}/20 EXPLORED</p>
                         </div>
@@ -231,7 +248,7 @@ export const Museum3DPage = () => {
                             <Sparkles className="w-10 h-10 text-gold" />
                         </div>
                         <h2 className="text-white font-serif text-5xl font-black italic tracking-tighter mb-2">ARCHIVE LENS</h2>
-                        <p className="text-gold/60 text-[10px] md:text-xs uppercase tracking-[0.5em] font-black">Digital Heritage Explorer • v7.3</p>
+                        <p className="text-gold/60 text-[10px] md:text-xs uppercase tracking-[0.5em] font-black">Digital Heritage Explorer • v7.5</p>
                     </div>
 
                     <Button
@@ -302,7 +319,6 @@ export const Museum3DPage = () => {
                         <HeritageCrest />
                         <DustParticles />
 
-                        {/* High Performance Soft Shadows */}
                         <ContactShadows
                             position={[0, 0.01, 0]}
                             opacity={0.4}
@@ -337,7 +353,7 @@ export const Museum3DPage = () => {
                         paused={!!selectedBatik}
                         onPositionChange={handlePositionChange}
                         onSprintChange={setIsSprinting}
-                        joystickData={joystickData}
+                        mobileHandlers={mobileHandlers}
                     />
                 </Canvas>
             </KeyboardControls>

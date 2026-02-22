@@ -1,5 +1,5 @@
 
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { useKeyboardControls } from '@react-three/drei';
 import * as THREE from 'three';
@@ -15,14 +15,13 @@ const WALK_SPEED = 4.8;
 const SPRINT_SPEED = 8.5;
 const TURN_SPEED = 1.9;
 const MOUSE_SENS = 0.0018;
-const TOUCH_SENS = 0.0055;
 
 const Q_UP = new THREE.Quaternion();
 const Q_RIGHT = new THREE.Quaternion();
 const AXIS_Y = new THREE.Vector3(0, 1, 0);
 const AXIS_X = new THREE.Vector3(1, 0, 0);
 
-export const Player = ({ started, paused, onPositionChange, onSprintChange, joystickData }: any) => {
+export const Player = ({ started, paused, onPositionChange, onSprintChange, mobileHandlers }: any) => {
     const [, get] = useKeyboardControls();
     const { camera } = useThree();
 
@@ -34,11 +33,28 @@ export const Player = ({ started, paused, onPositionChange, onSprintChange, joys
     const breathT = useRef(0);
     const fovRef = useRef(65);
 
-    const lastTouch = useRef({ x: 0, y: 0 });
-    const isMobile = useRef(false);
+    // FIX 3: Mobile Input Refs
+    const mobileMove = useRef({ x: 0, y: 0 });
+    const mobileLook = useRef({ dx: 0, dy: 0 });
+    const mobileSprint = useRef(false);
+
+    // Connect handlers back to parent
+    useEffect(() => {
+        if (mobileHandlers && mobileHandlers.current) {
+            mobileHandlers.current.onMove = (x: number, y: number) => {
+                mobileMove.current = { x, y };
+            };
+            mobileHandlers.current.onLook = (dx: number, dy: number) => {
+                mobileLook.current.dx += dx;
+                mobileLook.current.dy += dy;
+            };
+            mobileHandlers.current.onSprint = (s: boolean) => {
+                mobileSprint.current = s;
+            };
+        }
+    }, [mobileHandlers]);
 
     useEffect(() => {
-        isMobile.current = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         camera.quaternion.identity();
         camera.position.set(0, EYE_LEVEL, 0);
         camera.up.set(0, 1, 0);
@@ -54,68 +70,24 @@ export const Player = ({ started, paused, onPositionChange, onSprintChange, joys
             pitch.current = Math.max(-0.44, Math.min(0.44, pitch.current));
         };
 
-        const activeLookId = { current: null as number | null };
-
-        const onTouchStart = (e: TouchEvent) => {
-            for (let i = 0; i < e.changedTouches.length; i++) {
-                const t = e.changedTouches[i];
-                if (t.clientX > window.innerWidth * 0.4 && activeLookId.current === null) {
-                    activeLookId.current = t.identifier;
-                    lastTouch.current = { x: t.clientX, y: t.clientY };
-                }
-            }
-        };
-
-        const onTouchMove = (e: TouchEvent) => {
-            if (paused) return;
-            if (e.cancelable) e.preventDefault();
-
-            for (let i = 0; i < e.changedTouches.length; i++) {
-                const t = e.changedTouches[i];
-                if (t.identifier === activeLookId.current) {
-                    const dx = t.clientX - lastTouch.current.x;
-                    const dy = t.clientY - lastTouch.current.y;
-
-                    yaw.current -= dx * TOUCH_SENS;
-                    pitch.current -= dy * TOUCH_SENS;
-                    pitch.current = Math.max(-0.44, Math.min(0.44, pitch.current));
-
-                    lastTouch.current = { x: t.clientX, y: t.clientY };
-                }
-            }
-        };
-
-        const onTouchEnd = (e: TouchEvent) => {
-            for (let i = 0; i < e.changedTouches.length; i++) {
-                if (e.changedTouches[i].identifier === activeLookId.current) {
-                    activeLookId.current = null;
-                }
-            }
-        };
-
         const onWheel = (e: WheelEvent) => {
             if (paused) return;
             fovRef.current = Math.max(30, Math.min(85, fovRef.current + e.deltaY * 0.04));
         };
 
         const onClick = () => {
-            if (!paused && !isMobile.current) document.body.requestPointerLock();
+            if (!paused) {
+                const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
+                if (!isMobile) document.body.requestPointerLock();
+            }
         };
 
         document.addEventListener('mousemove', onMove);
-        document.addEventListener('touchstart', onTouchStart, { passive: false });
-        document.addEventListener('touchmove', onTouchMove, { passive: false });
-        document.addEventListener('touchend', onTouchEnd);
-        document.addEventListener('touchcancel', onTouchEnd);
         document.addEventListener('click', onClick);
         window.addEventListener('wheel', onWheel, { passive: true });
 
         return () => {
             document.removeEventListener('mousemove', onMove);
-            document.removeEventListener('touchstart', onTouchStart);
-            document.removeEventListener('touchmove', onTouchMove);
-            document.removeEventListener('touchend', onTouchEnd);
-            document.removeEventListener('touchcancel', onTouchEnd);
             document.removeEventListener('click', onClick);
             window.removeEventListener('wheel', onWheel);
         };
@@ -130,6 +102,14 @@ export const Player = ({ started, paused, onPositionChange, onSprintChange, joys
         cam.updateProjectionMatrix();
 
         if (paused) return;
+
+        // Mobile Look Override/Integration
+        if (Math.abs(mobileLook.current.dx) > 0 || Math.abs(mobileLook.current.dy) > 0) {
+            yaw.current -= mobileLook.current.dx * 1.5; // Scale for better mobile feel
+            pitch.current -= mobileLook.current.dy * 1.5;
+            pitch.current = Math.max(-0.44, Math.min(0.44, pitch.current));
+            mobileLook.current = { dx: 0, dy: 0 }; // Consume the look delta
+        }
 
         if (arrowKeys.ArrowLeft) yaw.current += TURN_SPEED * dt;
         if (arrowKeys.ArrowRight) yaw.current -= TURN_SPEED * dt;
@@ -146,23 +126,29 @@ export const Player = ({ started, paused, onPositionChange, onSprintChange, joys
 
         const { forward, backward, left, right, sprint } = get() as any;
 
-        const targetVel = new THREE.Vector3();
-        const speed = sprint ? SPRINT_SPEED : WALK_SPEED;
+        const mX = mobileMove.current.x;
+        const mY = mobileMove.current.y;
+        const isMobileMoving = Math.abs(mX) > 0.05 || Math.abs(mY) > 0.05;
 
+        const targetVel = new THREE.Vector3();
+        const activeSprint = sprint || mobileSprint.current;
+        const speed = activeSprint ? SPRINT_SPEED : WALK_SPEED;
+
+        // Keyboard
         if (forward) targetVel.addScaledVector(front, speed);
         if (backward) targetVel.addScaledVector(front, -speed * 0.7);
         if (left) targetVel.addScaledVector(side, -speed * 0.85);
         if (right) targetVel.addScaledVector(side, speed * 0.85);
 
-        if (joystickData) {
-            targetVel.addScaledVector(front, joystickData.y * speed);
-            targetVel.addScaledVector(side, joystickData.x * speed * 0.85);
+        // Mobile joystick
+        if (isMobileMoving) {
+            targetVel.addScaledVector(front, mY * speed);
+            targetVel.addScaledVector(side, mX * speed * 0.85);
         }
 
         if (targetVel.length() > speed) targetVel.normalize().multiplyScalar(speed);
 
         const isMoving = targetVel.length() > 0.1;
-        // High-friction deceleration to avoid "sliding"
         const lerpFactor = isMoving ? 0.15 : 0.25;
         velocity.current.lerp(targetVel, lerpFactor);
 
@@ -173,8 +159,8 @@ export const Player = ({ started, paused, onPositionChange, onSprintChange, joys
 
         const moving = velocity.current.length() > 0.3;
         if (moving) {
-            bobT.current += dt * (sprint ? 9.0 : 6.0);
-            const bob = Math.abs(Math.sin(bobT.current)) * (sprint ? 0.04 : 0.022);
+            bobT.current += dt * (activeSprint ? 9.0 : 6.0);
+            const bob = Math.abs(Math.sin(bobT.current)) * (activeSprint ? 0.04 : 0.022);
             bobY.current = THREE.MathUtils.lerp(bobY.current, EYE_LEVEL + bob, 0.18);
         } else {
             breathT.current += dt * 0.4;
@@ -185,7 +171,7 @@ export const Player = ({ started, paused, onPositionChange, onSprintChange, joys
         camera.position.y = bobY.current;
 
         onPositionChange?.({ x: camera.position.x, z: camera.position.z });
-        onSprintChange?.((sprint || (joystickData && Math.abs(joystickData.y) > 0.8)) && moving);
+        onSprintChange?.(activeSprint && moving);
     });
 
     return null;

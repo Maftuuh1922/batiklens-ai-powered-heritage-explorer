@@ -14,10 +14,13 @@ export const MobileJoystick = ({ onMove, onEnd }: JoystickProps) => {
 
     const handleStart = (e: React.TouchEvent | React.MouseEvent) => {
         setDragging(true);
-        if ('touches' in e) {
-            touchId.current = e.touches[0].identifier;
+        if ('changedTouches' in e) {
+            // Use the finger that actually triggered this event
+            touchId.current = e.changedTouches[0].identifier;
+            updatePosition(e);
+        } else {
+            updatePosition(e);
         }
-        updatePosition(e);
     };
 
     const updatePosition = (e: any) => {

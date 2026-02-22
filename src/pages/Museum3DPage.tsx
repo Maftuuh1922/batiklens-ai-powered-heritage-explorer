@@ -231,7 +231,7 @@ export const Museum3DPage = () => {
                             <Sparkles className="w-10 h-10 text-gold" />
                         </div>
                         <h2 className="text-white font-serif text-5xl font-black italic tracking-tighter mb-2">ARCHIVE LENS</h2>
-                        <p className="text-gold/60 text-[10px] md:text-xs uppercase tracking-[0.5em] font-black">Digital Heritage Explorer • v7.1</p>
+                        <p className="text-gold/60 text-[10px] md:text-xs uppercase tracking-[0.5em] font-black">Digital Heritage Explorer • v7.3</p>
                     </div>
 
                     <Button

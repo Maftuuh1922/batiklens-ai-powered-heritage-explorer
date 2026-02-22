@@ -1,3 +1,4 @@
+
 import { useRef, useEffect, useState } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { useKeyboardControls } from '@react-three/drei';
@@ -10,11 +11,11 @@ if (typeof window !== 'undefined') {
 }
 
 const EYE_LEVEL = 1.7;
-const WALK_SPEED = 5.5;
-const SPRINT_SPEED = 10.0;
-const TURN_SPEED = 1.8;
+const WALK_SPEED = 4.8;
+const SPRINT_SPEED = 8.5;
+const TURN_SPEED = 1.9;
 const MOUSE_SENS = 0.0018;
-const TOUCH_SENS = 0.004;
+const TOUCH_SENS = 0.0055;
 
 const Q_UP = new THREE.Quaternion();
 const Q_RIGHT = new THREE.Quaternion();
@@ -38,7 +39,6 @@ export const Player = ({ started, paused, onPositionChange, onSprintChange, joys
 
     useEffect(() => {
         isMobile.current = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
         camera.quaternion.identity();
         camera.position.set(0, EYE_LEVEL, 0);
         camera.up.set(0, 1, 0);
@@ -54,25 +54,43 @@ export const Player = ({ started, paused, onPositionChange, onSprintChange, joys
             pitch.current = Math.max(-0.44, Math.min(0.44, pitch.current));
         };
 
-        const onTouchMove = (e: TouchEvent) => {
-            if (paused || e.touches.length > 1) return;
-            const touch = e.touches[0];
-            const dx = touch.clientX - lastTouch.current.x;
-            const dy = touch.clientY - lastTouch.current.y;
-
-            // Only rotate if not using joystick (handled by different areas usually, but here we just dampen)
-            // If the touch is on the right half of the screen, it's for rotation
-            if (touch.clientX > window.innerWidth / 2) {
-                yaw.current -= dx * TOUCH_SENS;
-                pitch.current -= dy * TOUCH_SENS;
-                pitch.current = Math.max(-0.44, Math.min(0.44, pitch.current));
-            }
-
-            lastTouch.current = { x: touch.clientX, y: touch.clientY };
-        };
+        const activeLookId = { current: null as number | null };
 
         const onTouchStart = (e: TouchEvent) => {
-            lastTouch.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+            for (let i = 0; i < e.changedTouches.length; i++) {
+                const t = e.changedTouches[i];
+                if (t.clientX > window.innerWidth * 0.4 && activeLookId.current === null) {
+                    activeLookId.current = t.identifier;
+                    lastTouch.current = { x: t.clientX, y: t.clientY };
+                }
+            }
+        };
+
+        const onTouchMove = (e: TouchEvent) => {
+            if (paused) return;
+            if (e.cancelable) e.preventDefault();
+
+            for (let i = 0; i < e.changedTouches.length; i++) {
+                const t = e.changedTouches[i];
+                if (t.identifier === activeLookId.current) {
+                    const dx = t.clientX - lastTouch.current.x;
+                    const dy = t.clientY - lastTouch.current.y;
+
+                    yaw.current -= dx * TOUCH_SENS;
+                    pitch.current -= dy * TOUCH_SENS;
+                    pitch.current = Math.max(-0.44, Math.min(0.44, pitch.current));
+
+                    lastTouch.current = { x: t.clientX, y: t.clientY };
+                }
+            }
+        };
+
+        const onTouchEnd = (e: TouchEvent) => {
+            for (let i = 0; i < e.changedTouches.length; i++) {
+                if (e.changedTouches[i].identifier === activeLookId.current) {
+                    activeLookId.current = null;
+                }
+            }
         };
 
         const onWheel = (e: WheelEvent) => {
@@ -85,8 +103,10 @@ export const Player = ({ started, paused, onPositionChange, onSprintChange, joys
         };
 
         document.addEventListener('mousemove', onMove);
-        document.addEventListener('touchstart', onTouchStart);
-        document.addEventListener('touchmove', onTouchMove);
+        document.addEventListener('touchstart', onTouchStart, { passive: false });
+        document.addEventListener('touchmove', onTouchMove, { passive: false });
+        document.addEventListener('touchend', onTouchEnd);
+        document.addEventListener('touchcancel', onTouchEnd);
         document.addEventListener('click', onClick);
         window.addEventListener('wheel', onWheel, { passive: true });
 
@@ -94,6 +114,8 @@ export const Player = ({ started, paused, onPositionChange, onSprintChange, joys
             document.removeEventListener('mousemove', onMove);
             document.removeEventListener('touchstart', onTouchStart);
             document.removeEventListener('touchmove', onTouchMove);
+            document.removeEventListener('touchend', onTouchEnd);
+            document.removeEventListener('touchcancel', onTouchEnd);
             document.removeEventListener('click', onClick);
             window.removeEventListener('wheel', onWheel);
         };
@@ -127,13 +149,11 @@ export const Player = ({ started, paused, onPositionChange, onSprintChange, joys
         const targetVel = new THREE.Vector3();
         const speed = sprint ? SPRINT_SPEED : WALK_SPEED;
 
-        // Keyboard Input
         if (forward) targetVel.addScaledVector(front, speed);
         if (backward) targetVel.addScaledVector(front, -speed * 0.7);
         if (left) targetVel.addScaledVector(side, -speed * 0.85);
         if (right) targetVel.addScaledVector(side, speed * 0.85);
 
-        // Joystick Input (Mobile)
         if (joystickData) {
             targetVel.addScaledVector(front, joystickData.y * speed);
             targetVel.addScaledVector(side, joystickData.x * speed * 0.85);
@@ -142,7 +162,9 @@ export const Player = ({ started, paused, onPositionChange, onSprintChange, joys
         if (targetVel.length() > speed) targetVel.normalize().multiplyScalar(speed);
 
         const isMoving = targetVel.length() > 0.1;
-        velocity.current.lerp(targetVel, isMoving ? 0.12 : 0.07);
+        // High-friction deceleration to avoid "sliding"
+        const lerpFactor = isMoving ? 0.15 : 0.25;
+        velocity.current.lerp(targetVel, lerpFactor);
 
         camera.position.x += velocity.current.x * dt;
         camera.position.z += velocity.current.z * dt;

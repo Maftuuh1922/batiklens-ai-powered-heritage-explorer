@@ -4,6 +4,30 @@ import { Text } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
+// ─── SHARED MATERIALS — created once, reused across all components ────────────
+// This is the #1 performance win: avoids GPU material state switches & GC pressure
+const MAT = {
+    floor: new THREE.MeshStandardMaterial({ color: '#5a3518', roughness: 0.35, metalness: 0.12 }),
+    ceiling: new THREE.MeshStandardMaterial({ color: '#dfd3b8', roughness: 1 }),
+    wallBase: new THREE.MeshStandardMaterial({ color: '#e8ddc8', roughness: 0.95 }),
+    wainscot: new THREE.MeshStandardMaterial({ color: '#2a1800', roughness: 0.7 }),
+    goldMetal: new THREE.MeshStandardMaterial({ color: '#b8860b', metalness: 0.85, roughness: 0.15, emissive: new THREE.Color('#b8860b'), emissiveIntensity: 0.15 }),
+    goldBright: new THREE.MeshStandardMaterial({ color: '#d4a017', metalness: 1, roughness: 0.08 }),
+    darkWood: new THREE.MeshStandardMaterial({ color: '#2a1400', roughness: 0.75 }),
+    medWood: new THREE.MeshStandardMaterial({ color: '#3a1e00', roughness: 0.82 }),
+    lightWood: new THREE.MeshStandardMaterial({ color: '#8b4513', roughness: 0.65, metalness: 0.04 }),
+    bamboo: new THREE.MeshStandardMaterial({ color: '#c8a040', roughness: 0.6 }),
+    bambooDark: new THREE.MeshStandardMaterial({ color: '#a07828', roughness: 0.6 }),
+    brownRope: new THREE.MeshStandardMaterial({ color: '#8b6914', roughness: 0.9 }),
+    drumHead: new THREE.MeshStandardMaterial({ color: '#c8a878', roughness: 0.9 }),
+    stonePillar: new THREE.MeshStandardMaterial({ color: '#ddd8cc', roughness: 0.5, metalness: 0.05 }),
+    stoneCap: new THREE.MeshStandardMaterial({ color: '#c8c0b0', roughness: 0.8 }),
+    redCarpet: new THREE.MeshStandardMaterial({ color: '#7a1a1a', roughness: 1 }),
+    deepRed: new THREE.MeshStandardMaterial({ color: '#8b0000', roughness: 0.8 }),
+    black: new THREE.MeshStandardMaterial({ color: '#1a0a00', roughness: 0.9 }),
+};
+
+
 // FLOOR — Polished dark wood (lightweight, HD look)
 const Floor = () => (
     <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]} receiveShadow>
@@ -437,9 +461,6 @@ const GamelanSet = ({ position }: { position: [number, number, number] }) => (
         {/* Saron pair — front */}
         <Saron position={[-2.2, 0.15, 1.2]} rotY={0} />
         <Saron position={[2.2, 0.15, 1.2]} rotY={0} />
-
-        {/* Small label — point light to spotlight the set */}
-        <pointLight position={[0, 3.5, 0]} intensity={1.2} distance={8} color="#ffcc66" castShadow={false} />
     </group>
 );
 
@@ -538,8 +559,6 @@ const AngklungGroup = ({ position, rotY = 0 }: { position: [number, number, numb
                 </group>
             );
         })}
-        {/* Label light */}
-        <pointLight position={[0, 2.5, 0.5]} intensity={0.5} distance={4} color="#ffe090" />
     </group>
 );
 

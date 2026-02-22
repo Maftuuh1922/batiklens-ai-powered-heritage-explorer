@@ -19,11 +19,14 @@ const MOUSE_SENS = 0.0017;
 // Pre-allocated quaternions/vectors to avoid GC pressure
 const Q_UP = new THREE.Quaternion();
 const Q_RIGHT = new THREE.Quaternion();
+const Q_ROLL = new THREE.Quaternion();          // pre-alloc, never new in frame loop
 const AXIS_Y = new THREE.Vector3(0, 1, 0);
 const AXIS_X = new THREE.Vector3(1, 0, 0);
+const AXIS_Z = new THREE.Vector3(0, 0, 1);      // for roll
 const _front = new THREE.Vector3();
 const _side = new THREE.Vector3();
 const _target = new THREE.Vector3();
+const _localRight = new THREE.Vector3(1, 0, 0);  // pre-alloc lateral sway
 
 export const Player = ({ started, paused, onPositionChange, onSprintChange, mobileHandlers }: any) => {
     const [, get] = useKeyboardControls();
@@ -133,7 +136,7 @@ export const Player = ({ started, paused, onPositionChange, onSprintChange, mobi
             -0.028, 0.028
         );
         roll.current = rollAngle;
-        const Q_ROLL = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 0, 1), rollAngle);
+        Q_ROLL.setFromAxisAngle(AXIS_Z, rollAngle);   // reuse pre-alloc, no 'new'
         camera.quaternion.multiplyQuaternions(Q_UP, Q_RIGHT).multiply(Q_ROLL);
 
         // ── Movement direction ────────────────────────────
@@ -199,9 +202,9 @@ export const Player = ({ started, paused, onPositionChange, onSprintChange, mobi
 
         // Apply head position
         camera.position.y = bobY.current;
-        // Lateral sway: shift camera slightly on its local X axis
-        const localRight = new THREE.Vector3(1, 0, 0).applyQuaternion(Q_UP);
-        camera.position.addScaledVector(localRight, bobX.current);
+        // Lateral sway: shift camera slightly on its local X axis — reuse pre-alloc
+        _localRight.set(1, 0, 0).applyQuaternion(Q_UP);
+        camera.position.addScaledVector(_localRight, bobX.current);
 
         onPositionChange?.({ x: camera.position.x, z: camera.position.z });
         onSprintChange?.(activeSprint && moving);

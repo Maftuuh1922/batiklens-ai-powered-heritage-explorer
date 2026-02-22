@@ -1,7 +1,7 @@
 
 import React, { useState, Suspense, useMemo, useCallback, useEffect, useRef } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { KeyboardControls } from '@react-three/drei';
+import { KeyboardControls, PerformanceMonitor } from '@react-three/drei';
 import * as THREE from 'three';
 import { batiks } from '@/lib/batik-data';
 import { useLanguage } from '@/lib/LanguageContext';
@@ -473,34 +473,43 @@ export const Museum3DPage = () => {
             ]}>
                 <div style={{ width: '100vw', height: '100vh', touchAction: 'none', pointerEvents: started ? 'auto' : 'none' }}>
                     <Canvas
-                        dpr={Math.min(window.devicePixelRatio, 2)}
-                        shadows
-                        camera={{ position: [0, 1.72, 0], fov: 62, near: 0.08, far: 180 }}
+                        dpr={[1, 1.5]}        // cap at 1.5x — was 2x (saves 30% GPU fill rate)
+                        shadows="soft"         // softer shadows, cheaper than default hard
+                        camera={{ position: [0, 1.72, 0], fov: 62, near: 0.1, far: 160 }}
                         gl={{
                             antialias: true,
                             powerPreference: 'high-performance',
                             toneMapping: THREE.ACESFilmicToneMapping,
-                            toneMappingExposure: 1.25,
+                            toneMappingExposure: 1.2,
                         }}
-                        performance={{ min: 0.6 }}
+                        performance={{ min: 0.5 }}
                     >
                         <color attach="background" args={['#c8b89a']} />
-                        <fog attach="fog" args={['#c8b89a', 80, 160]} />
+                        <fog attach="fog" args={['#c8b89a', 55, 130]} />
 
-                        <ambientLight intensity={0.75} color="#ffe4b0" />
-                        <hemisphereLight intensity={0.55} color="#ffcc66" groundColor="#4a2800" />
-                        <directionalLight
-                            position={[20, 28, 8]} intensity={2.2} color="#ffcb7a"
-                            castShadow
-                            shadow-mapSize={[2048, 2048]}
-                            shadow-camera-near={0.5} shadow-camera-far={200}
-                            shadow-camera-left={-70} shadow-camera-right={70}
-                            shadow-camera-top={70} shadow-camera-bottom={-70}
-                            shadow-bias={-0.0005}
+                        {/* Auto-degrade DPR when FPS < 40 */}
+                        <PerformanceMonitor
+                            onDecline={() => { }}
+                            onChange={({ factor }) => {
+                                // factor 0..1 — lower = worse perf
+                                // handled internally by R3F performance.min
+                            }}
                         />
-                        <pointLight position={[0, 7.5, -52]} intensity={1.6} color="#ffe090" distance={100} decay={2} castShadow={false} />
-                        <pointLight position={[0, 7.5, 52]} intensity={1.6} color="#ffe090" distance={100} decay={2} castShadow={false} />
-                        <pointLight position={[0, 6, 0]} intensity={1.0} color="#ffaa44" distance={120} decay={2} castShadow={false} />
+
+                        <ambientLight intensity={0.72} color="#ffe4b0" />
+                        <hemisphereLight intensity={0.5} color="#ffcc66" groundColor="#4a2800" />
+                        <directionalLight
+                            position={[20, 28, 8]} intensity={2.0} color="#ffcb7a"
+                            castShadow
+                            shadow-mapSize={[1024, 1024]}  // was 2048 — 4x cheaper
+                            shadow-camera-near={1} shadow-camera-far={120}
+                            shadow-camera-left={-55} shadow-camera-right={55}
+                            shadow-camera-top={55} shadow-camera-bottom={-55}
+                            shadow-bias={-0.001}
+                        />
+                        <pointLight position={[0, 7.5, -52]} intensity={1.4} color="#ffe090" distance={80} decay={2} castShadow={false} />
+                        <pointLight position={[0, 7.5, 52]} intensity={1.4} color="#ffe090" distance={80} decay={2} castShadow={false} />
+                        <pointLight position={[0, 6, 0]} intensity={0.85} color="#ffaa44" distance={100} decay={2} castShadow={false} />
 
                         <Suspense fallback={null}>
                             <Environment museumBatiks={museumBatiks} />

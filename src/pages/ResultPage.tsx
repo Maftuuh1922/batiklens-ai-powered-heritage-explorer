@@ -133,7 +133,7 @@ export function ResultPage() {
               <div className="absolute top-4 left-4 md:top-8 md:left-8 z-20">
                 <TooltipProvider>
                   <Tooltip delayDuration={0}>
-                    <TooltipTrigger asChild>
+                    <TooltipTrigger>
                       <Badge className={`${theme.badge} font-black text-[9px] md:text-[10px] uppercase tracking-widest px-4 md:px-5 py-2 rounded-full border-none shadow-2xl cursor-help flex items-center gap-2`}>
                         {scanResult ? `Confidence: ${scanResult.percentage}` : 'Verified'}
                         <Info className="w-3 h-3 opacity-70" />

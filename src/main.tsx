@@ -21,6 +21,7 @@ import GalleryPage from '@/pages/GalleryPage';
 import { QuizPage } from '@/pages/QuizPage';
 import { EnhancedDetailPage } from '@/pages/EnhancedDetailPage';
 import { Museum3DPage } from '@/pages/Museum3DPage';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <HomePage /> },
       { path: "/scan", element: <ScanPage /> },
+
       { path: "/result", element: <ResultPage /> },
       { path: "/catalog", element: <CatalogPage /> },
       { path: "/museum", element: <Museum3DPage /> },

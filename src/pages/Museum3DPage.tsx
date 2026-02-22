@@ -13,7 +13,7 @@ import { X, Map as MapIcon, ChevronRight, Sparkles, Maximize, Minimize } from 'l
 import { Toaster, toast } from 'sonner';
 
 // Modular Components
-import { Environment, Cat, Butterfly } from '@/components/museum/Environment';
+import { Environment, Butterfly } from '@/components/museum/Environment';
 import { Painting } from '@/components/museum/Painting';
 import { Player } from '@/components/museum/Player';
 import { MiniMap } from '@/components/museum/MiniMap';
@@ -21,7 +21,7 @@ import { DetailDialog } from '@/components/museum/DetailDialog';
 import { LoadingScreen } from '@/components/museum/LoadingScreen';
 import { MobileControls } from '@/components/museum/MobileControls';
 
-// Decorative Component: Light Dust Particles (Twinkling)
+// Decorative Component: Warm Gold Dust Particles
 const DustParticles = () => {
     const count = 120;
     const mesh = useRef<THREE.Points>(null);
@@ -29,29 +29,27 @@ const DustParticles = () => {
         const pos = new Float32Array(count * 3);
         for (let i = 0; i < count; i++) {
             pos[i * 3] = (Math.random() - 0.5) * 100;
-            pos[i * 3 + 1] = Math.random() * 8 + 0.5;
+            pos[i * 3 + 1] = Math.random() * 7 + 0.5;
             pos[i * 3 + 2] = (Math.random() - 0.5) * 100;
         }
         return pos;
     }, []);
-    const speeds = useMemo(() => Array.from({ length: count }, () => Math.random() * 0.4 + 0.1), []);
+    const speeds = useMemo(() => Array.from({ length: count }, () => Math.random() * 0.3 + 0.05), []);
     useFrame(({ clock }) => {
         if (!mesh.current) return;
         const pos = mesh.current.geometry.attributes.position.array as Float32Array;
-        const time = clock.getElapsedTime();
+        const t = clock.getElapsedTime();
         for (let i = 0; i < count; i++) {
-            pos[i * 3 + 1] += speeds[i] * 0.005;
-            if (pos[i * 3 + 1] > 7.8) pos[i * 3 + 1] = 0.5;
+            pos[i * 3 + 1] += speeds[i] * 0.004;
+            pos[i * 3] += Math.sin(t * 0.08 + i) * 0.0015;
+            if (pos[i * 3 + 1] > 7.5) pos[i * 3 + 1] = 0.5;
         }
         mesh.current.geometry.attributes.position.needsUpdate = true;
-        if (mesh.current.material instanceof THREE.PointsMaterial) {
-            mesh.current.material.opacity = 0.2 + Math.sin(time * 2) * 0.1;
-        }
     });
     return (
         <points ref={mesh}>
             <bufferGeometry><bufferAttribute attach="attributes-position" array={positions} count={count} itemSize={3} /></bufferGeometry>
-            <pointsMaterial size={0.06} color="#ffd700" transparent opacity={0.3} sizeAttenuation depthWrite={false} />
+            <pointsMaterial size={0.06} color="#ffcc44" transparent opacity={0.45} sizeAttenuation depthWrite={false} />
         </points>
     );
 };
@@ -189,8 +187,30 @@ export const Museum3DPage = () => {
     if (!loaded) return <LoadingScreen onComplete={() => setLoaded(true)} />;
 
     return (
-        <div className="h-screen w-full bg-[#ede8df] relative overflow-hidden font-sans" style={{ touchAction: 'none' }}>
+        <div
+            className="bg-[#e8d5a3] font-sans"
+            style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                width: '100vw',
+                height: '100vh',
+                zIndex: 9999,
+                overflow: 'hidden',
+                touchAction: 'none'
+            }}
+        >
             <Toaster position="top-right" expand={false} richColors theme="dark" />
+
+            {/* Vignette CSS Overlay */}
+            {started && (
+                <div
+                    className='absolute inset-0 pointer-events-none z-10'
+                    style={{
+                        background: 'radial-gradient(ellipse at center, transparent 55%, rgba(60,20,0,0.55) 100%)',
+                    }}
+                />
+            )}
 
             {/* Mobile Controls Overlay */}
             <MobileControls
@@ -202,7 +222,7 @@ export const Museum3DPage = () => {
 
             {/* Target Crosshair */}
             {started && !selectedBatik && (
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
                     <div className="w-5 h-px bg-black/40 shadow-lg" />
                     <div className="h-5 w-px bg-black/40 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-lg" />
                 </div>
@@ -217,7 +237,7 @@ export const Museum3DPage = () => {
                     <div>
                         <h1 className="text-white font-serif font-black text-3xl leading-none tracking-tighter italic">GALLERY OF HERITAGE</h1>
                         <div className="flex items-center gap-3 mt-3">
-                            <p className="text-gold/60 text-[10px] uppercase tracking-[0.4em] font-black">Archive Experience • ver 7.5</p>
+                            <p className="text-gold/60 text-[10px] uppercase tracking-[0.4em] font-black">Archive Experience • ver 7.7</p>
                             <div className="w-1 h-1 rounded-full bg-white/20" />
                             <p className="text-white/40 text-[10px] uppercase tracking-widest font-bold">{visited.size}/20 EXPLORED</p>
                         </div>
@@ -248,7 +268,7 @@ export const Museum3DPage = () => {
                             <Sparkles className="w-10 h-10 text-gold" />
                         </div>
                         <h2 className="text-white font-serif text-5xl font-black italic tracking-tighter mb-2">ARCHIVE LENS</h2>
-                        <p className="text-gold/60 text-[10px] md:text-xs uppercase tracking-[0.5em] font-black">Digital Heritage Explorer • v7.5</p>
+                        <p className="text-gold/60 text-[10px] md:text-xs uppercase tracking-[0.5em] font-black">Digital Heritage Explorer • v7.7</p>
                     </div>
 
                     <Button
@@ -291,71 +311,93 @@ export const Museum3DPage = () => {
                     { name: 'sprint', keys: ['ShiftLeft'] },
                 ]}
             >
-                <Canvas
-                    dpr={[1, 1.5]}
-                    shadows="soft"
-                    camera={{ position: [0, 1.7, 0], fov: 65, near: 0.1, far: 200 }}
-                    gl={{
-                        antialias: true,
-                        powerPreference: "high-performance",
-                        logarithmicDepthBuffer: true
+                <div
+                    className='h-screen w-full relative'
+                    style={{
+                        filter: 'sepia(0.18) saturate(1.15) brightness(0.97)',
+                        touchAction: 'none'
                     }}
                 >
-                    <color attach="background" args={["#ede8df"]} />
-                    <fog attach="fog" args={["#ede8df", 80, 160]} />
+                    <Canvas
+                        dpr={[1, 1.5]}
+                        shadows="soft"
+                        camera={{ position: [0, 1.7, 0], fov: 65, near: 0.1, far: 200 }}
+                        gl={{
+                            antialias: true,
+                            powerPreference: "high-performance",
+                            logarithmicDepthBuffer: true,
+                            toneMapping: THREE.ACESFilmicToneMapping,
+                            toneMappingExposure: 1.3
+                        }}
+                    >
+                        <color attach="background" args={['#e8d5a3']} />
+                        <fog attach="fog" args={['#e8d5a3', 75, 150]} />
 
-                    <ambientLight intensity={1.2} color="#fff5e6" />
-                    <hemisphereLight intensity={0.8} color="#ffe4b5" groundColor="#8B6343" />
-                    <directionalLight
-                        position={[20, 18, 10]}
-                        intensity={2.0}
-                        color="#fff8f0"
-                        castShadow
-                        shadow-mapSize={[512, 512]}
-                    />
-
-                    <Suspense fallback={null}>
-                        <Environment museumBatiks={museumBatiks} />
-                        <HeritageCrest />
-                        <DustParticles />
-
-                        <ContactShadows
-                            position={[0, 0.01, 0]}
-                            opacity={0.4}
-                            scale={120}
-                            blur={2.5}
-                            far={10}
-                            color="#2a1800"
+                        <ambientLight intensity={0.9} color='#ffe8b0' />
+                        <hemisphereLight
+                            intensity={0.7}
+                            color='#ffcc66'
+                            groundColor='#5c2e00'
+                        />
+                        <directionalLight
+                            position={[15, 20, 5]}
+                            intensity={1.8}
+                            color='#ffb347'
+                            castShadow
+                            shadow-mapSize={[1024, 1024]}
+                            shadow-camera-left={-65}
+                            shadow-camera-right={65}
+                            shadow-camera-top={65}
+                            shadow-camera-bottom={-65}
+                            shadow-camera-far={150}
                         />
 
-                        {museumBatiks.map((batik) => (
-                            <Painting
-                                key={batik.id}
-                                batik={batik}
-                                isVisited={visited.has(batik.id)}
-                                position={batik.position as [number, number, number]}
-                                rotation={batik.rotation as [number, number, number]}
-                                onSelect={handleSelect}
+                        {/* Warm fill from within */}
+                        <pointLight position={[0, 6, 0]} intensity={1.2} color='#ffaa33' distance={120} decay={2} />
+                        <pointLight position={[-30, 5, 0]} intensity={0.5} color='#ff9922' distance={80} decay={2} />
+                        <pointLight position={[30, 5, 0]} intensity={0.5} color='#ff9922' distance={80} decay={2} />
+                        <pointLight position={[0, 5, -30]} intensity={0.4} color='#ffbb44' distance={80} decay={2} />
+                        <pointLight position={[0, 5, 30]} intensity={0.4} color='#ffbb44' distance={80} decay={2} />
+
+                        <Suspense fallback={null}>
+                            <Environment museumBatiks={museumBatiks} />
+                            <HeritageCrest />
+                            <DustParticles />
+
+                            <ContactShadows
+                                position={[0, 0.01, 0]}
+                                opacity={0.4}
+                                scale={120}
+                                blur={2.5}
+                                far={10}
+                                color="#2a1800"
                             />
+
+                            {museumBatiks.map((batik) => (
+                                <Painting
+                                    key={batik.id}
+                                    batik={batik}
+                                    isVisited={visited.has(batik.id)}
+                                    position={batik.position as [number, number, number]}
+                                    rotation={batik.rotation as [number, number, number]}
+                                    onSelect={handleSelect}
+                                />
+                            ))}
+                        </Suspense>
+
+                        {butterflyPositions.map((pos, i) => (
+                            <Butterfly key={i} position={pos} />
                         ))}
-                    </Suspense>
 
-                    <Cat position={[5, 0, 15]} color="#c8793a" behavior="sit" />
-                    <Cat position={[-12, 0, 0]} color="#9a9a9a" behavior="walk" />
-                    <Cat position={[0, 0, 10]} color="#f0ead6" behavior="sleep" />
-
-                    {butterflyPositions.map((pos, i) => (
-                        <Butterfly key={i} position={pos} />
-                    ))}
-
-                    <Player
-                        started={started}
-                        paused={!!selectedBatik}
-                        onPositionChange={handlePositionChange}
-                        onSprintChange={setIsSprinting}
-                        mobileHandlers={mobileHandlers}
-                    />
-                </Canvas>
+                        <Player
+                            started={started}
+                            paused={!!selectedBatik}
+                            onPositionChange={handlePositionChange}
+                            onSprintChange={setIsSprinting}
+                            mobileHandlers={mobileHandlers}
+                        />
+                    </Canvas>
+                </div>
             </KeyboardControls>
 
             <DetailDialog

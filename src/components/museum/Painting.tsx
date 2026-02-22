@@ -44,25 +44,13 @@ export const Painting = ({ batik, position, rotation, isVisited, onSelect }: Pai
             </mesh>
 
             {/* Simulated Spotlight Strip (Emissive) */}
-            <mesh position={[0, 2.9, 0.12]}>
+            <mesh position={[0, 2.45, 0.12]}>
                 <boxGeometry args={[4.4, 0.08, 0.18]} />
                 <meshStandardMaterial
-                    color="#fff8e7"
-                    emissive="#ffd700"
-                    emissiveIntensity={2.5}
+                    color="#ffe4a0"
+                    emissive="#ffcc66"
+                    emissiveIntensity={1.8}
                     depthWrite={false}
-                />
-            </mesh>
-
-            {/* FAKE YELLOW GLOW (High Performance) */}
-            <mesh position={[0, 0, 0.15]}>
-                <planeGeometry args={[4.2, 5.2]} />
-                <meshBasicMaterial
-                    color="#ffd700"
-                    transparent
-                    opacity={0.07}
-                    depthWrite={false}
-                    blending={THREE.AdditiveBlending}
                 />
             </mesh>
 

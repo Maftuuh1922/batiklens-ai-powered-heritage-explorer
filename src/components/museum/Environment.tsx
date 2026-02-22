@@ -8,7 +8,7 @@ import * as THREE from 'three';
 const Wall = ({ position, rotation = [0, 0, 0] as [number, number, number], width = 122, height = 10 }: any) => (
     <mesh position={position} rotation={rotation} receiveShadow>
         <boxGeometry args={[width, height, 0.5]} />
-        <meshStandardMaterial color='#f2ede4' roughness={0.95} />
+        <meshStandardMaterial color='#ede0c4' roughness={0.95} />
     </mesh>
 );
 
@@ -16,7 +16,7 @@ const Wall = ({ position, rotation = [0, 0, 0] as [number, number, number], widt
 const Floor = () => (
     <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]} receiveShadow>
         <planeGeometry args={[130, 130]} />
-        <meshStandardMaterial color='#8B6343' roughness={0.85} />
+        <meshStandardMaterial color='#7a5230' roughness={0.85} />
     </mesh>
 );
 
@@ -25,7 +25,7 @@ const Ceiling = () => (
     <>
         <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, 8, 0]}>
             <planeGeometry args={[130, 130]} />
-            <meshStandardMaterial color='#f5f2ed' roughness={1} />
+            <meshStandardMaterial color='#f5ecd4' roughness={1} />
         </mesh>
         {[
             [-25, 7.94, -25], [0, 7.94, -25], [25, 7.94, -25],
@@ -34,7 +34,7 @@ const Ceiling = () => (
         ].map((p, i) => (
             <mesh key={i} position={p as [number, number, number]} rotation={[Math.PI / 2, 0, 0]}>
                 <planeGeometry args={[8, 14]} />
-                <meshStandardMaterial color='#fff' emissive='#fff' emissiveIntensity={0.7} depthWrite={false} side={THREE.DoubleSide} />
+                <meshStandardMaterial color='#fff8e0' emissive='#ffcc66' emissiveIntensity={0.6} depthWrite={false} side={THREE.DoubleSide} />
             </mesh>
         ))}
     </>
@@ -436,77 +436,7 @@ const HeritageVase = ({ position }: { position: [number, number, number] }) => (
 );
 
 // ============ CAT ============
-export const Cat = ({ position, color = '#c8793a', behavior = 'sit' }: {
-    position: [number, number, number],
-    color?: string,
-    behavior?: 'sit' | 'walk' | 'sleep'
-}) => {
-    const groupRef = useRef<THREE.Group>(null);
-    const tailRef = useRef<THREE.Mesh>(null);
-    const head = useRef<THREE.Group>(null);
-    const legFL = useRef<THREE.Mesh>(null);
-    const legFR = useRef<THREE.Mesh>(null);
-    const offset = useMemo(() => Math.random() * Math.PI * 2, []);
 
-    const stripeColor = useMemo(() => {
-        const c = new THREE.Color(color);
-        c.multiplyScalar(0.65);
-        return '#' + c.getHexString();
-    }, [color]);
-
-    useFrame(({ clock }) => {
-        const t = clock.getElapsedTime() + offset;
-
-        if (behavior === 'sit') {
-            if (groupRef.current) groupRef.current.position.y = position[1] + Math.sin(t * 0.6) * 0.006;
-            if (tailRef.current) tailRef.current.rotation.z = Math.sin(t * 1.8) * 0.45;
-            if (head.current) head.current.rotation.y = Math.sin(t * 0.4) * 0.12;
-        }
-
-        if (behavior === 'walk') {
-            if (groupRef.current) {
-                groupRef.current.position.x = position[0] + Math.sin(t * 0.25) * 7;
-                groupRef.current.position.z = position[2] + Math.cos(t * 0.18) * 7;
-                groupRef.current.position.y = position[1] + Math.abs(Math.sin(t * 4)) * 0.03;
-                groupRef.current.rotation.y = Math.atan2(Math.sin(t * 0.25), -Math.cos(t * 0.18));
-            }
-            if (tailRef.current) tailRef.current.rotation.z = Math.sin(t * 3) * 0.3;
-            if (legFL.current) legFL.current.rotation.x = Math.sin(t * 4) * 0.5;
-            if (legFR.current) legFR.current.rotation.x = -Math.sin(t * 4) * 0.5;
-        }
-
-        if (behavior === 'sleep') {
-            if (groupRef.current) groupRef.current.position.y = position[1] + Math.sin(t * 0.35) * 0.004;
-            if (tailRef.current) tailRef.current.rotation.z = Math.sin(t * 0.5) * 0.15;
-        }
-    });
-
-    const isSleep = behavior === 'sleep';
-
-    return (
-        <group
-            ref={groupRef}
-            position={position}
-            rotation={isSleep ? [0, 0.5, Math.PI / 2] : [0, 0, 0]}
-        >
-            <mesh position={[0, 0.28, 0]} rotation={[0.15, 0, 0]}>
-                <capsuleGeometry args={[0.19, 0.32, 8, 12]} />
-                <meshStandardMaterial color={color} roughness={0.95} />
-            </mesh>
-            <mesh position={[0, 0.22, 0.11]} rotation={[0.3, 0, 0]} scale={[1.0, 1.45, 1.0]}>
-                <sphereGeometry args={[0.11, 12, 8]} />
-                <meshStandardMaterial color="#f5e6d0" roughness={0.95} />
-            </mesh>
-            <group ref={head} position={[0, 0.60, 0.16]}>
-                <mesh><sphereGeometry args={[0.175, 14, 12]} /><meshStandardMaterial color={color} /></mesh>
-                <mesh position={[0, 0.0, 0.175]}><sphereGeometry args={[0.018, 6, 6]} /><meshStandardMaterial color="#e07090" roughness={0.4} /></mesh>
-                <mesh position={[-0.072, 0.055, 0.148]}><sphereGeometry args={[0.028, 8, 8]} /><meshStandardMaterial color="#c8a040" roughness={0.1} /></mesh>
-                <mesh position={[0.072, 0.055, 0.148]}><sphereGeometry args={[0.028, 8, 8]} /><meshStandardMaterial color="#c8a040" roughness={0.1} /></mesh>
-            </group>
-            <mesh ref={tailRef} position={[0.06, 0.30, -0.30]} rotation={[1.1, 0.2, 0.3]}><capsuleGeometry args={[0.032, 0.42, 6, 8]} /><meshStandardMaterial color={color} /></mesh>
-        </group>
-    );
-};
 
 // ============ BUTTERFLY ============
 export const Butterfly = ({ position }: { position: [number, number, number] }) => {

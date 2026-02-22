@@ -1,0 +1,9 @@
+
+# Bootstrap marker
+.bootstrap-complete
+.vercel
+.env*.local
+
+# Local Netlify folder
+.netlify
+node_modules/

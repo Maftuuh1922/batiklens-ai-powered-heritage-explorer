@@ -1,0 +1,26 @@
+# Exclude large dataset files from Vercel deployment
+Dataset_Batik_Asli-20251225T085333Z-1-001/
+*.zip
+*.tar.gz
+*.rar
+
+# Exclude development files
+.env.local
+.env.development
+.env.test
+
+# Exclude build artifacts and caches
+node_modules/
+.cache/
+dist/
+build/
+
+# Exclude IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Exclude logs
+*.log
+logs/

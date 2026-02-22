@@ -1,0 +1,1682 @@
+[
+  {
+    "id": "batik-aceh-1",
+    "nama": "Batik Aceh 1",
+    "directLink": "/batik-images/batik-aceh/hf_git_1134_Aceh11.jpg",
+    "thumbnailLink": "/batik-images/batik-aceh/hf_git_1134_Aceh11.jpg",
+    "kategori": "batik-aceh",
+    "fileName": "hf_git_1134_Aceh11.jpg"
+  },
+  {
+    "id": "batik-aceh-2",
+    "nama": "Batik Aceh 2",
+    "directLink": "/batik-images/batik-aceh/hf_git_1135_Aceh31.jpg",
+    "thumbnailLink": "/batik-images/batik-aceh/hf_git_1135_Aceh31.jpg",
+    "kategori": "batik-aceh",
+    "fileName": "hf_git_1135_Aceh31.jpg"
+  },
+  {
+    "id": "batik-aceh-3",
+    "nama": "Batik Aceh 3",
+    "directLink": "/batik-images/batik-aceh/hf_git_1136_Aceh4.jpg",
+    "thumbnailLink": "/batik-images/batik-aceh/hf_git_1136_Aceh4.jpg",
+    "kategori": "batik-aceh",
+    "fileName": "hf_git_1136_Aceh4.jpg"
+  },
+  {
+    "id": "batik-aceh-4",
+    "nama": "Batik Aceh 4",
+    "directLink": "/batik-images/batik-aceh/hf_git_1137_Aceh38.jpg",
+    "thumbnailLink": "/batik-images/batik-aceh/hf_git_1137_Aceh38.jpg",
+    "kategori": "batik-aceh",
+    "fileName": "hf_git_1137_Aceh38.jpg"
+  },
+  {
+    "id": "batik-aceh-5",
+    "nama": "Batik Aceh 5",
+    "directLink": "/batik-images/batik-aceh/hf_git_1138_Aceh28.jpg",
+    "thumbnailLink": "/batik-images/batik-aceh/hf_git_1138_Aceh28.jpg",
+    "kategori": "batik-aceh",
+    "fileName": "hf_git_1138_Aceh28.jpg"
+  },
+  {
+    "id": "batik-bali-1",
+    "nama": "Batik Bali 1",
+    "directLink": "/batik-images/batik-bali/1.jpg",
+    "thumbnailLink": "/batik-images/batik-bali/1.jpg",
+    "kategori": "batik-bali",
+    "fileName": "1.jpg"
+  },
+  {
+    "id": "batik-bali-2",
+    "nama": "Batik Bali 2",
+    "directLink": "/batik-images/batik-bali/10.jpg",
+    "thumbnailLink": "/batik-images/batik-bali/10.jpg",
+    "kategori": "batik-bali",
+    "fileName": "10.jpg"
+  },
+  {
+    "id": "batik-bali-3",
+    "nama": "Batik Bali 3",
+    "directLink": "/batik-images/batik-bali/11.jpg",
+    "thumbnailLink": "/batik-images/batik-bali/11.jpg",
+    "kategori": "batik-bali",
+    "fileName": "11.jpg"
+  },
+  {
+    "id": "batik-bali-4",
+    "nama": "Batik Bali 4",
+    "directLink": "/batik-images/batik-bali/12.jpg",
+    "thumbnailLink": "/batik-images/batik-bali/12.jpg",
+    "kategori": "batik-bali",
+    "fileName": "12.jpg"
+  },
+  {
+    "id": "batik-bali-5",
+    "nama": "Batik Bali 5",
+    "directLink": "/batik-images/batik-bali/13.jpg",
+    "thumbnailLink": "/batik-images/batik-bali/13.jpg",
+    "kategori": "batik-bali",
+    "fileName": "13.jpg"
+  },
+  {
+    "id": "batik-bali_barong-1",
+    "nama": "Batik Bali Barong 1",
+    "directLink": "/batik-images/batik-bali_barong/hf_git_2043_Bali_Barong44.jpg",
+    "thumbnailLink": "/batik-images/batik-bali_barong/hf_git_2043_Bali_Barong44.jpg",
+    "kategori": "batik-bali_barong",
+    "fileName": "hf_git_2043_Bali_Barong44.jpg"
+  },
+  {
+    "id": "batik-bali_barong-2",
+    "nama": "Batik Bali Barong 2",
+    "directLink": "/batik-images/batik-bali_barong/hf_git_2044_Bali_Barong34.jpg",
+    "thumbnailLink": "/batik-images/batik-bali_barong/hf_git_2044_Bali_Barong34.jpg",
+    "kategori": "batik-bali_barong",
+    "fileName": "hf_git_2044_Bali_Barong34.jpg"
+  },
+  {
+    "id": "batik-bali_barong-3",
+    "nama": "Batik Bali Barong 3",
+    "directLink": "/batik-images/batik-bali_barong/hf_git_2045_Bali_Barong33.jpg",
+    "thumbnailLink": "/batik-images/batik-bali_barong/hf_git_2045_Bali_Barong33.jpg",
+    "kategori": "batik-bali_barong",
+    "fileName": "hf_git_2045_Bali_Barong33.jpg"
+  },
+  {
+    "id": "batik-bali_barong-4",
+    "nama": "Batik Bali Barong 4",
+    "directLink": "/batik-images/batik-bali_barong/hf_git_2046_Bali_Barong19.jpg",
+    "thumbnailLink": "/batik-images/batik-bali_barong/hf_git_2046_Bali_Barong19.jpg",
+    "kategori": "batik-bali_barong",
+    "fileName": "hf_git_2046_Bali_Barong19.jpg"
+  },
+  {
+    "id": "batik-bali_barong-5",
+    "nama": "Batik Bali Barong 5",
+    "directLink": "/batik-images/batik-bali_barong/hf_git_2047_Bali_Barong3.jpg",
+    "thumbnailLink": "/batik-images/batik-bali_barong/hf_git_2047_Bali_Barong3.jpg",
+    "kategori": "batik-bali_barong",
+    "fileName": "hf_git_2047_Bali_Barong3.jpg"
+  },
+  {
+    "id": "batik-bali_merak-1",
+    "nama": "Batik Bali Merak 1",
+    "directLink": "/batik-images/batik-bali_merak/hf_git_283_Bali_Merak27.jpg",
+    "thumbnailLink": "/batik-images/batik-bali_merak/hf_git_283_Bali_Merak27.jpg",
+    "kategori": "batik-bali_merak",
+    "fileName": "hf_git_283_Bali_Merak27.jpg"
+  },
+  {
+    "id": "batik-bali_merak-2",
+    "nama": "Batik Bali Merak 2",
+    "directLink": "/batik-images/batik-bali_merak/hf_git_284_Bali_Merak20.jpg",
+    "thumbnailLink": "/batik-images/batik-bali_merak/hf_git_284_Bali_Merak20.jpg",
+    "kategori": "batik-bali_merak",
+    "fileName": "hf_git_284_Bali_Merak20.jpg"
+  },
+  {
+    "id": "batik-bali_merak-3",
+    "nama": "Batik Bali Merak 3",
+    "directLink": "/batik-images/batik-bali_merak/hf_git_285_Bali_Merak21.jpg",
+    "thumbnailLink": "/batik-images/batik-bali_merak/hf_git_285_Bali_Merak21.jpg",
+    "kategori": "batik-bali_merak",
+    "fileName": "hf_git_285_Bali_Merak21.jpg"
+  },
+  {
+    "id": "batik-bali_merak-4",
+    "nama": "Batik Bali Merak 4",
+    "directLink": "/batik-images/batik-bali_merak/hf_git_286_Bali_Merak5.jpg",
+    "thumbnailLink": "/batik-images/batik-bali_merak/hf_git_286_Bali_Merak5.jpg",
+    "kategori": "batik-bali_merak",
+    "fileName": "hf_git_286_Bali_Merak5.jpg"
+  },
+  {
+    "id": "batik-bali_merak-5",
+    "nama": "Batik Bali Merak 5",
+    "directLink": "/batik-images/batik-bali_merak/hf_git_287_Bali_Merak7.jpg",
+    "thumbnailLink": "/batik-images/batik-bali_merak/hf_git_287_Bali_Merak7.jpg",
+    "kategori": "batik-bali_merak",
+    "fileName": "hf_git_287_Bali_Merak7.jpg"
+  },
+  {
+    "id": "batik-betawi-1",
+    "nama": "Batik Betawi 1",
+    "directLink": "/batik-images/batik-betawi/1.jpg",
+    "thumbnailLink": "/batik-images/batik-betawi/1.jpg",
+    "kategori": "batik-betawi",
+    "fileName": "1.jpg"
+  },
+  {
+    "id": "batik-betawi-2",
+    "nama": "Batik Betawi 2",
+    "directLink": "/batik-images/batik-betawi/10.jpg",
+    "thumbnailLink": "/batik-images/batik-betawi/10.jpg",
+    "kategori": "batik-betawi",
+    "fileName": "10.jpg"
+  },
+  {
+    "id": "batik-betawi-3",
+    "nama": "Batik Betawi 3",
+    "directLink": "/batik-images/batik-betawi/11.jpg",
+    "thumbnailLink": "/batik-images/batik-betawi/11.jpg",
+    "kategori": "batik-betawi",
+    "fileName": "11.jpg"
+  },
+  {
+    "id": "batik-betawi-4",
+    "nama": "Batik Betawi 4",
+    "directLink": "/batik-images/batik-betawi/12.jpg",
+    "thumbnailLink": "/batik-images/batik-betawi/12.jpg",
+    "kategori": "batik-betawi",
+    "fileName": "12.jpg"
+  },
+  {
+    "id": "batik-betawi-5",
+    "nama": "Batik Betawi 5",
+    "directLink": "/batik-images/batik-betawi/13.jpg",
+    "thumbnailLink": "/batik-images/batik-betawi/13.jpg",
+    "kategori": "batik-betawi",
+    "fileName": "13.jpg"
+  },
+  {
+    "id": "batik-celup-1",
+    "nama": "Batik Celup 1",
+    "directLink": "/batik-images/batik-celup/1.jpg",
+    "thumbnailLink": "/batik-images/batik-celup/1.jpg",
+    "kategori": "batik-celup",
+    "fileName": "1.jpg"
+  },
+  {
+    "id": "batik-celup-2",
+    "nama": "Batik Celup 2",
+    "directLink": "/batik-images/batik-celup/10.jpg",
+    "thumbnailLink": "/batik-images/batik-celup/10.jpg",
+    "kategori": "batik-celup",
+    "fileName": "10.jpg"
+  },
+  {
+    "id": "batik-celup-3",
+    "nama": "Batik Celup 3",
+    "directLink": "/batik-images/batik-celup/11.jpg",
+    "thumbnailLink": "/batik-images/batik-celup/11.jpg",
+    "kategori": "batik-celup",
+    "fileName": "11.jpg"
+  },
+  {
+    "id": "batik-celup-4",
+    "nama": "Batik Celup 4",
+    "directLink": "/batik-images/batik-celup/12.jpg",
+    "thumbnailLink": "/batik-images/batik-celup/12.jpg",
+    "kategori": "batik-celup",
+    "fileName": "12.jpg"
+  },
+  {
+    "id": "batik-celup-5",
+    "nama": "Batik Celup 5",
+    "directLink": "/batik-images/batik-celup/13.jpg",
+    "thumbnailLink": "/batik-images/batik-celup/13.jpg",
+    "kategori": "batik-celup",
+    "fileName": "13.jpg"
+  },
+  {
+    "id": "batik-cendrawasih-1",
+    "nama": "Batik Cendrawasih 1",
+    "directLink": "/batik-images/batik-cendrawasih/1.jpg",
+    "thumbnailLink": "/batik-images/batik-cendrawasih/1.jpg",
+    "kategori": "batik-cendrawasih",
+    "fileName": "1.jpg"
+  },
+  {
+    "id": "batik-cendrawasih-2",
+    "nama": "Batik Cendrawasih 2",
+    "directLink": "/batik-images/batik-cendrawasih/10.jpg",
+    "thumbnailLink": "/batik-images/batik-cendrawasih/10.jpg",
+    "kategori": "batik-cendrawasih",
+    "fileName": "10.jpg"
+  },
+  {
+    "id": "batik-cendrawasih-3",
+    "nama": "Batik Cendrawasih 3",
+    "directLink": "/batik-images/batik-cendrawasih/11.jpg",
+    "thumbnailLink": "/batik-images/batik-cendrawasih/11.jpg",
+    "kategori": "batik-cendrawasih",
+    "fileName": "11.jpg"
+  },
+  {
+    "id": "batik-cendrawasih-4",
+    "nama": "Batik Cendrawasih 4",
+    "directLink": "/batik-images/batik-cendrawasih/12.jpg",
+    "thumbnailLink": "/batik-images/batik-cendrawasih/12.jpg",
+    "kategori": "batik-cendrawasih",
+    "fileName": "12.jpg"
+  },
+  {
+    "id": "batik-cendrawasih-5",
+    "nama": "Batik Cendrawasih 5",
+    "directLink": "/batik-images/batik-cendrawasih/13.jpg",
+    "thumbnailLink": "/batik-images/batik-cendrawasih/13.jpg",
+    "kategori": "batik-cendrawasih",
+    "fileName": "13.jpg"
+  },
+  {
+    "id": "batik-ceplok-1",
+    "nama": "Batik Ceplok 1",
+    "directLink": "/batik-images/batik-ceplok/10.jpg",
+    "thumbnailLink": "/batik-images/batik-ceplok/10.jpg",
+    "kategori": "batik-ceplok",
+    "fileName": "10.jpg"
+  },
+  {
+    "id": "batik-ceplok-2",
+    "nama": "Batik Ceplok 2",
+    "directLink": "/batik-images/batik-ceplok/11.jpg",
+    "thumbnailLink": "/batik-images/batik-ceplok/11.jpg",
+    "kategori": "batik-ceplok",
+    "fileName": "11.jpg"
+  },
+  {
+    "id": "batik-ceplok-3",
+    "nama": "Batik Ceplok 3",
+    "directLink": "/batik-images/batik-ceplok/12.jpg",
+    "thumbnailLink": "/batik-images/batik-ceplok/12.jpg",
+    "kategori": "batik-ceplok",
+    "fileName": "12.jpg"
+  },
+  {
+    "id": "batik-ceplok-4",
+    "nama": "Batik Ceplok 4",
+    "directLink": "/batik-images/batik-ceplok/13.jpg",
+    "thumbnailLink": "/batik-images/batik-ceplok/13.jpg",
+    "kategori": "batik-ceplok",
+    "fileName": "13.jpg"
+  },
+  {
+    "id": "batik-ceplok-5",
+    "nama": "Batik Ceplok 5",
+    "directLink": "/batik-images/batik-ceplok/14.jpg",
+    "thumbnailLink": "/batik-images/batik-ceplok/14.jpg",
+    "kategori": "batik-ceplok",
+    "fileName": "14.jpg"
+  },
+  {
+    "id": "batik-ciamis-1",
+    "nama": "Batik Ciamis 1",
+    "directLink": "/batik-images/batik-ciamis/1.jpg",
+    "thumbnailLink": "/batik-images/batik-ciamis/1.jpg",
+    "kategori": "batik-ciamis",
+    "fileName": "1.jpg"
+  },
+  {
+    "id": "batik-ciamis-2",
+    "nama": "Batik Ciamis 2",
+    "directLink": "/batik-images/batik-ciamis/10.jpg",
+    "thumbnailLink": "/batik-images/batik-ciamis/10.jpg",
+    "kategori": "batik-ciamis",
+    "fileName": "10.jpg"
+  },
+  {
+    "id": "batik-ciamis-3",
+    "nama": "Batik Ciamis 3",
+    "directLink": "/batik-images/batik-ciamis/11.jpg",
+    "thumbnailLink": "/batik-images/batik-ciamis/11.jpg",
+    "kategori": "batik-ciamis",
+    "fileName": "11.jpg"
+  },
+  {
+    "id": "batik-ciamis-4",
+    "nama": "Batik Ciamis 4",
+    "directLink": "/batik-images/batik-ciamis/12.jpg",
+    "thumbnailLink": "/batik-images/batik-ciamis/12.jpg",
+    "kategori": "batik-ciamis",
+    "fileName": "12.jpg"
+  },
+  {
+    "id": "batik-ciamis-5",
+    "nama": "Batik Ciamis 5",
+    "directLink": "/batik-images/batik-ciamis/13.jpg",
+    "thumbnailLink": "/batik-images/batik-ciamis/13.jpg",
+    "kategori": "batik-ciamis",
+    "fileName": "13.jpg"
+  },
+  {
+    "id": "batik-corak_insang-1",
+    "nama": "Batik Corak Insang 1",
+    "directLink": "/batik-images/batik-corak_insang/hf_git_1056_Corak_Insang6.jpg",
+    "thumbnailLink": "/batik-images/batik-corak_insang/hf_git_1056_Corak_Insang6.jpg",
+    "kategori": "batik-corak_insang",
+    "fileName": "hf_git_1056_Corak_Insang6.jpg"
+  },
+  {
+    "id": "batik-corak_insang-2",
+    "nama": "Batik Corak Insang 2",
+    "directLink": "/batik-images/batik-corak_insang/hf_git_1057_Corak_Insang30.jpg",
+    "thumbnailLink": "/batik-images/batik-corak_insang/hf_git_1057_Corak_Insang30.jpg",
+    "kategori": "batik-corak_insang",
+    "fileName": "hf_git_1057_Corak_Insang30.jpg"
+  },
+  {
+    "id": "batik-corak_insang-3",
+    "nama": "Batik Corak Insang 3",
+    "directLink": "/batik-images/batik-corak_insang/hf_git_1058_Corak_Insang66.jpg",
+    "thumbnailLink": "/batik-images/batik-corak_insang/hf_git_1058_Corak_Insang66.jpg",
+    "kategori": "batik-corak_insang",
+    "fileName": "hf_git_1058_Corak_Insang66.jpg"
+  },
+  {
+    "id": "batik-corak_insang-4",
+    "nama": "Batik Corak Insang 4",
+    "directLink": "/batik-images/batik-corak_insang/hf_git_1059_Corak_Insang71.jpg",
+    "thumbnailLink": "/batik-images/batik-corak_insang/hf_git_1059_Corak_Insang71.jpg",
+    "kategori": "batik-corak_insang",
+    "fileName": "hf_git_1059_Corak_Insang71.jpg"
+  },
+  {
+    "id": "batik-corak_insang-5",
+    "nama": "Batik Corak Insang 5",
+    "directLink": "/batik-images/batik-corak_insang/hf_git_1060_Corak_Insang25.jpg",
+    "thumbnailLink": "/batik-images/batik-corak_insang/hf_git_1060_Corak_Insang25.jpg",
+    "kategori": "batik-corak_insang",
+    "fileName": "hf_git_1060_Corak_Insang25.jpg"
+  },
+  {
+    "id": "batik-garutan-1",
+    "nama": "Batik Garutan 1",
+    "directLink": "/batik-images/batik-garutan/1.jpg",
+    "thumbnailLink": "/batik-images/batik-garutan/1.jpg",
+    "kategori": "batik-garutan",
+    "fileName": "1.jpg"
+  },
+  {
+    "id": "batik-garutan-2",
+    "nama": "Batik Garutan 2",
+    "directLink": "/batik-images/batik-garutan/10.jpg",
+    "thumbnailLink": "/batik-images/batik-garutan/10.jpg",
+    "kategori": "batik-garutan",
+    "fileName": "10.jpg"
+  },
+  {
+    "id": "batik-garutan-3",
+    "nama": "Batik Garutan 3",
+    "directLink": "/batik-images/batik-garutan/11.jpg",
+    "thumbnailLink": "/batik-images/batik-garutan/11.jpg",
+    "kategori": "batik-garutan",
+    "fileName": "11.jpg"
+  },
+  {
+    "id": "batik-garutan-4",
+    "nama": "Batik Garutan 4",
+    "directLink": "/batik-images/batik-garutan/12.jpg",
+    "thumbnailLink": "/batik-images/batik-garutan/12.jpg",
+    "kategori": "batik-garutan",
+    "fileName": "12.jpg"
+  },
+  {
+    "id": "batik-garutan-5",
+    "nama": "Batik Garutan 5",
+    "directLink": "/batik-images/batik-garutan/13.jpg",
+    "thumbnailLink": "/batik-images/batik-garutan/13.jpg",
+    "kategori": "batik-garutan",
+    "fileName": "13.jpg"
+  },
+  {
+    "id": "batik-gentongan-1",
+    "nama": "Batik Gentongan 1",
+    "directLink": "/batik-images/batik-gentongan/1.jpg",
+    "thumbnailLink": "/batik-images/batik-gentongan/1.jpg",
+    "kategori": "batik-gentongan",
+    "fileName": "1.jpg"
+  },
+  {
+    "id": "batik-gentongan-2",
+    "nama": "Batik Gentongan 2",
+    "directLink": "/batik-images/batik-gentongan/10.jpg",
+    "thumbnailLink": "/batik-images/batik-gentongan/10.jpg",
+    "kategori": "batik-gentongan",
+    "fileName": "10.jpg"
+  },
+  {
+    "id": "batik-gentongan-3",
+    "nama": "Batik Gentongan 3",
+    "directLink": "/batik-images/batik-gentongan/11.jpg",
+    "thumbnailLink": "/batik-images/batik-gentongan/11.jpg",
+    "kategori": "batik-gentongan",
+    "fileName": "11.jpg"
+  },
+  {
+    "id": "batik-gentongan-4",
+    "nama": "Batik Gentongan 4",
+    "directLink": "/batik-images/batik-gentongan/12.jpg",
+    "thumbnailLink": "/batik-images/batik-gentongan/12.jpg",
+    "kategori": "batik-gentongan",
+    "fileName": "12.jpg"
+  },
+  {
+    "id": "batik-gentongan-5",
+    "nama": "Batik Gentongan 5",
+    "directLink": "/batik-images/batik-gentongan/13.jpg",
+    "thumbnailLink": "/batik-images/batik-gentongan/13.jpg",
+    "kategori": "batik-gentongan",
+    "fileName": "13.jpg"
+  },
+  {
+    "id": "batik-ikat_celup-1",
+    "nama": "Batik Ikat Celup 1",
+    "directLink": "/batik-images/batik-ikat_celup/hf_git_1274_Ikat_Celup43.jpg",
+    "thumbnailLink": "/batik-images/batik-ikat_celup/hf_git_1274_Ikat_Celup43.jpg",
+    "kategori": "batik-ikat_celup",
+    "fileName": "hf_git_1274_Ikat_Celup43.jpg"
+  },
+  {
+    "id": "batik-ikat_celup-2",
+    "nama": "Batik Ikat Celup 2",
+    "directLink": "/batik-images/batik-ikat_celup/hf_git_1275_Ikat_Celup41.jpg",
+    "thumbnailLink": "/batik-images/batik-ikat_celup/hf_git_1275_Ikat_Celup41.jpg",
+    "kategori": "batik-ikat_celup",
+    "fileName": "hf_git_1275_Ikat_Celup41.jpg"
+  },
+  {
+    "id": "batik-ikat_celup-3",
+    "nama": "Batik Ikat Celup 3",
+    "directLink": "/batik-images/batik-ikat_celup/hf_git_1276_Ikat_Celup22.jpg",
+    "thumbnailLink": "/batik-images/batik-ikat_celup/hf_git_1276_Ikat_Celup22.jpg",
+    "kategori": "batik-ikat_celup",
+    "fileName": "hf_git_1276_Ikat_Celup22.jpg"
+  },
+  {
+    "id": "batik-ikat_celup-4",
+    "nama": "Batik Ikat Celup 4",
+    "directLink": "/batik-images/batik-ikat_celup/hf_git_1277_Ikat_Celup1.jpg",
+    "thumbnailLink": "/batik-images/batik-ikat_celup/hf_git_1277_Ikat_Celup1.jpg",
+    "kategori": "batik-ikat_celup",
+    "fileName": "hf_git_1277_Ikat_Celup1.jpg"
+  },
+  {
+    "id": "batik-ikat_celup-5",
+    "nama": "Batik Ikat Celup 5",
+    "directLink": "/batik-images/batik-ikat_celup/hf_git_1278_Ikat_Celup67.jpg",
+    "thumbnailLink": "/batik-images/batik-ikat_celup/hf_git_1278_Ikat_Celup67.jpg",
+    "kategori": "batik-ikat_celup",
+    "fileName": "hf_git_1278_Ikat_Celup67.jpg"
+  },
+  {
+    "id": "batik-jakarta_ondel_ondel-1",
+    "nama": "Batik Jakarta Ondel-Ondel 1",
+    "directLink": "/batik-images/batik-jakarta_ondel_ondel/hf_git_1576_Jakarta_Ondel_Ondel36.jpg",
+    "thumbnailLink": "/batik-images/batik-jakarta_ondel_ondel/hf_git_1576_Jakarta_Ondel_Ondel36.jpg",
+    "kategori": "batik-jakarta_ondel_ondel",
+    "fileName": "hf_git_1576_Jakarta_Ondel_Ondel36.jpg"
+  },
+  {
+    "id": "batik-jakarta_ondel_ondel-2",
+    "nama": "Batik Jakarta Ondel-Ondel 2",
+    "directLink": "/batik-images/batik-jakarta_ondel_ondel/hf_git_1577_Jakarta_Ondel_Ondel39.jpg",
+    "thumbnailLink": "/batik-images/batik-jakarta_ondel_ondel/hf_git_1577_Jakarta_Ondel_Ondel39.jpg",
+    "kategori": "batik-jakarta_ondel_ondel",
+    "fileName": "hf_git_1577_Jakarta_Ondel_Ondel39.jpg"
+  },
+  {
+    "id": "batik-jakarta_ondel_ondel-3",
+    "nama": "Batik Jakarta Ondel-Ondel 3",
+    "directLink": "/batik-images/batik-jakarta_ondel_ondel/hf_git_1578_Jakarta_Ondel_Ondel20.jpg",
+    "thumbnailLink": "/batik-images/batik-jakarta_ondel_ondel/hf_git_1578_Jakarta_Ondel_Ondel20.jpg",
+    "kategori": "batik-jakarta_ondel_ondel",
+    "fileName": "hf_git_1578_Jakarta_Ondel_Ondel20.jpg"
+  },
+  {
+    "id": "batik-jakarta_ondel_ondel-4",
+    "nama": "Batik Jakarta Ondel-Ondel 4",
+    "directLink": "/batik-images/batik-jakarta_ondel_ondel/hf_git_1579_Jakarta_Ondel_Ondel43.jpg",
+    "thumbnailLink": "/batik-images/batik-jakarta_ondel_ondel/hf_git_1579_Jakarta_Ondel_Ondel43.jpg",
+    "kategori": "batik-jakarta_ondel_ondel",
+    "fileName": "hf_git_1579_Jakarta_Ondel_Ondel43.jpg"
+  },
+  {
+    "id": "batik-jakarta_ondel_ondel-5",
+    "nama": "Batik Jakarta Ondel-Ondel 5",
+    "directLink": "/batik-images/batik-jakarta_ondel_ondel/hf_git_1580_Jakarta_Ondel_Ondel10.jpg",
+    "thumbnailLink": "/batik-images/batik-jakarta_ondel_ondel/hf_git_1580_Jakarta_Ondel_Ondel10.jpg",
+    "kategori": "batik-jakarta_ondel_ondel",
+    "fileName": "hf_git_1580_Jakarta_Ondel_Ondel10.jpg"
+  },
+  {
+    "id": "batik-jawa_barat_megamendung-1",
+    "nama": "Batik Jawa Barat Megamendung 1",
+    "directLink": "/batik-images/batik-jawa_barat_megamendung/hf_git_330_Jawa_Barat_Megamendung125.jpg",
+    "thumbnailLink": "/batik-images/batik-jawa_barat_megamendung/hf_git_330_Jawa_Barat_Megamendung125.jpg",
+    "kategori": "batik-jawa_barat_megamendung",
+    "fileName": "hf_git_330_Jawa_Barat_Megamendung125.jpg"
+  },
+  {
+    "id": "batik-jawa_barat_megamendung-2",
+    "nama": "Batik Jawa Barat Megamendung 2",
+    "directLink": "/batik-images/batik-jawa_barat_megamendung/hf_git_331_Jawa_Barat_Megamendung62.jpg",
+    "thumbnailLink": "/batik-images/batik-jawa_barat_megamendung/hf_git_331_Jawa_Barat_Megamendung62.jpg",
+    "kategori": "batik-jawa_barat_megamendung",
+    "fileName": "hf_git_331_Jawa_Barat_Megamendung62.jpg"
+  },
+  {
+    "id": "batik-jawa_barat_megamendung-3",
+    "nama": "Batik Jawa Barat Megamendung 3",
+    "directLink": "/batik-images/batik-jawa_barat_megamendung/hf_git_332_Jawa_Barat_Megamendung45.jpg",
+    "thumbnailLink": "/batik-images/batik-jawa_barat_megamendung/hf_git_332_Jawa_Barat_Megamendung45.jpg",
+    "kategori": "batik-jawa_barat_megamendung",
+    "fileName": "hf_git_332_Jawa_Barat_Megamendung45.jpg"
+  },
+  {
+    "id": "batik-jawa_barat_megamendung-4",
+    "nama": "Batik Jawa Barat Megamendung 4",
+    "directLink": "/batik-images/batik-jawa_barat_megamendung/hf_git_333_Jawa_Barat_Megamendung211.jpg",
+    "thumbnailLink": "/batik-images/batik-jawa_barat_megamendung/hf_git_333_Jawa_Barat_Megamendung211.jpg",
+    "kategori": "batik-jawa_barat_megamendung",
+    "fileName": "hf_git_333_Jawa_Barat_Megamendung211.jpg"
+  },
+  {
+    "id": "batik-jawa_barat_megamendung-5",
+    "nama": "Batik Jawa Barat Megamendung 5",
+    "directLink": "/batik-images/batik-jawa_barat_megamendung/hf_git_334_Jawa_Barat_Megamendung49.jpg",
+    "thumbnailLink": "/batik-images/batik-jawa_barat_megamendung/hf_git_334_Jawa_Barat_Megamendung49.jpg",
+    "kategori": "batik-jawa_barat_megamendung",
+    "fileName": "hf_git_334_Jawa_Barat_Megamendung49.jpg"
+  },
+  {
+    "id": "batik-jawa_timur_pring-1",
+    "nama": "Batik Jawa Timur Pring 1",
+    "directLink": "/batik-images/batik-jawa_timur_pring/hf_git_1873_Jawa_Timur_Pring14.jpg",
+    "thumbnailLink": "/batik-images/batik-jawa_timur_pring/hf_git_1873_Jawa_Timur_Pring14.jpg",
+    "kategori": "batik-jawa_timur_pring",
+    "fileName": "hf_git_1873_Jawa_Timur_Pring14.jpg"
+  },
+  {
+    "id": "batik-jawa_timur_pring-2",
+    "nama": "Batik Jawa Timur Pring 2",
+    "directLink": "/batik-images/batik-jawa_timur_pring/hf_git_1874_Jawa_Timur_Pring26.jpg",
+    "thumbnailLink": "/batik-images/batik-jawa_timur_pring/hf_git_1874_Jawa_Timur_Pring26.jpg",
+    "kategori": "batik-jawa_timur_pring",
+    "fileName": "hf_git_1874_Jawa_Timur_Pring26.jpg"
+  },
+  {
+    "id": "batik-jawa_timur_pring-3",
+    "nama": "Batik Jawa Timur Pring 3",
+    "directLink": "/batik-images/batik-jawa_timur_pring/hf_git_1875_Jawa_Timur_Pring25.jpg",
+    "thumbnailLink": "/batik-images/batik-jawa_timur_pring/hf_git_1875_Jawa_Timur_Pring25.jpg",
+    "kategori": "batik-jawa_timur_pring",
+    "fileName": "hf_git_1875_Jawa_Timur_Pring25.jpg"
+  },
+  {
+    "id": "batik-jawa_timur_pring-4",
+    "nama": "Batik Jawa Timur Pring 4",
+    "directLink": "/batik-images/batik-jawa_timur_pring/hf_git_1876_Jawa_Timur_Pring8.jpg",
+    "thumbnailLink": "/batik-images/batik-jawa_timur_pring/hf_git_1876_Jawa_Timur_Pring8.jpg",
+    "kategori": "batik-jawa_timur_pring",
+    "fileName": "hf_git_1876_Jawa_Timur_Pring8.jpg"
+  },
+  {
+    "id": "batik-jawa_timur_pring-5",
+    "nama": "Batik Jawa Timur Pring 5",
+    "directLink": "/batik-images/batik-jawa_timur_pring/hf_git_1877_Jawa_Timur_Pring3.jpg",
+    "thumbnailLink": "/batik-images/batik-jawa_timur_pring/hf_git_1877_Jawa_Timur_Pring3.jpg",
+    "kategori": "batik-jawa_timur_pring",
+    "fileName": "hf_git_1877_Jawa_Timur_Pring3.jpg"
+  },
+  {
+    "id": "batik-kalimantan_dayak-1",
+    "nama": "Batik Kalimantan Dayak 1",
+    "directLink": "/batik-images/batik-kalimantan_dayak/hf_git_1000_Kalimantan_Dayak26.jpg",
+    "thumbnailLink": "/batik-images/batik-kalimantan_dayak/hf_git_1000_Kalimantan_Dayak26.jpg",
+    "kategori": "batik-kalimantan_dayak",
+    "fileName": "hf_git_1000_Kalimantan_Dayak26.jpg"
+  },
+  {
+    "id": "batik-kalimantan_dayak-2",
+    "nama": "Batik Kalimantan Dayak 2",
+    "directLink": "/batik-images/batik-kalimantan_dayak/hf_git_1001_Kalimantan_Dayak142.jpg",
+    "thumbnailLink": "/batik-images/batik-kalimantan_dayak/hf_git_1001_Kalimantan_Dayak142.jpg",
+    "kategori": "batik-kalimantan_dayak",
+    "fileName": "hf_git_1001_Kalimantan_Dayak142.jpg"
+  },
+  {
+    "id": "batik-kalimantan_dayak-3",
+    "nama": "Batik Kalimantan Dayak 3",
+    "directLink": "/batik-images/batik-kalimantan_dayak/hf_git_1002_Kalimantan_Dayak49.jpg",
+    "thumbnailLink": "/batik-images/batik-kalimantan_dayak/hf_git_1002_Kalimantan_Dayak49.jpg",
+    "kategori": "batik-kalimantan_dayak",
+    "fileName": "hf_git_1002_Kalimantan_Dayak49.jpg"
+  },
+  {
+    "id": "batik-kalimantan_dayak-4",
+    "nama": "Batik Kalimantan Dayak 4",
+    "directLink": "/batik-images/batik-kalimantan_dayak/hf_git_1003_Kalimantan_Dayak191.jpg",
+    "thumbnailLink": "/batik-images/batik-kalimantan_dayak/hf_git_1003_Kalimantan_Dayak191.jpg",
+    "kategori": "batik-kalimantan_dayak",
+    "fileName": "hf_git_1003_Kalimantan_Dayak191.jpg"
+  },
+  {
+    "id": "batik-kalimantan_dayak-5",
+    "nama": "Batik Kalimantan Dayak 5",
+    "directLink": "/batik-images/batik-kalimantan_dayak/hf_git_1004_Kalimantan_Dayak146.jpg",
+    "thumbnailLink": "/batik-images/batik-kalimantan_dayak/hf_git_1004_Kalimantan_Dayak146.jpg",
+    "kategori": "batik-kalimantan_dayak",
+    "fileName": "hf_git_1004_Kalimantan_Dayak146.jpg"
+  },
+  {
+    "id": "batik-kawung-1",
+    "nama": "Batik Kawung 1",
+    "directLink": "/batik-images/batik-kawung/1.jpg",
+    "thumbnailLink": "/batik-images/batik-kawung/1.jpg",
+    "kategori": "batik-kawung",
+    "fileName": "1.jpg"
+  },
+  {
+    "id": "batik-kawung-2",
+    "nama": "Batik Kawung 2",
+    "directLink": "/batik-images/batik-kawung/10.jpg",
+    "thumbnailLink": "/batik-images/batik-kawung/10.jpg",
+    "kategori": "batik-kawung",
+    "fileName": "10.jpg"
+  },
+  {
+    "id": "batik-kawung-3",
+    "nama": "Batik Kawung 3",
+    "directLink": "/batik-images/batik-kawung/11.jpg",
+    "thumbnailLink": "/batik-images/batik-kawung/11.jpg",
+    "kategori": "batik-kawung",
+    "fileName": "11.jpg"
+  },
+  {
+    "id": "batik-kawung-4",
+    "nama": "Batik Kawung 4",
+    "directLink": "/batik-images/batik-kawung/12.jpg",
+    "thumbnailLink": "/batik-images/batik-kawung/12.jpg",
+    "kategori": "batik-kawung",
+    "fileName": "12.jpg"
+  },
+  {
+    "id": "batik-kawung-5",
+    "nama": "Batik Kawung 5",
+    "directLink": "/batik-images/batik-kawung/13.jpg",
+    "thumbnailLink": "/batik-images/batik-kawung/13.jpg",
+    "kategori": "batik-kawung",
+    "fileName": "13.jpg"
+  },
+  {
+    "id": "batik-keraton-1",
+    "nama": "Batik Keraton 1",
+    "directLink": "/batik-images/batik-keraton/1.jpg",
+    "thumbnailLink": "/batik-images/batik-keraton/1.jpg",
+    "kategori": "batik-keraton",
+    "fileName": "1.jpg"
+  },
+  {
+    "id": "batik-keraton-2",
+    "nama": "Batik Keraton 2",
+    "directLink": "/batik-images/batik-keraton/10.jpg",
+    "thumbnailLink": "/batik-images/batik-keraton/10.jpg",
+    "kategori": "batik-keraton",
+    "fileName": "10.jpg"
+  },
+  {
+    "id": "batik-keraton-3",
+    "nama": "Batik Keraton 3",
+    "directLink": "/batik-images/batik-keraton/11.jpg",
+    "thumbnailLink": "/batik-images/batik-keraton/11.jpg",
+    "kategori": "batik-keraton",
+    "fileName": "11.jpg"
+  },
+  {
+    "id": "batik-keraton-4",
+    "nama": "Batik Keraton 4",
+    "directLink": "/batik-images/batik-keraton/12.jpg",
+    "thumbnailLink": "/batik-images/batik-keraton/12.jpg",
+    "kategori": "batik-keraton",
+    "fileName": "12.jpg"
+  },
+  {
+    "id": "batik-keraton-5",
+    "nama": "Batik Keraton 5",
+    "directLink": "/batik-images/batik-keraton/13.jpg",
+    "thumbnailLink": "/batik-images/batik-keraton/13.jpg",
+    "kategori": "batik-keraton",
+    "fileName": "13.jpg"
+  },
+  {
+    "id": "batik-lampung_gajah-1",
+    "nama": "Batik Lampung Gajah 1",
+    "directLink": "/batik-images/batik-lampung_gajah/hf_git_0_Lampung_Gajah26.jpg",
+    "thumbnailLink": "/batik-images/batik-lampung_gajah/hf_git_0_Lampung_Gajah26.jpg",
+    "kategori": "batik-lampung_gajah",
+    "fileName": "hf_git_0_Lampung_Gajah26.jpg"
+  },
+  {
+    "id": "batik-lampung_gajah-2",
+    "nama": "Batik Lampung Gajah 2",
+    "directLink": "/batik-images/batik-lampung_gajah/hf_git_10_Lampung_Gajah34.jpg",
+    "thumbnailLink": "/batik-images/batik-lampung_gajah/hf_git_10_Lampung_Gajah34.jpg",
+    "kategori": "batik-lampung_gajah",
+    "fileName": "hf_git_10_Lampung_Gajah34.jpg"
+  },
+  {
+    "id": "batik-lampung_gajah-3",
+    "nama": "Batik Lampung Gajah 3",
+    "directLink": "/batik-images/batik-lampung_gajah/hf_git_11_Lampung_Gajah72.jpg",
+    "thumbnailLink": "/batik-images/batik-lampung_gajah/hf_git_11_Lampung_Gajah72.jpg",
+    "kategori": "batik-lampung_gajah",
+    "fileName": "hf_git_11_Lampung_Gajah72.jpg"
+  },
+  {
+    "id": "batik-lampung_gajah-4",
+    "nama": "Batik Lampung Gajah 4",
+    "directLink": "/batik-images/batik-lampung_gajah/hf_git_12_Lampung_Gajah39.jpg",
+    "thumbnailLink": "/batik-images/batik-lampung_gajah/hf_git_12_Lampung_Gajah39.jpg",
+    "kategori": "batik-lampung_gajah",
+    "fileName": "hf_git_12_Lampung_Gajah39.jpg"
+  },
+  {
+    "id": "batik-lampung_gajah-5",
+    "nama": "Batik Lampung Gajah 5",
+    "directLink": "/batik-images/batik-lampung_gajah/hf_git_13_Lampung_Gajah70.jpg",
+    "thumbnailLink": "/batik-images/batik-lampung_gajah/hf_git_13_Lampung_Gajah70.jpg",
+    "kategori": "batik-lampung_gajah",
+    "fileName": "hf_git_13_Lampung_Gajah70.jpg"
+  },
+  {
+    "id": "batik-lasem-1",
+    "nama": "Batik Lasem 1",
+    "directLink": "/batik-images/batik-lasem/1.jpg",
+    "thumbnailLink": "/batik-images/batik-lasem/1.jpg",
+    "kategori": "batik-lasem",
+    "fileName": "1.jpg"
+  },
+  {
+    "id": "batik-lasem-2",
+    "nama": "Batik Lasem 2",
+    "directLink": "/batik-images/batik-lasem/10.jpg",
+    "thumbnailLink": "/batik-images/batik-lasem/10.jpg",
+    "kategori": "batik-lasem",
+    "fileName": "10.jpg"
+  },
+  {
+    "id": "batik-lasem-3",
+    "nama": "Batik Lasem 3",
+    "directLink": "/batik-images/batik-lasem/11.jpg",
+    "thumbnailLink": "/batik-images/batik-lasem/11.jpg",
+    "kategori": "batik-lasem",
+    "fileName": "11.jpg"
+  },
+  {
+    "id": "batik-lasem-4",
+    "nama": "Batik Lasem 4",
+    "directLink": "/batik-images/batik-lasem/12.jpg",
+    "thumbnailLink": "/batik-images/batik-lasem/12.jpg",
+    "kategori": "batik-lasem",
+    "fileName": "12.jpg"
+  },
+  {
+    "id": "batik-lasem-5",
+    "nama": "Batik Lasem 5",
+    "directLink": "/batik-images/batik-lasem/13.jpg",
+    "thumbnailLink": "/batik-images/batik-lasem/13.jpg",
+    "kategori": "batik-lasem",
+    "fileName": "13.jpg"
+  },
+  {
+    "id": "batik-madura_mataketeran-1",
+    "nama": "Batik Madura Mataketeran 1",
+    "directLink": "/batik-images/batik-madura_mataketeran/hf_git_2396_Madura_Mataketeran42.jpg",
+    "thumbnailLink": "/batik-images/batik-madura_mataketeran/hf_git_2396_Madura_Mataketeran42.jpg",
+    "kategori": "batik-madura_mataketeran",
+    "fileName": "hf_git_2396_Madura_Mataketeran42.jpg"
+  },
+  {
+    "id": "batik-madura_mataketeran-2",
+    "nama": "Batik Madura Mataketeran 2",
+    "directLink": "/batik-images/batik-madura_mataketeran/hf_git_2397_Madura_Mataketeran61.jpg",
+    "thumbnailLink": "/batik-images/batik-madura_mataketeran/hf_git_2397_Madura_Mataketeran61.jpg",
+    "kategori": "batik-madura_mataketeran",
+    "fileName": "hf_git_2397_Madura_Mataketeran61.jpg"
+  },
+  {
+    "id": "batik-madura_mataketeran-3",
+    "nama": "Batik Madura Mataketeran 3",
+    "directLink": "/batik-images/batik-madura_mataketeran/hf_git_2398_Madura_Mataketeran69.jpg",
+    "thumbnailLink": "/batik-images/batik-madura_mataketeran/hf_git_2398_Madura_Mataketeran69.jpg",
+    "kategori": "batik-madura_mataketeran",
+    "fileName": "hf_git_2398_Madura_Mataketeran69.jpg"
+  },
+  {
+    "id": "batik-madura_mataketeran-4",
+    "nama": "Batik Madura Mataketeran 4",
+    "directLink": "/batik-images/batik-madura_mataketeran/hf_git_2399_Madura_Mataketeran36.jpg",
+    "thumbnailLink": "/batik-images/batik-madura_mataketeran/hf_git_2399_Madura_Mataketeran36.jpg",
+    "kategori": "batik-madura_mataketeran",
+    "fileName": "hf_git_2399_Madura_Mataketeran36.jpg"
+  },
+  {
+    "id": "batik-madura_mataketeran-5",
+    "nama": "Batik Madura Mataketeran 5",
+    "directLink": "/batik-images/batik-madura_mataketeran/hf_git_2400_Madura_Mataketeran58.jpg",
+    "thumbnailLink": "/batik-images/batik-madura_mataketeran/hf_git_2400_Madura_Mataketeran58.jpg",
+    "kategori": "batik-madura_mataketeran",
+    "fileName": "hf_git_2400_Madura_Mataketeran58.jpg"
+  },
+  {
+    "id": "batik-maluku_pala-1",
+    "nama": "Batik Maluku Pala 1",
+    "directLink": "/batik-images/batik-maluku_pala/hf_git_598_Maluku_Pala46.jpg",
+    "thumbnailLink": "/batik-images/batik-maluku_pala/hf_git_598_Maluku_Pala46.jpg",
+    "kategori": "batik-maluku_pala",
+    "fileName": "hf_git_598_Maluku_Pala46.jpg"
+  },
+  {
+    "id": "batik-maluku_pala-2",
+    "nama": "Batik Maluku Pala 2",
+    "directLink": "/batik-images/batik-maluku_pala/hf_git_599_Maluku_Pala50.jpg",
+    "thumbnailLink": "/batik-images/batik-maluku_pala/hf_git_599_Maluku_Pala50.jpg",
+    "kategori": "batik-maluku_pala",
+    "fileName": "hf_git_599_Maluku_Pala50.jpg"
+  },
+  {
+    "id": "batik-maluku_pala-3",
+    "nama": "Batik Maluku Pala 3",
+    "directLink": "/batik-images/batik-maluku_pala/hf_git_600_Maluku_Pala59.jpg",
+    "thumbnailLink": "/batik-images/batik-maluku_pala/hf_git_600_Maluku_Pala59.jpg",
+    "kategori": "batik-maluku_pala",
+    "fileName": "hf_git_600_Maluku_Pala59.jpg"
+  },
+  {
+    "id": "batik-maluku_pala-4",
+    "nama": "Batik Maluku Pala 4",
+    "directLink": "/batik-images/batik-maluku_pala/hf_git_601_Maluku_Pala61.jpg",
+    "thumbnailLink": "/batik-images/batik-maluku_pala/hf_git_601_Maluku_Pala61.jpg",
+    "kategori": "batik-maluku_pala",
+    "fileName": "hf_git_601_Maluku_Pala61.jpg"
+  },
+  {
+    "id": "batik-maluku_pala-5",
+    "nama": "Batik Maluku Pala 5",
+    "directLink": "/batik-images/batik-maluku_pala/hf_git_602_Maluku_Pala35.jpg",
+    "thumbnailLink": "/batik-images/batik-maluku_pala/hf_git_602_Maluku_Pala35.jpg",
+    "kategori": "batik-maluku_pala",
+    "fileName": "hf_git_602_Maluku_Pala35.jpg"
+  },
+  {
+    "id": "batik-megamendung-1",
+    "nama": "Batik Megamendung 1",
+    "directLink": "/batik-images/batik-megamendung/1.jpg",
+    "thumbnailLink": "/batik-images/batik-megamendung/1.jpg",
+    "kategori": "batik-megamendung",
+    "fileName": "1.jpg"
+  },
+  {
+    "id": "batik-megamendung-2",
+    "nama": "Batik Megamendung 2",
+    "directLink": "/batik-images/batik-megamendung/10.jpg",
+    "thumbnailLink": "/batik-images/batik-megamendung/10.jpg",
+    "kategori": "batik-megamendung",
+    "fileName": "10.jpg"
+  },
+  {
+    "id": "batik-megamendung-3",
+    "nama": "Batik Megamendung 3",
+    "directLink": "/batik-images/batik-megamendung/12.jpg",
+    "thumbnailLink": "/batik-images/batik-megamendung/12.jpg",
+    "kategori": "batik-megamendung",
+    "fileName": "12.jpg"
+  },
+  {
+    "id": "batik-megamendung-4",
+    "nama": "Batik Megamendung 4",
+    "directLink": "/batik-images/batik-megamendung/13.jpg",
+    "thumbnailLink": "/batik-images/batik-megamendung/13.jpg",
+    "kategori": "batik-megamendung",
+    "fileName": "13.jpg"
+  },
+  {
+    "id": "batik-megamendung-5",
+    "nama": "Batik Megamendung 5",
+    "directLink": "/batik-images/batik-megamendung/14.jpg",
+    "thumbnailLink": "/batik-images/batik-megamendung/14.jpg",
+    "kategori": "batik-megamendung",
+    "fileName": "14.jpg"
+  },
+  {
+    "id": "batik-ntb_lumbung-1",
+    "nama": "Batik NTB Lumbung 1",
+    "directLink": "/batik-images/batik-ntb_lumbung/hf_git_1913_NTB_Lumbung80.jpg",
+    "thumbnailLink": "/batik-images/batik-ntb_lumbung/hf_git_1913_NTB_Lumbung80.jpg",
+    "kategori": "batik-ntb_lumbung",
+    "fileName": "hf_git_1913_NTB_Lumbung80.jpg"
+  },
+  {
+    "id": "batik-ntb_lumbung-2",
+    "nama": "Batik NTB Lumbung 2",
+    "directLink": "/batik-images/batik-ntb_lumbung/hf_git_1914_NTB_Lumbung54.jpg",
+    "thumbnailLink": "/batik-images/batik-ntb_lumbung/hf_git_1914_NTB_Lumbung54.jpg",
+    "kategori": "batik-ntb_lumbung",
+    "fileName": "hf_git_1914_NTB_Lumbung54.jpg"
+  },
+  {
+    "id": "batik-ntb_lumbung-3",
+    "nama": "Batik NTB Lumbung 3",
+    "directLink": "/batik-images/batik-ntb_lumbung/hf_git_1915_NTB_Lumbung55.jpg",
+    "thumbnailLink": "/batik-images/batik-ntb_lumbung/hf_git_1915_NTB_Lumbung55.jpg",
+    "kategori": "batik-ntb_lumbung",
+    "fileName": "hf_git_1915_NTB_Lumbung55.jpg"
+  },
+  {
+    "id": "batik-ntb_lumbung-4",
+    "nama": "Batik NTB Lumbung 4",
+    "directLink": "/batik-images/batik-ntb_lumbung/hf_git_1916_NTB_Lumbung21.jpg",
+    "thumbnailLink": "/batik-images/batik-ntb_lumbung/hf_git_1916_NTB_Lumbung21.jpg",
+    "kategori": "batik-ntb_lumbung",
+    "fileName": "hf_git_1916_NTB_Lumbung21.jpg"
+  },
+  {
+    "id": "batik-ntb_lumbung-5",
+    "nama": "Batik NTB Lumbung 5",
+    "directLink": "/batik-images/batik-ntb_lumbung/hf_git_1917_NTB_Lumbung3.jpg",
+    "thumbnailLink": "/batik-images/batik-ntb_lumbung/hf_git_1917_NTB_Lumbung3.jpg",
+    "kategori": "batik-ntb_lumbung",
+    "fileName": "hf_git_1917_NTB_Lumbung3.jpg"
+  },
+  {
+    "id": "batik-papua_asmat-1",
+    "nama": "Batik Papua Asmat 1",
+    "directLink": "/batik-images/batik-papua_asmat/hf_git_100_Papua_Asmat11.jpg",
+    "thumbnailLink": "/batik-images/batik-papua_asmat/hf_git_100_Papua_Asmat11.jpg",
+    "kategori": "batik-papua_asmat",
+    "fileName": "hf_git_100_Papua_Asmat11.jpg"
+  },
+  {
+    "id": "batik-papua_asmat-2",
+    "nama": "Batik Papua Asmat 2",
+    "directLink": "/batik-images/batik-papua_asmat/hf_git_101_Papua_Asmat74.jpg",
+    "thumbnailLink": "/batik-images/batik-papua_asmat/hf_git_101_Papua_Asmat74.jpg",
+    "kategori": "batik-papua_asmat",
+    "fileName": "hf_git_101_Papua_Asmat74.jpg"
+  },
+  {
+    "id": "batik-papua_asmat-3",
+    "nama": "Batik Papua Asmat 3",
+    "directLink": "/batik-images/batik-papua_asmat/hf_git_102_Papua_Asmat70.jpg",
+    "thumbnailLink": "/batik-images/batik-papua_asmat/hf_git_102_Papua_Asmat70.jpg",
+    "kategori": "batik-papua_asmat",
+    "fileName": "hf_git_102_Papua_Asmat70.jpg"
+  },
+  {
+    "id": "batik-papua_asmat-4",
+    "nama": "Batik Papua Asmat 4",
+    "directLink": "/batik-images/batik-papua_asmat/hf_git_103_Papua_Asmat48.jpg",
+    "thumbnailLink": "/batik-images/batik-papua_asmat/hf_git_103_Papua_Asmat48.jpg",
+    "kategori": "batik-papua_asmat",
+    "fileName": "hf_git_103_Papua_Asmat48.jpg"
+  },
+  {
+    "id": "batik-papua_asmat-5",
+    "nama": "Batik Papua Asmat 5",
+    "directLink": "/batik-images/batik-papua_asmat/hf_git_104_Papua_Asmat25.jpg",
+    "thumbnailLink": "/batik-images/batik-papua_asmat/hf_git_104_Papua_Asmat25.jpg",
+    "kategori": "batik-papua_asmat",
+    "fileName": "hf_git_104_Papua_Asmat25.jpg"
+  },
+  {
+    "id": "batik-papua_cendrawasih-1",
+    "nama": "Batik Papua Cendrawasih 1",
+    "directLink": "/batik-images/batik-papua_cendrawasih/hf_git_2217_Papua_Cendrawasih38.jpg",
+    "thumbnailLink": "/batik-images/batik-papua_cendrawasih/hf_git_2217_Papua_Cendrawasih38.jpg",
+    "kategori": "batik-papua_cendrawasih",
+    "fileName": "hf_git_2217_Papua_Cendrawasih38.jpg"
+  },
+  {
+    "id": "batik-papua_cendrawasih-2",
+    "nama": "Batik Papua Cendrawasih 2",
+    "directLink": "/batik-images/batik-papua_cendrawasih/hf_git_2218_Papua_Cendrawasih79.jpg",
+    "thumbnailLink": "/batik-images/batik-papua_cendrawasih/hf_git_2218_Papua_Cendrawasih79.jpg",
+    "kategori": "batik-papua_cendrawasih",
+    "fileName": "hf_git_2218_Papua_Cendrawasih79.jpg"
+  },
+  {
+    "id": "batik-papua_cendrawasih-3",
+    "nama": "Batik Papua Cendrawasih 3",
+    "directLink": "/batik-images/batik-papua_cendrawasih/hf_git_2219_Papua_Cendrawasih95.jpg",
+    "thumbnailLink": "/batik-images/batik-papua_cendrawasih/hf_git_2219_Papua_Cendrawasih95.jpg",
+    "kategori": "batik-papua_cendrawasih",
+    "fileName": "hf_git_2219_Papua_Cendrawasih95.jpg"
+  },
+  {
+    "id": "batik-papua_cendrawasih-4",
+    "nama": "Batik Papua Cendrawasih 4",
+    "directLink": "/batik-images/batik-papua_cendrawasih/hf_git_2220_Papua_Cendrawasih82.jpg",
+    "thumbnailLink": "/batik-images/batik-papua_cendrawasih/hf_git_2220_Papua_Cendrawasih82.jpg",
+    "kategori": "batik-papua_cendrawasih",
+    "fileName": "hf_git_2220_Papua_Cendrawasih82.jpg"
+  },
+  {
+    "id": "batik-papua_cendrawasih-5",
+    "nama": "Batik Papua Cendrawasih 5",
+    "directLink": "/batik-images/batik-papua_cendrawasih/hf_git_2221_Papua_Cendrawasih119.jpg",
+    "thumbnailLink": "/batik-images/batik-papua_cendrawasih/hf_git_2221_Papua_Cendrawasih119.jpg",
+    "kategori": "batik-papua_cendrawasih",
+    "fileName": "hf_git_2221_Papua_Cendrawasih119.jpg"
+  },
+  {
+    "id": "batik-papua_tifa-1",
+    "nama": "Batik Papua Tifa 1",
+    "directLink": "/batik-images/batik-papua_tifa/hf_git_1795_Papua_Tifa33.jpg",
+    "thumbnailLink": "/batik-images/batik-papua_tifa/hf_git_1795_Papua_Tifa33.jpg",
+    "kategori": "batik-papua_tifa",
+    "fileName": "hf_git_1795_Papua_Tifa33.jpg"
+  },
+  {
+    "id": "batik-papua_tifa-2",
+    "nama": "Batik Papua Tifa 2",
+    "directLink": "/batik-images/batik-papua_tifa/hf_git_1796_Papua_Tifa28.jpg",
+    "thumbnailLink": "/batik-images/batik-papua_tifa/hf_git_1796_Papua_Tifa28.jpg",
+    "kategori": "batik-papua_tifa",
+    "fileName": "hf_git_1796_Papua_Tifa28.jpg"
+  },
+  {
+    "id": "batik-papua_tifa-3",
+    "nama": "Batik Papua Tifa 3",
+    "directLink": "/batik-images/batik-papua_tifa/hf_git_1797_Papua_Tifa70.jpg",
+    "thumbnailLink": "/batik-images/batik-papua_tifa/hf_git_1797_Papua_Tifa70.jpg",
+    "kategori": "batik-papua_tifa",
+    "fileName": "hf_git_1797_Papua_Tifa70.jpg"
+  },
+  {
+    "id": "batik-papua_tifa-4",
+    "nama": "Batik Papua Tifa 4",
+    "directLink": "/batik-images/batik-papua_tifa/hf_git_1798_Papua_Tifa64.jpg",
+    "thumbnailLink": "/batik-images/batik-papua_tifa/hf_git_1798_Papua_Tifa64.jpg",
+    "kategori": "batik-papua_tifa",
+    "fileName": "hf_git_1798_Papua_Tifa64.jpg"
+  },
+  {
+    "id": "batik-papua_tifa-5",
+    "nama": "Batik Papua Tifa 5",
+    "directLink": "/batik-images/batik-papua_tifa/hf_git_1799_Papua_Tifa39.jpg",
+    "thumbnailLink": "/batik-images/batik-papua_tifa/hf_git_1799_Papua_Tifa39.jpg",
+    "kategori": "batik-papua_tifa",
+    "fileName": "hf_git_1799_Papua_Tifa39.jpg"
+  },
+  {
+    "id": "batik-parang-1",
+    "nama": "Batik Parang 1",
+    "directLink": "/batik-images/batik-parang/1.jpg",
+    "thumbnailLink": "/batik-images/batik-parang/1.jpg",
+    "kategori": "batik-parang",
+    "fileName": "1.jpg"
+  },
+  {
+    "id": "batik-parang-2",
+    "nama": "Batik Parang 2",
+    "directLink": "/batik-images/batik-parang/10.jpg",
+    "thumbnailLink": "/batik-images/batik-parang/10.jpg",
+    "kategori": "batik-parang",
+    "fileName": "10.jpg"
+  },
+  {
+    "id": "batik-parang-3",
+    "nama": "Batik Parang 3",
+    "directLink": "/batik-images/batik-parang/11.jpg",
+    "thumbnailLink": "/batik-images/batik-parang/11.jpg",
+    "kategori": "batik-parang",
+    "fileName": "11.jpg"
+  },
+  {
+    "id": "batik-parang-4",
+    "nama": "Batik Parang 4",
+    "directLink": "/batik-images/batik-parang/12.jpg",
+    "thumbnailLink": "/batik-images/batik-parang/12.jpg",
+    "kategori": "batik-parang",
+    "fileName": "12.jpg"
+  },
+  {
+    "id": "batik-parang-5",
+    "nama": "Batik Parang 5",
+    "directLink": "/batik-images/batik-parang/13.jpg",
+    "thumbnailLink": "/batik-images/batik-parang/13.jpg",
+    "kategori": "batik-parang",
+    "fileName": "13.jpg"
+  },
+  {
+    "id": "batik-pekalongan-1",
+    "nama": "Batik Pekalongan 1",
+    "directLink": "/batik-images/batik-pekalongan/1.jpg",
+    "thumbnailLink": "/batik-images/batik-pekalongan/1.jpg",
+    "kategori": "batik-pekalongan",
+    "fileName": "1.jpg"
+  },
+  {
+    "id": "batik-pekalongan-2",
+    "nama": "Batik Pekalongan 2",
+    "directLink": "/batik-images/batik-pekalongan/10.jpg",
+    "thumbnailLink": "/batik-images/batik-pekalongan/10.jpg",
+    "kategori": "batik-pekalongan",
+    "fileName": "10.jpg"
+  },
+  {
+    "id": "batik-pekalongan-3",
+    "nama": "Batik Pekalongan 3",
+    "directLink": "/batik-images/batik-pekalongan/11.jpg",
+    "thumbnailLink": "/batik-images/batik-pekalongan/11.jpg",
+    "kategori": "batik-pekalongan",
+    "fileName": "11.jpg"
+  },
+  {
+    "id": "batik-pekalongan-4",
+    "nama": "Batik Pekalongan 4",
+    "directLink": "/batik-images/batik-pekalongan/12.jpg",
+    "thumbnailLink": "/batik-images/batik-pekalongan/12.jpg",
+    "kategori": "batik-pekalongan",
+    "fileName": "12.jpg"
+  },
+  {
+    "id": "batik-pekalongan-5",
+    "nama": "Batik Pekalongan 5",
+    "directLink": "/batik-images/batik-pekalongan/13.jpg",
+    "thumbnailLink": "/batik-images/batik-pekalongan/13.jpg",
+    "kategori": "batik-pekalongan",
+    "fileName": "13.jpg"
+  },
+  {
+    "id": "batik-priangan-1",
+    "nama": "Batik Priangan 1",
+    "directLink": "/batik-images/batik-priangan/1.jpg",
+    "thumbnailLink": "/batik-images/batik-priangan/1.jpg",
+    "kategori": "batik-priangan",
+    "fileName": "1.jpg"
+  },
+  {
+    "id": "batik-priangan-2",
+    "nama": "Batik Priangan 2",
+    "directLink": "/batik-images/batik-priangan/10.jpg",
+    "thumbnailLink": "/batik-images/batik-priangan/10.jpg",
+    "kategori": "batik-priangan",
+    "fileName": "10.jpg"
+  },
+  {
+    "id": "batik-priangan-3",
+    "nama": "Batik Priangan 3",
+    "directLink": "/batik-images/batik-priangan/11.jpg",
+    "thumbnailLink": "/batik-images/batik-priangan/11.jpg",
+    "kategori": "batik-priangan",
+    "fileName": "11.jpg"
+  },
+  {
+    "id": "batik-priangan-4",
+    "nama": "Batik Priangan 4",
+    "directLink": "/batik-images/batik-priangan/12.jpg",
+    "thumbnailLink": "/batik-images/batik-priangan/12.jpg",
+    "kategori": "batik-priangan",
+    "fileName": "12.jpg"
+  },
+  {
+    "id": "batik-priangan-5",
+    "nama": "Batik Priangan 5",
+    "directLink": "/batik-images/batik-priangan/13.jpg",
+    "thumbnailLink": "/batik-images/batik-priangan/13.jpg",
+    "kategori": "batik-priangan",
+    "fileName": "13.jpg"
+  },
+  {
+    "id": "batik-sekar-1",
+    "nama": "Batik Sekar 1",
+    "directLink": "/batik-images/batik-sekar/1.jpg",
+    "thumbnailLink": "/batik-images/batik-sekar/1.jpg",
+    "kategori": "batik-sekar",
+    "fileName": "1.jpg"
+  },
+  {
+    "id": "batik-sekar-2",
+    "nama": "Batik Sekar 2",
+    "directLink": "/batik-images/batik-sekar/10.jpg",
+    "thumbnailLink": "/batik-images/batik-sekar/10.jpg",
+    "kategori": "batik-sekar",
+    "fileName": "10.jpg"
+  },
+  {
+    "id": "batik-sekar-3",
+    "nama": "Batik Sekar 3",
+    "directLink": "/batik-images/batik-sekar/11.jpg",
+    "thumbnailLink": "/batik-images/batik-sekar/11.jpg",
+    "kategori": "batik-sekar",
+    "fileName": "11.jpg"
+  },
+  {
+    "id": "batik-sekar-4",
+    "nama": "Batik Sekar 4",
+    "directLink": "/batik-images/batik-sekar/13.jpg",
+    "thumbnailLink": "/batik-images/batik-sekar/13.jpg",
+    "kategori": "batik-sekar",
+    "fileName": "13.jpg"
+  },
+  {
+    "id": "batik-sekar-5",
+    "nama": "Batik Sekar 5",
+    "directLink": "/batik-images/batik-sekar/14.jpg",
+    "thumbnailLink": "/batik-images/batik-sekar/14.jpg",
+    "kategori": "batik-sekar",
+    "fileName": "14.jpg"
+  },
+  {
+    "id": "batik-sidoluhur-1",
+    "nama": "Batik Sidoluhur 1",
+    "directLink": "/batik-images/batik-sidoluhur/1.jpg",
+    "thumbnailLink": "/batik-images/batik-sidoluhur/1.jpg",
+    "kategori": "batik-sidoluhur",
+    "fileName": "1.jpg"
+  },
+  {
+    "id": "batik-sidoluhur-2",
+    "nama": "Batik Sidoluhur 2",
+    "directLink": "/batik-images/batik-sidoluhur/10.jpg",
+    "thumbnailLink": "/batik-images/batik-sidoluhur/10.jpg",
+    "kategori": "batik-sidoluhur",
+    "fileName": "10.jpg"
+  },
+  {
+    "id": "batik-sidoluhur-3",
+    "nama": "Batik Sidoluhur 3",
+    "directLink": "/batik-images/batik-sidoluhur/11.jpg",
+    "thumbnailLink": "/batik-images/batik-sidoluhur/11.jpg",
+    "kategori": "batik-sidoluhur",
+    "fileName": "11.jpg"
+  },
+  {
+    "id": "batik-sidoluhur-4",
+    "nama": "Batik Sidoluhur 4",
+    "directLink": "/batik-images/batik-sidoluhur/12.jpg",
+    "thumbnailLink": "/batik-images/batik-sidoluhur/12.jpg",
+    "kategori": "batik-sidoluhur",
+    "fileName": "12.jpg"
+  },
+  {
+    "id": "batik-sidoluhur-5",
+    "nama": "Batik Sidoluhur 5",
+    "directLink": "/batik-images/batik-sidoluhur/13.jpg",
+    "thumbnailLink": "/batik-images/batik-sidoluhur/13.jpg",
+    "kategori": "batik-sidoluhur",
+    "fileName": "13.jpg"
+  },
+  {
+    "id": "batik-sidomukti-1",
+    "nama": "Batik Sidomukti 1",
+    "directLink": "/batik-images/batik-sidomukti/1.jpg",
+    "thumbnailLink": "/batik-images/batik-sidomukti/1.jpg",
+    "kategori": "batik-sidomukti",
+    "fileName": "1.jpg"
+  },
+  {
+    "id": "batik-sidomukti-2",
+    "nama": "Batik Sidomukti 2",
+    "directLink": "/batik-images/batik-sidomukti/10.jpg",
+    "thumbnailLink": "/batik-images/batik-sidomukti/10.jpg",
+    "kategori": "batik-sidomukti",
+    "fileName": "10.jpg"
+  },
+  {
+    "id": "batik-sidomukti-3",
+    "nama": "Batik Sidomukti 3",
+    "directLink": "/batik-images/batik-sidomukti/11.jpg",
+    "thumbnailLink": "/batik-images/batik-sidomukti/11.jpg",
+    "kategori": "batik-sidomukti",
+    "fileName": "11.jpg"
+  },
+  {
+    "id": "batik-sidomukti-4",
+    "nama": "Batik Sidomukti 4",
+    "directLink": "/batik-images/batik-sidomukti/12.jpg",
+    "thumbnailLink": "/batik-images/batik-sidomukti/12.jpg",
+    "kategori": "batik-sidomukti",
+    "fileName": "12.jpg"
+  },
+  {
+    "id": "batik-sidomukti-5",
+    "nama": "Batik Sidomukti 5",
+    "directLink": "/batik-images/batik-sidomukti/13.jpg",
+    "thumbnailLink": "/batik-images/batik-sidomukti/13.jpg",
+    "kategori": "batik-sidomukti",
+    "fileName": "13.jpg"
+  },
+  {
+    "id": "batik-sogan-1",
+    "nama": "Batik Sogan 1",
+    "directLink": "/batik-images/batik-sogan/1.jpg",
+    "thumbnailLink": "/batik-images/batik-sogan/1.jpg",
+    "kategori": "batik-sogan",
+    "fileName": "1.jpg"
+  },
+  {
+    "id": "batik-sogan-2",
+    "nama": "Batik Sogan 2",
+    "directLink": "/batik-images/batik-sogan/10.jpg",
+    "thumbnailLink": "/batik-images/batik-sogan/10.jpg",
+    "kategori": "batik-sogan",
+    "fileName": "10.jpg"
+  },
+  {
+    "id": "batik-sogan-3",
+    "nama": "Batik Sogan 3",
+    "directLink": "/batik-images/batik-sogan/11.jpg",
+    "thumbnailLink": "/batik-images/batik-sogan/11.jpg",
+    "kategori": "batik-sogan",
+    "fileName": "11.jpg"
+  },
+  {
+    "id": "batik-sogan-4",
+    "nama": "Batik Sogan 4",
+    "directLink": "/batik-images/batik-sogan/12.jpg",
+    "thumbnailLink": "/batik-images/batik-sogan/12.jpg",
+    "kategori": "batik-sogan",
+    "fileName": "12.jpg"
+  },
+  {
+    "id": "batik-sogan-5",
+    "nama": "Batik Sogan 5",
+    "directLink": "/batik-images/batik-sogan/13.jpg",
+    "thumbnailLink": "/batik-images/batik-sogan/13.jpg",
+    "kategori": "batik-sogan",
+    "fileName": "13.jpg"
+  },
+  {
+    "id": "batik-solo_parang-1",
+    "nama": "Batik Solo Parang 1",
+    "directLink": "/batik-images/batik-solo_parang/hf_git_2087_Solo_Parang8.jpg",
+    "thumbnailLink": "/batik-images/batik-solo_parang/hf_git_2087_Solo_Parang8.jpg",
+    "kategori": "batik-solo_parang",
+    "fileName": "hf_git_2087_Solo_Parang8.jpg"
+  },
+  {
+    "id": "batik-solo_parang-2",
+    "nama": "Batik Solo Parang 2",
+    "directLink": "/batik-images/batik-solo_parang/hf_git_2088_Solo_Parang95.jpg",
+    "thumbnailLink": "/batik-images/batik-solo_parang/hf_git_2088_Solo_Parang95.jpg",
+    "kategori": "batik-solo_parang",
+    "fileName": "hf_git_2088_Solo_Parang95.jpg"
+  },
+  {
+    "id": "batik-solo_parang-3",
+    "nama": "Batik Solo Parang 3",
+    "directLink": "/batik-images/batik-solo_parang/hf_git_2089_Solo_Parang62.jpg",
+    "thumbnailLink": "/batik-images/batik-solo_parang/hf_git_2089_Solo_Parang62.jpg",
+    "kategori": "batik-solo_parang",
+    "fileName": "hf_git_2089_Solo_Parang62.jpg"
+  },
+  {
+    "id": "batik-solo_parang-4",
+    "nama": "Batik Solo Parang 4",
+    "directLink": "/batik-images/batik-solo_parang/hf_git_2090_Solo_Parang59.jpg",
+    "thumbnailLink": "/batik-images/batik-solo_parang/hf_git_2090_Solo_Parang59.jpg",
+    "kategori": "batik-solo_parang",
+    "fileName": "hf_git_2090_Solo_Parang59.jpg"
+  },
+  {
+    "id": "batik-solo_parang-5",
+    "nama": "Batik Solo Parang 5",
+    "directLink": "/batik-images/batik-solo_parang/hf_git_2091_Solo_Parang123.jpg",
+    "thumbnailLink": "/batik-images/batik-solo_parang/hf_git_2091_Solo_Parang123.jpg",
+    "kategori": "batik-solo_parang",
+    "fileName": "hf_git_2091_Solo_Parang123.jpg"
+  },
+  {
+    "id": "batik-sulawesi_selatan_lontara-1",
+    "nama": "Batik Sulawesi Selatan Lontara 1",
+    "directLink": "/batik-images/batik-sulawesi_selatan_lontara/hf_git_1715_Sulawesi_Selatan_Lontara1.jpg",
+    "thumbnailLink": "/batik-images/batik-sulawesi_selatan_lontara/hf_git_1715_Sulawesi_Selatan_Lontara1.jpg",
+    "kategori": "batik-sulawesi_selatan_lontara",
+    "fileName": "hf_git_1715_Sulawesi_Selatan_Lontara1.jpg"
+  },
+  {
+    "id": "batik-sulawesi_selatan_lontara-2",
+    "nama": "Batik Sulawesi Selatan Lontara 2",
+    "directLink": "/batik-images/batik-sulawesi_selatan_lontara/hf_git_1716_Sulawesi_Selatan_Lontara3.jpg",
+    "thumbnailLink": "/batik-images/batik-sulawesi_selatan_lontara/hf_git_1716_Sulawesi_Selatan_Lontara3.jpg",
+    "kategori": "batik-sulawesi_selatan_lontara",
+    "fileName": "hf_git_1716_Sulawesi_Selatan_Lontara3.jpg"
+  },
+  {
+    "id": "batik-sulawesi_selatan_lontara-3",
+    "nama": "Batik Sulawesi Selatan Lontara 3",
+    "directLink": "/batik-images/batik-sulawesi_selatan_lontara/hf_git_1717_Sulawesi_Selatan_Lontara31.jpg",
+    "thumbnailLink": "/batik-images/batik-sulawesi_selatan_lontara/hf_git_1717_Sulawesi_Selatan_Lontara31.jpg",
+    "kategori": "batik-sulawesi_selatan_lontara",
+    "fileName": "hf_git_1717_Sulawesi_Selatan_Lontara31.jpg"
+  },
+  {
+    "id": "batik-sulawesi_selatan_lontara-4",
+    "nama": "Batik Sulawesi Selatan Lontara 4",
+    "directLink": "/batik-images/batik-sulawesi_selatan_lontara/hf_git_1718_Sulawesi_Selatan_Lontara56.jpg",
+    "thumbnailLink": "/batik-images/batik-sulawesi_selatan_lontara/hf_git_1718_Sulawesi_Selatan_Lontara56.jpg",
+    "kategori": "batik-sulawesi_selatan_lontara",
+    "fileName": "hf_git_1718_Sulawesi_Selatan_Lontara56.jpg"
+  },
+  {
+    "id": "batik-sulawesi_selatan_lontara-5",
+    "nama": "Batik Sulawesi Selatan Lontara 5",
+    "directLink": "/batik-images/batik-sulawesi_selatan_lontara/hf_git_1719_Sulawesi_Selatan_Lontara50.jpg",
+    "thumbnailLink": "/batik-images/batik-sulawesi_selatan_lontara/hf_git_1719_Sulawesi_Selatan_Lontara50.jpg",
+    "kategori": "batik-sulawesi_selatan_lontara",
+    "fileName": "hf_git_1719_Sulawesi_Selatan_Lontara50.jpg"
+  },
+  {
+    "id": "batik-sumatera_barat_rumah_minang-1",
+    "nama": "Batik Sumatera Barat Rumah Minang 1",
+    "directLink": "/batik-images/batik-sumatera_barat_rumah_minang/hf_git_1341_Sumatera_Barat_Rumah_Minang36.jpg",
+    "thumbnailLink": "/batik-images/batik-sumatera_barat_rumah_minang/hf_git_1341_Sumatera_Barat_Rumah_Minang36.jpg",
+    "kategori": "batik-sumatera_barat_rumah_minang",
+    "fileName": "hf_git_1341_Sumatera_Barat_Rumah_Minang36.jpg"
+  },
+  {
+    "id": "batik-sumatera_barat_rumah_minang-2",
+    "nama": "Batik Sumatera Barat Rumah Minang 2",
+    "directLink": "/batik-images/batik-sumatera_barat_rumah_minang/hf_git_1342_Sumatera_Barat_Rumah_Minang53.jpg",
+    "thumbnailLink": "/batik-images/batik-sumatera_barat_rumah_minang/hf_git_1342_Sumatera_Barat_Rumah_Minang53.jpg",
+    "kategori": "batik-sumatera_barat_rumah_minang",
+    "fileName": "hf_git_1342_Sumatera_Barat_Rumah_Minang53.jpg"
+  },
+  {
+    "id": "batik-sumatera_barat_rumah_minang-3",
+    "nama": "Batik Sumatera Barat Rumah Minang 3",
+    "directLink": "/batik-images/batik-sumatera_barat_rumah_minang/hf_git_1343_Sumatera_Barat_Rumah_Minang54.jpg",
+    "thumbnailLink": "/batik-images/batik-sumatera_barat_rumah_minang/hf_git_1343_Sumatera_Barat_Rumah_Minang54.jpg",
+    "kategori": "batik-sumatera_barat_rumah_minang",
+    "fileName": "hf_git_1343_Sumatera_Barat_Rumah_Minang54.jpg"
+  },
+  {
+    "id": "batik-sumatera_barat_rumah_minang-4",
+    "nama": "Batik Sumatera Barat Rumah Minang 4",
+    "directLink": "/batik-images/batik-sumatera_barat_rumah_minang/hf_git_1344_Sumatera_Barat_Rumah_Minang10.jpg",
+    "thumbnailLink": "/batik-images/batik-sumatera_barat_rumah_minang/hf_git_1344_Sumatera_Barat_Rumah_Minang10.jpg",
+    "kategori": "batik-sumatera_barat_rumah_minang",
+    "fileName": "hf_git_1344_Sumatera_Barat_Rumah_Minang10.jpg"
+  },
+  {
+    "id": "batik-sumatera_barat_rumah_minang-5",
+    "nama": "Batik Sumatera Barat Rumah Minang 5",
+    "directLink": "/batik-images/batik-sumatera_barat_rumah_minang/hf_git_1345_Sumatera_Barat_Rumah_Minang21.jpg",
+    "thumbnailLink": "/batik-images/batik-sumatera_barat_rumah_minang/hf_git_1345_Sumatera_Barat_Rumah_Minang21.jpg",
+    "kategori": "batik-sumatera_barat_rumah_minang",
+    "fileName": "hf_git_1345_Sumatera_Barat_Rumah_Minang21.jpg"
+  },
+  {
+    "id": "batik-sumatera_utara_boraspati-1",
+    "nama": "Batik Sumatera Utara Boraspati 1",
+    "directLink": "/batik-images/batik-sumatera_utara_boraspati/hf_git_746_Sumatera_Utara_Boraspati61.jpg",
+    "thumbnailLink": "/batik-images/batik-sumatera_utara_boraspati/hf_git_746_Sumatera_Utara_Boraspati61.jpg",
+    "kategori": "batik-sumatera_utara_boraspati",
+    "fileName": "hf_git_746_Sumatera_Utara_Boraspati61.jpg"
+  },
+  {
+    "id": "batik-sumatera_utara_boraspati-2",
+    "nama": "Batik Sumatera Utara Boraspati 2",
+    "directLink": "/batik-images/batik-sumatera_utara_boraspati/hf_git_747_Sumatera_Utara_Boraspati75.jpg",
+    "thumbnailLink": "/batik-images/batik-sumatera_utara_boraspati/hf_git_747_Sumatera_Utara_Boraspati75.jpg",
+    "kategori": "batik-sumatera_utara_boraspati",
+    "fileName": "hf_git_747_Sumatera_Utara_Boraspati75.jpg"
+  },
+  {
+    "id": "batik-sumatera_utara_boraspati-3",
+    "nama": "Batik Sumatera Utara Boraspati 3",
+    "directLink": "/batik-images/batik-sumatera_utara_boraspati/hf_git_748_Sumatera_Utara_Boraspati28.jpg",
+    "thumbnailLink": "/batik-images/batik-sumatera_utara_boraspati/hf_git_748_Sumatera_Utara_Boraspati28.jpg",
+    "kategori": "batik-sumatera_utara_boraspati",
+    "fileName": "hf_git_748_Sumatera_Utara_Boraspati28.jpg"
+  },
+  {
+    "id": "batik-sumatera_utara_boraspati-4",
+    "nama": "Batik Sumatera Utara Boraspati 4",
+    "directLink": "/batik-images/batik-sumatera_utara_boraspati/hf_git_749_Sumatera_Utara_Boraspati43.jpg",
+    "thumbnailLink": "/batik-images/batik-sumatera_utara_boraspati/hf_git_749_Sumatera_Utara_Boraspati43.jpg",
+    "kategori": "batik-sumatera_utara_boraspati",
+    "fileName": "hf_git_749_Sumatera_Utara_Boraspati43.jpg"
+  },
+  {
+    "id": "batik-sumatera_utara_boraspati-5",
+    "nama": "Batik Sumatera Utara Boraspati 5",
+    "directLink": "/batik-images/batik-sumatera_utara_boraspati/hf_git_750_Sumatera_Utara_Boraspati46.jpg",
+    "thumbnailLink": "/batik-images/batik-sumatera_utara_boraspati/hf_git_750_Sumatera_Utara_Boraspati46.jpg",
+    "kategori": "batik-sumatera_utara_boraspati",
+    "fileName": "hf_git_750_Sumatera_Utara_Boraspati46.jpg"
+  },
+  {
+    "id": "batik-tambal-1",
+    "nama": "Batik Tambal 1",
+    "directLink": "/batik-images/batik-tambal/1.jpg",
+    "thumbnailLink": "/batik-images/batik-tambal/1.jpg",
+    "kategori": "batik-tambal",
+    "fileName": "1.jpg"
+  },
+  {
+    "id": "batik-tambal-2",
+    "nama": "Batik Tambal 2",
+    "directLink": "/batik-images/batik-tambal/10.jpg",
+    "thumbnailLink": "/batik-images/batik-tambal/10.jpg",
+    "kategori": "batik-tambal",
+    "fileName": "10.jpg"
+  },
+  {
+    "id": "batik-tambal-3",
+    "nama": "Batik Tambal 3",
+    "directLink": "/batik-images/batik-tambal/11.jpg",
+    "thumbnailLink": "/batik-images/batik-tambal/11.jpg",
+    "kategori": "batik-tambal",
+    "fileName": "11.jpg"
+  },
+  {
+    "id": "batik-tambal-4",
+    "nama": "Batik Tambal 4",
+    "directLink": "/batik-images/batik-tambal/12.jpg",
+    "thumbnailLink": "/batik-images/batik-tambal/12.jpg",
+    "kategori": "batik-tambal",
+    "fileName": "12.jpg"
+  },
+  {
+    "id": "batik-tambal-5",
+    "nama": "Batik Tambal 5",
+    "directLink": "/batik-images/batik-tambal/13.jpg",
+    "thumbnailLink": "/batik-images/batik-tambal/13.jpg",
+    "kategori": "batik-tambal",
+    "fileName": "13.jpg"
+  },
+  {
+    "id": "batik-yogyakarta_kawung-1",
+    "nama": "Batik Yogyakarta Kawung 1",
+    "directLink": "/batik-images/batik-yogyakarta_kawung/hf_git_2474_Yogyakarta_Kawung87.jpg",
+    "thumbnailLink": "/batik-images/batik-yogyakarta_kawung/hf_git_2474_Yogyakarta_Kawung87.jpg",
+    "kategori": "batik-yogyakarta_kawung",
+    "fileName": "hf_git_2474_Yogyakarta_Kawung87.jpg"
+  },
+  {
+    "id": "batik-yogyakarta_kawung-2",
+    "nama": "Batik Yogyakarta Kawung 2",
+    "directLink": "/batik-images/batik-yogyakarta_kawung/hf_git_2475_Yogyakarta_Kawung2.jpg",
+    "thumbnailLink": "/batik-images/batik-yogyakarta_kawung/hf_git_2475_Yogyakarta_Kawung2.jpg",
+    "kategori": "batik-yogyakarta_kawung",
+    "fileName": "hf_git_2475_Yogyakarta_Kawung2.jpg"
+  },
+  {
+    "id": "batik-yogyakarta_kawung-3",
+    "nama": "Batik Yogyakarta Kawung 3",
+    "directLink": "/batik-images/batik-yogyakarta_kawung/hf_git_2476_Yogyakarta_Kawung76.jpg",
+    "thumbnailLink": "/batik-images/batik-yogyakarta_kawung/hf_git_2476_Yogyakarta_Kawung76.jpg",
+    "kategori": "batik-yogyakarta_kawung",
+    "fileName": "hf_git_2476_Yogyakarta_Kawung76.jpg"
+  },
+  {
+    "id": "batik-yogyakarta_kawung-4",
+    "nama": "Batik Yogyakarta Kawung 4",
+    "directLink": "/batik-images/batik-yogyakarta_kawung/hf_git_2477_Yogyakarta_Kawung39.jpg",
+    "thumbnailLink": "/batik-images/batik-yogyakarta_kawung/hf_git_2477_Yogyakarta_Kawung39.jpg",
+    "kategori": "batik-yogyakarta_kawung",
+    "fileName": "hf_git_2477_Yogyakarta_Kawung39.jpg"
+  },
+  {
+    "id": "batik-yogyakarta_kawung-5",
+    "nama": "Batik Yogyakarta Kawung 5",
+    "directLink": "/batik-images/batik-yogyakarta_kawung/hf_git_2478_Yogyakarta_Kawung5.jpg",
+    "thumbnailLink": "/batik-images/batik-yogyakarta_kawung/hf_git_2478_Yogyakarta_Kawung5.jpg",
+    "kategori": "batik-yogyakarta_kawung",
+    "fileName": "hf_git_2478_Yogyakarta_Kawung5.jpg"
+  },
+  {
+    "id": "batik-yogyakarta_parang-1",
+    "nama": "Batik Yogyakarta Parang 1",
+    "directLink": "/batik-images/batik-yogyakarta_parang/hf_git_1421_Yogyakarta_Parang19.jpg",
+    "thumbnailLink": "/batik-images/batik-yogyakarta_parang/hf_git_1421_Yogyakarta_Parang19.jpg",
+    "kategori": "batik-yogyakarta_parang",
+    "fileName": "hf_git_1421_Yogyakarta_Parang19.jpg"
+  },
+  {
+    "id": "batik-yogyakarta_parang-2",
+    "nama": "Batik Yogyakarta Parang 2",
+    "directLink": "/batik-images/batik-yogyakarta_parang/hf_git_1422_Yogyakarta_Parang7.jpg",
+    "thumbnailLink": "/batik-images/batik-yogyakarta_parang/hf_git_1422_Yogyakarta_Parang7.jpg",
+    "kategori": "batik-yogyakarta_parang",
+    "fileName": "hf_git_1422_Yogyakarta_Parang7.jpg"
+  },
+  {
+    "id": "batik-yogyakarta_parang-3",
+    "nama": "Batik Yogyakarta Parang 3",
+    "directLink": "/batik-images/batik-yogyakarta_parang/hf_git_1423_Yogyakarta_Parang25.jpg",
+    "thumbnailLink": "/batik-images/batik-yogyakarta_parang/hf_git_1423_Yogyakarta_Parang25.jpg",
+    "kategori": "batik-yogyakarta_parang",
+    "fileName": "hf_git_1423_Yogyakarta_Parang25.jpg"
+  },
+  {
+    "id": "batik-yogyakarta_parang-4",
+    "nama": "Batik Yogyakarta Parang 4",
+    "directLink": "/batik-images/batik-yogyakarta_parang/hf_git_1424_Yogyakarta_Parang2.jpg",
+    "thumbnailLink": "/batik-images/batik-yogyakarta_parang/hf_git_1424_Yogyakarta_Parang2.jpg",
+    "kategori": "batik-yogyakarta_parang",
+    "fileName": "hf_git_1424_Yogyakarta_Parang2.jpg"
+  },
+  {
+    "id": "batik-yogyakarta_parang-5",
+    "nama": "Batik Yogyakarta Parang 5",
+    "directLink": "/batik-images/batik-yogyakarta_parang/hf_git_1425_Yogyakarta_Parang67.jpg",
+    "thumbnailLink": "/batik-images/batik-yogyakarta_parang/hf_git_1425_Yogyakarta_Parang67.jpg",
+    "kategori": "batik-yogyakarta_parang",
+    "fileName": "hf_git_1425_Yogyakarta_Parang67.jpg"
+  }
+]

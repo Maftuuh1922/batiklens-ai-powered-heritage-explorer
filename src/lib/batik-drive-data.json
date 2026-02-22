@@ -1,0 +1,98 @@
+[
+  {
+    "nama": "Batik Aceh 1",
+    "directLink": "https://drive.google.com/uc?export=view&id=1abc123def456",
+    "thumbnailLink": "https://drive.google.com/thumbnail?id=1abc123def456&sz=s300",
+    "kategori": "batik-aceh"
+  },
+  {
+    "nama": "Batik Bali 1",
+    "directLink": "https://drive.google.com/uc?export=view&id=2def456ghi789",
+    "thumbnailLink": "https://drive.google.com/thumbnail?id=2def456ghi789&sz=s300",
+    "kategori": "batik-bali"
+  },
+  {
+    "nama": "Batik Betawi 1",
+    "directLink": "https://drive.google.com/uc?export=view&id=3ghi789jkl012",
+    "thumbnailLink": "https://drive.google.com/thumbnail?id=3ghi789jkl012&sz=s300",
+    "kategori": "batik-betawi"
+  },
+  {
+    "nama": "Batik Celup 1",
+    "directLink": "https://drive.google.com/uc?export=view&id=4jkl012mno345",
+    "thumbnailLink": "https://drive.google.com/thumbnail?id=4jkl012mno345&sz=s300",
+    "kategori": "batik-celup"
+  },
+  {
+    "nama": "Batik Ciamis 1",
+    "directLink": "https://drive.google.com/uc?export=view&id=5mno345pqr678",
+    "thumbnailLink": "https://drive.google.com/thumbnail?id=5mno345pqr678&sz=s300",
+    "kategori": "batik-ciamis"
+  },
+  {
+    "nama": "Batik Kawung 1",
+    "directLink": "https://drive.google.com/uc?export=view&id=6pqr678stu901",
+    "thumbnailLink": "https://drive.google.com/thumbnail?id=6pqr678stu901&sz=s300",
+    "kategori": "batik-kawung"
+  },
+  {
+    "nama": "Batik Lasem 1",
+    "directLink": "https://drive.google.com/uc?export=view&id=7stu901vwx234",
+    "thumbnailLink": "https://drive.google.com/thumbnail?id=7stu901vwx234&sz=s300",
+    "kategori": "batik-lasem"
+  },
+  {
+    "nama": "Batik Madura 1",
+    "directLink": "https://drive.google.com/uc?export=view&id=8vwx234yza567",
+    "thumbnailLink": "https://drive.google.com/thumbnail?id=8vwx234yza567&sz=s300",
+    "kategori": "batik-madura"
+  },
+  {
+    "nama": "Batik Megamendung 1",
+    "directLink": "https://drive.google.com/uc?export=view&id=9yza567bcd890",
+    "thumbnailLink": "https://drive.google.com/thumbnail?id=9yza567bcd890&sz=s300",
+    "kategori": "batik-megamendung"
+  },
+  {
+    "nama": "Batik Parang 1",
+    "directLink": "https://drive.google.com/uc?export=view&id=0bcd890efg123",
+    "thumbnailLink": "https://drive.google.com/thumbnail?id=0bcd890efg123&sz=s300",
+    "kategori": "batik-parang"
+  },
+  {
+    "nama": "Batik Pekalongan 1",
+    "directLink": "https://drive.google.com/uc?export=view&id=1efg123hij456",
+    "thumbnailLink": "https://drive.google.com/thumbnail?id=1efg123hij456&sz=s300",
+    "kategori": "batik-pekalongan"
+  },
+  {
+    "nama": "Batik Sogan 1",
+    "directLink": "https://drive.google.com/uc?export=view&id=2hij456klm789",
+    "thumbnailLink": "https://drive.google.com/thumbnail?id=2hij456klm789&sz=s300",
+    "kategori": "batik-sogan"
+  },
+  {
+    "nama": "Batik Solo 1",
+    "directLink": "https://drive.google.com/uc?export=view&id=3klm789nop012",
+    "thumbnailLink": "https://drive.google.com/thumbnail?id=3klm789nop012&sz=s300",
+    "kategori": "batik-solo"
+  },
+  {
+    "nama": "Batik Sulawesi 1",
+    "directLink": "https://drive.google.com/uc?export=view&id=4nop012qrs345",
+    "thumbnailLink": "https://drive.google.com/thumbnail?id=4nop012qrs345&sz=s300",
+    "kategori": "batik-sulawesi"
+  },
+  {
+    "nama": "Batik Sumatera 1",
+    "directLink": "https://drive.google.com/uc?export=view&id=5qrs345tuv678",
+    "thumbnailLink": "https://drive.google.com/thumbnail?id=5qrs345tuv678&sz=s300",
+    "kategori": "batik-sumatera"
+  },
+  {
+    "nama": "Batik Yogyakarta 1",
+    "directLink": "https://drive.google.com/uc?export=view&id=6tuv678wxy901",
+    "thumbnailLink": "https://drive.google.com/thumbnail?id=6tuv678wxy901&sz=s300",
+    "kategori": "batik-yogyakarta"
+  }
+]

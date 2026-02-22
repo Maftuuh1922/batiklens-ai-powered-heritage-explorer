@@ -1,0 +1,32 @@
+[
+  {
+    "nama": "Heritage Indonesia 1",
+    "directLink": "https://drive.google.com/uc?export=view&id=1SampleImageId1",
+    "thumbnailLink": "https://drive.google.com/thumbnail?id=1SampleImageId1&sz=s300",
+    "kategori": "candi"
+  },
+  {
+    "nama": "Heritage Indonesia 2", 
+    "directLink": "https://drive.google.com/uc?export=view&id=1SampleImageId2",
+    "thumbnailLink": "https://drive.google.com/thumbnail?id=1SampleImageId2&sz=s300",
+    "kategori": "museum"
+  },
+  {
+    "nama": "Heritage Indonesia 3",
+    "directLink": "https://drive.google.com/uc?export=view&id=1SampleImageId3", 
+    "thumbnailLink": "https://drive.google.com/thumbnail?id=1SampleImageId3&sz=s300",
+    "kategori": "rumah-adat"
+  },
+  {
+    "nama": "Heritage Indonesia 4",
+    "directLink": "https://drive.google.com/uc?export=view&id=1SampleImageId4",
+    "thumbnailLink": "https://drive.google.com/thumbnail?id=1SampleImageId4&sz=s300", 
+    "kategori": "tarian"
+  },
+  {
+    "nama": "Heritage Indonesia 5",
+    "directLink": "https://drive.google.com/uc?export=view&id=1SampleImageId5",
+    "thumbnailLink": "https://drive.google.com/thumbnail?id=1SampleImageId5&sz=s300",
+    "kategori": "kerajinan"
+  }
+]

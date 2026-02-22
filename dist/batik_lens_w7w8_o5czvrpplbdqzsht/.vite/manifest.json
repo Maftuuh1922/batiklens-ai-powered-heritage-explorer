@@ -1,0 +1,27 @@
+{
+  "_worker-entry-jvUr-yvJ.js": {
+    "file": "assets/worker-entry-jvUr-yvJ.js",
+    "name": "worker-entry",
+    "dynamicImports": [
+      "node_modules/mimetext/dist/mimetext.node.es.js"
+    ]
+  },
+  "node_modules/mimetext/dist/mimetext.node.es.js": {
+    "file": "assets/mimetext.node.es-BdF7VSCl.js",
+    "name": "mimetext.node.es",
+    "src": "node_modules/mimetext/dist/mimetext.node.es.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_worker-entry-jvUr-yvJ.js"
+    ]
+  },
+  "virtual:cloudflare/worker-entry": {
+    "file": "index.js",
+    "name": "index",
+    "src": "virtual:cloudflare/worker-entry",
+    "isEntry": true,
+    "imports": [
+      "_worker-entry-jvUr-yvJ.js"
+    ]
+  }
+}

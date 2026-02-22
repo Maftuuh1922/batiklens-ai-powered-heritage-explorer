@@ -1,385 +1,525 @@
 
 import React, { useState, Suspense, useMemo, useCallback, useEffect, useRef } from 'react';
-import { Canvas } from '@react-three/fiber';
-import {
-    KeyboardControls,
-    ContactShadows,
-} from '@react-three/drei';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { KeyboardControls } from '@react-three/drei';
 import * as THREE from 'three';
 import { batiks } from '@/lib/batik-data';
 import { useLanguage } from '@/lib/LanguageContext';
-import { Button } from '@/components/ui/button';
-import { X, Map as MapIcon, ChevronRight, Sparkles, Maximize, Minimize } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import { Toaster, toast } from 'sonner';
 
-// Modular Components
 import { Environment, Butterfly } from '@/components/museum/Environment';
 import { Painting } from '@/components/museum/Painting';
 import { Player } from '@/components/museum/Player';
-import { MiniMap } from '@/components/museum/MiniMap';
 import { DetailDialog } from '@/components/museum/DetailDialog';
 import { LoadingScreen } from '@/components/museum/LoadingScreen';
 import { MobileControls } from '@/components/museum/MobileControls';
 
-// Decorative Component: Warm Gold Dust Particles
-const DustParticles = () => {
-    const count = 120;
-    const mesh = useRef<THREE.Points>(null);
-    const positions = useMemo(() => {
-        const pos = new Float32Array(count * 3);
-        for (let i = 0; i < count; i++) {
-            pos[i * 3] = (Math.random() - 0.5) * 100;
-            pos[i * 3 + 1] = Math.random() * 7 + 0.5;
-            pos[i * 3 + 2] = (Math.random() - 0.5) * 100;
-        }
-        return pos;
-    }, []);
-    const speeds = useMemo(() => Array.from({ length: count }, () => Math.random() * 0.3 + 0.05), []);
-    useFrame(({ clock }) => {
-        if (!mesh.current) return;
-        const pos = mesh.current.geometry.attributes.position.array as Float32Array;
-        const t = clock.getElapsedTime();
-        for (let i = 0; i < count; i++) {
-            pos[i * 3 + 1] += speeds[i] * 0.004;
-            pos[i * 3] += Math.sin(t * 0.08 + i) * 0.0015;
-            if (pos[i * 3 + 1] > 7.5) pos[i * 3 + 1] = 0.5;
-        }
-        mesh.current.geometry.attributes.position.needsUpdate = true;
-    });
-    return (
-        <points ref={mesh}>
-            <bufferGeometry><bufferAttribute attach="attributes-position" array={positions} count={count} itemSize={3} /></bufferGeometry>
-            <pointsMaterial size={0.06} color="#ffcc44" transparent opacity={0.45} sizeAttenuation depthWrite={false} />
-        </points>
-    );
-};
+// ─────────────────────────────────────────────────────────────────────────────
+// MODULE-LEVEL components (NEVER redefined inside render → no remount bug)
+// ─────────────────────────────────────────────────────────────────────────────
 
-import { useFrame } from '@react-three/fiber';
-
-// Centerpiece: Glowing Heritage Crest
+// Spinning decorative crest
 const HeritageCrest = () => {
     const ref = useRef<THREE.Group>(null);
+    const frame = useRef(0);
     useFrame(({ clock }) => {
-        if (ref.current) {
-            ref.current.rotation.y = clock.getElapsedTime() * 0.5;
-            ref.current.position.y = 4 + Math.sin(clock.getElapsedTime() * 0.8) * 0.2;
-        }
+        frame.current++;
+        if (frame.current % 2 !== 0) return;
+        if (!ref.current) return;
+        ref.current.rotation.y = clock.getElapsedTime() * 0.4;
+        ref.current.position.y = 3.8 + Math.sin(clock.getElapsedTime() * 0.7) * 0.18;
     });
     return (
-        <group ref={ref} position={[0, 4, 0]}>
-            <mesh>
-                <octahedronGeometry args={[0.8, 0]} />
-                <meshStandardMaterial color="#b8860b" metalness={1} roughness={0.1} emissive="#b8860b" emissiveIntensity={0.5} />
+        <group ref={ref} position={[0, 3.8, 0]}>
+            <mesh castShadow>
+                <octahedronGeometry args={[0.85, 1]} />
+                <meshStandardMaterial color="#b8860b" metalness={1} roughness={0.05} emissive="#b8860b" emissiveIntensity={0.6} />
             </mesh>
-            <pointLight intensity={2} distance={10} color="#ffd700" />
-            <mesh scale={1.2}>
-                <octahedronGeometry args={[0.8, 0]} />
-                <meshBasicMaterial color="#ffd700" wireframe transparent opacity={0.2} />
+            <pointLight intensity={3} distance={14} color="#ffd060" castShadow={false} />
+            <mesh scale={1.25}>
+                <octahedronGeometry args={[0.85, 0]} />
+                <meshBasicMaterial color="#ffe080" wireframe transparent opacity={0.15} depthWrite={false} />
             </mesh>
         </group>
     );
 };
 
+// ProximityDetector — OUTSIDE Museum3DPage so it's never recreated
+// Uses a callback+ref pattern so setNearPainting is only called on ACTUAL CHANGE
+interface ProximityProps {
+    batiks: { id: string; position: [number, number, number] }[];
+    onNearChange: (b: any) => void;
+    paused: boolean;
+}
+const ProximityDetector = ({ batiks: bList, onNearChange, paused }: ProximityProps) => {
+    const { camera } = useThree();
+    const lastId = useRef<string | null>(null);
+    const frameCount = useRef(0);
+
+    useFrame(() => {
+        if (paused) return;
+        frameCount.current++;
+        // Only check every 8 frames (~8fps check) to save CPU
+        if (frameCount.current % 8 !== 0) return;
+
+        let closest: any = null;
+        let minDist = 8.5;
+
+        for (const batik of bList) {
+            const dx = camera.position.x - batik.position[0];
+            const dz = camera.position.z - batik.position[2];
+            const dist = Math.sqrt(dx * dx + dz * dz);
+            if (dist < minDist) { closest = batik; minDist = dist; }
+        }
+
+        const newId = closest ? closest.id : null;
+        if (newId !== lastId.current) {
+            lastId.current = newId;
+            onNearChange(closest); // only fires when painting changes → minimal re-renders
+        }
+    });
+    return null;
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PAGE COMPONENT
+// ─────────────────────────────────────────────────────────────────────────────
 export const Museum3DPage = () => {
     const { language } = useLanguage();
     const [selectedBatik, setSelectedBatik] = useState<any>(null);
     const [started, setStarted] = useState(false);
     const [loaded, setLoaded] = useState(false);
-    const [playerPosition, setPlayerPosition] = useState({ x: 0, z: 0 });
     const [visited, setVisited] = useState<Set<string>>(new Set());
-    const [isSprinting, setIsSprinting] = useState(false);
-
-    // Mobile & Control States
+    const [nearPainting, setNearPainting] = useState<any>(null);
     const [isMobile, setIsMobile] = useState(false);
-    const [isFullscreen, setIsFullscreen] = useState(false);
+    const [muted, setMuted] = useState(false);
+    const audioRef = useRef<HTMLAudioElement>(null);
 
-    // FIX 1 & 4: Mobile Handlers and Navbar Hiding
     const mobileHandlers = useRef({
-        onMove: (x: number, y: number) => { },
-        onLook: (dx: number, dy: number) => { },
-        onSprint: (s: boolean) => { },
+        onMove: (_x: number, _y: number) => { },
+        onLook: (_dx: number, _dy: number) => { },
+        onSprint: (_s: boolean) => { },
     });
 
-    useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(/Android|iPhone|iPad/i.test(navigator.userAgent) || window.innerWidth < 1024);
-        };
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
+    // Stable noop callbacks at top level — Rules of Hooks requires no hooks after conditional returns
+    const noopPos = useCallback(() => { }, []);
+    const noopSprint = useCallback((_s: boolean) => { }, []);
 
-        // Hide Navbar/Header
-        const navbar = document.querySelector('nav') as HTMLElement;
+    // BGM: autoplay Ladrang Pangkur when museum starts
+    useEffect(() => {
+        const audio = audioRef.current;
+        if (!audio) return;
+        if (started) {
+            audio.volume = 0;
+            audio.play().catch(() => { }); // browser may block, user gesture already happened
+            // Fade in over 2 seconds
+            let vol = 0;
+            const fade = setInterval(() => {
+                vol = Math.min(vol + 0.02, muted ? 0 : 0.55);
+                audio.volume = vol;
+                if (vol >= 0.55) clearInterval(fade);
+            }, 40);
+            return () => clearInterval(fade);
+        } else {
+            audio.pause();
+            audio.currentTime = 0;
+        }
+    }, [started]);
+
+    useEffect(() => {
+        const audio = audioRef.current;
+        if (!audio) return;
+        audio.volume = muted ? 0 : 0.55;
+    }, [muted]);
+
+    // Detect mobile & hide navbar
+    useEffect(() => {
+        const check = () => setIsMobile(
+            /Android|iPhone|iPad/i.test(navigator.userAgent) || window.innerWidth < 1024
+        );
+        check();
+        window.addEventListener('resize', check);
+
+        const nav = document.querySelector('nav') as HTMLElement;
         const header = document.querySelector('header') as HTMLElement;
-        if (navbar) navbar.style.display = 'none';
+        if (nav) nav.style.display = 'none';
         if (header) header.style.display = 'none';
         document.documentElement.style.overflow = 'hidden';
 
         return () => {
-            window.removeEventListener('resize', checkMobile);
-            if (navbar) navbar.style.display = '';
+            window.removeEventListener('resize', check);
+            if (nav) nav.style.display = '';
             if (header) header.style.display = '';
             document.documentElement.style.overflow = '';
         };
     }, []);
 
-    const toggleFullscreen = () => {
-        if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen().catch((err) => {
-                toast.error(`Error attempting to enable fullscreen: ${err.message}`);
-            });
-            setIsFullscreen(true);
-        } else {
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-                setIsFullscreen(false);
-            }
-        }
-    };
+    // Batik layout (stable reference — never recalculated)
+    const museumBatiks = useMemo(() =>
+        batiks.slice(0, 20).map((batik, i) => ({
+            ...batik,
+            position: [(i % 10 - 4.5) * 11, 3.8, i < 10 ? -57.5 : 57.5] as [number, number, number],
+            rotation: [0, i < 10 ? 0 : Math.PI, 0] as [number, number, number],
+        })),
+        []);
 
-    const museumBatiks = useMemo(() => {
-        return batiks.slice(0, 20).map((batik, i) => {
-            const x = (i % 10 - 4.5) * 11;
-            const z = i < 10 ? -57.5 : 57.5;
-            const rotationY = i < 10 ? 0 : Math.PI;
-            return {
-                ...batik,
-                position: [x, 3.8, z] as [number, number, number],
-                rotation: [0, rotationY, 0] as [number, number, number]
-            };
-        });
-    }, []);
-
-    const butterflyPositions: [number, number, number][] = useMemo(() => [
+    const butterflyPositions = useMemo<[number, number, number][]>(() => [
         [-15, 4.5, -20], [10, 3.8, -30], [-5, 5.2, -15],
         [20, 4.2, -20], [0, 4.8, 0], [-25, 3.5, 10],
-        [15, 5.0, 10], [-10, 4.0, -5]
+        [15, 5.0, 10], [-10, 4.0, -5],
     ], []);
 
+    // Escape key → close dialog
     useEffect(() => {
         const onKey = (e: KeyboardEvent) => {
             if (e.code === 'Escape' && selectedBatik) {
                 setSelectedBatik(null);
-                if (!isMobile) setTimeout(() => document.body.requestPointerLock(), 150);
+            }
+            if (e.code === 'KeyE' && !selectedBatik && nearPainting) {
+                openDetail(nearPainting);
             }
         };
         window.addEventListener('keydown', onKey);
         return () => window.removeEventListener('keydown', onKey);
-    }, [selectedBatik, isMobile]);
+    }, [selectedBatik, nearPainting]);
+
+    // Open detail: set state FIRST so player pauses, THEN release pointer lock
+    const openDetail = useCallback((batik: any) => {
+        setSelectedBatik(batik);                                 // paused=true → player stops
+        setVisited(prev => new Set(prev).add(batik.id));
+        if (document.pointerLockElement) document.exitPointerLock(); // safe now
+    }, []);
 
     const handleSelect = useCallback((batik: any) => {
-        setSelectedBatik(batik);
-        if (!visited.has(batik.id)) {
-            setVisited(prev => new Set(prev).add(batik.id));
-            if (visited.size === 0) {
-                toast.success("Selamat Datang!", {
-                    description: isMobile ? "Gunakan joystick di kiri dan geser layar di kanan." : "Arahkan target ke lukisan dan klik untuk detail.",
-                    duration: 6000,
-                    icon: <Sparkles className="text-gold" />
-                });
-            }
+        if (visited.size === 0) {
+            toast.success('Selamat Datang!', {
+                description: 'Jelajahi setiap motif warisan nusantara.',
+                duration: 4000,
+                icon: <Sparkles className="text-gold" />,
+            });
         }
-    }, [visited, isMobile]);
+        openDetail(batik);
+    }, [visited, openDetail]);
 
-    const handlePositionChange = useCallback((pos: { x: number, z: number }) => {
-        setPlayerPosition(pos);
+    const handleClose = useCallback(() => setSelectedBatik(null), []);
+
+    // Stable handler for proximity (stable ref → no child re-render)
+    const nearRef = useRef<any>(null);
+    const handleNearChange = useCallback((b: any) => {
+        nearRef.current = b;
+        setNearPainting(b);
     }, []);
 
     if (!loaded) return <LoadingScreen onComplete={() => setLoaded(true)} />;
 
     return (
-        <div
-            className="bg-[#e8d5a3] font-sans"
-            style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                width: '100vw',
-                height: '100vh',
-                zIndex: 9999,
-                overflow: 'hidden',
-                touchAction: 'none'
-            }}
-        >
-            <Toaster position="top-right" expand={false} richColors theme="dark" />
+        <div style={{
+            position: 'fixed', inset: 0, zIndex: 9999,
+            overflow: 'hidden', touchAction: 'none',
+            background: '#c8b89a',
+        }}>
+            <Toaster position="top-right" richColors theme="dark" />
 
-            {/* Vignette CSS Overlay */}
+            {/* Background music — Ladrang Pangkur */}
+            <audio
+                ref={audioRef}
+                src="/museum-bgm.mp3"
+                loop
+                preload="auto"
+                style={{ display: 'none' }}
+            />
+
+            {/* Vignette overlay */}
             {started && (
-                <div
-                    className='absolute inset-0 pointer-events-none z-10'
-                    style={{
-                        background: 'radial-gradient(ellipse at center, transparent 55%, rgba(60,20,0,0.55) 100%)',
-                    }}
-                />
+                <div style={{
+                    position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 10,
+                    background: 'radial-gradient(ellipse at center, transparent 52%, rgba(40,15,0,0.65) 100%)',
+                }} />
             )}
 
-            {/* Mobile Controls Overlay */}
+            {/* Mobile controls */}
             <MobileControls
                 visible={started && !selectedBatik && isMobile}
                 onMove={(x, y) => mobileHandlers.current.onMove(x, y)}
                 onLook={(dx, dy) => mobileHandlers.current.onLook(dx, dy)}
-                onSprint={(s) => mobileHandlers.current.onSprint(s)}
+                onSprint={s => mobileHandlers.current.onSprint(s)}
             />
 
-            {/* Target Crosshair */}
-            {started && !selectedBatik && (
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
-                    <div className="w-5 h-px bg-black/40 shadow-lg" />
-                    <div className="h-5 w-px bg-black/40 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-lg" />
-                </div>
-            )}
-
-            {/* Version Header */}
-            <div className={`absolute ${isMobile ? 'top-2 left-2 scale-[0.55] origin-top-left' : 'top-10 left-10'} z-20 pointer-events-none group`}>
-                <div className="bg-[#111111]/90 backdrop-blur-3xl p-8 rounded-3xl border border-white/10 flex items-center gap-8 shadow-2xl transition-all">
-                    <div className="w-16 h-16 rounded-full bg-gold/10 flex items-center justify-center border border-gold/20 shadow-inner group-hover:scale-110 transition-transform">
-                        <MapIcon className="w-8 h-8 text-gold" />
-                    </div>
-                    <div>
-                        <h1 className="text-white font-serif font-black text-3xl leading-none tracking-tighter italic">GALLERY OF HERITAGE</h1>
-                        <div className="flex items-center gap-3 mt-3">
-                            <p className="text-gold/60 text-[10px] uppercase tracking-[0.4em] font-black">Archive Experience • ver 7.7</p>
-                            <div className="w-1 h-1 rounded-full bg-white/20" />
-                            <p className="text-white/40 text-[10px] uppercase tracking-widest font-bold">{visited.size}/20 EXPLORED</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div className={`absolute ${isMobile ? 'top-4 right-4' : 'top-10 right-10'} z-30 flex gap-2 md:gap-4`}>
-                {started && (
-                    <Button
-                        variant="ghost"
-                        size="icon"
-                        className="bg-white/10 text-white rounded-full w-10 h-10 md:w-14 md:h-14 border border-white/20 hover:bg-white/20 backdrop-blur-md"
-                        onClick={toggleFullscreen}
-                    >
-                        {isFullscreen ? <Minimize className="w-5 h-5 md:w-6 md:h-6" /> : <Maximize className="w-5 h-5 md:w-6 md:h-6" />}
-                    </Button>
-                )}
-                <Button variant="ghost" size="icon" className="bg-red-600/10 text-red-500 rounded-full w-10 h-10 md:w-14 md:h-14 border border-red-500/20 hover:bg-red-600 hover:text-white transition-all shadow-xl" onClick={() => window.history.back()}>
-                    <X className="w-5 h-5 md:w-6 md:h-6" />
-                </Button>
-            </div>
-
-            {!started && (
-                <div className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-black/80 backdrop-blur-2xl px-6 text-center">
-                    <div className="mb-12 origin-center scale-90 md:scale-100 animate-in fade-in zoom-in duration-700">
-                        <div className="w-20 h-20 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-gold/30 shadow-[0_0_30px_rgba(184,134,11,0.2)]">
-                            <Sparkles className="w-10 h-10 text-gold" />
-                        </div>
-                        <h2 className="text-white font-serif text-5xl font-black italic tracking-tighter mb-2">ARCHIVE LENS</h2>
-                        <p className="text-gold/60 text-[10px] md:text-xs uppercase tracking-[0.5em] font-black">Digital Heritage Explorer • v7.7</p>
-                    </div>
-
-                    <Button
-                        onClick={() => {
-                            setStarted(true);
-                            toggleFullscreen();
-                        }}
-                        size="lg"
-                        className="group bg-gold hover:bg-white text-black font-black px-12 md:px-32 py-10 md:py-14 text-xl md:text-3xl rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all hover:-translate-y-2 active:scale-95"
-                    >
-                        <span className="flex items-center">
-                            {isMobile ? 'MULAI FULLSCREEN' : 'ENGAGE FULLSCREEN'}
-                            <ChevronRight className="ml-4 group-hover:translate-x-2 transition-transform" />
-                        </span>
-                    </Button>
-
-                    <div className="mt-10 flex flex-col items-center gap-2">
-                        <div className="flex items-center gap-4">
-                            <div className="h-px w-8 bg-white/20" />
-                            <p className="text-white/40 text-[10px] uppercase tracking-[0.3em] font-bold italic">
-                                Optimized Experience
-                            </p>
-                            <div className="h-px w-8 bg-white/20" />
-                        </div>
-                        <p className="text-white/30 text-[9px] md:text-[10px] max-w-xs leading-relaxed uppercase tracking-widest text-center mt-2">
-                            Layar akan otomatis masuk ke mode Fullscreen untuk fokus maksimal pada Galeri Batik
-                        </p>
-                    </div>
-                </div>
-            )}
-
-            {started && <MiniMap playerPosition={playerPosition} paintings={museumBatiks} />}
-
-            <KeyboardControls
-                map={[
-                    { name: 'forward', keys: ['KeyW', 'ArrowUp'] },
-                    { name: 'backward', keys: ['KeyS', 'ArrowDown'] },
-                    { name: 'left', keys: ['KeyA', 'a'] },
-                    { name: 'right', keys: ['KeyD', 'd'] },
-                    { name: 'sprint', keys: ['ShiftLeft'] },
-                ]}
-            >
-                <div
-                    className='h-screen w-full relative'
+            {/* Exit button */}
+            {started && (
+                <button
+                    onPointerDown={() => window.history.back()}
                     style={{
-                        filter: 'sepia(0.18) saturate(1.15) brightness(0.97)',
-                        touchAction: 'none'
+                        position: 'fixed', top: 12, right: 12, zIndex: 300,
+                        width: 40, height: 40, borderRadius: '50%',
+                        background: 'rgba(200,40,40,0.88)',
+                        border: '1.5px solid rgba(255,255,255,0.2)',
+                        color: 'white', fontSize: 18, cursor: 'pointer',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        boxShadow: '0 4px 16px rgba(0,0,0,0.45)',
+                        touchAction: 'manipulation',
                     }}
-                >
+                >✕</button>
+            )}
+
+            {/* Mute / Unmute BGM button */}
+            {started && (
+                <button
+                    onClick={() => setMuted(m => !m)}
+                    title={muted ? 'Aktifkan Musik' : 'Matikan Musik'}
+                    style={{
+                        position: 'fixed', top: 12, right: 60, zIndex: 300,
+                        width: 40, height: 40, borderRadius: '50%',
+                        background: muted ? 'rgba(80,80,80,0.88)' : 'rgba(184,134,11,0.88)',
+                        border: '1.5px solid rgba(255,255,255,0.2)',
+                        color: 'white', fontSize: 18, cursor: 'pointer',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        boxShadow: '0 4px 16px rgba(0,0,0,0.45)',
+                        touchAction: 'manipulation',
+                        transition: 'background 0.2s',
+                    }}
+                >{muted ? '🔇' : '🎵'}</button>
+            )}
+
+            {/* HUD */}
+            {started && (
+                <>
+                    {/* Progress bar */}
+                    <div style={{
+                        position: 'fixed', top: 0, left: 0, right: 0, height: 3,
+                        background: 'rgba(255,255,255,0.08)', zIndex: 200, pointerEvents: 'none',
+                    }}>
+                        <div style={{
+                            height: '100%',
+                            width: `${(visited.size / 20) * 100}%`,
+                            background: 'linear-gradient(90deg, #b8860b, #f5c518)',
+                            transition: 'width 0.5s ease',
+                            boxShadow: '0 0 8px #b8860b',
+                        }} />
+                    </div>
+
+                    {/* Badge */}
+                    {!selectedBatik && (
+                        <div style={{
+                            position: 'fixed', top: 16, right: 60, zIndex: 200,
+                            background: 'rgba(0,0,0,0.72)', backdropFilter: 'blur(10px)',
+                            border: '1px solid rgba(184,134,11,0.4)', borderRadius: 999,
+                            padding: '6px 14px', display: 'flex', alignItems: 'center', gap: 8,
+                            pointerEvents: 'none',
+                        }}>
+                            <div style={{
+                                width: 7, height: 7, borderRadius: '50%',
+                                background: visited.size > 0 ? '#f5c518' : '#555',
+                                boxShadow: visited.size > 0 ? '0 0 6px #f5c518' : 'none',
+                            }} />
+                            <span style={{
+                                color: '#f5c518', fontSize: 10, fontWeight: 900,
+                                letterSpacing: '0.2em', textTransform: 'uppercase', fontFamily: 'sans-serif',
+                            }}>{visited.size}/20 BATIK</span>
+                        </div>
+                    )}
+
+                    {/* Crosshair */}
+                    {!selectedBatik && (
+                        <div style={{
+                            position: 'fixed', top: '50%', left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            zIndex: 100, pointerEvents: 'none',
+                            opacity: nearPainting ? 1 : 0.4, transition: 'opacity 0.3s',
+                        }}>
+                            <div style={{ position: 'relative', width: 20, height: 20 }}>
+                                <div style={{ position: 'absolute', top: '50%', left: 0, right: 0, height: 1, background: nearPainting ? '#f5c518' : 'white' }} />
+                                <div style={{ position: 'absolute', left: '50%', top: 0, bottom: 0, width: 1, background: nearPainting ? '#f5c518' : 'white' }} />
+                                {nearPainting && (
+                                    <div style={{
+                                        position: 'absolute', top: '50%', left: '50%',
+                                        transform: 'translate(-50%, -50%)',
+                                        width: 28, height: 28, borderRadius: '50%',
+                                        border: '1.5px solid #f5c518',
+                                        animation: 'pulse 1s infinite',
+                                    }} />
+                                )}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* LIHAT DETAIL button — DOM level, no Three.js raycast needed */}
+                    {!selectedBatik && nearPainting && (
+                        <button
+                            onPointerDown={() => handleSelect(nearPainting)}
+                            style={{
+                                position: 'fixed',
+                                bottom: isMobile ? 160 : 48,
+                                left: '50%',
+                                transform: 'translateX(-50%)',
+                                zIndex: 200,
+                                background: 'linear-gradient(135deg, #b8860b, #d4a017)',
+                                color: '#000', fontWeight: 900, fontSize: 13,
+                                letterSpacing: '0.15em', textTransform: 'uppercase',
+                                fontFamily: 'sans-serif',
+                                padding: '14px 32px', borderRadius: 999,
+                                border: '2px solid rgba(255,255,255,0.3)',
+                                boxShadow: '0 8px 32px rgba(184,134,11,0.55)',
+                                cursor: 'pointer', touchAction: 'manipulation',
+                                display: 'flex', alignItems: 'center', gap: 10,
+                            }}
+                        >
+                            <span>▶ LIHAT DETAIL</span>
+                            {!isMobile && (
+                                <span style={{
+                                    background: 'rgba(0,0,0,0.22)', borderRadius: 6,
+                                    padding: '2px 8px', fontSize: 11, fontWeight: 700,
+                                }}>E</span>
+                            )}
+                        </button>
+                    )}
+                </>
+            )}
+
+            {/* START SCREEN — position:fixed zIndex:9999 so it's always on top */}
+            {!started && (
+                <div style={{
+                    position: 'fixed', inset: 0, zIndex: 9999,
+                    background: 'linear-gradient(160deg, #0d0800 0%, #1a0e00 40%, #2a1600 70%, #0d0800 100%)',
+                    display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                    overflow: 'hidden',
+                    cursor: 'default',
+                }}>
+                    {/* Decorative rings — pointerEvents:none so they don't block button */}
+                    {[600, 420, 260].map((s, i) => (
+                        <div key={i} style={{
+                            position: 'absolute', width: s, height: s, borderRadius: '50%',
+                            border: `1px solid rgba(184,134,11,${0.06 + i * 0.05})`,
+                            top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
+                            pointerEvents: 'none',
+                        }} />
+                    ))}
+                    {/* Corner brackets — pointerEvents:none */}
+                    {[
+                        { top: 24, left: 24, borderTop: '2px solid #b8860b', borderLeft: '2px solid #b8860b' },
+                        { top: 24, right: 24, borderTop: '2px solid #b8860b', borderRight: '2px solid #b8860b' },
+                        { bottom: 24, left: 24, borderBottom: '2px solid #b8860b', borderLeft: '2px solid #b8860b' },
+                        { bottom: 24, right: 24, borderBottom: '2px solid #b8860b', borderRight: '2px solid #b8860b' },
+                    ].map((s, i) => (
+                        <div key={i} style={{ position: 'absolute', width: 40, height: 40, opacity: 0.6, pointerEvents: 'none', ...s }} />
+                    ))}
+
+                    <div style={{ marginBottom: 28, display: 'flex', alignItems: 'center', gap: 12, pointerEvents: 'none' }}>
+                        <div style={{ width: 32, height: 1, background: 'rgba(184,134,11,0.5)' }} />
+                        <span style={{ color: '#b8860b', fontSize: 10, fontWeight: 900, letterSpacing: '0.4em', textTransform: 'uppercase', fontFamily: 'sans-serif' }}>WARISAN NUSANTARA</span>
+                        <div style={{ width: 32, height: 1, background: 'rgba(184,134,11,0.5)' }} />
+                    </div>
+
+                    <h1 style={{
+                        fontSize: 'clamp(48px,13vw,88px)', fontWeight: 900, fontStyle: 'italic',
+                        fontFamily: 'Georgia, serif', letterSpacing: '-0.02em', lineHeight: 1, margin: 0,
+                        color: 'transparent', pointerEvents: 'none',
+                        backgroundImage: 'linear-gradient(135deg, #d4a017 0%, #f5c518 40%, #b8860b 70%, #e8b840 100%)',
+                        WebkitBackgroundClip: 'text', backgroundClip: 'text',
+                    }}>BatikLens</h1>
+
+                    <p style={{
+                        color: 'rgba(245,197,24,0.5)', fontSize: 11, fontWeight: 700,
+                        letterSpacing: '0.5em', textTransform: 'uppercase', fontFamily: 'sans-serif',
+                        marginBottom: 48, marginTop: 8, pointerEvents: 'none',
+                    }}>Galeri Digital Interaktif</p>
+
+                    <div style={{
+                        display: 'flex', gap: 32, marginBottom: 52,
+                        padding: '16px 32px', borderRadius: 12,
+                        border: '1px solid rgba(184,134,11,0.2)',
+                        background: 'rgba(184,134,11,0.05)',
+                        pointerEvents: 'none',
+                    }}>
+                        {[['20', 'Koleksi Batik'], ['3D', 'Interaktif'], ['HD', 'Gambar Detail']].map(([v, l], i) => (
+                            <div key={i} style={{ textAlign: 'center' }}>
+                                <div style={{ color: '#f5c518', fontSize: 22, fontWeight: 900, fontFamily: 'sans-serif' }}>{v}</div>
+                                <div style={{ color: 'rgba(255,255,255,0.35)', fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', fontFamily: 'sans-serif', marginTop: 2 }}>{l}</div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Button — onClick for Firefox, explicit z-index, position:relative to stay above decorations */}
+                    <button
+                        onClick={() => setStarted(true)}
+                        style={{
+                            position: 'relative', zIndex: 1,
+                            background: 'linear-gradient(135deg, #b8860b 0%, #d4a017 50%, #f5c518 100%)',
+                            color: '#000', fontWeight: 900, fontSize: 14,
+                            letterSpacing: '0.25em', textTransform: 'uppercase', fontFamily: 'sans-serif',
+                            padding: '18px 48px', borderRadius: 999, border: 'none',
+                            cursor: 'pointer', touchAction: 'manipulation',
+                            boxShadow: '0 0 40px rgba(184,134,11,0.45), 0 8px 32px rgba(0,0,0,0.6)',
+                            userSelect: 'none', WebkitUserSelect: 'none',
+                        }}
+                    >{isMobile ? '▶  MULAI JELAJAH' : '▶  MASUK GALERI'}</button>
+
+                    <p style={{
+                        marginTop: 28, color: 'rgba(255,255,255,0.2)', fontSize: 9,
+                        letterSpacing: '0.2em', textTransform: 'uppercase', fontFamily: 'sans-serif',
+                        pointerEvents: 'none',
+                    }}>{isMobile ? 'Joystick Kiri • Geser Kanan' : 'WASD / Arrow • Mouse Aim • E = Detail'}</p>
+                </div>
+            )}
+
+            {/* 3D CANVAS */}
+            <KeyboardControls map={[
+                { name: 'forward', keys: ['KeyW', 'ArrowUp'] },
+                { name: 'backward', keys: ['KeyS', 'ArrowDown'] },
+                { name: 'left', keys: ['KeyA'] },
+                { name: 'right', keys: ['KeyD'] },
+                { name: 'sprint', keys: ['ShiftLeft'] },
+            ]}>
+                <div style={{ width: '100vw', height: '100vh', touchAction: 'none', pointerEvents: started ? 'auto' : 'none' }}>
                     <Canvas
-                        dpr={[1, 1.5]}
-                        shadows="soft"
-                        camera={{ position: [0, 1.7, 0], fov: 65, near: 0.1, far: 200 }}
+                        dpr={Math.min(window.devicePixelRatio, 2)}
+                        shadows
+                        camera={{ position: [0, 1.72, 0], fov: 62, near: 0.08, far: 180 }}
                         gl={{
                             antialias: true,
-                            powerPreference: "high-performance",
-                            logarithmicDepthBuffer: true,
+                            powerPreference: 'high-performance',
                             toneMapping: THREE.ACESFilmicToneMapping,
-                            toneMappingExposure: 1.3
+                            toneMappingExposure: 1.25,
                         }}
+                        performance={{ min: 0.6 }}
                     >
-                        <color attach="background" args={['#e8d5a3']} />
-                        <fog attach="fog" args={['#e8d5a3', 75, 150]} />
+                        <color attach="background" args={['#c8b89a']} />
+                        <fog attach="fog" args={['#c8b89a', 80, 160]} />
 
-                        <ambientLight intensity={0.9} color='#ffe8b0' />
-                        <hemisphereLight
-                            intensity={0.7}
-                            color='#ffcc66'
-                            groundColor='#5c2e00'
-                        />
+                        <ambientLight intensity={0.75} color="#ffe4b0" />
+                        <hemisphereLight intensity={0.55} color="#ffcc66" groundColor="#4a2800" />
                         <directionalLight
-                            position={[15, 20, 5]}
-                            intensity={1.8}
-                            color='#ffb347'
+                            position={[20, 28, 8]} intensity={2.2} color="#ffcb7a"
                             castShadow
-                            shadow-mapSize={[1024, 1024]}
-                            shadow-camera-left={-65}
-                            shadow-camera-right={65}
-                            shadow-camera-top={65}
-                            shadow-camera-bottom={-65}
-                            shadow-camera-far={150}
+                            shadow-mapSize={[2048, 2048]}
+                            shadow-camera-near={0.5} shadow-camera-far={200}
+                            shadow-camera-left={-70} shadow-camera-right={70}
+                            shadow-camera-top={70} shadow-camera-bottom={-70}
+                            shadow-bias={-0.0005}
                         />
-
-                        {/* Warm fill from within */}
-                        <pointLight position={[0, 6, 0]} intensity={1.2} color='#ffaa33' distance={120} decay={2} />
-                        <pointLight position={[-30, 5, 0]} intensity={0.5} color='#ff9922' distance={80} decay={2} />
-                        <pointLight position={[30, 5, 0]} intensity={0.5} color='#ff9922' distance={80} decay={2} />
-                        <pointLight position={[0, 5, -30]} intensity={0.4} color='#ffbb44' distance={80} decay={2} />
-                        <pointLight position={[0, 5, 30]} intensity={0.4} color='#ffbb44' distance={80} decay={2} />
+                        <pointLight position={[0, 7.5, -52]} intensity={1.6} color="#ffe090" distance={100} decay={2} castShadow={false} />
+                        <pointLight position={[0, 7.5, 52]} intensity={1.6} color="#ffe090" distance={100} decay={2} castShadow={false} />
+                        <pointLight position={[0, 6, 0]} intensity={1.0} color="#ffaa44" distance={120} decay={2} castShadow={false} />
 
                         <Suspense fallback={null}>
                             <Environment museumBatiks={museumBatiks} />
                             <HeritageCrest />
-                            <DustParticles />
 
-                            <ContactShadows
-                                position={[0, 0.01, 0]}
-                                opacity={0.4}
-                                scale={120}
-                                blur={2.5}
-                                far={10}
-                                color="#2a1800"
+                            {/* ProximityDetector is module-level → stable identity → no remount */}
+                            <ProximityDetector
+                                batiks={museumBatiks}
+                                onNearChange={handleNearChange}
+                                paused={!!selectedBatik}
                             />
 
-                            {museumBatiks.map((batik) => (
+                            {museumBatiks.map(batik => (
                                 <Painting
                                     key={batik.id}
                                     batik={batik}
                                     isVisited={visited.has(batik.id)}
-                                    position={batik.position as [number, number, number]}
-                                    rotation={batik.rotation as [number, number, number]}
+                                    position={batik.position}
+                                    rotation={batik.rotation}
                                     onSelect={handleSelect}
                                 />
                             ))}
@@ -392,17 +532,18 @@ export const Museum3DPage = () => {
                         <Player
                             started={started}
                             paused={!!selectedBatik}
-                            onPositionChange={handlePositionChange}
-                            onSprintChange={setIsSprinting}
+                            onPositionChange={noopPos}
+                            onSprintChange={noopSprint}
                             mobileHandlers={mobileHandlers}
                         />
                     </Canvas>
                 </div>
             </KeyboardControls>
 
+            {/* Detail Dialog — pure React, outside Canvas, no 3D conflict */}
             <DetailDialog
                 selectedBatik={selectedBatik}
-                onClose={() => setSelectedBatik(null)}
+                onClose={handleClose}
                 language={language}
             />
         </div>

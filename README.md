@@ -4,7 +4,7 @@
 </p>
 
 <p align="center">
-  <em>Discover, Learn, and Explore the Beauty of Indonesian Batik Patterns with Artificial Intelligence</em>
+  <em>Discover, Learn, and Explore the Beauty of Indonesian Batik Patterns with Artificial Intelligences</em>
 </p>
 
 <!-- BADGES -->

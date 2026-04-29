@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, ScanLine, User, Brain } from 'lucide-react';
+import { Menu, ScanLine, Brain } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { useLanguage } from '@/lib/LanguageContext';
 import { StreakIndicator } from '@/components/engagement/StreakIndicator';
+import { UserMenu } from '@/components/auth/UserMenu';
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,13 +61,7 @@ export const Navbar = () => {
 
             <StreakIndicator />
 
-            <Link
-              to="/profile"
-              aria-label={t('nav.profile')}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 text-foreground/80 hover:text-foreground hover:bg-foreground/5 transition-colors"
-            >
-              <User className="w-4 h-4" />
-            </Link>
+            <UserMenu />
 
             <LanguageSwitcher />
             <ThemeToggle className="static" />
@@ -74,13 +69,7 @@ export const Navbar = () => {
 
           <div className="md:hidden flex items-center gap-2">
             <StreakIndicator compact />
-            <Link
-              to="/profile"
-              aria-label={t('nav.profile')}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 text-foreground/80 hover:text-foreground hover:bg-foreground/5 transition-colors"
-            >
-              <User className="w-4 h-4" />
-            </Link>
+            <UserMenu />
             <ThemeToggle className="static" />
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
@@ -117,14 +106,11 @@ export const Navbar = () => {
                       <ScanLine className="w-4 h-4" />
                       {t('nav.scan')}
                     </Link>
-                    <Link to="/profile" onClick={closeMenu} className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors py-2 flex items-center gap-2">
-                      <User className="w-4 h-4" />
-                      {t('nav.profile')}
-                    </Link>
                   </nav>
 
                   <div className="mt-auto pt-8 border-t border-foreground/5 space-y-4">
-                    <div className="flex items-center gap-2">
+                    <UserMenu variant="mobile" onAction={closeMenu} />
+                    <div className="flex items-center gap-2 pt-2 border-t border-foreground/5">
                       <LanguageSwitcher />
                     </div>
                     <p className="text-[10px] text-muted-foreground font-black uppercase tracking-[0.3em]">

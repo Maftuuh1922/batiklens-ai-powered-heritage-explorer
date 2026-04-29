@@ -1,5 +1,6 @@
 import '@/lib/errorReporter';
 import { LanguageProvider } from '@/lib/LanguageContext';
+import { AuthProvider } from '@/lib/AuthContext';
 import { enableMapSet } from "immer";
 enableMapSet();
 import { StrictMode } from 'react'
@@ -23,6 +24,8 @@ import { EnhancedDetailPage } from '@/pages/EnhancedDetailPage';
 import { Museum3DPage } from '@/pages/Museum3DPage';
 import { ProfilePage } from '@/pages/ProfilePage';
 import { DailyPage } from '@/pages/DailyPage';
+import { LoginPage } from '@/pages/LoginPage';
+import { SignupPage } from '@/pages/SignupPage';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -42,6 +45,8 @@ const router = createBrowserRouter([
       { path: "/quiz/:motifId", element: <QuizPage /> },
       { path: "/profile", element: <ProfilePage /> },
       { path: "/daily", element: <DailyPage /> },
+      { path: "/login", element: <LoginPage /> },
+      { path: "/signup", element: <SignupPage /> },
     ]
   },
 ]);
@@ -49,7 +54,9 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ErrorBoundary>
       <LanguageProvider>
-        <RouterProvider router={router} />
+        <AuthProvider>
+          <RouterProvider router={router} />
+        </AuthProvider>
       </LanguageProvider>
     </ErrorBoundary>
   </StrictMode>,

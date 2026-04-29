@@ -1,11 +1,14 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Flame, Trophy, BookOpen, Heart, ScanLine, Brain, Award, Calendar, ChevronRight } from 'lucide-react';
+import { Flame, Trophy, BookOpen, Heart, ScanLine, Brain, Award, Calendar, ChevronRight, LogIn, LogOut, UserCircle2 } from 'lucide-react';
 import { useEngagement, levelFromXp, titleForLevel, BADGES } from '@/lib/engagement';
 import { useLanguage } from '@/lib/LanguageContext';
+import { useAuth } from '@/lib/AuthContext';
+import { userAvatarUrl, userDisplayName } from '@/lib/auth-utils';
 import { batiks } from '@/lib/batik-data';
 import { XpBar } from '@/components/engagement/XpBar';
 import { BadgeGrid } from '@/components/engagement/BadgeGrid';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
@@ -18,6 +21,7 @@ const fmtDate = (ts: number, lang: 'id' | 'en'): string =>
 
 export function ProfilePage() {
   const { language } = useLanguage();
+  const { user, signOut, loading: authLoading, isConfigured } = useAuth();
   const xp = useEngagement((s) => s.xp);
   const streak = useEngagement((s) => s.streak);
   const longest = useEngagement((s) => s.longestStreak);
@@ -108,6 +112,79 @@ export function ProfilePage() {
           </div>
         </div>
       </motion.div>
+
+      {/* Account section */}
+      <motion.section
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.05, duration: 0.5 }}
+        className="mt-6 rounded-2xl border border-foreground/10 bg-background/60 p-5 md:p-6"
+      >
+        {authLoading ? (
+          <div className="flex items-center gap-4 animate-pulse">
+            <div className="h-12 w-12 rounded-full bg-muted/50" />
+            <div className="flex-1 space-y-2">
+              <div className="h-3 w-32 rounded bg-muted/50" />
+              <div className="h-3 w-48 rounded bg-muted/30" />
+            </div>
+          </div>
+        ) : user ? (
+          <div className="flex flex-wrap items-center gap-4">
+            <Avatar className="h-12 w-12">
+              {userAvatarUrl(user) && <AvatarImage src={userAvatarUrl(user)!} alt={userDisplayName(user)} />}
+              <AvatarFallback>
+                {userDisplayName(user)
+                  .split(/\s+/)
+                  .map((p) => p[0])
+                  .filter(Boolean)
+                  .slice(0, 2)
+                  .join('')
+                  .toUpperCase() || 'B'}
+              </AvatarFallback>
+            </Avatar>
+            <div className="flex-1 min-w-0">
+              <p className="text-[10px] font-black uppercase tracking-[0.25em] text-muted-foreground">
+                {language === 'id' ? 'AKUN' : 'ACCOUNT'}
+              </p>
+              <p className="text-base font-medium truncate">{userDisplayName(user)}</p>
+              {user.email && (
+                <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+              )}
+            </div>
+            <Button variant="outline" size="sm" onClick={() => void signOut()}>
+              <LogOut className="w-3.5 h-3.5 mr-2" />
+              {language === 'id' ? 'Keluar' : 'Sign out'}
+            </Button>
+          </div>
+        ) : (
+          <div className="flex flex-wrap items-center gap-4">
+            <UserCircle2 className="w-10 h-10 text-muted-foreground" />
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium">
+                {language === 'id' ? 'Masuk untuk simpan progres lintas perangkat' : 'Sign in to save progress across devices'}
+              </p>
+              <p className="text-xs text-muted-foreground mt-1">
+                {language === 'id'
+                  ? 'Streak, XP, badge, dan diary kamu tetap aman saat ganti hp / browser.'
+                  : 'Keep your streak, XP, badges, and diary safe when you change devices or browsers.'}
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <Link to="/login">
+                <Button size="sm" variant="outline" disabled={!isConfigured}>
+                  <LogIn className="w-3.5 h-3.5 mr-2" />
+                  {language === 'id' ? 'Masuk' : 'Sign in'}
+                </Button>
+              </Link>
+              {isConfigured && (
+                <Link to="/signup">
+                  <Button size="sm">{language === 'id' ? 'Daftar' : 'Sign up'}</Button>
+                </Link>
+              )}
+            </div>
+          </div>
+        )}
+      </motion.section>
 
       {/* Quick stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-6">

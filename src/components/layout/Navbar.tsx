@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, ScanLine } from 'lucide-react';
+import { Menu, ScanLine, User, Brain } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { useLanguage } from '@/lib/LanguageContext';
+import { StreakIndicator } from '@/components/engagement/StreakIndicator';
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +19,8 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex justify-between items-center h-16 md:h-20">
           <div className="flex-shrink-0">
-            <Link to="/" className="flex items-center group">
+            <Link to="/" className="flex items-center gap-2 group">
+              <KawungLogo className="h-7 w-7 md:h-8 md:w-8 text-foreground transition-transform group-hover:rotate-90 duration-700" />
               <span className="text-xl md:text-2xl font-serif font-bold tracking-tighter text-foreground group-hover:opacity-80 transition-opacity">
                 BatikLens.
               </span>
@@ -38,6 +40,12 @@ export const Navbar = () => {
             >
               {t('nav.museum')}
             </Link>
+            <Link
+              to="/daily"
+              className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Daily
+            </Link>
             <Link to="/scan">
               <Button
                 size="sm"
@@ -50,12 +58,29 @@ export const Navbar = () => {
 
             <div className="h-6 w-px bg-border/50 mx-2" />
 
+            <StreakIndicator />
+
+            <Link
+              to="/profile"
+              aria-label="Profile"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 text-foreground/80 hover:text-foreground hover:bg-foreground/5 transition-colors"
+            >
+              <User className="w-4 h-4" />
+            </Link>
+
             <LanguageSwitcher />
             <ThemeToggle className="static" />
           </div>
 
           <div className="md:hidden flex items-center gap-2">
-            <LanguageSwitcher />
+            <StreakIndicator compact />
+            <Link
+              to="/profile"
+              aria-label="Profile"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 text-foreground/80 hover:text-foreground hover:bg-foreground/5 transition-colors"
+            >
+              <User className="w-4 h-4" />
+            </Link>
             <ThemeToggle className="static" />
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
@@ -66,14 +91,15 @@ export const Navbar = () => {
               <SheetContent side="right" className="bg-background/95 backdrop-blur-3xl border-l border-foreground/5 w-[280px] sm:w-[350px] p-0">
                 <div className="flex flex-col h-full py-12 px-6">
                   <div className="flex justify-between items-start mb-2">
-                    <SheetTitle className="text-left font-serif text-2xl">
+                    <SheetTitle className="text-left font-serif text-2xl flex items-center gap-2">
+                      <KawungLogo className="h-6 w-6" />
                       BatikLens.
                     </SheetTitle>
                   </div>
                   <SheetDescription className="text-[10px] uppercase tracking-widest text-muted-foreground mb-8 pb-4 border-b border-foreground/5">
                     Heritage Vision Explorer
                   </SheetDescription>
-                  <nav className="flex flex-col space-y-6">
+                  <nav className="flex flex-col space-y-5">
                     <Link to="/" onClick={closeMenu} className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors py-2">
                       {t('nav.home')}
                     </Link>
@@ -83,12 +109,24 @@ export const Navbar = () => {
                     <Link to="/museum" onClick={closeMenu} className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors py-2">
                       {t('nav.museum')}
                     </Link>
-                    <Link to="/scan" onClick={closeMenu} className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors py-2">
+                    <Link to="/daily" onClick={closeMenu} className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors py-2 flex items-center gap-2">
+                      <Brain className="w-4 h-4" />
+                      Daily
+                    </Link>
+                    <Link to="/scan" onClick={closeMenu} className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors py-2 flex items-center gap-2">
+                      <ScanLine className="w-4 h-4" />
                       {t('nav.scan')}
+                    </Link>
+                    <Link to="/profile" onClick={closeMenu} className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors py-2 flex items-center gap-2">
+                      <User className="w-4 h-4" />
+                      Profile
                     </Link>
                   </nav>
 
-                  <div className="mt-auto pt-8 border-t border-foreground/5">
+                  <div className="mt-auto pt-8 border-t border-foreground/5 space-y-4">
+                    <div className="flex items-center gap-2">
+                      <LanguageSwitcher />
+                    </div>
                     <p className="text-[10px] text-muted-foreground font-black uppercase tracking-[0.3em]">
                       Preserving the Infinite Thread
                     </p>
@@ -102,3 +140,17 @@ export const Navbar = () => {
     </nav>
   );
 };
+
+/** Tiny inline SVG of a Kawung-inspired motif used as the brand mark. */
+function KawungLogo({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} aria-hidden="true">
+      <circle cx="16" cy="16" r="15" stroke="currentColor" strokeWidth="1" opacity="0.25" />
+      <ellipse cx="16" cy="6.5" rx="5" ry="7" stroke="currentColor" strokeWidth="1.4" />
+      <ellipse cx="16" cy="25.5" rx="5" ry="7" stroke="currentColor" strokeWidth="1.4" />
+      <ellipse cx="6.5" cy="16" rx="7" ry="5" stroke="currentColor" strokeWidth="1.4" />
+      <ellipse cx="25.5" cy="16" rx="7" ry="5" stroke="currentColor" strokeWidth="1.4" />
+      <circle cx="16" cy="16" r="2" fill="currentColor" />
+    </svg>
+  );
+}

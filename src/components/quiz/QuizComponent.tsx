@@ -15,6 +15,7 @@ import { Progress } from '@/components/ui/progress';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { useEngagement } from '@/lib/engagement';
 
 interface Question {
   question_id: string;
@@ -218,14 +219,14 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
     setQuizState(finalState);
     setShowResultDialog(true);
     playSound('complete');
-    
-    // Calculate XP earned
+
+    // Calculate XP earned (legacy local progress)
     const xpEarned = quizState.answers.reduce((total, answer) => {
       const question = questions.find(q => q.question_id === answer.question_id);
       return total + (answer.correct ? (question?.xp_reward || 10) : 0);
     }, 0);
 
-    // Save to localStorage
+    // Save to localStorage (legacy)
     const userProgress = JSON.parse(localStorage.getItem('userProgress') || '{}');
     userProgress.totalXP = (userProgress.totalXP || 0) + xpEarned;
     userProgress.quizScores = userProgress.quizScores || [];
@@ -237,6 +238,13 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
       xpEarned
     });
     localStorage.setItem('userProgress', JSON.stringify(userProgress));
+
+    // Award XP via the engagement system: per correct answer + completion bonus
+    const eng = useEngagement.getState();
+    for (const a of finalState.answers) {
+      if (a.correct) eng.awardXp('quiz-correct');
+    }
+    eng.awardXp('quiz-complete');
 
     onQuizComplete?.(finalState);
   };

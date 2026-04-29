@@ -21,6 +21,8 @@ import GalleryPage from '@/pages/GalleryPage';
 import { QuizPage } from '@/pages/QuizPage';
 import { EnhancedDetailPage } from '@/pages/EnhancedDetailPage';
 import { Museum3DPage } from '@/pages/Museum3DPage';
+import { ProfilePage } from '@/pages/ProfilePage';
+import { DailyPage } from '@/pages/DailyPage';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -38,6 +40,8 @@ const router = createBrowserRouter([
       { path: "/story/:motifId", element: <EnhancedDetailPage /> },
       { path: "/quiz", element: <QuizPage /> },
       { path: "/quiz/:motifId", element: <QuizPage /> },
+      { path: "/profile", element: <ProfilePage /> },
+      { path: "/daily", element: <DailyPage /> },
     ]
   },
 ]);

@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/lib/LanguageContext';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { FavoriteButton } from '@/components/engagement/FavoriteButton';
+import { ShareButton } from '@/components/engagement/ShareButton';
 
 export function ResultPage() {
   const [searchParams] = useSearchParams();
@@ -264,6 +266,21 @@ export function ResultPage() {
               )}
 
             </div>
+
+            {/* Save / Share Row */}
+            {batik && !isNonBatik && (
+              <div className="pt-8 flex flex-wrap items-center gap-3">
+                <FavoriteButton motifId={batik.id} motifName={batik.name} imageUrl={batik.imageUrl} />
+                <ShareButton
+                  title={`BatikLens — ${batik.name}`}
+                  text={
+                    language === 'id'
+                      ? `Aku baru saja mengenali motif ${batik.name} dari ${batik.origin} di BatikLens!`
+                      : `I just identified the ${batik.name} motif from ${batik.origin} on BatikLens!`
+                  }
+                />
+              </div>
+            )}
 
             {/* Action Buttons */}
             <div className={`pt-10 grid grid-cols-1 sm:grid-cols-2 gap-4 border-t ${theme.border}`}>

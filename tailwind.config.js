@@ -58,13 +58,23 @@ export default {
 					'0%': { transform: 'scale(1) translate(0, 0)' },
 					'50%': { transform: 'scale(1.05) translate(-1%, -1%)' },
 					'100%': { transform: 'scale(1) translate(0, 0)' }
+				},
+				'shimmer': {
+					'0%': { backgroundPosition: '-200% 0' },
+					'100%': { backgroundPosition: '200% 0' }
+				},
+				'gradient-x': {
+					'0%, 100%': { backgroundPosition: '0% 50%' },
+					'50%': { backgroundPosition: '100% 50%' }
 				}
 			},
 			animation: {
 				'scan-line': 'scan-line 2s linear infinite',
 				'float': 'float 4s ease-in-out infinite',
 				'parallax': 'parallax 30s linear infinite',
-				'slow-pan': 'slow-pan 25s ease-in-out infinite'
+				'slow-pan': 'slow-pan 25s ease-in-out infinite',
+				'shimmer': 'shimmer 2.4s linear infinite',
+				'gradient-x': 'gradient-x 8s ease infinite'
 			}
 		}
 	},

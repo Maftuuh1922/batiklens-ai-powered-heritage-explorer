@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useEngagement, XP_REWARDS } from '@/lib/engagement';
 import { useLanguage } from '@/lib/LanguageContext';
 import { Button } from '@/components/ui/button';
-import { quizQuestions, type QuizQuestion } from '@/data/quizQuestions';
+import { quizQuestions, type BilingualQuizQuestion, type QuizQuestion } from '@/data/quizQuestions';
 import { fireConfetti } from '@/components/engagement/Confetti';
 import { BatikOfTheDay } from '@/components/engagement/BatikOfTheDay';
 import { Progress } from '@/components/ui/progress';
@@ -21,11 +21,11 @@ const dayHash = (s: string): number => {
   return h >>> 0;
 };
 
-const pickDailyQuestions = (key: string, count = 3): QuizQuestion[] => {
+const pickDailyQuestions = (key: string, count = 3): BilingualQuizQuestion[] => {
   const all = Object.values(quizQuestions).flat();
   if (all.length === 0) return [];
   const seed = dayHash(key);
-  const picked: QuizQuestion[] = [];
+  const picked: BilingualQuizQuestion[] = [];
   const used = new Set<number>();
   let i = 0;
   while (picked.length < Math.min(count, all.length) && i < all.length * 4) {
@@ -39,6 +39,17 @@ const pickDailyQuestions = (key: string, count = 3): QuizQuestion[] => {
   return picked;
 };
 
+const localize = (q: BilingualQuizQuestion, lang: 'id' | 'en'): QuizQuestion => ({
+  question_id: q.question_id,
+  motif_id: q.motif_id,
+  question_text: q.question_text[lang],
+  options: q.options.map((o) => o[lang]),
+  correct_answer: q.correct_answer,
+  explanation: q.explanation[lang],
+  difficulty: q.difficulty,
+  xp_reward: q.xp_reward,
+});
+
 type Phase = 'intro' | 'question' | 'feedback' | 'done';
 
 export function DailyPage() {
@@ -48,7 +59,11 @@ export function DailyPage() {
   const dailyQuizDate = useEngagement((s) => s.dailyQuizDate);
   const alreadyDone = dailyQuizDate === todayKey();
 
-  const questions = useMemo(() => pickDailyQuestions(todayKey()), []);
+  const bilingualQuestions = useMemo(() => pickDailyQuestions(todayKey()), []);
+  const questions = useMemo(
+    () => bilingualQuestions.map((q) => localize(q, language)),
+    [bilingualQuestions, language],
+  );
   const [phase, setPhase] = useState<Phase>(alreadyDone ? 'done' : 'intro');
   const [qi, setQi] = useState(0);
   const [score, setScore] = useState(0);

@@ -30,6 +30,34 @@ const translations: Record<string, Record<Language, string>> = {
         en: '3D Museum',
         id: 'Museum 3D'
     },
+    'nav.daily': {
+        en: 'Challenge',
+        id: 'Tantangan'
+    },
+    'nav.profile': {
+        en: 'Profile',
+        id: 'Profil'
+    },
+    'nav.login': {
+        en: 'Sign in',
+        id: 'Masuk'
+    },
+    'nav.signup': {
+        en: 'Sign up',
+        id: 'Daftar'
+    },
+    'nav.logout': {
+        en: 'Sign out',
+        id: 'Keluar'
+    },
+    'nav.tagline': {
+        en: 'Heritage Vision Explorer',
+        id: 'Penjelajah Visi Warisan'
+    },
+    'nav.preserving': {
+        en: 'Preserving the Infinite Thread',
+        id: 'Menjaga Benang Tak Berujung'
+    },
 
     // Scan Page
     'scan.title': {

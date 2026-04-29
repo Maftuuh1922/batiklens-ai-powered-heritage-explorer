@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { useLanguage } from '@/lib/LanguageContext';
 import { batiks } from '@/lib/batik-data';
+import { useEngagement } from '@/lib/engagement';
 
 type ScanState = 'idle' | 'camera' | 'preview' | 'scanning' | 'complete';
 
@@ -415,6 +416,29 @@ export function ScanPage() {
       toast.success("Identity Confirmed", {
         description: `Pattern recognized: ${result.prediction} (${result.percentage || ''})`
       });
+
+      // Award XP & log to diary if it's an actual batik
+      const isBatik = result.is_batik !== false && result.prediction !== 'Bukan Batik';
+      if (isBatik) {
+        const xpResult = useEngagement.getState().awardXp('scan');
+        // Best-effort match against the static batik database for the diary entry
+        const matched = batiks.find(b =>
+          b.id === result.prediction ||
+          (typeof result.prediction === 'string' && (
+            b.id.includes(String(result.prediction).toLowerCase().replace(/\s+/g, '-')) ||
+            b.name.toLowerCase() === String(result.prediction).toLowerCase()
+          ))
+        );
+        useEngagement.getState().addDiary({
+          motifId: matched?.id ?? `scan-${Date.now()}`,
+          motifName: matched?.name ?? String(result.prediction ?? 'Scan Result'),
+          imageUrl: previewUrl || preview || matched?.imageUrl || '',
+          source: 'scan',
+        });
+        toast.success(`+${xpResult.xpGained} XP`, {
+          description: language === 'id' ? 'Pindaian baru tersimpan di Diary.' : 'New scan saved to your Diary.',
+        });
+      }
 
       // Simpan hasil dan redirect ke halaman result
       const resultWithImage = {

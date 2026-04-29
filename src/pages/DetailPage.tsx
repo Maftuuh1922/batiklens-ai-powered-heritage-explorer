@@ -1,15 +1,35 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { MapPin, Info, History, ArrowLeft, Heart } from 'lucide-react';
+import { MapPin, Info, History, ArrowLeft } from 'lucide-react';
 import { batiks } from '@/lib/batik-data';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/lib/LanguageContext';
+import { FavoriteButton } from '@/components/engagement/FavoriteButton';
+import { ShareButton } from '@/components/engagement/ShareButton';
+import { useEngagement } from '@/lib/engagement';
 
 export function DetailPage() {
   const { language } = useLanguage();
   const { id } = useParams();
   const batik = batiks.find(b => b.id === id);
+  const awardedRef = useRef(false);
+
+  useEffect(() => {
+    if (!batik || awardedRef.current) return;
+    awardedRef.current = true;
+    // Award read XP after a short dwell time so accidental clicks don't grind XP
+    const tid = setTimeout(() => {
+      useEngagement.getState().awardXp('read-motif');
+      useEngagement.getState().addDiary({
+        motifId: batik.id,
+        motifName: batik.name,
+        imageUrl: batik.imageUrl,
+        source: 'read',
+      });
+    }, 4000);
+    return () => clearTimeout(tid);
+  }, [batik]);
 
   if (!batik) {
     return (
@@ -31,9 +51,22 @@ export function DetailPage() {
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
             Archive Index
           </Link>
-          <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground border border-border/20 rounded-full h-10 w-10">
-            <Heart className="w-4 h-4" />
-          </Button>
+          <div className="flex items-center gap-2">
+            <FavoriteButton
+              motifId={batik.id}
+              motifName={batik.name}
+              imageUrl={batik.imageUrl}
+              variant="icon"
+            />
+            <ShareButton
+              title={`BatikLens — ${batik.name}`}
+              text={
+                language === 'id'
+                  ? `Pelajari motif ${batik.name} dari ${batik.origin} di BatikLens.`
+                  : `Discover the ${batik.name} motif from ${batik.origin} on BatikLens.`
+              }
+            />
+          </div>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
           <motion.div

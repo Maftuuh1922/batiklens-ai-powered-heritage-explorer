@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/lib/LanguageContext';
 import { batiks } from '@/lib/batik-data';
 import { useState, useEffect } from 'react';
+import { BatikOfTheDay } from '@/components/engagement/BatikOfTheDay';
+import { DailyQuizCard } from '@/components/engagement/DailyQuizCard';
 
 export function HomePage() {
   const { t, language } = useLanguage();
@@ -263,6 +265,14 @@ export function HomePage() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <BatikOfTheDay />
+
+      <section className="py-16 md:py-20 border-t border-foreground/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <DailyQuizCard />
         </div>
       </section>
 

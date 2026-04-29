@@ -6,27 +6,25 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { QuizComponent } from '@/components/quiz/QuizComponent';
-import { getQuizQuestions, QuizQuestion } from '@/data/quizQuestions';
+import { getLocalizedQuizQuestions, type QuizQuestion } from '@/data/quizQuestions';
+import { useLanguage } from '@/lib/LanguageContext';
 
 export const QuizPage: React.FC = () => {
   const { motifId } = useParams<{ motifId?: string }>();
+  const { language } = useLanguage();
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   const [motifName, setMotifName] = useState<string>('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const quizQuestions = getQuizQuestions(motifId);
-    setQuestions(quizQuestions);
-    
-    // Set motif name for display
+    setQuestions(getLocalizedQuizQuestions(motifId, language));
     if (motifId) {
       setMotifName(formatMotifName(motifId));
     } else {
-      setMotifName('General Knowledge');
+      setMotifName(language === 'id' ? 'Pengetahuan Umum' : 'General Knowledge');
     }
-    
     setLoading(false);
-  }, [motifId]);
+  }, [motifId, language]);
 
   const formatMotifName = (id: string): string => {
     return id
@@ -58,19 +56,19 @@ export const QuizPage: React.FC = () => {
               <Link to="/gallery">
                 <Button variant="ghost" size="sm">
                   <ArrowLeft className="w-4 h-4 mr-2" />
-                  Back to Gallery
+                  {language === 'id' ? 'Kembali ke Galeri' : 'Back to Gallery'}
                 </Button>
               </Link>
               <div className="flex items-center gap-2">
                 <BookOpen className="w-5 h-5" />
                 <h1 className="text-xl font-bold font-serif">
-                  {motifName} Quiz
+                  {language === 'id' ? `Kuis ${motifName}` : `${motifName} Quiz`}
                 </h1>
               </div>
             </div>
             <Badge variant="outline" className="flex items-center gap-1">
               <Clock className="w-3 h-3" />
-              {questions.length} Questions
+              {questions.length} {language === 'id' ? 'Soal' : 'Questions'}
             </Badge>
           </div>
         </div>
@@ -89,33 +87,34 @@ export const QuizPage: React.FC = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-3">
                   <Trophy className="w-6 h-6 text-yellow-500" />
-                  Test Your Knowledge
+                  {language === 'id' ? 'Uji Pengetahuanmu' : 'Test Your Knowledge'}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                   <div className="text-center p-4 bg-muted/50 rounded-lg">
                     <div className="text-2xl font-bold text-primary">{questions.length}</div>
-                    <div className="text-sm text-muted-foreground">Questions</div>
+                    <div className="text-sm text-muted-foreground">{language === 'id' ? 'Soal' : 'Questions'}</div>
                   </div>
                   <div className="text-center p-4 bg-muted/50 rounded-lg">
                     <div className="text-2xl font-bold text-green-500">
                       {questions.reduce((total, q) => total + q.xp_reward, 0)}
                     </div>
-                    <div className="text-sm text-muted-foreground">Total XP</div>
+                    <div className="text-sm text-muted-foreground">{language === 'id' ? 'Total XP' : 'Total XP'}</div>
                   </div>
                   <div className="text-center p-4 bg-muted/50 rounded-lg">
                     <div className="text-2xl font-bold text-orange-500">
                       {'⭐'.repeat(Math.round(questions.reduce((total, q) => total + q.difficulty, 0) / questions.length))}
                     </div>
-                    <div className="text-sm text-muted-foreground">Avg Difficulty</div>
+                    <div className="text-sm text-muted-foreground">{language === 'id' ? 'Rata-rata Kesulitan' : 'Avg Difficulty'}</div>
                   </div>
                 </div>
                 
                 <div className="prose prose-sm max-w-none dark:prose-invert">
                   <p className="text-muted-foreground">
-                    Test your knowledge about {motifName.toLowerCase()} batik patterns. 
-                    Each correct answer earns you XP points and helps you master the cultural heritage of Indonesian batik.
+                    {language === 'id'
+                      ? `Uji pemahamanmu tentang motif batik ${motifName.toLowerCase()}. Setiap jawaban benar memberi XP dan membantumu memahami warisan budaya batik Indonesia.`
+                      : `Test your knowledge about ${motifName.toLowerCase()} batik patterns. Each correct answer earns you XP points and helps you master the cultural heritage of Indonesian batik.`}
                   </p>
                 </div>
               </CardContent>

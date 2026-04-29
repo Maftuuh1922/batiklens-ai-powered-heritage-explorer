@@ -44,7 +44,7 @@ export const Navbar = () => {
               to="/daily"
               className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors"
             >
-              Daily
+              {t('nav.daily')}
             </Link>
             <Link to="/scan">
               <Button
@@ -62,7 +62,7 @@ export const Navbar = () => {
 
             <Link
               to="/profile"
-              aria-label="Profile"
+              aria-label={t('nav.profile')}
               className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 text-foreground/80 hover:text-foreground hover:bg-foreground/5 transition-colors"
             >
               <User className="w-4 h-4" />
@@ -76,7 +76,7 @@ export const Navbar = () => {
             <StreakIndicator compact />
             <Link
               to="/profile"
-              aria-label="Profile"
+              aria-label={t('nav.profile')}
               className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 text-foreground/80 hover:text-foreground hover:bg-foreground/5 transition-colors"
             >
               <User className="w-4 h-4" />
@@ -97,7 +97,7 @@ export const Navbar = () => {
                     </SheetTitle>
                   </div>
                   <SheetDescription className="text-[10px] uppercase tracking-widest text-muted-foreground mb-8 pb-4 border-b border-foreground/5">
-                    Heritage Vision Explorer
+                    {t('nav.tagline')}
                   </SheetDescription>
                   <nav className="flex flex-col space-y-5">
                     <Link to="/" onClick={closeMenu} className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors py-2">
@@ -111,7 +111,7 @@ export const Navbar = () => {
                     </Link>
                     <Link to="/daily" onClick={closeMenu} className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors py-2 flex items-center gap-2">
                       <Brain className="w-4 h-4" />
-                      Daily
+                      {t('nav.daily')}
                     </Link>
                     <Link to="/scan" onClick={closeMenu} className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors py-2 flex items-center gap-2">
                       <ScanLine className="w-4 h-4" />
@@ -119,7 +119,7 @@ export const Navbar = () => {
                     </Link>
                     <Link to="/profile" onClick={closeMenu} className="text-lg font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors py-2 flex items-center gap-2">
                       <User className="w-4 h-4" />
-                      Profile
+                      {t('nav.profile')}
                     </Link>
                   </nav>
 
@@ -128,7 +128,7 @@ export const Navbar = () => {
                       <LanguageSwitcher />
                     </div>
                     <p className="text-[10px] text-muted-foreground font-black uppercase tracking-[0.3em]">
-                      Preserving the Infinite Thread
+                      {t('nav.preserving')}
                     </p>
                   </div>
                 </div>

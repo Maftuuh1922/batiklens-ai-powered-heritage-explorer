@@ -16,6 +16,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useEngagement } from '@/lib/engagement';
+import { useLanguage } from '@/lib/LanguageContext';
 
 interface Question {
   question_id: string;
@@ -53,6 +54,8 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
   onSaveProgress,
   onQuizComplete
 }) => {
+  const { language } = useLanguage();
+  const t = (idText: string, enText: string) => (language === 'id' ? idText : enText);
   const [quizState, setQuizState] = useState<QuizState>({
     currentQuestionIndex: 0,
     score: 0,
@@ -269,18 +272,22 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
   };
 
   const shareResults = () => {
-    const text = `I scored ${quizState.score}/${quizState.totalQuestions} in the ${motifName || 'Batik'} quiz! 🎨`;
-    if (navigator.share) {
-      navigator.share({ text });
-    } else {
-      navigator.clipboard.writeText(text);
+    const text =
+      language === 'id'
+        ? `Aku dapat ${quizState.score}/${quizState.totalQuestions} di kuis ${motifName || 'Batik'}! 🎨`
+        : `I scored ${quizState.score}/${quizState.totalQuestions} in the ${motifName || 'Batik'} quiz! 🎨`;
+    const nav = navigator as Navigator;
+    if (typeof nav.share === 'function') {
+      void nav.share({ text }).catch(() => undefined);
+    } else if (nav.clipboard?.writeText) {
+      void nav.clipboard.writeText(text);
     }
   };
 
   if (questions.length === 0) {
     return (
       <Card className="p-8 text-center">
-        <p>No questions available for this quiz.</p>
+        <p>{t('Belum ada soal untuk kuis ini.', 'No questions available for this quiz.')}</p>
       </Card>
     );
   }
@@ -291,7 +298,9 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
       <div className="mb-8">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold font-serif">
-            {motifName ? `${motifName} Quiz` : 'Batik Heritage Quiz'}
+            {motifName
+              ? t(`Kuis ${motifName}`, `${motifName} Quiz`)
+              : t('Kuis Warisan Batik', 'Batik Heritage Quiz')}
           </h2>
           <div className="flex items-center gap-2">
             <Button
@@ -310,7 +319,10 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
         
         <Progress value={progress} className="h-2" />
         <p className="text-sm text-muted-foreground mt-2">
-          Question {quizState.currentQuestionIndex + 1} of {quizState.totalQuestions}
+          {t(
+            `Soal ${quizState.currentQuestionIndex + 1} dari ${quizState.totalQuestions}`,
+            `Question ${quizState.currentQuestionIndex + 1} of ${quizState.totalQuestions}`,
+          )}
         </p>
       </div>
 
@@ -326,9 +338,13 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
           <Card className="mb-6">
             <CardContent className="p-8">
               <div className="mb-6">
-                <Badge className="mb-3">Difficulty: {'⭐'.repeat(currentQuestion.difficulty)}</Badge>
+                <Badge className="mb-3">
+                  {t('Tingkat', 'Difficulty')}: {'⭐'.repeat(currentQuestion.difficulty)}
+                </Badge>
                 <h3 className="text-xl font-semibold mb-2">{currentQuestion.question_text}</h3>
-                <p className="text-sm text-muted-foreground">XP Reward: {currentQuestion.xp_reward}</p>
+                <p className="text-sm text-muted-foreground">
+                  {t('Hadiah XP', 'XP Reward')}: {currentQuestion.xp_reward}
+                </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -387,12 +403,12 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
                       {selectedAnswer === currentQuestion.correct_answer ? (
                         <>
                           <CheckCircle2 className="w-5 h-5 text-green-500" />
-                          <span className="text-green-500 font-semibold">Correct!</span>
+                          <span className="text-green-500 font-semibold">{t('Benar!', 'Correct!')}</span>
                         </>
                       ) : (
                         <>
                           <XCircle className="w-5 h-5 text-red-500" />
-                          <span className="text-red-500 font-semibold">Incorrect</span>
+                          <span className="text-red-500 font-semibold">{t('Salah', 'Incorrect')}</span>
                         </>
                       )}
                     </div>
@@ -401,7 +417,9 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
                       size="sm"
                       onClick={() => setShowExplanation(!showExplanation)}
                     >
-                      {showExplanation ? 'Hide' : 'Show'} Explanation
+                      {showExplanation
+                        ? t('Sembunyikan Penjelasan', 'Hide Explanation')
+                        : t('Lihat Penjelasan', 'Show Explanation')}
                     </Button>
                   </div>
 
@@ -430,7 +448,7 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <Trophy className="w-5 h-5 text-yellow-500" />
-              Quiz Complete!
+              {t('Kuis Selesai!', 'Quiz Complete!')}
             </DialogTitle>
           </DialogHeader>
           
@@ -439,17 +457,20 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
               {quizState.score}/{quizState.totalQuestions}
             </div>
             <p className="text-muted-foreground mb-6">
-              You got {quizState.score} out of {quizState.totalQuestions} questions correct!
+              {t(
+                `Kamu menjawab ${quizState.score} dari ${quizState.totalQuestions} soal dengan benar!`,
+                `You got ${quizState.score} out of ${quizState.totalQuestions} questions correct!`,
+              )}
             </p>
             
             <div className="flex gap-2 justify-center">
               <Button onClick={resetQuiz} variant="outline">
                 <RotateCcw className="w-4 h-4 mr-2" />
-                Retry
+                {t('Ulangi', 'Retry')}
               </Button>
               <Button onClick={shareResults}>
                 <Share2 className="w-4 h-4 mr-2" />
-                Share
+                {t('Bagikan', 'Share')}
               </Button>
             </div>
           </div>

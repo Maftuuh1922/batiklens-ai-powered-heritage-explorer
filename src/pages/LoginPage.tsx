@@ -7,6 +7,9 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuth } from '@/lib/AuthContext';
 import { useLanguage } from '@/lib/LanguageContext';
+import { BatikPattern } from '@/components/ornaments/BatikPattern';
+import { BatikDivider } from '@/components/ornaments/BatikDivider';
+import { BatikCornerOrnament } from '@/components/ornaments/BatikCornerOrnament';
 
 interface LocationState {
   redirectTo?: string;
@@ -72,32 +75,40 @@ export function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-gradient-to-br from-background via-background to-amber-50/40 dark:to-amber-950/20">
+    <div className="relative min-h-screen flex items-center justify-center px-4 py-16 overflow-hidden bg-sogan-wash">
+      <BatikPattern motif="kawung" opacity={0.07} className="text-sogan dark:text-gold" fixed />
+      <BatikPattern motif="parang" opacity={0.04} className="text-gold" fixed />
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="w-full max-w-md"
+        className="w-full max-w-md relative z-10"
       >
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors mb-6"
+          className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground hover:text-gold transition-colors mb-6"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           {t('Kembali ke Beranda', 'Back to Home')}
         </Link>
 
-        <Card className="border-foreground/10 shadow-xl">
-          <CardHeader className="space-y-2">
-            <CardTitle className="font-serif text-3xl">
+        <Card className="relative border-gold/25 shadow-[0_20px_60px_-15px_hsl(var(--batik-navy)/0.35)] bg-[hsl(var(--paper-cream))]/85 dark:bg-foreground/[0.04] backdrop-blur-md overflow-hidden">
+          <BatikCornerOrnament corner="tl" />
+          <BatikCornerOrnament corner="tr" />
+          <BatikCornerOrnament corner="bl" />
+          <BatikCornerOrnament corner="br" />
+          <CardHeader className="space-y-2 relative">
+            <span className="heritage-pill mx-auto mb-1">{t('Warisan Wastra', 'Heritage Wastra')}</span>
+            <CardTitle className="font-serif text-3xl text-center text-sogan dark:text-gold">
               {t('Masuk ke BatikLens', 'Sign in to BatikLens')}
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-center">
               {t(
                 'Lanjutkan perjalanan motifmu — streak, XP, dan diary tetap aman.',
                 'Continue your motif journey — your streak, XP, and diary stay safe.',
               )}
             </CardDescription>
+            <BatikDivider className="pt-2" />
           </CardHeader>
           <CardContent className="space-y-5">
             {!isConfigured && (

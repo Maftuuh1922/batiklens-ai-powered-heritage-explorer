@@ -49,7 +49,7 @@ export const QuizPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="glass-nav sticky top-0 z-40">
+      <div className="glass-nav sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-4">
@@ -61,7 +61,7 @@ export const QuizPage: React.FC = () => {
               </Link>
               <div className="flex items-center gap-2">
                 <BookOpen className="w-5 h-5" />
-                <h1 className="text-xl font-bold font-serif">
+                <h1 className="text-xl font-bold font-serif text-sogan dark:text-gold">
                   {language === 'id' ? `Kuis ${motifName}` : `${motifName} Quiz`}
                 </h1>
               </div>
@@ -83,30 +83,30 @@ export const QuizPage: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             className="mb-8"
           >
-            <Card className="glass-card">
+            <Card className="batik-card">
               <CardHeader>
-                <CardTitle className="flex items-center gap-3">
-                  <Trophy className="w-6 h-6 text-yellow-500" />
+                <CardTitle className="flex items-center gap-3 font-serif text-sogan dark:text-gold">
+                  <Trophy className="w-6 h-6 text-gold" />
                   {language === 'id' ? 'Uji Pengetahuanmu' : 'Test Your Knowledge'}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                  <div className="text-center p-4 bg-muted/50 rounded-lg">
-                    <div className="text-2xl font-bold text-primary">{questions.length}</div>
-                    <div className="text-sm text-muted-foreground">{language === 'id' ? 'Soal' : 'Questions'}</div>
+                  <div className="text-center p-4 rounded-xl border border-gold/20 bg-[hsl(var(--paper-mori))]/30 dark:bg-foreground/[0.02]">
+                    <div className="text-2xl font-bold font-serif text-sogan dark:text-gold">{questions.length}</div>
+                    <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-1">{language === 'id' ? 'Soal' : 'Questions'}</div>
                   </div>
-                  <div className="text-center p-4 bg-muted/50 rounded-lg">
-                    <div className="text-2xl font-bold text-green-500">
-                      {questions.reduce((total, q) => total + q.xp_reward, 0)}
+                  <div className="text-center p-4 rounded-xl border border-gold/20 bg-[hsl(var(--paper-mori))]/30 dark:bg-foreground/[0.02]">
+                    <div className="text-2xl font-bold font-serif text-emerald-600 dark:text-emerald-400">
+                      +{questions.reduce((total, q) => total + q.xp_reward, 0)}
                     </div>
-                    <div className="text-sm text-muted-foreground">{language === 'id' ? 'Total XP' : 'Total XP'}</div>
+                    <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-1">{language === 'id' ? 'Total XP' : 'Total XP'}</div>
                   </div>
-                  <div className="text-center p-4 bg-muted/50 rounded-lg">
-                    <div className="text-2xl font-bold text-orange-500">
+                  <div className="text-center p-4 rounded-xl border border-gold/20 bg-[hsl(var(--paper-mori))]/30 dark:bg-foreground/[0.02]">
+                    <div className="text-2xl font-bold text-gold">
                       {'⭐'.repeat(Math.round(questions.reduce((total, q) => total + q.difficulty, 0) / questions.length))}
                     </div>
-                    <div className="text-sm text-muted-foreground">{language === 'id' ? 'Rata-rata Kesulitan' : 'Avg Difficulty'}</div>
+                    <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-1">{language === 'id' ? 'Rata-rata Kesulitan' : 'Avg Difficulty'}</div>
                   </div>
                 </div>
                 

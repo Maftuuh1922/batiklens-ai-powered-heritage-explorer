@@ -25,12 +25,20 @@
     --input: 20 5.9% 90%;
     --ring: 24.6 95% 53.1%;
     --radius: 0.75rem;
-    --batik-gold: 44 62% 52%;
-    /* Heritage Gold */
+    --batik-gold: 38 64% 48%;
+    /* Soga-gold — keprabon tone */
     --batik-navy: 231 38% 16%;
-    /* #1a1f3a */
+    /* #1a1f3a — wastra night */
+    --batik-sogan: 26 55% 32%;
+    /* Sogan brown — dye of Solo */
+    --batik-indigo: 220 60% 22%;
+    /* Wedel indigo — dye of Pekalongan */
+    --batik-merah: 358 65% 38%;
+    /* Bang-bangan red — Lasem */
     --paper-cream: 38 41% 94%;
-    /* #f5f0e8 */
+    /* #f5f0e8 — kain mori */
+    --paper-mori: 36 38% 88%;
+    /* Slightly warmer cream */
   }
 
   .dark {
@@ -53,14 +61,18 @@
     --border: 12 6.5% 15.1%;
     --input: 12 6.5% 15.1%;
     --ring: 24 5.7% 82.9%;
-    --batik-gold: 45 93% 47%;
+    --batik-gold: 42 85% 56%;
+    --batik-sogan: 30 62% 45%;
+    --batik-indigo: 220 70% 60%;
+    --batik-merah: 358 70% 56%;
+    --paper-mori: 25 18% 14%;
   }
 }
 
 @layer components {
   .glass-card {
-    @apply bg-background/60 backdrop-blur-[40px] border border-foreground/10 shadow-2xl overflow-hidden relative;
-    background-image: linear-gradient(to bottom, hsl(var(--foreground) / 0.03), transparent);
+    @apply bg-[hsl(var(--paper-cream))]/55 dark:bg-foreground/[0.03] backdrop-blur-[40px] border border-gold/20 shadow-[0_8px_40px_-12px_hsl(var(--batik-navy)/0.18)] overflow-hidden relative;
+    background-image: linear-gradient(to bottom, hsl(var(--batik-gold) / 0.04), transparent 70%);
   }
 
   /* Fix for video elements */
@@ -77,8 +89,8 @@
   }
 
   .glass-nav {
-    @apply backdrop-blur-[40px] bg-background/70 border-b border-foreground/5;
-    background-image: linear-gradient(to bottom, hsl(var(--foreground) / 0.02), transparent);
+    @apply backdrop-blur-[40px] bg-[hsl(var(--paper-cream))]/65 dark:bg-background/70 border-b border-gold/15;
+    background-image: linear-gradient(to bottom, hsl(var(--batik-gold) / 0.03), transparent);
   }
 
   .premium-glow {
@@ -100,6 +112,70 @@
   .border-gold {
     border-color: hsl(var(--batik-gold));
   }
+
+  .text-sogan {
+    color: hsl(var(--batik-sogan));
+  }
+
+  .text-indigo-batik {
+    color: hsl(var(--batik-indigo));
+  }
+
+  .text-merah-batik {
+    color: hsl(var(--batik-merah));
+  }
+
+  .bg-sogan {
+    background-color: hsl(var(--batik-sogan));
+  }
+
+  .bg-mori {
+    background-color: hsl(var(--paper-mori));
+  }
+
+  /* Wastra-style card: warm cream tint, gold hairline, soft shadow that
+     evokes the depth of layered kain.  */
+  .batik-card {
+    @apply relative overflow-hidden rounded-2xl border border-gold/20 bg-[hsl(var(--paper-cream))]/80 dark:bg-foreground/[0.03] shadow-[0_8px_40px_-12px_hsl(var(--batik-navy)/0.2)];
+  }
+
+  /* Wash of a single batik color — used for hero backdrops & section bands. */
+  .bg-sogan-wash {
+    background-image: radial-gradient(
+        ellipse at top left,
+        hsl(var(--batik-sogan) / 0.16),
+        transparent 60%
+      ),
+      radial-gradient(ellipse at bottom right, hsl(var(--batik-gold) / 0.1), transparent 70%);
+  }
+
+  .bg-indigo-wash {
+    background-image: radial-gradient(
+        ellipse at top right,
+        hsl(var(--batik-indigo) / 0.18),
+        transparent 60%
+      ),
+      radial-gradient(ellipse at bottom left, hsl(var(--batik-gold) / 0.08), transparent 70%);
+  }
+
+  .bg-mori-wash {
+    background-image: radial-gradient(
+        ellipse at top,
+        hsl(var(--paper-mori) / 0.6),
+        transparent 70%
+      );
+  }
+
+  /* Heading accent — gold underline for h2/h3 in section headers. */
+  .heading-accent::after {
+    content: '';
+    @apply mt-2 block h-px w-12 bg-gradient-to-r from-gold to-transparent;
+  }
+
+  /* Pill that whispers "warisan / heritage" — small caps, gold tinted. */
+  .heritage-pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-gold/30 bg-[hsl(var(--paper-cream))]/40 dark:bg-foreground/5 px-3 py-1 text-[10px] uppercase tracking-[0.32em] font-medium text-gold backdrop-blur;
+  }
 }
 
 html {
@@ -109,8 +185,21 @@ html {
 
 body {
   @apply bg-background text-foreground font-sans subpixel-antialiased min-h-screen selection:bg-foreground selection:text-background overflow-x-hidden;
-  /* Batik Kawung Pattern - Subtle Overlay */
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  /* Layered batik feel: kawung dot grid + soft soga-gold radial glow.
+     Subtle enough to not interfere with content but enough to whisper
+     "warisan kain" on every page. */
+  background-image:
+    radial-gradient(ellipse at top, hsl(var(--batik-gold) / 0.08), transparent 65%),
+    radial-gradient(ellipse at bottom right, hsl(var(--batik-sogan) / 0.07), transparent 70%),
+    url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23a07a3f' stroke-opacity='0.12' stroke-width='1.1'%3E%3Ccircle cx='20' cy='20' r='10'/%3E%3Ccircle cx='60' cy='20' r='10'/%3E%3Ccircle cx='20' cy='60' r='10'/%3E%3Ccircle cx='60' cy='60' r='10'/%3E%3Ccircle cx='40' cy='40' r='10'/%3E%3C/g%3E%3Cg fill='%23a07a3f' fill-opacity='0.14'%3E%3Ccircle cx='20' cy='20' r='1.6'/%3E%3Ccircle cx='60' cy='20' r='1.6'/%3E%3Ccircle cx='20' cy='60' r='1.6'/%3E%3Ccircle cx='60' cy='60' r='1.6'/%3E%3Ccircle cx='40' cy='40' r='1.6'/%3E%3C/g%3E%3C/svg%3E");
+  background-attachment: fixed, fixed, fixed;
+}
+
+.dark body {
+  background-image:
+    radial-gradient(ellipse at top, hsl(var(--batik-gold) / 0.06), transparent 65%),
+    radial-gradient(ellipse at bottom right, hsl(var(--batik-indigo) / 0.12), transparent 70%),
+    url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23d4a857' stroke-opacity='0.07' stroke-width='1.1'%3E%3Ccircle cx='20' cy='20' r='10'/%3E%3Ccircle cx='60' cy='20' r='10'/%3E%3Ccircle cx='20' cy='60' r='10'/%3E%3Ccircle cx='60' cy='60' r='10'/%3E%3Ccircle cx='40' cy='40' r='10'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 #root {

@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import { BatikPattern } from '@/components/ornaments/BatikPattern';
 
 // Page Component
 const Page = forwardRef<HTMLDivElement, any>((props, ref) => {
@@ -372,9 +373,11 @@ export const CatalogPage = () => {
       <div className="absolute inset-0 z-0 opacity-[0.03] dark:opacity-[0.07] pointer-events-none mix-blend-multiply dark:mix-blend-screen"
         style={{ backgroundImage: "url('/batik-day.png')", backgroundSize: '400px', backgroundRepeat: 'repeat' }}
       />
+      <BatikPattern motif="kawung" opacity={0.06} className="text-sogan dark:text-gold z-0" />
+      <BatikPattern motif="parang" opacity={0.03} className="text-gold z-0" />
 
       {/* Ambient Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[80vh] bg-amber-500/5 dark:bg-blue-900/10 blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[80vh] bg-gold/8 dark:bg-indigo-batik/10 blur-[150px] rounded-full pointer-events-none" />
 
       {/* Mobile Sidebar Trigger */}
       <div className="lg:hidden absolute top-6 left-6 z-50">

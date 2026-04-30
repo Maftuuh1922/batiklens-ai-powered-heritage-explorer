@@ -110,11 +110,11 @@ export function DailyPage() {
 
   // Render
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 space-y-12">
+    <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 space-y-12">
       <header className="text-center space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-foreground/10 bg-background/60 backdrop-blur-sm">
-          <Calendar className="w-3.5 h-3.5 text-gold" />
-          <span className="text-[10px] font-black uppercase tracking-[0.25em] text-gold">
+        <div className="heritage-pill">
+          <Calendar className="w-3.5 h-3.5" />
+          <span>
             {new Date().toLocaleDateString(language === 'id' ? 'id-ID' : 'en-US', {
               weekday: 'long',
               day: 'numeric',
@@ -122,7 +122,7 @@ export function DailyPage() {
             })}
           </span>
         </div>
-        <h1 className="text-4xl md:text-6xl font-serif font-bold leading-tight">
+        <h1 className="text-4xl md:text-6xl font-serif font-bold leading-tight text-sogan dark:text-gold">
           {language === 'id' ? 'Tantangan Harian' : 'Daily Challenge'}
         </h1>
         <p className="text-muted-foreground max-w-lg mx-auto">
@@ -139,7 +139,7 @@ export function DailyPage() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
-            className="rounded-3xl border border-foreground/10 bg-gradient-to-br from-indigo-500/10 via-background to-rose-500/10 p-8 md:p-12 text-center"
+            className="relative overflow-hidden rounded-3xl border border-gold/25 bg-indigo-wash bg-[hsl(var(--paper-cream))]/70 dark:bg-foreground/[0.03] backdrop-blur-sm shadow-[0_18px_60px_-20px_hsl(var(--batik-navy)/0.3)] p-8 md:p-12 text-center"
           >
             <Brain className="w-10 h-10 mx-auto text-indigo-500 mb-4" />
             <h2 className="text-2xl md:text-3xl font-serif font-bold mb-2">
@@ -178,7 +178,7 @@ export function DailyPage() {
               </span>
             </div>
             <Progress value={((qi + (phase === 'feedback' ? 1 : 0)) / questions.length) * 100} className="h-1.5" />
-            <div className="rounded-3xl border border-foreground/10 bg-background/70 backdrop-blur p-6 md:p-8 space-y-5">
+            <div className="relative overflow-hidden rounded-3xl border border-gold/20 bg-[hsl(var(--paper-cream))]/70 dark:bg-foreground/[0.03] backdrop-blur-sm shadow-[0_8px_40px_-12px_hsl(var(--batik-navy)/0.18)] p-6 md:p-8 space-y-5">
               <h3 className="text-xl md:text-2xl font-serif font-bold leading-snug">{current.question_text}</h3>
               <div className="grid gap-3">
                 {current.options.map((opt, i) => {

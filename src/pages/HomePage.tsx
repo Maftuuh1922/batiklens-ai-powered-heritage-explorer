@@ -8,6 +8,7 @@ import { batiks } from '@/lib/batik-data';
 import { useState, useEffect } from 'react';
 import { BatikOfTheDay } from '@/components/engagement/BatikOfTheDay';
 import { DailyQuizCard } from '@/components/engagement/DailyQuizCard';
+import { BatikPattern } from '@/components/ornaments/BatikPattern';
 
 export function HomePage() {
   const { t, language } = useLanguage();
@@ -57,6 +58,8 @@ export function HomePage() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
           <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-background/20" />
+          <BatikPattern motif="kawung" opacity={0.07} className="text-gold" />
+          <BatikPattern motif="parang" opacity={0.04} className="text-sogan dark:text-gold" />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-12 md:py-24 text-center">
           <motion.div

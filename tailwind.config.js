@@ -39,7 +39,11 @@ export default {
 				},
 				'batik-navy': 'hsl(var(--batik-navy) / <alpha-value>)',
 				'paper-cream': 'hsl(var(--paper-cream) / <alpha-value>)',
-				'gold': 'hsl(var(--batik-gold) / <alpha-value>)'
+				'paper-mori': 'hsl(var(--paper-mori) / <alpha-value>)',
+				'gold': 'hsl(var(--batik-gold) / <alpha-value>)',
+				'sogan': 'hsl(var(--batik-sogan) / <alpha-value>)',
+				'indigo-batik': 'hsl(var(--batik-indigo) / <alpha-value>)',
+				'merah-batik': 'hsl(var(--batik-merah) / <alpha-value>)'
 			},
 			keyframes: {
 				'scan-line': {

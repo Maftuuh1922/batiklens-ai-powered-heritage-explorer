@@ -1,11 +1,26 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined;
+const rawUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
 
-export const isSupabaseConfigured: boolean = Boolean(
-  supabaseUrl && supabaseAnonKey && supabaseUrl.startsWith('http'),
-);
+/**
+ * Normalize a pasted Supabase URL. Users sometimes copy `…/auth/v1/` or include
+ * a trailing slash from the dashboard — strip both so the SDK can build paths
+ * cleanly. Returns undefined if the input clearly isn't a valid base URL.
+ */
+function normalizeSupabaseUrl(input: string | undefined): string | undefined {
+  if (!input) return undefined;
+  let url = input.trim();
+  if (!url) return undefined;
+  if (!/^https?:\/\//i.test(url)) return undefined;
+  url = url.replace(/\/+$/, '');
+  url = url.replace(/\/(auth|rest|storage|realtime)\/v\d+$/i, '');
+  return url;
+}
+
+const supabaseUrl = normalizeSupabaseUrl(rawUrl);
+
+export const isSupabaseConfigured: boolean = Boolean(supabaseUrl && supabaseAnonKey);
 
 if (!isSupabaseConfigured && typeof window !== 'undefined') {
   console.warn(

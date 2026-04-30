@@ -9,6 +9,9 @@ import { batiks } from '@/lib/batik-data';
 import { XpBar } from '@/components/engagement/XpBar';
 import { BadgeGrid } from '@/components/engagement/BadgeGrid';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { BatikPattern } from '@/components/ornaments/BatikPattern';
+import { BatikDivider } from '@/components/ornaments/BatikDivider';
+import { BatikCornerOrnament } from '@/components/ornaments/BatikCornerOrnament';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
@@ -77,9 +80,14 @@ export function ProfilePage() {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="relative overflow-hidden rounded-3xl border border-foreground/10 bg-gradient-to-br from-amber-50 via-background to-orange-50 dark:from-amber-950/30 dark:via-background dark:to-orange-950/30 p-6 md:p-10"
+        className="relative overflow-hidden rounded-3xl border border-gold/25 bg-sogan-wash bg-[hsl(var(--paper-cream))]/70 dark:bg-foreground/[0.03] backdrop-blur-sm shadow-[0_18px_60px_-20px_hsl(var(--batik-navy)/0.35)] p-6 md:p-10"
       >
-        <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-amber-300/20 blur-3xl" />
+        <BatikPattern motif="kawung" opacity={0.08} className="text-sogan dark:text-gold" />
+        <BatikCornerOrnament corner="tl" />
+        <BatikCornerOrnament corner="tr" />
+        <BatikCornerOrnament corner="bl" />
+        <BatikCornerOrnament corner="br" />
+        <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-gold/10 blur-3xl" />
         <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-10">
           <div className="relative">
             <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-br from-amber-300 via-orange-400 to-rose-500 p-1 shadow-2xl shadow-orange-500/30">
@@ -118,8 +126,10 @@ export function ProfilePage() {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.05, duration: 0.5 }}
-        className="mt-6 rounded-2xl border border-foreground/10 bg-background/60 p-5 md:p-6"
+        className="relative mt-6 rounded-2xl border border-gold/20 bg-[hsl(var(--paper-cream))]/70 dark:bg-foreground/[0.03] backdrop-blur-sm overflow-hidden p-5 md:p-6"
       >
+        <BatikPattern motif="truntum" opacity={0.05} className="text-sogan dark:text-gold" />
+        <div className="relative">
         {authLoading ? (
           <div className="flex items-center gap-4 animate-pulse">
             <div className="h-12 w-12 rounded-full bg-muted/50" />
@@ -151,7 +161,7 @@ export function ProfilePage() {
                 <p className="text-xs text-muted-foreground truncate">{user.email}</p>
               )}
             </div>
-            <Button variant="outline" size="sm" onClick={() => void signOut()}>
+            <Button variant="outline" size="sm" onClick={() => void signOut()} className="border-gold/30 hover:bg-gold/10">
               <LogOut className="w-3.5 h-3.5 mr-2" />
               {language === 'id' ? 'Keluar' : 'Sign out'}
             </Button>
@@ -184,7 +194,10 @@ export function ProfilePage() {
             </div>
           </div>
         )}
+        </div>
       </motion.section>
+
+      <BatikDivider className="mt-10 mb-2" label={language === 'id' ? 'Statistik' : 'Stats'} />
 
       {/* Quick stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-6">
@@ -194,7 +207,7 @@ export function ProfilePage() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 + i * 0.05, duration: 0.4 }}
-            className="rounded-2xl border border-foreground/10 bg-background/60 p-4 md:p-5"
+            className="relative rounded-2xl border border-gold/20 bg-[hsl(var(--paper-cream))]/60 dark:bg-foreground/[0.03] p-4 md:p-5 overflow-hidden hover:border-gold/40 transition-colors"
           >
             <div className="flex items-center justify-between">
               <Icon className={`w-4 h-4 ${tint}`} />

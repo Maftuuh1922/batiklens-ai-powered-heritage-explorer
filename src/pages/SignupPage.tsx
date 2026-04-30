@@ -6,6 +6,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuth } from '@/lib/AuthContext';
+import { BatikPattern } from '@/components/ornaments/BatikPattern';
+import { BatikDivider } from '@/components/ornaments/BatikDivider';
+import { BatikCornerOrnament } from '@/components/ornaments/BatikCornerOrnament';
 import { useLanguage } from '@/lib/LanguageContext';
 
 interface LocationState {
@@ -68,14 +71,20 @@ export function SignupPage() {
 
   if (done) {
     return (
-      <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-gradient-to-br from-background via-background to-amber-50/40 dark:to-amber-950/20">
+      <div className="relative min-h-screen flex items-center justify-center px-4 py-16 overflow-hidden bg-sogan-wash">
+        <BatikPattern motif="kawung" opacity={0.07} className="text-sogan dark:text-gold" fixed />
+        <BatikPattern motif="parang" opacity={0.04} className="text-gold" fixed />
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           className="w-full max-w-md"
         >
-          <Card className="border-foreground/10 shadow-xl text-center">
-            <CardHeader className="space-y-3">
+          <Card className="relative border-gold/25 shadow-[0_20px_60px_-15px_hsl(var(--batik-navy)/0.35)] bg-[hsl(var(--paper-cream))]/85 dark:bg-foreground/[0.04] backdrop-blur-md text-center overflow-hidden">
+            <BatikCornerOrnament corner="tl" />
+            <BatikCornerOrnament corner="tr" />
+            <BatikCornerOrnament corner="bl" />
+            <BatikCornerOrnament corner="br" />
+            <CardHeader className="space-y-3 relative">
               <div className="mx-auto w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-950/50 flex items-center justify-center">
                 <CheckCircle2 className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
               </div>
@@ -104,7 +113,9 @@ export function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-gradient-to-br from-background via-background to-amber-50/40 dark:to-amber-950/20">
+    <div className="relative min-h-screen flex items-center justify-center px-4 py-16 overflow-hidden bg-sogan-wash">
+      <BatikPattern motif="kawung" opacity={0.07} className="text-sogan dark:text-gold" fixed />
+      <BatikPattern motif="parang" opacity={0.04} className="text-gold" fixed />
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -119,19 +130,25 @@ export function SignupPage() {
           {t('Kembali ke Beranda', 'Back to Home')}
         </Link>
 
-        <Card className="border-foreground/10 shadow-xl">
-          <CardHeader className="space-y-2">
-            <CardTitle className="font-serif text-3xl">
+        <Card className="relative border-gold/25 shadow-[0_20px_60px_-15px_hsl(var(--batik-navy)/0.35)] bg-[hsl(var(--paper-cream))]/85 dark:bg-foreground/[0.04] backdrop-blur-md overflow-hidden">
+          <BatikCornerOrnament corner="tl" />
+          <BatikCornerOrnament corner="tr" />
+          <BatikCornerOrnament corner="bl" />
+          <BatikCornerOrnament corner="br" />
+          <CardHeader className="space-y-2 relative">
+            <span className="heritage-pill mx-auto mb-1">{t('Warisan Wastra', 'Heritage Wastra')}</span>
+            <CardTitle className="font-serif text-3xl text-center text-sogan dark:text-gold">
               {t('Daftar BatikLens', 'Create your BatikLens account')}
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-center">
               {t(
                 'Mulai kumpulkan streak, XP, dan badge sebagai penjaga motif.',
                 'Start collecting streaks, XP, and badges as a motif keeper.',
               )}
             </CardDescription>
+            <BatikDivider className="pt-2" />
           </CardHeader>
-          <CardContent className="space-y-5">
+          <CardContent className="space-y-5 relative">
             {!isConfigured && (
               <div className="rounded-md border border-amber-300/50 bg-amber-50 dark:bg-amber-950/40 p-3 text-xs text-amber-900 dark:text-amber-200">
                 {t(

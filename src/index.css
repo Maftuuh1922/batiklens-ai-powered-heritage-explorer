@@ -42,30 +42,30 @@
   }
 
   .dark {
-    --background: 20 14.3% 4.1%;
-    --foreground: 60 9.1% 97.8%;
-    --card: 20 14.3% 4.1%;
-    --card-foreground: 60 9.1% 97.8%;
-    --popover: 20 14.3% 4.1%;
-    --popover-foreground: 60 9.1% 97.8%;
-    --primary: 60 9.1% 97.8%;
-    --primary-foreground: 24 9.8% 10%;
-    --secondary: 12 6.5% 15.1%;
-    --secondary-foreground: 60 9.1% 97.8%;
-    --muted: 12 6.5% 15.1%;
-    --muted-foreground: 24 5.4% 63.9%;
-    --accent: 12 6.5% 15.1%;
-    --accent-foreground: 60 9.1% 97.8%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 60 9.1% 97.8%;
-    --border: 12 6.5% 15.1%;
-    --input: 12 6.5% 15.1%;
-    --ring: 24 5.7% 82.9%;
+    --background: 35 15% 12%; /* Warnanya kecoklatan tua agar tidak terlalu gelap (dark sepia) */
+    --foreground: 45 40% 96%;
+    --card: 35 15% 15%;
+    --card-foreground: 45 40% 96%;
+    --popover: 35 15% 15%;
+    --popover-foreground: 45 40% 96%;
+    --primary: 42 85% 56%;
+    --primary-foreground: 35 15% 10%;
+    --secondary: 35 20% 20%;
+    --secondary-foreground: 45 40% 96%;
+    --muted: 35 20% 20%;
+    --muted-foreground: 40 25% 65%;
+    --accent: 35 25% 25%;
+    --accent-foreground: 45 40% 96%;
+    --destructive: 0 62.8% 45%;
+    --destructive-foreground: 45 40% 96%;
+    --border: 35 20% 27%;
+    --input: 35 20% 20%;
+    --ring: 42 85% 56%;
     --batik-gold: 42 85% 56%;
     --batik-sogan: 30 62% 45%;
     --batik-indigo: 220 70% 60%;
     --batik-merah: 358 70% 56%;
-    --paper-mori: 25 18% 14%;
+    --paper-mori: 35 20% 18%;
   }
 }
 

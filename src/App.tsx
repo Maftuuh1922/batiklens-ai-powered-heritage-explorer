@@ -8,7 +8,7 @@ const App = () => {
     <div className="min-h-screen flex flex-col antialiased selection:bg-foreground selection:text-background">
       <EngagementProvider />
       <Navbar />
-      <main className="flex-grow">
+      <main className="flex-grow pt-24 md:pt-28">
         <Outlet />
       </main>
       <ScrollRestoration />

@@ -15,11 +15,19 @@ export const Navbar = () => {
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <nav className="sticky top-0 z-50 w-full glass-nav transition-all duration-300">
-      <div className="absolute inset-0 bg-gradient-to-r from-background/40 via-transparent to-background/40 pointer-events-none" />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex justify-between items-center h-16 md:h-20">
-          <div className="flex-shrink-0">
+    <div className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pointer-events-none">
+      <div className="mx-auto max-w-7xl group">
+        {/* Glow effect behind the navbar */}
+        <div className="absolute inset-0 bg-batik-gold/20 dark:bg-batik-gold/30 blur-[40px] opacity-0 group-hover:opacity-50 transition-opacity duration-700 pointer-events-none scale-105 rounded-full" />
+        
+        <nav className="relative bg-background/60 dark:bg-background/30 backdrop-blur-3xl rounded-full border-[0.5px] border-white/20 dark:border-white/10 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_-8px_hsl(var(--batik-gold)/0.2)] pointer-events-auto transition-all duration-500 overflow-hidden hover:border-gold/30 dark:hover:border-gold/40">
+          
+          {/* Inner ambient light */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent dark:from-white/5 pointer-events-none" />
+          
+          <div className="px-5 sm:px-8 lg:px-10 relative z-10">
+            <div className="flex justify-between items-center h-16 md:h-[72px]">
+              <div className="flex-shrink-0">
             <Link to="/" className="flex items-center gap-2 group">
               <KawungLogo className="h-7 w-7 md:h-8 md:w-8 text-foreground transition-transform group-hover:rotate-90 duration-700" />
               <span className="text-xl md:text-2xl font-serif font-bold tracking-tighter text-foreground group-hover:opacity-80 transition-opacity">
@@ -57,17 +65,17 @@ export const Navbar = () => {
               </Button>
             </Link>
 
-            <div className="h-6 w-px bg-border/50 mx-2" />
+            <div className="h-6 w-px bg-border/50 mx-2 hidden lg:block" />
 
-            <StreakIndicator />
-
-            <UserMenu />
-
-            <LanguageSwitcher />
-            <ThemeToggle className="static" />
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <StreakIndicator />
+              <UserMenu />
+              <LanguageSwitcher />
+              <ThemeToggle className="static" />
+            </div>
           </div>
 
-          <div className="md:hidden flex items-center gap-2">
+          <div className="md:hidden flex items-center gap-1.5 sm:gap-2">
             <StreakIndicator compact />
             <UserMenu />
             <ThemeToggle className="static" />
@@ -123,7 +131,9 @@ export const Navbar = () => {
           </div>
         </div>
       </div>
-    </nav>
+      </nav>
+      </div>
+    </div>
   );
 };
 

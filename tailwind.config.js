@@ -70,6 +70,19 @@ export default {
 				'gradient-x': {
 					'0%, 100%': { backgroundPosition: '0% 50%' },
 					'50%': { backgroundPosition: '100% 50%' }
+				},
+				'lightning': {
+					'0%, 100%': { opacity: '0', transform: 'scale(1)' },
+					'5%': { opacity: '1', transform: 'scale(1.2) rotate(15deg)' },
+					'10%': { opacity: '0' },
+					'11%': { opacity: '1', transform: 'scale(1.1) rotate(-10deg)' },
+					'15%': { opacity: '0' },
+				},
+				'zap-slide': {
+					'0%': { left: '-10%', opacity: '0' },
+					'10%': { opacity: '1' },
+					'90%': { opacity: '1' },
+					'100%': { left: '100%', opacity: '0' },
 				}
 			},
 			animation: {
@@ -78,7 +91,9 @@ export default {
 				'parallax': 'parallax 30s linear infinite',
 				'slow-pan': 'slow-pan 25s ease-in-out infinite',
 				'shimmer': 'shimmer 2.4s linear infinite',
-				'gradient-x': 'gradient-x 8s ease infinite'
+				'gradient-x': 'gradient-x 8s ease infinite',
+				'lightning': 'lightning 3s infinite',
+				'zap-slide': 'zap-slide 2.5s linear infinite'
 			}
 		}
 	},

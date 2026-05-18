@@ -8,19 +8,53 @@ import { LanguageSwitcher } from './LanguageSwitcher';
 import { useLanguage } from '@/lib/LanguageContext';
 import { StreakIndicator } from '@/components/engagement/StreakIndicator';
 import { UserMenu } from '@/components/auth/UserMenu';
+import { useEngagement, levelFromXp } from '@/lib/engagement';
+
+const getNavbarBorderStyle = (lvl: number) => {
+  if (lvl >= 50) return 'border-fuchsia-500/80 shadow-[0_0_30px_rgba(217,70,239,0.5)] dark:border-fuchsia-400/80 dark:shadow-[0_0_40px_rgba(217,70,239,0.4)]';
+  if (lvl >= 25) return 'border-orange-500/80 shadow-[0_0_30px_rgba(249,115,22,0.5)] dark:border-orange-400/80 dark:shadow-[0_0_40px_rgba(249,115,22,0.4)]';
+  if (lvl >= 10) return 'border-indigo-500/80 shadow-[0_0_30px_rgba(99,102,241,0.5)] dark:border-indigo-400/80 dark:shadow-[0_0_40px_rgba(99,102,241,0.4)]';
+  if (lvl >= 5) return 'border-emerald-500/80 shadow-[0_0_30px_rgba(16,185,129,0.5)] dark:border-emerald-400/80 dark:shadow-[0_0_40px_rgba(16,185,129,0.4)]';
+  return 'border-gold/60 shadow-[0_8px_32px_-8px_rgba(212,175,55,0.4)] dark:border-gold/50 dark:shadow-[0_8px_32px_-8px_rgba(212,175,55,0.4)]';
+};
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useLanguage();
+  const xp = useEngagement((s) => s.xp);
+  const level = levelFromXp(xp);
   const closeMenu = () => setIsOpen(false);
+
+  const navBorder = getNavbarBorderStyle(level);
+
+  // Fungsi khusus untuk menguji tampilan (nanti bisa Anda hapus)
+  const testLevelUp = (targetLevel: number, targetXp: number) => {
+    const data = JSON.parse(localStorage.getItem('batiklens-engagement-v1') || '{}');
+    if (!data.state) data.state = {};
+    data.state.xp = targetXp;
+    data.state.level = targetLevel;
+    localStorage.setItem('batiklens-engagement-v1', JSON.stringify(data));
+    window.location.reload();
+  };
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pointer-events-none">
+      {/* Tombol Rahasia Untuk Test Level */}
+      <div className="absolute top-0 right-0 p-1 pointer-events-auto z-[999] flex gap-1 bg-background/80 backdrop-blur-md rounded-bl-lg">
+        <span className="text-[8px] text-muted-foreground self-center mr-1 font-bold">TEST:</span>
+        <button onClick={() => testLevelUp(1, 0)} className="text-[8px] bg-foreground/20 text-foreground px-1.5 py-0.5 rounded hover:bg-foreground/40">L1</button>
+        <button onClick={() => testLevelUp(5, 1000)} className="text-[8px] bg-emerald-500 text-white px-1.5 py-0.5 rounded hover:bg-emerald-400">L5</button>
+        <button onClick={() => testLevelUp(10, 4500)} className="text-[8px] bg-indigo-500 text-white px-1.5 py-0.5 rounded hover:bg-indigo-400">L10</button>
+        <button onClick={() => testLevelUp(25, 30000)} className="text-[8px] bg-orange-500 text-white px-1.5 py-0.5 rounded hover:bg-orange-400">L25</button>
+        <button onClick={() => testLevelUp(50, 122500)} className="text-[8px] bg-fuchsia-500 text-white px-1.5 py-0.5 rounded hover:bg-fuchsia-400">L50</button>
+        <button onClick={() => { localStorage.removeItem('batiklens-engagement-v1'); window.location.reload(); }} className="text-[8px] bg-red-600 text-white px-1.5 py-0.5 rounded hover:bg-red-500 ml-1">RST</button>
+      </div>
+
       <div className="mx-auto max-w-7xl group">
         {/* Glow effect behind the navbar */}
-        <div className="absolute inset-0 bg-batik-gold/20 dark:bg-batik-gold/30 blur-[40px] opacity-0 group-hover:opacity-50 transition-opacity duration-700 pointer-events-none scale-105 rounded-full" />
+        <div className={`absolute inset-0 blur-[40px] opacity-0 group-hover:opacity-70 transition-opacity duration-700 pointer-events-none scale-105 rounded-full ${level >= 50 ? 'bg-fuchsia-500/40 animate-pulse' : level >= 25 ? 'bg-orange-500/40 animate-pulse' : 'bg-batik-gold/30'}`} />
         
-        <nav className="relative bg-background/60 dark:bg-background/30 backdrop-blur-3xl rounded-full border-[0.5px] border-white/20 dark:border-white/10 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_-8px_hsl(var(--batik-gold)/0.2)] pointer-events-auto transition-all duration-500 overflow-hidden hover:border-gold/30 dark:hover:border-gold/40">
+        <nav className={`relative bg-background/80 dark:bg-background/60 backdrop-blur-3xl rounded-full border-2 ${navBorder} pointer-events-auto transition-all duration-500 overflow-hidden hover:brightness-110`}>
           
           {/* Inner ambient light */}
           <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent dark:from-white/5 pointer-events-none" />
@@ -28,7 +62,7 @@ export const Navbar = () => {
           <div className="px-5 sm:px-8 lg:px-10 relative z-10">
             <div className="flex justify-between items-center h-16 md:h-[72px]">
               <div className="flex-shrink-0">
-            <Link to="/" className="flex items-center gap-2 group">
+            <Link to="/" id="nav-home" className="flex items-center gap-2 group">
               <KawungLogo className="h-7 w-7 md:h-8 md:w-8 text-foreground transition-transform group-hover:rotate-90 duration-700" />
               <span className="text-xl md:text-2xl font-serif font-bold tracking-tighter text-foreground group-hover:opacity-80 transition-opacity">
                 BatikLens.
@@ -38,24 +72,27 @@ export const Navbar = () => {
 
           <div className="hidden md:flex items-center justify-end space-x-4 lg:space-x-6">
             <Link
+              id="nav-catalog"
               to="/catalog"
               className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors"
             >
               {t('nav.catalog')}
             </Link>
             <Link
+              id="nav-museum"
               to="/museum"
               className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors"
             >
               {t('nav.museum')}
             </Link>
             <Link
+              id="nav-daily"
               to="/daily"
               className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors"
             >
               {t('nav.daily')}
             </Link>
-            <Link to="/scan">
+            <Link to="/scan" id="nav-scan">
               <Button
                 size="sm"
                 className="bg-foreground text-background hover:bg-foreground/90 flex items-center gap-2 px-6 rounded-full font-black uppercase text-[10px] tracking-[0.2em] transition-transform active:scale-95"

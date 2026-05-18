@@ -14,17 +14,22 @@ export type XpReason =
   | 'read-motif'
   | 'favorite'
   | 'share'
-  | 'daily-quiz';
+  | 'museum-discover'
+  | 'museum-complete'
+  | 'minigame';
 
 export const XP_REWARDS: Record<XpReason, number> = {
-  'daily-login': 10,
-  scan: 20,
-  'quiz-correct': 10,
-  'quiz-complete': 50,
-  'read-motif': 5,
-  favorite: 3,
-  share: 8,
-  'daily-quiz': 30,
+  'daily-login': 100,
+  scan: 250,
+  'quiz-correct': 50,
+  'quiz-complete': 300,
+  'read-motif': 50,
+  favorite: 25,
+  share: 100,
+  'daily-quiz': 500,
+  'museum-discover': 150,
+  'museum-complete': 5000,
+  'minigame': 1, // base multiplier for dynamic score
 };
 
 export interface DiaryEntry {
@@ -65,6 +70,9 @@ export interface EngagementState {
   // favorites
   favorites: string[]; // motif ids
 
+  // museum exploration
+  museumVisited: string[]; // motif ids of viewed museum pieces
+
   // counters
   scanCount: number;
   quizCompleteCount: number;
@@ -85,6 +93,7 @@ export interface EngagementActions {
   addDiary: (entry: Omit<DiaryEntry, 'id' | 'timestamp'>) => void;
   toggleFavorite: (motifId: string) => boolean; // returns new state
   isFavorite: (motifId: string) => boolean;
+  markMuseumVisited: (motifId: string) => { newlyDiscovered: boolean; totalVisited: number };
   markDailyQuizDone: () => void;
   hasDailyQuizDone: () => boolean;
   setSoundEnabled: (v: boolean) => void;
@@ -259,6 +268,7 @@ const initialState: EngagementState = {
   unlockedBadges: [],
   diary: [],
   favorites: [],
+  museumVisited: [],
   scanCount: 0,
   quizCompleteCount: 0,
   readCount: 0,
@@ -347,6 +357,16 @@ export const useEngagement = create<EngagementStore>()(
       },
 
       isFavorite: (motifId) => get().favorites.includes(motifId),
+
+      markMuseumVisited: (motifId) => {
+        const state = get();
+        if (state.museumVisited.includes(motifId)) {
+          return { newlyDiscovered: false, totalVisited: state.museumVisited.length };
+        }
+        const newVisited = [...state.museumVisited, motifId];
+        set({ museumVisited: newVisited });
+        return { newlyDiscovered: true, totalVisited: newVisited.length };
+      },
 
       markDailyQuizDone: () => set({ dailyQuizDate: today() }),
 

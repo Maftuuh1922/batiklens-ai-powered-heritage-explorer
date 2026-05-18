@@ -26,6 +26,8 @@ import { ProfilePage } from '@/pages/ProfilePage';
 import { DailyPage } from '@/pages/DailyPage';
 import { LoginPage } from '@/pages/LoginPage';
 import { SignupPage } from '@/pages/SignupPage';
+import { MiniGamePage } from '@/pages/MiniGamePage';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -47,6 +49,7 @@ const router = createBrowserRouter([
       { path: "/daily", element: <DailyPage /> },
       { path: "/login", element: <LoginPage /> },
       { path: "/signup", element: <SignupPage /> },
+      { path: "/minigame", element: <MiniGamePage /> },
     ]
   },
 ]);

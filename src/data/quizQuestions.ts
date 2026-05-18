@@ -22,6 +22,7 @@ export interface BilingualQuizQuestion {
   explanation: LocalizedString;
   difficulty: number;
   xp_reward: number;
+  image_url?: string;
 }
 
 export interface QuizQuestion {
@@ -33,6 +34,7 @@ export interface QuizQuestion {
   explanation: string;
   difficulty: number;
   xp_reward: number;
+  image_url?: string;
 }
 
 export const quizQuestions: Record<string, BilingualQuizQuestion[]> = {
@@ -573,6 +575,222 @@ export const quizQuestions: Record<string, BilingualQuizQuestion[]> = {
       },
       difficulty: 3,
       xp_reward: 25,
+    },
+    {
+      question_id: 'gen_006',
+      motif_id: 'general',
+      image_url: '/batik-images/batik-parang/1.jpg',
+      question_text: {
+        en: 'Look at the image. What is the name of this famous historical batik motif?',
+        id: 'Perhatikan gambar (Tebak Gambar). Apa nama motif batik yang sangat terkenal dan historis ini?',
+      },
+      options: [
+        { en: 'Kawung', id: 'Kawung' },
+        { en: 'Parang', id: 'Parang' },
+        { en: 'Mega Mendung', id: 'Mega Mendung' },
+        { en: 'Truntum', id: 'Truntum' },
+      ],
+      correct_answer: 'B',
+      explanation: {
+        en: 'This is the Parang motif, characterized by its continuous diagonal wave-like patterns symbolizing a sword or wave.',
+        id: 'Gambar tersebut adalah motif Parang. Ciri khasnya adalah pola miring (diagonal) berlanjut yang menyerupai ombak atau pedang.',
+      },
+      difficulty: 1,
+      xp_reward: 15,
+    },
+    {
+      question_id: 'gen_007',
+      motif_id: 'general',
+      image_url: '/batik-images/batik-megamendung/1.jpg',
+      question_text: {
+        en: 'From which coastal city does this cloud-patterned batik originate?',
+        id: 'Perhatikan tebak gambar di atas. Dari kota manakah motif batik bergambar awan ini berasal?',
+      },
+      options: [
+        { en: 'Pekalongan', id: 'Pekalongan' },
+        { en: 'Yogyakarta', id: 'Yogyakarta' },
+        { en: 'Cirebon', id: 'Cirebon' },
+        { en: 'Lasem', id: 'Lasem' },
+      ],
+      correct_answer: 'C',
+      explanation: {
+        en: 'Mega Mendung is the iconic cloud motif originating from Cirebon, heavily culturally influenced by China.',
+        id: 'Motif Mega Mendung adalah motif awan ikonik yang berasal dari Cirebon, dengan pengaruh kuat budaya Tiongkok.',
+      },
+      difficulty: 1,
+      xp_reward: 15,
+    },
+    {
+      question_id: 'gen_008',
+      motif_id: 'general',
+      question_text: {
+        en: 'What is the name of the plain white cotton cloth traditionally used as the foundational canvas for making batik?',
+        id: 'Apa nama kain katun putih polos yang biasanya selalu digunakan sebagai bahan dasar/kanvas pembuat batik tulis?',
+      },
+      options: [
+        { en: 'Mori Cloth', id: 'Kain Mori' },
+        { en: 'Silk Cloth', id: 'Kain Sutra' },
+        { en: 'Linen Cloth', id: 'Kain Linen' },
+        { en: 'Flannel Cloth', id: 'Kain Flanel' },
+      ],
+      correct_answer: 'A',
+      explanation: {
+        en: 'Mori cloth is a plain woven cotton fabric that had undergone bleaching, making it the perfect canvas for absorbing natural and synthetic batik dyes.',
+        id: 'Kain mori (mori cloth) adalah kain katun tenunan yang telah diputihkan, menjadikannya kanvas sempurna untuk menyerap warna secara baik pada batik.',
+      },
+      difficulty: 2,
+      xp_reward: 20,
+    },
+    {
+      question_id: 'gen_009',
+      motif_id: 'general',
+      image_url: '/batik-images/batik-kawung/1.jpg',
+      question_text: {
+        en: 'Look at the image above. The geometric and circular basic shape in this "Kawung" motif is visually inspired by which fruit?',
+        id: 'Tebak Gambar. Bentuk dasar geometris membulat empat kelopak pada motif "Kawung" ini secara visual terinspirasi dari irisan buah apa?',
+      },
+      options: [
+        { en: 'Apple', id: 'Apel' },
+        { en: 'Sugar Palm Fruit (Kolang-kaling)', id: 'Buah Aren (Kolang-kaling)' },
+        { en: 'Coconut', id: 'Kelapa' },
+        { en: 'Starfruit', id: 'Belimbing' },
+      ],
+      correct_answer: 'B',
+      explanation: {
+        en: 'The Kawung motif is visually inspired by the sliced cross-section of the sugar palm fruit (known locally as kolang-kaling).',
+        id: 'Motif Kawung terinspirasi secara visual dari irisan melintang (salib) buah aren atau buah kolang-kaling.',
+      },
+      difficulty: 2,
+      xp_reward: 20,
+    },
+    {
+      question_id: 'gen_010',
+      motif_id: 'general',
+      question_text: {
+        en: 'In the traditional batik process, boiling the fabric to remove the wax (malam) is known as...',
+        id: 'Proses merebus kain dalam air mendidih untuk meluruhkan (menghilangkan/melepas) lilin malam pada tahapan akhir pembuatan batik tulis disebut...',
+      },
+      options: [
+        { en: 'Membatik', id: 'Membatik' },
+        { en: 'Mencelup', id: 'Mencelup' },
+        { en: 'Nglorod (Pelorodan)', id: 'Nglorod (Pelorodan)' },
+        { en: 'Nyolet', id: 'Nyolet' },
+      ],
+      correct_answer: 'C',
+      explanation: {
+        en: 'Nglorod is the technique of boiling the batik cloth to dissolve and fully remove the wax resist, revealing the final uncolored patterns.',
+        id: 'Nglorod / Pelorodan adalah teknik merebus kain batik untuk melarutkan dan menghilangkan seluruh lilin (malam) agar pola dan warna akhir terlihat jelas.',
+      },
+      difficulty: 3,
+      xp_reward: 25,
+    },
+    {
+      question_id: 'gen_011',
+      motif_id: 'general',
+      image_url: '/batik-images/batik-papua_cendrawasih/hf_git_2217_Papua_Cendrawasih38.jpg',
+      question_text: {
+        en: 'This unique batik displays an endemic beautiful bird. From which large island is this motif originated?',
+        id: 'Tebak Asal Daerah. Batik ini menampilkan gambar burung endemik (Burung Surga). Dari pulau besar manakah seni batik ini diciptakan?',
+      },
+      options: [
+        { en: 'Sumatra', id: 'Sumatera' },
+        { en: 'Bali', id: 'Bali' },
+        { en: 'Papua', id: 'Papua' },
+        { en: 'Sulawesi', id: 'Sulawesi' },
+      ],
+      correct_answer: 'C',
+      explanation: {
+        en: 'This modern motif originates from Papua and prominently features the Bird of Paradise (Cendrawasih), the iconic, highly colorful tropical bird of the region.',
+        id: 'Motif ini berasal dari Papua (Motif Cendrawasih) dan secara indah menampilkan ikon Burung Surga (Cendrawasih) yang sangat khas dari wilayah tersebut.',
+      },
+      difficulty: 1,
+      xp_reward: 15,
+    },
+    {
+      question_id: 'gen_012',
+      motif_id: 'general',
+      question_text: {
+        en: 'Coastal (Pesisir) batik, unlike Inland (Keraton) batik, is generally famous for what specific characteristics?',
+        id: 'Batik Pesisir (seperti Cirebon/Lasem), berbeda dengan Batik Keraton (Solo/Jogja), pada umumnya dikenal memiliki karakteristik estetika apa?',
+      },
+      options: [
+        { en: 'Dark, subdued and highly philosophical colors', id: 'Warna gelap, redup dan sangat filosofis' },
+        { en: 'Strict royal rules on who can wear it', id: 'Aturan keraton yang sangat ketat tentang siapa yang memakainya' },
+        { en: 'Bright vibrant colors and dynamic, natural motifs', id: 'Warna-warna cerah mencolok serta motif alam yang dinamis/bebas' },
+        { en: 'Using purely geometric shapes exclusively', id: 'Penggunaan bentuk geometris yang kaku dan matematis murni' },
+      ],
+      correct_answer: 'C',
+      explanation: {
+        en: 'Coastal batik was shaped by foreign maritime trades (Arabs, Chinese, Europeans), leading to highly vibrant, colorful, and naturally free botanical patterns.',
+        id: 'Batik Pesisir dipengaruhi perdagangan laut/asing sehingga melahirkan gaya berani dengan warna cerah (merah, biru terang) serta pola dinamis yang bebas dari pantangan keraton.',
+      },
+      difficulty: 2,
+      xp_reward: 20,
+    },
+    {
+      question_id: 'gen_013',
+      motif_id: 'general',
+      image_url: '/batik-images/batik-ceplok/10.jpg',
+      question_text: {
+        en: 'This geometric and repetitious, symmetrically ordered motif falls under which classical batik pattern category?',
+        id: 'Tebak Pola Gambar. Motif dengan struktur susunan dasar geometris (kotak, belah ketupat, melingkar) yang diulang terus-menerus dan simetris ini masuk dalam kelompok pola apa?',
+      },
+      options: [
+        { en: 'Semen', id: 'Semen' },
+        { en: 'Ceplok', id: 'Ceplok' },
+        { en: 'Lereng / Miring', id: 'Lereng / Miring' },
+        { en: 'Nitik', id: 'Nitik' },
+      ],
+      correct_answer: 'B',
+      explanation: {
+        en: 'The Ceplok design framework refers to a class of geometric motifs composed of circles, rosettes, squares, and stars arranged in endless repeating symmetry.',
+        id: 'Pola Dasar Ceplok merujuk pada kategori motif geometris atau kotak/simetris yang terdiri dari susunan berulang yang terus-menerus saling melengkapi (termasuk motif Truntum & Kawung).',
+      },
+      difficulty: 3,
+      xp_reward: 25,
+    },
+    {
+      question_id: 'gen_014',
+      motif_id: 'general',
+      image_url: '/batik-images/batik-pekalongan/1.jpg',
+      question_text: {
+        en: 'Look at the vibrant colors and detailed floral (buketan) patterns in this image. This style is closely associated with which coastal city famously dubbed "World Batik City"?',
+        id: 'Tebak Gambar Daerah. Perhatikan gaya batik dengan bunga-bunga buketan yang berwarna-warni cerah ini. Kota pesisir manakah yang terkenal dengan gaya ini dan dijuluki "Kota Batik Sedunia"?',
+      },
+      options: [
+        { en: 'Pekalongan', id: 'Pekalongan' },
+        { en: 'Bandung', id: 'Bandung' },
+        { en: 'Semarang', id: 'Semarang' },
+        { en: 'Surabaya', id: 'Surabaya' },
+      ],
+      correct_answer: 'A',
+      explanation: {
+        en: 'Pekalongan is known as the "Batik City" of Indonesia, famous for its beautifully vibrant, floral-patterned (buketan) coastal aesthetic.',
+        id: 'Pekalongan dikenal luas sebagai wilayah sentra utama "Kota Batik" di Utara Jawa, sangat kental dengan gaya pesisir yang berpusat pada motif floral cantik hasil asimilasi budaya dunia.',
+      },
+      difficulty: 2,
+      xp_reward: 20,
+    },
+    {
+      question_id: 'gen_015',
+      motif_id: 'general',
+      question_text: {
+        en: 'Batik relies on a "resist dyeing" technique. Besides hot wax, what other natural material was historically used as a resist mechanism (like in Batik Simbut)?',
+        id: 'Prinsip utama batik adalah "Teknik Merintang Warna" (Resist Dyeing). Secara historis, sebelum malam (lilin panas) umum dipakai, bahan dasar alami apa yang sering dimanfaatkan leluhur kita (contohnya Batik Simbut di Banten)?',
+      },
+      options: [
+        { en: 'Clay and mud from swamps', id: 'Tanah liat dan lumpur rawa' },
+        { en: 'Glutinous rice paste / Cassava starch', id: 'Pasta Ketan / Bubur Kanji (Pati Singkong)' },
+        { en: 'Animal fat (Tallow)', id: 'Lemak Hewan (Gajih)' },
+        { en: 'Honey and tree sap', id: 'Madu dan getah pohon murni' },
+      ],
+      correct_answer: 'B',
+      explanation: {
+        en: 'Before modern wax became standard, earlier batik forms (like Banten\'s Batik Simbut or Toraja patterns) widely utilized sticky paste made from glutinous rice or cassava starch (bubur kanji) to resist dye.',
+        id: 'Sebelum lilin / malam menjadi standar utama, metode batik prasejarah Nusantara seperti *Simbut* dari Banten banyak memanfaatkan bubur ketan/kanji sebagai pasta perintang pewarna alami.',
+      },
+      difficulty: 3,
+      xp_reward: 30,
     },
   ],
 };

@@ -5,8 +5,9 @@ import { KeyboardControls } from '@react-three/drei';
 import * as THREE from 'three';
 import { batiks } from '@/lib/batik-data';
 import { useLanguage } from '@/lib/LanguageContext';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Trophy } from 'lucide-react';
 import { Toaster, toast } from 'sonner';
+import { useEngagement } from '@/lib/engagement';
 
 import { Environment, Butterfly } from '@/components/museum/Environment';
 import { Painting } from '@/components/museum/Painting';
@@ -90,7 +91,10 @@ export const Museum3DPage = () => {
     const [selectedBatik, setSelectedBatik] = useState<any>(null);
     const [started, setStarted] = useState(false);
     const [loaded, setLoaded] = useState(false);
-    const [visited, setVisited] = useState<Set<string>>(new Set());
+    
+    const { museumVisited, markMuseumVisited, awardXp } = useEngagement();
+    const visitedCount = museumVisited.length;
+
     const [nearPainting, setNearPainting] = useState<any>(null);
     const [isMobile, setIsMobile] = useState(false);
     const [muted, setMuted] = useState(false);
@@ -186,13 +190,36 @@ export const Museum3DPage = () => {
 
     // Open detail: set state FIRST so player pauses, THEN release pointer lock
     const openDetail = useCallback((batik: any) => {
-        setSelectedBatik(batik);                                 // paused=true → player stops
-        setVisited(prev => new Set(prev).add(batik.id));
+        setSelectedBatik(batik); // paused=true → player stops
+        
+        // Handle Engagement Logic
+        const res = markMuseumVisited(batik.id);
+        if (res.newlyDiscovered) {
+            // First time seeing this painting
+            const { xpGained } = awardXp('museum-discover');
+            if (res.totalVisited === 20) {
+                // Milestone Complete!
+                awardXp('museum-complete');
+                toast.success(language === 'id' ? 'Eksplorasi Selesai!' : 'Exploration Complete!', {
+                    description: language === 'id' ? 'Kamu telah menemukan semua lukisan! +500 XP' : 'You have found all paintings! +500 XP',
+                    duration: 8000,
+                    icon: <Trophy className="text-gold w-6 h-6" />,
+                    style: { background: 'linear-gradient(to right, #4a2800, #b8860b)', color: '#fff', border: '1px solid #f5c518' }
+                });
+            } else {
+                toast(`+${xpGained} XP`, {
+                    description: language === 'id' ? `Menemukan: ${batik.nama}` : `Discovered: ${batik.nama}`,
+                    duration: 3000,
+                    icon: <Sparkles className="text-gold" />,
+                });
+            }
+        }
+
         if (document.pointerLockElement) document.exitPointerLock(); // safe now
-    }, []);
+    }, [markMuseumVisited, awardXp, language]);
 
     const handleSelect = useCallback((batik: any) => {
-        if (visited.size === 0) {
+        if (visitedCount === 0) {
             toast.success('Selamat Datang!', {
                 description: 'Jelajahi setiap motif warisan nusantara.',
                 duration: 4000,
@@ -200,7 +227,7 @@ export const Museum3DPage = () => {
             });
         }
         openDetail(batik);
-    }, [visited, openDetail]);
+    }, [visitedCount, openDetail]);
 
     const handleClose = useCallback(() => setSelectedBatik(null), []);
 
@@ -292,7 +319,7 @@ export const Museum3DPage = () => {
                     }}>
                         <div style={{
                             height: '100%',
-                            width: `${(visited.size / 20) * 100}%`,
+                            width: `${(visitedCount / 20) * 100}%`,
                             background: 'linear-gradient(90deg, #b8860b, #f5c518)',
                             transition: 'width 0.5s ease',
                             boxShadow: '0 0 8px #b8860b',
@@ -310,13 +337,13 @@ export const Museum3DPage = () => {
                         }}>
                             <div style={{
                                 width: 7, height: 7, borderRadius: '50%',
-                                background: visited.size > 0 ? '#f5c518' : '#555',
-                                boxShadow: visited.size > 0 ? '0 0 6px #f5c518' : 'none',
+                                background: visitedCount > 0 ? '#f5c518' : '#555',
+                                boxShadow: visitedCount > 0 ? '0 0 6px #f5c518' : 'none',
                             }} />
                             <span style={{
                                 color: '#f5c518', fontSize: 10, fontWeight: 900,
                                 letterSpacing: '0.2em', textTransform: 'uppercase', fontFamily: 'sans-serif',
-                            }}>{visited.size}/20 BATIK</span>
+                            }}>{visitedCount}/20 BATIK</span>
                         </div>
                     )}
 
@@ -517,7 +544,7 @@ export const Museum3DPage = () => {
                                 <Painting
                                     key={batik.id}
                                     batik={batik}
-                                    isVisited={visited.has(batik.id)}
+                                    isVisited={museumVisited.includes(batik.id)}
                                     position={batik.position}
                                     rotation={batik.rotation}
                                     onSelect={handleSelect}

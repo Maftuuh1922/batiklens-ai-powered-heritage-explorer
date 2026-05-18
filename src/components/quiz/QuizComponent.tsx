@@ -27,6 +27,7 @@ interface Question {
   explanation: string;
   difficulty: number;
   xp_reward: number;
+  image_url?: string;
 }
 
 interface QuizState {
@@ -341,6 +342,15 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
                 <Badge className="mb-3">
                   {t('Tingkat', 'Difficulty')}: {'⭐'.repeat(currentQuestion.difficulty)}
                 </Badge>
+                {currentQuestion.image_url && (
+                  <div className="my-4 rounded-xl overflow-hidden border border-border">
+                    <img 
+                      src={currentQuestion.image_url} 
+                      alt="Tebak Gambar Batik" 
+                      className="w-full h-48 md:h-64 object-cover object-center"
+                    />
+                  </div>
+                )}
                 <h3 className="text-xl font-semibold mb-2">{currentQuestion.question_text}</h3>
                 <p className="text-sm text-muted-foreground">
                   {t('Hadiah XP', 'XP Reward')}: {currentQuestion.xp_reward}

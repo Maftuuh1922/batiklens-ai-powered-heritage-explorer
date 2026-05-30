@@ -27,28 +27,8 @@ export const Navbar = () => {
 
   const navBorder = getNavbarBorderStyle(level);
 
-  // Fungsi khusus untuk menguji tampilan (nanti bisa Anda hapus)
-  const testLevelUp = (targetLevel: number, targetXp: number) => {
-    const data = JSON.parse(localStorage.getItem('batiklens-engagement-v1') || '{}');
-    if (!data.state) data.state = {};
-    data.state.xp = targetXp;
-    data.state.level = targetLevel;
-    localStorage.setItem('batiklens-engagement-v1', JSON.stringify(data));
-    window.location.reload();
-  };
-
   return (
     <div className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pointer-events-none">
-      {/* Tombol Rahasia Untuk Test Level */}
-      <div className="absolute top-0 right-0 p-1 pointer-events-auto z-[999] flex gap-1 bg-background/80 backdrop-blur-md rounded-bl-lg">
-        <span className="text-[8px] text-muted-foreground self-center mr-1 font-bold">TEST:</span>
-        <button onClick={() => testLevelUp(1, 0)} className="text-[8px] bg-foreground/20 text-foreground px-1.5 py-0.5 rounded hover:bg-foreground/40">L1</button>
-        <button onClick={() => testLevelUp(5, 1000)} className="text-[8px] bg-emerald-500 text-white px-1.5 py-0.5 rounded hover:bg-emerald-400">L5</button>
-        <button onClick={() => testLevelUp(10, 4500)} className="text-[8px] bg-indigo-500 text-white px-1.5 py-0.5 rounded hover:bg-indigo-400">L10</button>
-        <button onClick={() => testLevelUp(25, 30000)} className="text-[8px] bg-orange-500 text-white px-1.5 py-0.5 rounded hover:bg-orange-400">L25</button>
-        <button onClick={() => testLevelUp(50, 122500)} className="text-[8px] bg-fuchsia-500 text-white px-1.5 py-0.5 rounded hover:bg-fuchsia-400">L50</button>
-        <button onClick={() => { localStorage.removeItem('batiklens-engagement-v1'); window.location.reload(); }} className="text-[8px] bg-red-600 text-white px-1.5 py-0.5 rounded hover:bg-red-500 ml-1">RST</button>
-      </div>
 
       <div className="mx-auto max-w-7xl group">
         {/* Glow effect behind the navbar */}

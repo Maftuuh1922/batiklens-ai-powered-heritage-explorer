@@ -27,6 +27,7 @@ import { DailyPage } from '@/pages/DailyPage';
 import { LoginPage } from '@/pages/LoginPage';
 import { SignupPage } from '@/pages/SignupPage';
 import { MiniGamePage } from '@/pages/MiniGamePage';
+import { AuthCallbackPage } from '@/pages/AuthCallbackPage';
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,7 @@ const router = createBrowserRouter([
       { path: "/login", element: <LoginPage /> },
       { path: "/signup", element: <SignupPage /> },
       { path: "/minigame", element: <MiniGamePage /> },
+      { path: "/auth/callback", element: <AuthCallbackPage /> },
     ]
   },
 ]);

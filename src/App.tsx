@@ -1,5 +1,6 @@
 import { Outlet, ScrollRestoration } from 'react-router-dom';
 import { Navbar } from '@/components/layout/Navbar';
+import { Footer } from '@/components/layout/Footer';
 import { Toaster } from '@/components/ui/sonner';
 import { EngagementProvider } from '@/components/engagement/EngagementProvider';
 import { useEngagement, levelFromXp } from '@/lib/engagement';
@@ -42,6 +43,7 @@ const App = () => {
       <main className="flex-grow pt-24 md:pt-28 relative z-0">
         <Outlet />
       </main>
+      <Footer />
       <ScrollRestoration />
       <Toaster richColors position="top-right" closeButton />
     </div>

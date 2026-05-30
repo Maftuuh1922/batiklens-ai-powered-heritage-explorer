@@ -2,6 +2,10 @@
 # Bootstrap marker
 .bootstrap-complete
 .vercel
+
+# Environment variables - NEVER commit actual keys
+.env
+.env.local
 .env*.local
 
 # Local Netlify folder

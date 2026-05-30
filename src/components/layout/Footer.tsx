@@ -21,7 +21,7 @@ export function Footer() {
             <p className="text-muted-foreground text-base leading-relaxed max-w-md">
               {label(
                 'Penghargaan teknologi untuk motif tekstil sakral Indonesia. Melestarikan sejarah melalui kecerdasan visual.',
-                'A technological tribute to Indonesia's sacred textile patterns. Preserving history through the precision of vision intelligence.'
+                "A technological tribute to Indonesia's sacred textile patterns. Preserving history through the precision of vision intelligence."
               )}
             </p>
             <div className="flex flex-wrap items-center gap-3">
